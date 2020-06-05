@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Data structure holding the service info
 public struct PryvServiceInfo: Codable {
     var register: String
     var access: String
