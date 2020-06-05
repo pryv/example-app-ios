@@ -26,7 +26,6 @@ public class Service {
             
             // Library doc: TimeInteval is in seconds, whereas poll_rate_ms is in milliseconds
             timer = Timer.scheduledTimer(withTimeInterval: poll_s, repeats: true) { _ in
-                print("I am polling") // FIXME: timeout even if tap on the back button
                 elapsedTime += poll_s
                 if elapsedTime >= 90.0 {
                     currentState = .timeout
@@ -291,7 +290,7 @@ public class Service {
     ///   - currentState: the current state of the response
     ///   - poll: the url for the polling request
     ///   - stateChangedCallback: callback function to call upon a state change
-    /// - Returns: the new authentication state according to the polling response 
+    /// - Returns: the new authentication state according to the polling response
     private func poll(currentState: AuthStates?, poll: String, stateChangedCallback: @escaping (AuthResult) -> ()) -> AuthStates? {
         var newState = currentState
         
