@@ -13,30 +13,25 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var authButton: UIButton!
     private let utils = Utils()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private let service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
+    private let authPayload = """
+        {
+            "requestingAppId": "pryv-interview-exercise",
+            "requestedPermissions": [
+                {
+                    "streamId": "fitbit",
+                    "defaultName": "Fitbit",
+                    "level": "read"
+                }
+            ]
+        }
+    """
 
     @IBAction func authenticate(_ sender: Any) {
-        // MARK: - set up the auth request with the service and the request payload
-        let service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
-        let authPayload = """
-            {
-                "requestingAppId": "pryv-interview-exercise",
-                "requestedPermissions": [
-                    {
-                        "streamId": "fitbit",
-                        "defaultName": "Fitbit",
-                        "level": "read"
-                    }
-                ]
-            }
-        """
-        
         // MARK: - ask for auth url and load it in the web view to allow the user to login
         if let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback) {
             let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! WebViewController
+            vc.service = self.service
             vc.authUrl = authUrl
             self.navigationController?.pushViewController(vc, animated: false)
         } else { print("problem encountered when setting up the authentication") }

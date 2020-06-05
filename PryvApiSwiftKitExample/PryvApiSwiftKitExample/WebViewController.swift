@@ -11,6 +11,7 @@ import WebKit
 
 class WebViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!
+    var service: Service?
     
     var authUrl: String? {
         didSet {
@@ -19,8 +20,7 @@ class WebViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillDisappear(_ animated: Bool) {
+        service?.interruptAuth()
     }
-
 }
