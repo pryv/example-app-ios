@@ -1,0 +1,6 @@
+framework module Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests {
+  umbrella header "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
