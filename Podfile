@@ -6,6 +6,7 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
+  pod 'Mocker', '~> 1.0.0'
 
   target 'PryvApiSwiftKitExampleTests' do
     inherit! :search_paths
