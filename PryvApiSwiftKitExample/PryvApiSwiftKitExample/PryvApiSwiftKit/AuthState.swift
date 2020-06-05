@@ -13,6 +13,7 @@ public enum AuthStates {
     case need_signin
     case accepted
     case refused
+    case timeout
 }
 
 public struct AuthResult {

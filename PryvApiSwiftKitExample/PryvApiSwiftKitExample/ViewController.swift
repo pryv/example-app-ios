@@ -70,6 +70,15 @@ class ViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }))
             self.present(alert, animated: true, completion: nil)
+            
+        case .timeout: // notify the user that he has a fixed time to log in and that the connection timed out
+            print("The authentication has timed out")
+            
+            let alert = UIAlertController(title: "The request timed out", message: "You exceeded the login delay of 1min30s. Please, try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
