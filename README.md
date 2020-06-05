@@ -10,7 +10,7 @@ Pryv Sample Swift App for iOS based on lib-swift
 
 ## Motivation
 
-Provide a use case example for the `lib-swift` framework.
+Provide a use case example for the [lib-swift](https://github.com/pryv/lib-swift) framework.
 
 ## Proposition
 
