@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import PryvApiSwiftKit
 
 class WebViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import PryvApiSwiftKit // TODO: add this import, install the cocoapod library and remove all the files in folder PryvApiSwiftKit
+import PryvApiSwiftKit
 
 class ViewController: UIViewController {
     
