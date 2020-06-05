@@ -21,6 +21,7 @@ public class Service {
     private var pollingInfo: (poll: String, poll_ms: Double, callback: (AuthResult) -> ())? {
         didSet {
             DispatchQueue.global(qos: .background).async {
+                // FIXME: does not poll 
                 self.poll(poll: self.pollingInfo!.poll, poll_ms: self.pollingInfo!.poll_ms, stateChangedCallback: self.pollingInfo!.callback)
             }
         }
@@ -119,7 +120,7 @@ public class Service {
         let serviceInfo = pryvServiceInfo ?? info()
         guard let registerUrl = serviceInfo?.register else { print("problem encountered when getting the register url") ; return nil }
         
-        guard let (authUrl, poll, poll_ms) = sendAuthRequest(string: registerUrl + "/access", payload: authPayload) else { print("problem encountered when getting the result for auth request") ; return nil }
+        guard let (authUrl, poll, poll_ms) = sendAuthRequest(string: registerUrl + "access", payload: authPayload) else { print("problem encountered when getting the result for auth request") ; return nil }
         self.pollingInfo = (poll: poll, poll_ms: poll_ms, callback: stateChangedCallback)
         
         return authUrl
@@ -277,6 +278,7 @@ public class Service {
         
         // Library doc: TimeInteval is in seconds, whereas poll_rate_ms is in milliseconds
         self.timer = Timer.scheduledTimer(withTimeInterval: poll_ms * 0.001, repeats: true) { _ in
+            print("I am polling") // TODO: remove
             var request = URLRequest(url: URL(string: poll)!)
             request.httpMethod = "GET"
             

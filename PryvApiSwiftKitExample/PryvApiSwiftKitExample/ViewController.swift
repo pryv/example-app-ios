@@ -10,7 +10,9 @@ import UIKit
 //import PryvApiSwiftKit // TODO: add this import, install the cocoapod library and remove all the files in folder PryvApiSwiftKit
 
 class ViewController: UIViewController {
+    
     @IBOutlet private weak var authButton: UIButton!
+    private let utils = Utils()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +33,13 @@ class ViewController: UIViewController {
                 ]
             }
         """
-        let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback)
         
-        // MARK: - open the web view that loads the auth url to allow the user to login
-        let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! WebViewController
-        vc.authUrl = authUrl
-        self.navigationController?.pushViewController(vc, animated: false)
+        // MARK: - ask for auth url and load it in the web view to allow the user to login
+        if let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback) {
+            let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! WebViewController
+            vc.authUrl = authUrl
+            self.navigationController?.pushViewController(vc, animated: false)
+        } else { print("problem encountered when setting up the authentication") }
     }
     
     /// Callback function to execute when the state of the login from the authenticate function changes
@@ -51,7 +54,8 @@ class ViewController: UIViewController {
                 print("The endpoint is \(endpoint)")
                 
                 self.authButton.isHidden = true
-                let alert = UIAlertController(title: "Request accepted", message: "The token is \(endpoint)", preferredStyle: .alert) // TODO: token instead of endpoint
+                let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? "" 
+                let alert = UIAlertController(title: "Request accepted", message: "The token is \(token)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                     self.navigationController?.popViewController(animated: true)
                 }))
