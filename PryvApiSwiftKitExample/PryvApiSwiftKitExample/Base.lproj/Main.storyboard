@@ -22,11 +22,19 @@
                                     <action selector="authenticate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvh-23-Wb6"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pryv API app example" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5H-Eh-l7d">
+                                <rect key="frame" x="108.5" y="384.5" width="197" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="THF-5N-x1V" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Ubm-qZ-m2L"/>
                             <constraint firstItem="THF-5N-x1V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ZyX-vy-CDb"/>
+                            <constraint firstItem="THF-5N-x1V" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="50" id="dIB-Qp-8Aw"/>
+                            <constraint firstItem="k5H-Eh-l7d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yfy-g1-jPo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
