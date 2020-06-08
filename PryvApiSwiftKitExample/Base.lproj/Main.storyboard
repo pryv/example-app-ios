@@ -26,7 +26,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pryv API app example" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5H-Eh-l7d">
-                                <rect key="frame" x="108.5" y="384.5" width="197" height="25.5"/>
+                                <rect key="frame" x="108.5" y="334.5" width="197" height="25.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,19 +34,39 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="welcomeLabel"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="https://access.{domain}/service/info" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aX2-xK-RGq">
+                                <rect key="frame" x="76.5" y="418" width="261" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="url"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="serviceInfoUrlField"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the service info URL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43a-YC-i8m">
+                                <rect key="frame" x="133.5" y="383" width="147.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="43a-YC-i8m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3wM-ex-Ein"/>
                             <constraint firstItem="THF-5N-x1V" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Ubm-qZ-m2L"/>
                             <constraint firstItem="THF-5N-x1V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ZyX-vy-CDb"/>
-                            <constraint firstItem="THF-5N-x1V" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="50" id="dIB-Qp-8Aw"/>
+                            <constraint firstItem="43a-YC-i8m" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="23" id="aKi-ZA-m5X"/>
+                            <constraint firstItem="THF-5N-x1V" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="100" id="dIB-Qp-8Aw"/>
+                            <constraint firstItem="aX2-xK-RGq" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="58" id="gjQ-PP-fUL"/>
                             <constraint firstItem="k5H-Eh-l7d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yfy-g1-jPo"/>
+                            <constraint firstItem="aX2-xK-RGq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zvT-XP-Mdq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="cuS-HL-zxs"/>
                     <connections>
                         <outlet property="authButton" destination="THF-5N-x1V" id="EXh-8X-dOa"/>
+                        <outlet property="authDetailsLabel" destination="43a-YC-i8m" id="vtR-n6-2ZT"/>
+                        <outlet property="serviceInfoUrlField" destination="aX2-xK-RGq" id="c8Z-0G-zdq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

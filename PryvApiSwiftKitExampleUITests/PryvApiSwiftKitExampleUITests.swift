@@ -32,6 +32,16 @@ class PryvApiSwiftKitExampleUITests: XCTestCase {
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
     }
     
+    func testBadServiceInfoUrl() {
+        app.textFields["serviceInfoUrlField"].tap()
+        app.textFields["serviceInfoUrlField"].typeText("hello")
+        app.buttons["authButton"].tap()
+        
+        XCTAssertFalse(app.webViews["webView"].exists)
+        
+        XCTAssertEqual(app.alerts.element.label, "Invalid URL")
+    }
+    
     private func mockResponses() {
         let mockAccessEndpoint = Mock(url: URL(string: "https://reg.pryv.me/access")!, contentType: .json, statusCode: 200, data: [
             .post: MockedData.authResponse
