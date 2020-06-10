@@ -43,8 +43,7 @@ class MainViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: false)
         } else {
             let alert = UIAlertController(title: "Invalid URL", message: "Please, type a valid service info URL", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            }))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -63,13 +62,7 @@ class MainViewController: UIViewController {
                 
                 let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
                 vc.connection = Connection(apiEndpoint: endpoint)
-                
-                let alert = UIAlertController(title: "Request accepted", message: "The token is \(token)", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }))
-                self.present(alert, animated: true, completion: nil)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login

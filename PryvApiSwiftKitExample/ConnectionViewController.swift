@@ -28,7 +28,9 @@ class ConnectionViewController: UIViewController {
     }
     
     @IBAction func callBatch(_ sender: Any) {
-        // TODO: create table view with alerts for api calls and submit api() request
+        let vc = self.storyboard?.instantiateViewController(identifier: "callBatchTVC") as! CreateBatchTableViewController
+        vc.connection = connection
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func getEvents(_ sender: Any) {

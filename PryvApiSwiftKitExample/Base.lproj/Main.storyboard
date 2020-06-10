@@ -152,7 +152,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5q-j5-BmT">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="30"/>
-                                                <state key="normal" title="Call batch"/>
+                                                <state key="normal" title="Create events"/>
                                                 <connections>
                                                     <action selector="callBatch:" destination="BrA-hH-jY3" eventType="touchUpInside" id="s8E-yN-C9f"/>
                                                 </connections>
@@ -190,6 +190,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FzV-NI-3ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2506" y="137"/>
+        </scene>
+        <!--Create Batch Table View Controller-->
+        <scene sceneID="AQ8-gM-zBI">
+            <objects>
+                <tableViewController storyboardIdentifier="callBatchTVC" id="Fsq-oW-UZ4" customClass="CreateBatchTableViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IBH-Z0-PX2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="apiCall" id="ouO-Mi-og4">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ouO-Mi-og4" id="VMO-NH-CCc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fsq-oW-UZ4" id="4II-NX-PXy"/>
+                            <outlet property="delegate" destination="Fsq-oW-UZ4" id="2eY-qZ-CFA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xZa-8D-raf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3326" y="-537"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xfq-hn-v3a">
