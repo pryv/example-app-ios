@@ -23,7 +23,7 @@ class GetEventsTableViewController: UITableViewController {
             ]
             guard let events = connection!.api(APICalls: request) else { return } // FIXME: empty as type error in request body
             events.forEach({ self.events.append($0) })
-            
+
             loadViewIfNeeded()
             self.tableView.reloadData()
         }
@@ -48,7 +48,7 @@ class GetEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = events[indexPath.row]
         let streamIds = event["streamIds"] as! [String]
-        let content = event["content"] as! Int // TODO: generic content type
+        let content = String(describing: event["content"] ?? "")
         let type = event["type"] as! String
         let message = "The \(streamIds.joined(separator: ", ")) is \(content) \(type)."
         
