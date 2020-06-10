@@ -8,15 +8,17 @@
 
 import UIKit
 import PryvApiSwiftKit
+import SwiftKeychainWrapper
 
 class MainViewController: UIViewController {
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
+    private let key = "app-swift-example-endpoint"
     private let authPayload = """
         {
-            "requestingAppId": "pryv-interview-exercise",
+            "requestingAppId": "app-swift-example",
             "requestedPermissions": [
                 {
                     "streamId": "fitbit",
@@ -28,6 +30,12 @@ class MainViewController: UIViewController {
     """
     
     @IBOutlet private weak var authButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let endpoint = KeychainWrapper.standard.string(forKey: key) {
+            openConnection(apiEndpoint: endpoint, animated: false)
+        }
+    }
     
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
@@ -60,9 +68,10 @@ class MainViewController: UIViewController {
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
-                let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
-                vc.connection = Connection(apiEndpoint: endpoint)
-                self.navigationController?.pushViewController(vc, animated: true)
+                // Note always same user !
+                let saveSuccessful: Bool = KeychainWrapper.standard.set(endpoint, forKey: key)
+                if saveSuccessful { print("successfully saved the endpoint in the keychain") }
+                openConnection(apiEndpoint: endpoint, animated: true)
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login
@@ -110,6 +119,12 @@ class MainViewController: UIViewController {
         group.wait()
         
         return result
+    }
+    
+    private func openConnection(apiEndpoint: String, animated: Bool) {
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        vc.connection = Connection(apiEndpoint: apiEndpoint)
+        self.navigationController?.pushViewController(vc, animated: animated)
     }
     
 }
