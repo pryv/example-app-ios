@@ -48,7 +48,7 @@ class GetEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = events[indexPath.row]
         let streamIds = event["streamIds"] as! [String]
-        let content = event["content"] as! Int // Assume all the content are Int
+        let content = event["content"] as! Int // TODO: generic content type
         let type = event["type"] as! String
         let message = "The \(streamIds.joined(separator: ", ")) is \(content) \(type)."
         

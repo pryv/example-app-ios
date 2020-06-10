@@ -53,7 +53,7 @@ class CreateBatchTableViewController: UITableViewController {
             textField.text = params?["type"] as? String ?? ""
         }
         alert.addTextField { (textField : UITextField!) -> Void in
-            textField.text = String(params?["content"] as? Int ?? 0)
+            textField.text = String(params?["content"] as? Int ?? 0)  // TODO: generic content type
         }
 
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
@@ -62,7 +62,7 @@ class CreateBatchTableViewController: UITableViewController {
                 "params": [
                     "streamId": alert.textFields![1].text ?? "",
                     "type": alert.textFields![2].text ?? "",
-                    "content": Int(alert.textFields![3].text ?? "0") ?? 0
+                    "content": Int(alert.textFields![3].text ?? "0") ?? 0  // TODO: generic content type
                 ]
             ]
             
@@ -96,7 +96,7 @@ class CreateBatchTableViewController: UITableViewController {
                 "params": [
                     "streamId": alert.textFields![1].text ?? "",
                     "type": alert.textFields![2].text ?? "",
-                    "content": Int(alert.textFields![3].text ?? "0") ?? 0
+                    "content": Int(alert.textFields![3].text ?? "0") ?? 0  // TODO: generic content type
                 ]
             ]
             

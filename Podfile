@@ -12,6 +12,7 @@ target 'PryvApiSwiftKitExample' do
   pod 'Mocker', '~> 1.0.0'
   pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'connection-object'
   pod 'SwiftKeychainWrapper'
+  pod 'FileBrowser', '~> 1.0'
 
   target 'PryvApiSwiftKitExampleTests' do
     inherit! :search_paths

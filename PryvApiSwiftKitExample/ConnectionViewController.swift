@@ -9,6 +9,7 @@
 import UIKit
 import PryvApiSwiftKit
 import SwiftKeychainWrapper
+import FileBrowser
 
 class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
@@ -45,6 +46,22 @@ class ConnectionViewController: UIViewController {
     }
 
     @IBAction func createEventFromFile(_ sender: Any) {
-        // TODO: open the file selector + event details + show event
+        let fileBrowser = FileBrowser()
+        present(fileBrowser, animated: true, completion: nil)
+        
+        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+            let event: Event = ["streamIds": ["weight"], "type": "mass/kg", "content": 90]
+            let eventWithFile = self.connection?.createEventWithFile(event: event, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
+            
+            if let result = eventWithFile {
+                let text = (result.compactMap({ (key, value) -> String in
+                    return "\(key)=\(value)"
+                }) as Array).joined(separator: ", \n")
+                
+                let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController
+                vc.text = text
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 }

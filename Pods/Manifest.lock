@@ -1,16 +1,19 @@
 PODS:
+  - FileBrowser (1.0.0)
   - Mocker (1.0.0)
   - PryvApiSwiftKit (0.1.2):
     - Mocker
   - SwiftKeychainWrapper (3.4.0)
 
 DEPENDENCIES:
+  - FileBrowser (~> 1.0)
   - Mocker (~> 1.0.0)
   - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `connection-object`)
   - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - FileBrowser
     - Mocker
     - SwiftKeychainWrapper
 
@@ -25,10 +28,11 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
+  FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   Mocker: 58560cc516f6240e92492dad66f295e7cdd7cdb2
   PryvApiSwiftKit: aa8e63442f121d620b5488a3ab1d0e8f309cd8b1
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 9b82ecdb638d7cbda04c17c1f754b0622293c1da
+PODFILE CHECKSUM: da66ce2fdf02549758bc794402da45e9d51555e1
 
 COCOAPODS: 1.8.4

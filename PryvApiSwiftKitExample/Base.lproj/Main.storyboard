@@ -219,6 +219,37 @@
             </objects>
             <point key="canvasLocation" x="3315" y="124"/>
         </scene>
+        <!--Text View Controller-->
+        <scene sceneID="Wqi-9W-F4Y">
+            <objects>
+                <viewController storyboardIdentifier="textVC" id="BPA-c3-ZZ1" customClass="TextViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZAF-gN-7GP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZA-Z9-nDW">
+                                <rect key="frame" x="207" y="438" width="0.0" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BZA-Z9-nDW" firstAttribute="top" secondItem="TSM-bp-aEt" secondAttribute="top" constant="394" id="0Io-cc-ik3"/>
+                            <constraint firstItem="BZA-Z9-nDW" firstAttribute="centerX" secondItem="ZAF-gN-7GP" secondAttribute="centerX" id="HGG-hv-xYm"/>
+                            <constraint firstItem="BZA-Z9-nDW" firstAttribute="centerY" secondItem="ZAF-gN-7GP" secondAttribute="centerY" id="euW-L4-gIw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TSM-bp-aEt"/>
+                    </view>
+                    <connections>
+                        <outlet property="textLabel" destination="BZA-Z9-nDW" id="eV8-GF-9VA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AgI-jR-O65" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3315" y="810"/>
+        </scene>
         <!--Create Batch Table View Controller-->
         <scene sceneID="AQ8-gM-zBI">
             <objects>

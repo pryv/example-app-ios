@@ -10,6 +10,7 @@
 		50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */; };
 		62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
 		B37A89F02490FE34000C0E72 /* GetEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */; };
+		B37A89F224911A3F000C0E72 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A89F124911A3F000C0E72 /* TextViewController.swift */; };
 		B3AF43482490BD4C0011839F /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF43472490BD4C0011839F /* ConnectionViewController.swift */; };
 		B3AF434A2490C6C20011839F /* CreateBatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
@@ -52,6 +53,7 @@
 		8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
 		984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsTableViewController.swift; sourceTree = "<group>"; };
+		B37A89F124911A3F000C0E72 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		B3AF43472490BD4C0011839F /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
 		B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBatchTableViewController.swift; sourceTree = "<group>"; };
 		B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -134,6 +136,7 @@
 				B3D70D3A248A2FE900A1A247 /* MainViewController.swift */,
 				B3C51E7B248A36B700F1D398 /* AuthViewController.swift */,
 				B3D70D3C248A2FE900A1A247 /* Main.storyboard */,
+				B37A89F124911A3F000C0E72 /* TextViewController.swift */,
 				B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */,
 				B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */,
 				B3AF43472490BD4C0011839F /* ConnectionViewController.swift */,
@@ -433,6 +436,7 @@
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
 				B3AF434A2490C6C20011839F /* CreateBatchTableViewController.swift in Sources */,
 				B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */,
+				B37A89F224911A3F000C0E72 /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,63 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A1E9D786CA1040C50244F3427482C2C /* SwiftKeychainWrapper-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 002F9405B7B1CFE0AD8380D4E9682999 /* SwiftKeychainWrapper-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		17F81AE9958B61708DAC28162F52F6BA /* Data+append.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEE10D7402E13A1F559DFC8E416D88 /* Data+append.swift */; };
-		1BB72D35C1614D5955F927774DCC7C44 /* SwiftKeychainWrapper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EE4AB262F4591FA9A148033A874E18 /* SwiftKeychainWrapper-dummy.m */; };
-		2367B4DB0679243185EF0CDFDF4787D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
-		25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA6824F41D61A5F431FCCA58A1533A7 /* Mocker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26102C252C4B4535F2C3713C8220C64F /* Mocker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6ADDB095A89A3BC6945A1B35A51 /* Mocker-dummy.m */; };
-		292208651E587C8DD3CC462EB514DD48 /* PryvApiSwiftKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B970C88679A50C8E6F29DD3C8C769E /* PryvApiSwiftKit-dummy.m */; };
-		35C7EB60E66E2814886504B822190484 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
-		3A246CB408E326D4798A114169A4D9E3 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282731A017DA5E8CBB81B33FD42F57C1 /* KeychainWrapper.swift */; };
-		3EBB3F9DB6183290D0897387EC95C282 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */; };
-		3FA7FFEA091A1145AAD5BBE5A32BF4DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
-		462916B5E66AC042EEDB568A444A2D11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C061CBBA50F461C3172C80C0BD10B0 /* Utils.swift */; };
+		0A1E9D786CA1040C50244F3427482C2C /* SwiftKeychainWrapper-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AA7ECF9B47D21EA19A55DF0424DF16E /* SwiftKeychainWrapper-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C8E9B3D80DB634CC9B5042DADACB502 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB240FD4D094B38A39CE5AF890BFDB5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */; };
+		17F81AE9958B61708DAC28162F52F6BA /* Data+append.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B62D7473AB9476849699F096C369AA2 /* Data+append.swift */; };
+		1BB72D35C1614D5955F927774DCC7C44 /* SwiftKeychainWrapper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BF0957DE3A8A8D5C6F4FF7C703032C /* SwiftKeychainWrapper-dummy.m */; };
+		1CAD51550A23BBA011BE2040CD920891 /* FileListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF47A0EADEC89669310F6C0CBE8C9533 /* FileListTableView.swift */; };
+		20F2028BF02713C97C6725DAD0D44926 /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767716A406E56D61DC1FD87181FFEBCB /* PreviewTransitionViewController.xib */; };
+		2367B4DB0679243185EF0CDFDF4787D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C80CD1D54E9A0856EBE3623943285684 /* Mocker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26102C252C4B4535F2C3713C8220C64F /* Mocker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B64F868CBFA5EA8B9AF913AEF114A3A /* Mocker-dummy.m */; };
+		292208651E587C8DD3CC462EB514DD48 /* PryvApiSwiftKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6F2527326A6324DF2DEBB54FE2CAA9 /* PryvApiSwiftKit-dummy.m */; };
+		35BB6778460759C81019D6B31D079568 /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB08C891DCEA7ADF32F83B7C55B83615 /* folder@2x.png */; };
+		35C7EB60E66E2814886504B822190484 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		3A246CB408E326D4798A114169A4D9E3 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E292C83C641CC3413652A32CBD9C1DA /* KeychainWrapper.swift */; };
+		3FA7FFEA091A1145AAD5BBE5A32BF4DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		462916B5E66AC042EEDB568A444A2D11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB70BC19FC4B5B78B368D5D2202AE990 /* Utils.swift */; };
+		4A95A84F9D6535282AD063A64169BA31 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BE4CACF6060599EC43AA12560C47F6B /* Pods-PryvApiSwiftKitExampleTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 778DCADB1AFE9E7D54DF56E0F1FB2B31 /* Pods-PryvApiSwiftKitExampleTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4EFAEEB95B51C858A229A157804E4BC0 /* PryvServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC95C1833D7329C7F394A6B976EE81E /* PryvServiceInfo.swift */; };
-		50C48CA93A7F8AF887DCF47C9A95DB3A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C677D2EBC8D8A88479FD60258131E000 /* Connection.swift */; };
-		5860CECBE09B5A9F1F7ECFD1F15DF1E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
-		59BC31895A7CF79272B974F6B663F8A1 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */; };
-		7A9B1050C7076E50098FE981A7209035 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2107904C42793AEE144E8B2B10AE3 /* Media.swift */; };
-		7BDEA58982AE38EC64F549D981FD45E6 /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECE12D16036F98BCAC4DA75CA0B0111 /* SwiftKeychainWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8192316D2AB5E5AC7E60D4DC3FF0E3F1 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C25801913FB3186B69F9F574B280C9 /* AuthState.swift */; };
-		853500B973255E0957451456FAAD6E31 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD580305D0357BA97FD376A331C0DCD /* KeychainItemAccessibility.swift */; };
-		879783884B75E5A4611C1A8D1B3AAF44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
-		A06E7BE7BC6A89C4E6906CB50AB4DA68 /* Mocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17797CA008A364FE0DFAB855DF2084 /* Mocker.swift */; };
-		AAA41819C68E66171FF886152A2661B0 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B782167EE22A36FAEDBDB9EDF943AFEF /* PryvApiSwiftKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286166C2176694441D7304F503D7559E /* PryvApiSwiftKit.swift */; };
-		BEB86F7D649864E24A0F24B44E3A9E09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */; };
+		4EFAEEB95B51C858A229A157804E4BC0 /* PryvServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098873803DB79447E64044831D8D1FC /* PryvServiceInfo.swift */; };
+		50C48CA93A7F8AF887DCF47C9A95DB3A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C01437A648CA9C828E5B3632A12DC13 /* Connection.swift */; };
+		5215DCBE6710AD5AA86A0A70744BA3BB /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B750C01610903A2905057B932BA5CA /* file@2x.png */; };
+		5866D559DB2BCFCB1083E844B3848326 /* FileListPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E0ADA3BDEF7A063C6498C78599F3F /* FileListPreview.swift */; };
+		5984D9DC8F924C72F6018A3C3FE8B82A /* pdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71777CF80334A120D8D8573A3F1635C /* pdf@2x.png */; };
+		59EB715BC99B619BCDD230721E2A1B55 /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C746940A65FA205E08BE73EBAF46E /* WebviewPreviewViewContoller.swift */; };
+		5CB7558219F71F41DC2BE90FB50CCE3F /* image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF606781BD5044A95C1A2E57290B1B49 /* image@2x.png */; };
+		7559DE245E16704C9A80CAB12C795CD9 /* PreviewTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB7A34E9578F4B7270685B8A6930C6 /* PreviewTransitionViewController.swift */; };
+		7759D7A510B77D3EAABFAE095F6E1DCE /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C2C26D51CC38B9C286FF088AF623F83 /* zip@2x.png */; };
+		7A9B1050C7076E50098FE981A7209035 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B29D6297C10211816A89354D49A7C /* Media.swift */; };
+		7BDEA58982AE38EC64F549D981FD45E6 /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F7FFA383D5C656A0AC0D19AF60FA479 /* SwiftKeychainWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7C9A69AA851BCF1B95C919C4D6B28955 /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0875BD1FC08F06886D85D3DAB96547BF /* WebviewPreviewViewContoller.xib */; };
+		7FEA12B69E436FB4AB0E54CEEBBC8D4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		8172A22F6A0FD20AC5328DBD49BDBBEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		8192316D2AB5E5AC7E60D4DC3FF0E3F1 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129BADB67B6FB4E3FFA1116CFDEC284 /* AuthState.swift */; };
+		8445A2A92C57F2EFE9D5943CA2811FF1 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDC470EF7E1F768633C4DBD1601C566 /* FileParser.swift */; };
+		853500B973255E0957451456FAAD6E31 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B820B5AEB392B07182217ED117FEFC /* KeychainItemAccessibility.swift */; };
+		879783884B75E5A4611C1A8D1B3AAF44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		88AD1A35AE18C3983F7CBB826CA7B246 /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A362831B00DEB5E7DDAC830C89F9578E /* FBFile.swift */; };
+		9A5BF303ACEB39A7720513D5928D5A53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		9F8D40D754572CEF0AF0B8EDA3AB6FF8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */; };
+		A06E7BE7BC6A89C4E6906CB50AB4DA68 /* Mocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1767B20D60C36BE8E3D5DDD45D68F /* Mocker.swift */; };
+		A11856A9061239E1483498A551DC117C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */; };
+		A75283431AC3FF78D619F192AA21739B /* FileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9284B0BFA5BD296B5185AF4A48474157 /* FileBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8E57E4DB6A31EE18475FE79D070D7FC /* documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDB4F382B6B21D55F2AA14FA7D419F8 /* documents@2x.png */; };
+		AD54683850BB2387F8FA7A2D801891AD /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */; };
+		B35ED9D9DC5748427E30E6AAFA5897E7 /* FileBrowser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB595A4B5F47CFF5BC04A874A6B06C9 /* FileBrowser-dummy.m */; };
+		B782167EE22A36FAEDBDB9EDF943AFEF /* PryvApiSwiftKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF271DEC84BA586A2D12420F1069AB2A /* PryvApiSwiftKit.swift */; };
 		C563EAF140957E5DB9BE08B467AF7EDB /* Pods-PryvApiSwiftKitExampleTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF09DA2685D9571209FD98DF7E655F0 /* Pods-PryvApiSwiftKitExampleTests-dummy.m */; };
-		C64BBB2C56B9F15440071826663A42F8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA9B8B0F6ED469BF4B99ABAD080D3E43 /* PryvApiSwiftKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4655087318DCB87CBC7C80717FB59EA3 /* PryvApiSwiftKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBBDA101D0A80A7AE5C1172953D6164F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A537EB5D06B9F8B70A79A741DC334AA /* Service.swift */; };
-		E07AC101B32B7CE657A30EF5B236A1B8 /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B50B13A56DE2E6FCE7983E2B5720BD /* Mocker.framework */; };
-		E74923A11C921F5FE54DDC23089017DB /* PryvApiSwiftKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A46930E91890A1BABE164CD96C8042E /* PryvApiSwiftKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EB286E2F52AE057B8C53D0DE5B165B9C /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F80387762AB6564FC5012E0FC1E99B1 /* Mock.swift */; };
-		F74A51C82DB485E1D24EC23630AB16B6 /* MockingURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25124FD78BA1B13BF379C9C13C00BC12 /* MockingURLProtocol.swift */; };
+		C7915A24356037F0D9E71B5784D65C68 /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8A7634B2C7037804DA5E5F0FE739730 /* FileBrowser.xib */; };
+		CA4D6850D16D95809EE6283CC72260FC /* FileBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDDFFEFD0782C8D1FF69EEDB972E60F /* FileBrowser.swift */; };
+		CA9B8B0F6ED469BF4B99ABAD080D3E43 /* PryvApiSwiftKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 675D73FA4FC3937F1727A5AA307FB931 /* PryvApiSwiftKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CBBDA101D0A80A7AE5C1172953D6164F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBBF4048E9E905EF9790BE870F1E55F /* Service.swift */; };
+		CFBC2A313C1E0794B7B7E321AFA34AD6 /* FileBrowser-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C440B8CE4ACE51C4941F3422EDE562 /* FileBrowser-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1FEC1A52914D75E022A7FFFEA37BC3F /* PreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A305029EB6F589344AE88219A21D61 /* PreviewManager.swift */; };
+		E07AC101B32B7CE657A30EF5B236A1B8 /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */; };
+		E74923A11C921F5FE54DDC23089017DB /* PryvApiSwiftKit.h in Headers */ = {isa = PBXBuildFile; fileRef = EBD34359626906059FD7193E6382C8F4 /* PryvApiSwiftKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB286E2F52AE057B8C53D0DE5B165B9C /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F056AEF5051428094C7961C5D47FD /* Mock.swift */; };
+		F1A3B28A72F6AA7BA1987CAF0316ADC0 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489383DFBE04F291D0B8AE0580A6DA83 /* FileListViewController.swift */; };
+		F3C7AE52EA1046C4002D23E34F065421 /* FileListSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEECD5F8BC94F5D5AC03F373E3E518 /* FileListSearch.swift */; };
+		F74A51C82DB485E1D24EC23630AB16B6 /* MockingURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73056522EBFD95D54B26AD2F0D0E588 /* MockingURLProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		04DC45AE35E960288BFA1901C1A1AF00 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
-			remoteInfo = Mocker;
-		};
-		1B826BD475698A1C16E0459A7F7980BE /* PBXContainerItemProxy */ = {
+		549C4AA78A7DBE0563A584EE168BB958 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
 			remoteInfo = PryvApiSwiftKit;
-		};
-		3FB39AFB6E11280BD310AF25AFD551F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CF903DF43E111410ECA0C288D36FA21A;
-			remoteInfo = SwiftKeychainWrapper;
 		};
 		6E0D97448F08E14FB42D949BB714811E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -72,6 +83,20 @@
 			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
 			remoteInfo = Mocker;
 		};
+		8251CA81B403B00250DAE06C4C1C6195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
+			remoteInfo = PryvApiSwiftKit;
+		};
+		8D0172F88F5A12EA32B54AEBB08270FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
+			remoteInfo = FileBrowser;
+		};
 		8E7E3883EFF84AAA3C3CEA1D3D426C6F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -79,106 +104,159 @@
 			remoteGlobalIDString = C5D432A2AF89A0B0A4B79A5E43D31728;
 			remoteInfo = "Pods-PryvApiSwiftKitExample";
 		};
-		B20A8E439FCEA4111F4C63A0FFF2F026 /* PBXContainerItemProxy */ = {
+		99AC113DF514D9D350103FBF4CA725B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CF903DF43E111410ECA0C288D36FA21A;
-			remoteInfo = SwiftKeychainWrapper;
+			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
+			remoteInfo = FileBrowser;
 		};
-		CFCE132043042525C4B06DDCB4877EFA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
-			remoteInfo = PryvApiSwiftKit;
-		};
-		D888717B140E67FA6AF8D867B378FD0D /* PBXContainerItemProxy */ = {
+		B6CFEC972F9A6DB7BFEA19BA4AC0BED1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
 			remoteInfo = Mocker;
 		};
+		C9C41627EE69C9FBCADB16B5A982E618 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
+			remoteInfo = Mocker;
+		};
+		D04BB1D6F3C4373FD7B3E927AF55B244 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF903DF43E111410ECA0C288D36FA21A;
+			remoteInfo = SwiftKeychainWrapper;
+		};
+		F0F7CEE132EA7B0F4EBFC12D611C55D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF903DF43E111410ECA0C288D36FA21A;
+			remoteInfo = SwiftKeychainWrapper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002F9405B7B1CFE0AD8380D4E9682999 /* SwiftKeychainWrapper-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftKeychainWrapper-umbrella.h"; sourceTree = "<group>"; };
-		009D915F5D970069EE499D4C64445B77 /* SwiftKeychainWrapper.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftKeychainWrapper.modulemap; sourceTree = "<group>"; };
-		06426067262B3505743A6D9FF2FF98BD /* Mocker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Mocker.xcconfig; sourceTree = "<group>"; };
+		0098873803DB79447E64044831D8D1FC /* PryvServiceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvServiceInfo.swift; path = PryvApiSwiftKit/Classes/PryvServiceInfo.swift; sourceTree = "<group>"; };
+		054C01A309655D0F9642DE132B699EBD /* SwiftKeychainWrapper.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftKeychainWrapper.xcconfig; sourceTree = "<group>"; };
 		08700F00E4B34ECF9A04232739560F87 /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		0875BD1FC08F06886D85D3DAB96547BF /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = WebviewPreviewViewContoller.xib; path = FileBrowser/Resources/WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
+		0B64F868CBFA5EA8B9AF913AEF114A3A /* Mocker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Mocker-dummy.m"; sourceTree = "<group>"; };
+		0B92467812989E68B3F9B836341D3714 /* SwiftKeychainWrapper-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftKeychainWrapper-Info.plist"; sourceTree = "<group>"; };
 		0BF09DA2685D9571209FD98DF7E655F0 /* Pods-PryvApiSwiftKitExampleTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExampleTests-dummy.m"; sourceTree = "<group>"; };
 		0CFA0ECD2E5ED89C9E3D4A52437D00C8 /* Pods-PryvApiSwiftKitExampleTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExampleTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		0EEA2AFC7E3F4002A1065DFE473EBB00 /* Pods-PryvApiSwiftKitExampleTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExampleTests-Info.plist"; sourceTree = "<group>"; };
-		11C061CBBA50F461C3172C80C0BD10B0 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = PryvApiSwiftKit/Classes/Utils.swift; sourceTree = "<group>"; };
+		0F9E0ADA3BDEF7A063C6498C78599F3F /* FileListPreview.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListPreview.swift; path = FileBrowser/FileListPreview.swift; sourceTree = "<group>"; };
+		0FBBF4048E9E905EF9790BE870F1E55F /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = PryvApiSwiftKit/Classes/Service.swift; sourceTree = "<group>"; };
+		10E0550011E320C4DDB2213A5C3ABB6F /* Mocker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Mocker.modulemap; sourceTree = "<group>"; };
+		1200516A84CBB6995D5F1AFB611FA747 /* FileBrowser-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FileBrowser-Info.plist"; sourceTree = "<group>"; };
 		128E413C3A8F81B4AF124CDFE6F2B86B /* Pods-PryvApiSwiftKitExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-Info.plist"; sourceTree = "<group>"; };
+		12C440B8CE4ACE51C4941F3422EDE562 /* FileBrowser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-umbrella.h"; sourceTree = "<group>"; };
+		15EA03C7B037196ED3C069F105533794 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		16BF0957DE3A8A8D5C6F4FF7C703032C /* SwiftKeychainWrapper-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftKeychainWrapper-dummy.m"; sourceTree = "<group>"; };
+		18A305029EB6F589344AE88219A21D61 /* PreviewManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewManager.swift; path = FileBrowser/PreviewManager.swift; sourceTree = "<group>"; };
 		1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Mocker.framework; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PryvApiSwiftKit.framework; path = PryvApiSwiftKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		25124FD78BA1B13BF379C9C13C00BC12 /* MockingURLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockingURLProtocol.swift; path = Sources/MockingURLProtocol.swift; sourceTree = "<group>"; };
-		282731A017DA5E8CBB81B33FD42F57C1 /* KeychainWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = SwiftKeychainWrapper/KeychainWrapper.swift; sourceTree = "<group>"; };
-		286166C2176694441D7304F503D7559E /* PryvApiSwiftKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvApiSwiftKit.swift; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.swift; sourceTree = "<group>"; };
-		2925D2125D5F521BD0016733FB82DDAF /* PryvApiSwiftKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PryvApiSwiftKit.modulemap; sourceTree = "<group>"; };
-		2ABEE10D7402E13A1F559DFC8E416D88 /* Data+append.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+append.swift"; path = "PryvApiSwiftKit/Classes/Data+append.swift"; sourceTree = "<group>"; };
+		2A2B29D6297C10211816A89354D49A7C /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = PryvApiSwiftKit/Classes/Media.swift; sourceTree = "<group>"; };
 		2B441E2CC4DE964DF8FEA574F3A0CB10 /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		30C25801913FB3186B69F9F574B280C9 /* AuthState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthState.swift; path = PryvApiSwiftKit/Classes/AuthState.swift; sourceTree = "<group>"; };
+		2B85E0D791587BD92075C44E5D975AC6 /* PryvApiSwiftKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PryvApiSwiftKit.xcconfig; sourceTree = "<group>"; };
+		376D1716ABF79A932BF3C08F1734BA76 /* SwiftKeychainWrapper-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftKeychainWrapper-prefix.pch"; sourceTree = "<group>"; };
 		3928AC5B5CD2AFD99B934C921FB1B0A0 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3B597E82E1313A7717C5227D6231F38E /* Pods-PryvApiSwiftKitExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-acknowledgements.plist"; sourceTree = "<group>"; };
-		3B891065C30CF9D7E6AC48F65A17962A /* PryvApiSwiftKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PryvApiSwiftKit.xcconfig; sourceTree = "<group>"; };
-		4187D4253CBB26ACEF62D7947D374253 /* PryvApiSwiftKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-prefix.pch"; sourceTree = "<group>"; };
-		45EE4AB262F4591FA9A148033A874E18 /* SwiftKeychainWrapper-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftKeychainWrapper-dummy.m"; sourceTree = "<group>"; };
-		4655087318DCB87CBC7C80717FB59EA3 /* PryvApiSwiftKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-umbrella.h"; sourceTree = "<group>"; };
+		3DDB7A34E9578F4B7270685B8A6930C6 /* PreviewTransitionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewTransitionViewController.swift; path = FileBrowser/PreviewTransitionViewController.swift; sourceTree = "<group>"; };
+		42CF417176615642E339CD6A8DF1E2BB /* FileBrowser.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileBrowser.modulemap; sourceTree = "<group>"; };
+		489383DFBE04F291D0B8AE0580A6DA83 /* FileListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListViewController.swift; path = FileBrowser/FileListViewController.swift; sourceTree = "<group>"; };
 		49114DDEDF6DD9F1B68D0C6189D47B6E /* Pods-PryvApiSwiftKitExampleTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExampleTests.modulemap"; sourceTree = "<group>"; };
 		4927AAB24AA6E54FE4F4D0480A5CC496 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4DD2107904C42793AEE144E8B2B10AE3 /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = PryvApiSwiftKit/Classes/Media.swift; sourceTree = "<group>"; };
-		4FA2A555B8490EF1FD1694DD9DE8479C /* SwiftKeychainWrapper.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftKeychainWrapper.xcconfig; sourceTree = "<group>"; };
-		4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4C2C26D51CC38B9C286FF088AF623F83 /* zip@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "zip@2x.png"; path = "FileBrowser/Resources/zip@2x.png"; sourceTree = "<group>"; };
+		4FDC470EF7E1F768633C4DBD1601C566 /* FileParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileParser.swift; path = FileBrowser/FileParser.swift; sourceTree = "<group>"; };
 		5069D199AB328CCD047E61C632CD7C32 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftKeychainWrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BC25640672AE01DAE6DDED934A6CFB /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		598D014E19727070EB2E190212BB672A /* Mocker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Mocker.xcconfig; sourceTree = "<group>"; };
 		59F6F2B4589CCE6A8354A1F11845361A /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh"; sourceTree = "<group>"; };
-		5F80387762AB6564FC5012E0FC1E99B1 /* Mock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = Sources/Mock.swift; sourceTree = "<group>"; };
-		62B970C88679A50C8E6F29DD3C8C769E /* PryvApiSwiftKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PryvApiSwiftKit-dummy.m"; sourceTree = "<group>"; };
-		6A46930E91890A1BABE164CD96C8042E /* PryvApiSwiftKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PryvApiSwiftKit.h; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.h; sourceTree = "<group>"; };
-		6B1743BAD97F322C3646E0AAA447D4C6 /* Mocker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Mocker-Info.plist"; sourceTree = "<group>"; };
-		6BA6824F41D61A5F431FCCA58A1533A7 /* Mocker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-umbrella.h"; sourceTree = "<group>"; };
+		5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FileBrowser.framework; path = FileBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B62D7473AB9476849699F096C369AA2 /* Data+append.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+append.swift"; path = "PryvApiSwiftKit/Classes/Data+append.swift"; sourceTree = "<group>"; };
+		5B6F2527326A6324DF2DEBB54FE2CAA9 /* PryvApiSwiftKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PryvApiSwiftKit-dummy.m"; sourceTree = "<group>"; };
+		675D73FA4FC3937F1727A5AA307FB931 /* PryvApiSwiftKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-umbrella.h"; sourceTree = "<group>"; };
+		69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
 		6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExample.framework; path = "Pods-PryvApiSwiftKitExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3EF2C9EFCBB91EBFF6748632C3F4E5 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist"; sourceTree = "<group>"; };
-		6EC95C1833D7329C7F394A6B976EE81E /* PryvServiceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvServiceInfo.swift; path = PryvApiSwiftKit/Classes/PryvServiceInfo.swift; sourceTree = "<group>"; };
 		6F41E9D6726513640C679A1FBE8F0BB8 /* Pods-PryvApiSwiftKitExampleTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExampleTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		73B50B13A56DE2E6FCE7983E2B5720BD /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FA1767B20D60C36BE8E3D5DDD45D68F /* Mocker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mocker.swift; path = Sources/Mocker.swift; sourceTree = "<group>"; };
+		7129BADB67B6FB4E3FFA1116CFDEC284 /* AuthState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthState.swift; path = PryvApiSwiftKit/Classes/AuthState.swift; sourceTree = "<group>"; };
+		767716A406E56D61DC1FD87181FFEBCB /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = PreviewTransitionViewController.xib; path = FileBrowser/Resources/PreviewTransitionViewController.xib; sourceTree = "<group>"; };
 		778DCADB1AFE9E7D54DF56E0F1FB2B31 /* Pods-PryvApiSwiftKitExampleTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExampleTests-umbrella.h"; sourceTree = "<group>"; };
-		7CD580305D0357BA97FD376A331C0DCD /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = SwiftKeychainWrapper/KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		7AA7ECF9B47D21EA19A55DF0424DF16E /* SwiftKeychainWrapper-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftKeychainWrapper-umbrella.h"; sourceTree = "<group>"; };
+		7F7FFA383D5C656A0AC0D19AF60FA479 /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftKeychainWrapper.h; path = SwiftKeychainWrapper/SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		83D054056B97CA4C072C659BEF5DFD92 /* SwiftKeychainWrapper-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftKeychainWrapper-Info.plist"; sourceTree = "<group>"; };
-		8A06D6ADDB095A89A3BC6945A1B35A51 /* Mocker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Mocker-dummy.m"; sourceTree = "<group>"; };
-		8A537EB5D06B9F8B70A79A741DC334AA /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = PryvApiSwiftKit/Classes/Service.swift; sourceTree = "<group>"; };
-		8ECE12D16036F98BCAC4DA75CA0B0111 /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftKeychainWrapper.h; path = SwiftKeychainWrapper/SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		84EEECD5F8BC94F5D5AC03F373E3E518 /* FileListSearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListSearch.swift; path = FileBrowser/FileListSearch.swift; sourceTree = "<group>"; };
+		852B1741133060FB835934F4138C5861 /* SwiftKeychainWrapper.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftKeychainWrapper.modulemap; sourceTree = "<group>"; };
+		8BB595A4B5F47CFF5BC04A874A6B06C9 /* FileBrowser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FileBrowser-dummy.m"; sourceTree = "<group>"; };
+		8C01437A648CA9C828E5B3632A12DC13 /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = PryvApiSwiftKit/Classes/Connection.swift; sourceTree = "<group>"; };
+		9284B0BFA5BD296B5185AF4A48474157 /* FileBrowser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FileBrowser.h; path = FileBrowser/FileBrowser.h; sourceTree = "<group>"; };
+		94B750C01610903A2905057B932BA5CA /* file@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "file@2x.png"; path = "FileBrowser/Resources/file@2x.png"; sourceTree = "<group>"; };
+		969FAB9FCCDF9735B37DCF6CA29FBAC0 /* Mocker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-prefix.pch"; sourceTree = "<group>"; };
 		9B59FB563A5745DD41407078BBD221A1 /* Pods-PryvApiSwiftKitExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PryvApiSwiftKitExample-frameworks.sh"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E292C83C641CC3413652A32CBD9C1DA /* KeychainWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = SwiftKeychainWrapper/KeychainWrapper.swift; sourceTree = "<group>"; };
+		A362831B00DEB5E7DDAC830C89F9578E /* FBFile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FBFile.swift; path = FileBrowser/FBFile.swift; sourceTree = "<group>"; };
 		A450FF2221758F229BE64698AD53F5D3 /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
-		A9D37E8284D0132C056F586B14F052F2 /* SwiftKeychainWrapper-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftKeychainWrapper-prefix.pch"; sourceTree = "<group>"; };
-		AB17797CA008A364FE0DFAB855DF2084 /* Mocker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mocker.swift; path = Sources/Mocker.swift; sourceTree = "<group>"; };
-		B3A076C3D7AF7C895AB4A2BC3FDD5CAC /* Mocker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-prefix.pch"; sourceTree = "<group>"; };
+		A71777CF80334A120D8D8573A3F1635C /* pdf@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pdf@2x.png"; path = "FileBrowser/Resources/pdf@2x.png"; sourceTree = "<group>"; };
+		A73056522EBFD95D54B26AD2F0D0E588 /* MockingURLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockingURLProtocol.swift; path = Sources/MockingURLProtocol.swift; sourceTree = "<group>"; };
+		A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB70BC19FC4B5B78B368D5D2202AE990 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = PryvApiSwiftKit/Classes/Utils.swift; sourceTree = "<group>"; };
+		AD28EEBF3D90AE83E87E9A084C1D34C1 /* FileBrowser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-prefix.pch"; sourceTree = "<group>"; };
+		B4B820B5AEB392B07182217ED117FEFC /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = SwiftKeychainWrapper/KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExample-umbrella.h"; sourceTree = "<group>"; };
 		BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExampleTests.framework; path = "Pods-PryvApiSwiftKitExampleTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C677D2EBC8D8A88479FD60258131E000 /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = PryvApiSwiftKit/Classes/Connection.swift; sourceTree = "<group>"; };
+		C2AAA4F40C66F56D85E22F5D4DBA5B44 /* PryvApiSwiftKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PryvApiSwiftKit-Info.plist"; sourceTree = "<group>"; };
+		C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C80CD1D54E9A0856EBE3623943285684 /* Mocker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-umbrella.h"; sourceTree = "<group>"; };
+		CDDB4F382B6B21D55F2AA14FA7D419F8 /* documents@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "documents@2x.png"; path = "FileBrowser/Resources/documents@2x.png"; sourceTree = "<group>"; };
+		CF271DEC84BA586A2D12420F1069AB2A /* PryvApiSwiftKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvApiSwiftKit.swift; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.swift; sourceTree = "<group>"; };
 		CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExample-dummy.m"; sourceTree = "<group>"; };
 		D0C8D4B47EEB6A3A7A4B3DA3D5757011 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap"; sourceTree = "<group>"; };
+		D299CE95A0322E4749A31A4D3E969BCB /* PryvApiSwiftKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-prefix.pch"; sourceTree = "<group>"; };
 		D5EDF92344659B4BECB281DBBEB6A2A8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h"; sourceTree = "<group>"; };
 		DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
-		E54CB507D13708418598AF337EC77B0C /* Mocker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Mocker.modulemap; sourceTree = "<group>"; };
+		E1916C154CA6A0C8DFC730A0B2732288 /* FileBrowser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileBrowser.xcconfig; sourceTree = "<group>"; };
+		EBD34359626906059FD7193E6382C8F4 /* PryvApiSwiftKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PryvApiSwiftKit.h; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.h; sourceTree = "<group>"; };
+		EBE1F8E6CF829E9D04F8E47E9A53600F /* Mocker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Mocker-Info.plist"; sourceTree = "<group>"; };
 		EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m"; sourceTree = "<group>"; };
+		EF47A0EADEC89669310F6C0CBE8C9533 /* FileListTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListTableView.swift; path = FileBrowser/FileListTableView.swift; sourceTree = "<group>"; };
 		EF4E46045C7D96A27EA98CBC54BDB7EF /* Pods-PryvApiSwiftKitExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F73849B964B7484DC9443CC994E5D57D /* PryvApiSwiftKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PryvApiSwiftKit-Info.plist"; sourceTree = "<group>"; };
+		EF606781BD5044A95C1A2E57290B1B49 /* image@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "image@2x.png"; path = "FileBrowser/Resources/image@2x.png"; sourceTree = "<group>"; };
+		F13F056AEF5051428094C7961C5D47FD /* Mock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = Sources/Mock.swift; sourceTree = "<group>"; };
+		F61C746940A65FA205E08BE73EBAF46E /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebviewPreviewViewContoller.swift; path = FileBrowser/WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
 		F74AE10460663522E59FE92FD0AF05D1 /* Pods-PryvApiSwiftKitExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExample.modulemap"; sourceTree = "<group>"; };
+		F8A7634B2C7037804DA5E5F0FE739730 /* FileBrowser.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FileBrowser.xib; path = FileBrowser/Resources/FileBrowser.xib; sourceTree = "<group>"; };
+		FB08C891DCEA7ADF32F83B7C55B83615 /* folder@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "folder@2x.png"; path = "FileBrowser/Resources/folder@2x.png"; sourceTree = "<group>"; };
+		FBE643830C89F903C795946ED6C6B094 /* PryvApiSwiftKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PryvApiSwiftKit.modulemap; sourceTree = "<group>"; };
+		FDDDFFEFD0782C8D1FF69EEDB972E60F /* FileBrowser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileBrowser.swift; path = FileBrowser/FileBrowser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1A4650196DC9DAD399E4A57DA1175FD0 /* Frameworks */ = {
+		1BC3A058A9240AF4808B3D0DD772BE07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEB86F7D649864E24A0F24B44E3A9E09 /* Foundation.framework in Frameworks */,
+				9A5BF303ACEB39A7720513D5928D5A53 /* Foundation.framework in Frameworks */,
+				0FB240FD4D094B38A39CE5AF890BFDB5 /* QuickLook.framework in Frameworks */,
+				A11856A9061239E1483498A551DC117C /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33A7003248A21AC3E0FD8091F03EDF26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FEA12B69E436FB4AB0E54CEEBBC8D4F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +277,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A09E453E65DA7B63D17A08BF40F04A20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8172A22F6A0FD20AC5328DBD49BDBBEE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2DB4BF475C15A8F206794F4A32C9298 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,60 +301,124 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EC964BCB5815C44F3F012D7801BC6246 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5860CECBE09B5A9F1F7ECFD1F15DF1E8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		307F2957DFA0619020F3FCC367354092 /* Frameworks */ = {
+		13AF3E8BA2FBF8B7710643B21921AEDE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				73B50B13A56DE2E6FCE7983E2B5720BD /* Mocker.framework */,
-				4E3F2C3894831C3AD8CD816588D0774E /* iOS */,
+				42CF417176615642E339CD6A8DF1E2BB /* FileBrowser.modulemap */,
+				E1916C154CA6A0C8DFC730A0B2732288 /* FileBrowser.xcconfig */,
+				8BB595A4B5F47CFF5BC04A874A6B06C9 /* FileBrowser-dummy.m */,
+				1200516A84CBB6995D5F1AFB611FA747 /* FileBrowser-Info.plist */,
+				AD28EEBF3D90AE83E87E9A084C1D34C1 /* FileBrowser-prefix.pch */,
+				12C440B8CE4ACE51C4941F3422EDE562 /* FileBrowser-umbrella.h */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/FileBrowser";
 			sourceTree = "<group>";
 		};
-		48617144E1C0F0BDE515C8D0093E2E3B /* PryvApiSwiftKit */ = {
+		17A83715EAD017D8723DDA92519A3C9A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				30C25801913FB3186B69F9F574B280C9 /* AuthState.swift */,
-				C677D2EBC8D8A88479FD60258131E000 /* Connection.swift */,
-				2ABEE10D7402E13A1F559DFC8E416D88 /* Data+append.swift */,
-				4DD2107904C42793AEE144E8B2B10AE3 /* Media.swift */,
-				6A46930E91890A1BABE164CD96C8042E /* PryvApiSwiftKit.h */,
-				286166C2176694441D7304F503D7559E /* PryvApiSwiftKit.swift */,
-				6EC95C1833D7329C7F394A6B976EE81E /* PryvServiceInfo.swift */,
-				8A537EB5D06B9F8B70A79A741DC334AA /* Service.swift */,
-				11C061CBBA50F461C3172C80C0BD10B0 /* Utils.swift */,
-				DD86F033AE3C164BC99BFAC4183EFB3C /* Support Files */,
+				FA3D5715D8AF481FF28835D47AF753F2 /* FileBrowser */,
+				4134EF0FBE38B63013C1987422467EA7 /* Mocker */,
+				BD423FFD984F573685C5532B4BA79FE8 /* PryvApiSwiftKit */,
+				2CA07A5847CF5583694B90F210D691D5 /* SwiftKeychainWrapper */,
 			);
-			name = PryvApiSwiftKit;
-			path = PryvApiSwiftKit;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		4E3F2C3894831C3AD8CD816588D0774E /* iOS */ = {
+		1F3D5D4A41F10C7B6D45AE1DCE81D831 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4FB19258878E428BF7E54A7821880B0C /* Foundation.framework */,
+				852B1741133060FB835934F4138C5861 /* SwiftKeychainWrapper.modulemap */,
+				054C01A309655D0F9642DE132B699EBD /* SwiftKeychainWrapper.xcconfig */,
+				16BF0957DE3A8A8D5C6F4FF7C703032C /* SwiftKeychainWrapper-dummy.m */,
+				0B92467812989E68B3F9B836341D3714 /* SwiftKeychainWrapper-Info.plist */,
+				376D1716ABF79A932BF3C08F1734BA76 /* SwiftKeychainWrapper-prefix.pch */,
+				7AA7ECF9B47D21EA19A55DF0424DF16E /* SwiftKeychainWrapper-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftKeychainWrapper";
+			sourceTree = "<group>";
+		};
+		21DEB8481540E55871D5C558BFE96800 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */,
+				1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */,
+				6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */,
+				7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
+				BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */,
+				2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */,
+				5069D199AB328CCD047E61C632CD7C32 /* SwiftKeychainWrapper.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24D4142BAC738D35514F28A69F18649C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				15EA03C7B037196ED3C069F105533794 /* Foundation.framework */,
+				69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */,
+				C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		5832BF702D9A3FE2DED4D2D6E8BD126A /* Pods */ = {
+		2CA07A5847CF5583694B90F210D691D5 /* SwiftKeychainWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				DE321BFF01C1255FCE56D1BD80E4FCEB /* Mocker */,
-				48617144E1C0F0BDE515C8D0093E2E3B /* PryvApiSwiftKit */,
-				C3C1251F9BB27AE03EBCA8E2ED5794CA /* SwiftKeychainWrapper */,
+				B4B820B5AEB392B07182217ED117FEFC /* KeychainItemAccessibility.swift */,
+				9E292C83C641CC3413652A32CBD9C1DA /* KeychainWrapper.swift */,
+				7F7FFA383D5C656A0AC0D19AF60FA479 /* SwiftKeychainWrapper.h */,
+				1F3D5D4A41F10C7B6D45AE1DCE81D831 /* Support Files */,
 			);
-			name = Pods;
+			name = SwiftKeychainWrapper;
+			path = SwiftKeychainWrapper;
+			sourceTree = "<group>";
+		};
+		35D8AA6B7D1EB59AEDA690DC97F8F613 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CDDB4F382B6B21D55F2AA14FA7D419F8 /* documents@2x.png */,
+				94B750C01610903A2905057B932BA5CA /* file@2x.png */,
+				F8A7634B2C7037804DA5E5F0FE739730 /* FileBrowser.xib */,
+				FB08C891DCEA7ADF32F83B7C55B83615 /* folder@2x.png */,
+				EF606781BD5044A95C1A2E57290B1B49 /* image@2x.png */,
+				A71777CF80334A120D8D8573A3F1635C /* pdf@2x.png */,
+				767716A406E56D61DC1FD87181FFEBCB /* PreviewTransitionViewController.xib */,
+				0875BD1FC08F06886D85D3DAB96547BF /* WebviewPreviewViewContoller.xib */,
+				4C2C26D51CC38B9C286FF088AF623F83 /* zip@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		4134EF0FBE38B63013C1987422467EA7 /* Mocker */ = {
+			isa = PBXGroup;
+			children = (
+				F13F056AEF5051428094C7961C5D47FD /* Mock.swift */,
+				6FA1767B20D60C36BE8E3D5DDD45D68F /* Mocker.swift */,
+				A73056522EBFD95D54B26AD2F0D0E588 /* MockingURLProtocol.swift */,
+				44A4ECB2E00519B290C229FC3A26DD18 /* Support Files */,
+			);
+			name = Mocker;
+			path = Mocker;
+			sourceTree = "<group>";
+		};
+		44A4ECB2E00519B290C229FC3A26DD18 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				10E0550011E320C4DDB2213A5C3ABB6F /* Mocker.modulemap */,
+				598D014E19727070EB2E190212BB672A /* Mocker.xcconfig */,
+				0B64F868CBFA5EA8B9AF913AEF114A3A /* Mocker-dummy.m */,
+				EBE1F8E6CF829E9D04F8E47E9A53600F /* Mocker-Info.plist */,
+				969FAB9FCCDF9735B37DCF6CA29FBAC0 /* Mocker-prefix.pch */,
+				C80CD1D54E9A0856EBE3623943285684 /* Mocker-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Mocker";
 			sourceTree = "<group>";
 		};
 		5EBA70F81FC5864ADADC3D138C32C73B /* Pods-PryvApiSwiftKitExample */ = {
@@ -288,18 +438,13 @@
 			path = "Target Support Files/Pods-PryvApiSwiftKitExample";
 			sourceTree = "<group>";
 		};
-		74FFE127ABE011F06596CD0E0BBFA3F1 /* Support Files */ = {
+		7EFC8EBE862FBEFFAD6A466309AF50AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E54CB507D13708418598AF337EC77B0C /* Mocker.modulemap */,
-				06426067262B3505743A6D9FF2FF98BD /* Mocker.xcconfig */,
-				8A06D6ADDB095A89A3BC6945A1B35A51 /* Mocker-dummy.m */,
-				6B1743BAD97F322C3646E0AAA447D4C6 /* Mocker-Info.plist */,
-				B3A076C3D7AF7C895AB4A2BC3FDD5CAC /* Mocker-prefix.pch */,
-				6BA6824F41D61A5F431FCCA58A1533A7 /* Mocker-umbrella.h */,
+				A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */,
+				24D4142BAC738D35514F28A69F18649C /* iOS */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Mocker";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		836AC565166251539BE66E652A10D3FB /* Pods-PryvApiSwiftKitExampleTests */ = {
@@ -328,19 +473,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		97FB48851F6DB73B604EEB9ED0CD954B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */,
-				6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */,
-				7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
-				BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */,
-				2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */,
-				5069D199AB328CCD047E61C632CD7C32 /* SwiftKeychainWrapper.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A7151D8CFFAACF96B3954E4C8A3A4717 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,77 +490,86 @@
 			path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
 			sourceTree = "<group>";
 		};
-		C3C1251F9BB27AE03EBCA8E2ED5794CA /* SwiftKeychainWrapper */ = {
+		BD423FFD984F573685C5532B4BA79FE8 /* PryvApiSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
-				7CD580305D0357BA97FD376A331C0DCD /* KeychainItemAccessibility.swift */,
-				282731A017DA5E8CBB81B33FD42F57C1 /* KeychainWrapper.swift */,
-				8ECE12D16036F98BCAC4DA75CA0B0111 /* SwiftKeychainWrapper.h */,
-				C3CC7F34EDBA0573B28D44B966A6C571 /* Support Files */,
+				7129BADB67B6FB4E3FFA1116CFDEC284 /* AuthState.swift */,
+				8C01437A648CA9C828E5B3632A12DC13 /* Connection.swift */,
+				5B62D7473AB9476849699F096C369AA2 /* Data+append.swift */,
+				2A2B29D6297C10211816A89354D49A7C /* Media.swift */,
+				EBD34359626906059FD7193E6382C8F4 /* PryvApiSwiftKit.h */,
+				CF271DEC84BA586A2D12420F1069AB2A /* PryvApiSwiftKit.swift */,
+				0098873803DB79447E64044831D8D1FC /* PryvServiceInfo.swift */,
+				0FBBF4048E9E905EF9790BE870F1E55F /* Service.swift */,
+				AB70BC19FC4B5B78B368D5D2202AE990 /* Utils.swift */,
+				F3FC4CC748CEBBD52DFB0034BF6614EA /* Support Files */,
 			);
-			name = SwiftKeychainWrapper;
-			path = SwiftKeychainWrapper;
-			sourceTree = "<group>";
-		};
-		C3CC7F34EDBA0573B28D44B966A6C571 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				009D915F5D970069EE499D4C64445B77 /* SwiftKeychainWrapper.modulemap */,
-				4FA2A555B8490EF1FD1694DD9DE8479C /* SwiftKeychainWrapper.xcconfig */,
-				45EE4AB262F4591FA9A148033A874E18 /* SwiftKeychainWrapper-dummy.m */,
-				83D054056B97CA4C072C659BEF5DFD92 /* SwiftKeychainWrapper-Info.plist */,
-				A9D37E8284D0132C056F586B14F052F2 /* SwiftKeychainWrapper-prefix.pch */,
-				002F9405B7B1CFE0AD8380D4E9682999 /* SwiftKeychainWrapper-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftKeychainWrapper";
+			name = PryvApiSwiftKit;
+			path = PryvApiSwiftKit;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				307F2957DFA0619020F3FCC367354092 /* Frameworks */,
-				5832BF702D9A3FE2DED4D2D6E8BD126A /* Pods */,
-				97FB48851F6DB73B604EEB9ED0CD954B /* Products */,
+				7EFC8EBE862FBEFFAD6A466309AF50AB /* Frameworks */,
+				17A83715EAD017D8723DDA92519A3C9A /* Pods */,
+				21DEB8481540E55871D5C558BFE96800 /* Products */,
 				93892028FF1D92160BABE571834C36E1 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		DD86F033AE3C164BC99BFAC4183EFB3C /* Support Files */ = {
+		F3FC4CC748CEBBD52DFB0034BF6614EA /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2925D2125D5F521BD0016733FB82DDAF /* PryvApiSwiftKit.modulemap */,
-				3B891065C30CF9D7E6AC48F65A17962A /* PryvApiSwiftKit.xcconfig */,
-				62B970C88679A50C8E6F29DD3C8C769E /* PryvApiSwiftKit-dummy.m */,
-				F73849B964B7484DC9443CC994E5D57D /* PryvApiSwiftKit-Info.plist */,
-				4187D4253CBB26ACEF62D7947D374253 /* PryvApiSwiftKit-prefix.pch */,
-				4655087318DCB87CBC7C80717FB59EA3 /* PryvApiSwiftKit-umbrella.h */,
+				FBE643830C89F903C795946ED6C6B094 /* PryvApiSwiftKit.modulemap */,
+				2B85E0D791587BD92075C44E5D975AC6 /* PryvApiSwiftKit.xcconfig */,
+				5B6F2527326A6324DF2DEBB54FE2CAA9 /* PryvApiSwiftKit-dummy.m */,
+				C2AAA4F40C66F56D85E22F5D4DBA5B44 /* PryvApiSwiftKit-Info.plist */,
+				D299CE95A0322E4749A31A4D3E969BCB /* PryvApiSwiftKit-prefix.pch */,
+				675D73FA4FC3937F1727A5AA307FB931 /* PryvApiSwiftKit-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/PryvApiSwiftKit";
 			sourceTree = "<group>";
 		};
-		DE321BFF01C1255FCE56D1BD80E4FCEB /* Mocker */ = {
+		FA3D5715D8AF481FF28835D47AF753F2 /* FileBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				5F80387762AB6564FC5012E0FC1E99B1 /* Mock.swift */,
-				AB17797CA008A364FE0DFAB855DF2084 /* Mocker.swift */,
-				25124FD78BA1B13BF379C9C13C00BC12 /* MockingURLProtocol.swift */,
-				74FFE127ABE011F06596CD0E0BBFA3F1 /* Support Files */,
+				A362831B00DEB5E7DDAC830C89F9578E /* FBFile.swift */,
+				9284B0BFA5BD296B5185AF4A48474157 /* FileBrowser.h */,
+				FDDDFFEFD0782C8D1FF69EEDB972E60F /* FileBrowser.swift */,
+				0F9E0ADA3BDEF7A063C6498C78599F3F /* FileListPreview.swift */,
+				84EEECD5F8BC94F5D5AC03F373E3E518 /* FileListSearch.swift */,
+				EF47A0EADEC89669310F6C0CBE8C9533 /* FileListTableView.swift */,
+				489383DFBE04F291D0B8AE0580A6DA83 /* FileListViewController.swift */,
+				4FDC470EF7E1F768633C4DBD1601C566 /* FileParser.swift */,
+				18A305029EB6F589344AE88219A21D61 /* PreviewManager.swift */,
+				3DDB7A34E9578F4B7270685B8A6930C6 /* PreviewTransitionViewController.swift */,
+				F61C746940A65FA205E08BE73EBAF46E /* WebviewPreviewViewContoller.swift */,
+				35D8AA6B7D1EB59AEDA690DC97F8F613 /* Resources */,
+				13AF3E8BA2FBF8B7710643B21921AEDE /* Support Files */,
 			);
-			name = Mocker;
-			path = Mocker;
+			name = FileBrowser;
+			path = FileBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		18D6D7BF451DBF15628DA17ADFAD5AA0 /* Headers */ = {
+		822045741CADE205825F0D5E390948F5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64BBB2C56B9F15440071826663A42F8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */,
+				0C8E9B3D80DB634CC9B5042DADACB502 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83A9AAE4AFD09F28435640D1B9E13CBC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A95A84F9D6535282AD063A64169BA31 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,14 +579,6 @@
 			files = (
 				CA9B8B0F6ED469BF4B99ABAD080D3E43 /* PryvApiSwiftKit-umbrella.h in Headers */,
 				E74923A11C921F5FE54DDC23089017DB /* PryvApiSwiftKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B67F4188F8221302098AC87D98A55204 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AAA41819C68E66171FF886152A2661B0 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +596,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E685B281342D7BD20B9F10E4F698B364 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBC2A313C1E0794B7B7E321AFA34AD6 /* FileBrowser-umbrella.h in Headers */,
+				A75283431AC3FF78D619F192AA21739B /* FileBrowser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +656,24 @@
 			productReference = BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0B84D8566C777544D5CE32218333BF6 /* Build configuration list for PBXNativeTarget "FileBrowser" */;
+			buildPhases = (
+				E685B281342D7BD20B9F10E4F698B364 /* Headers */,
+				0223C180A7A27174E3E3F01F0C1D076C /* Sources */,
+				1BC3A058A9240AF4808B3D0DD772BE07 /* Frameworks */,
+				575AA240CB7226897E88DB1EEF433984 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FileBrowser;
+			productName = FileBrowser;
+			productReference = 5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B1D7CF136EDD2031CF6FC6367D74554 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKit" */;
@@ -535,19 +695,20 @@
 		};
 		C2475DF9F44E9D65027E1A832B9C71FC /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 682112C6F948B1E74360BBFF879043B0 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */;
+			buildConfigurationList = CBBC2FBB40B07E0717B238F178106BE2 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */;
 			buildPhases = (
-				18D6D7BF451DBF15628DA17ADFAD5AA0 /* Headers */,
-				838152D4F1D7FC59F156F71210231515 /* Sources */,
-				1A4650196DC9DAD399E4A57DA1175FD0 /* Frameworks */,
-				023A775AB3F7A84DBF9E6891C4C64C14 /* Resources */,
+				83A9AAE4AFD09F28435640D1B9E13CBC /* Headers */,
+				D5CDE7E75DEA21DE64D6263388DA2395 /* Sources */,
+				A09E453E65DA7B63D17A08BF40F04A20 /* Frameworks */,
+				7C4BB409B24F8D290AC5E8A0D969E98A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9000231DA13D1E82CECC673F88633A93 /* PBXTargetDependency */,
-				B903B66D6021E4B020D1BA88615E4ED8 /* PBXTargetDependency */,
-				F420EC5262463DCB2B972026DAD496CC /* PBXTargetDependency */,
+				E1354CE01431BF92950CA3BAEC2D50F3 /* PBXTargetDependency */,
+				E9F7C33E229DA357C1C5987B8AC1E874 /* PBXTargetDependency */,
+				DB9027A7A391EF13EE4628158813C5BF /* PBXTargetDependency */,
+				29AE7EC3FF695CCEFED71334938BA176 /* PBXTargetDependency */,
 			);
 			name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
 			productName = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
@@ -556,19 +717,20 @@
 		};
 		C5D432A2AF89A0B0A4B79A5E43D31728 /* Pods-PryvApiSwiftKitExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 440A900FFB17088776A12138A17C40D9 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */;
+			buildConfigurationList = EE9EB0F6D81743A4A99A910D8625E9D0 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */;
 			buildPhases = (
-				B67F4188F8221302098AC87D98A55204 /* Headers */,
-				DD91644A18D375CAA7B033DF82820C00 /* Sources */,
-				EC964BCB5815C44F3F012D7801BC6246 /* Frameworks */,
-				E8EBCF7A83A222DDFCB2C03990C6FC2A /* Resources */,
+				822045741CADE205825F0D5E390948F5 /* Headers */,
+				D6BA5E871A7EB17AF396DAAFA1B8DF53 /* Sources */,
+				33A7003248A21AC3E0FD8091F03EDF26 /* Frameworks */,
+				600C064A194B80CA376DC8A8087604D5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4D1440D074778F107187A3CD82ABA5E /* PBXTargetDependency */,
-				68A6B486B7FA333A38AE807BE966D854 /* PBXTargetDependency */,
-				4D4C11F837448652427A0BAF1458D34E /* PBXTargetDependency */,
+				2CD1A92561CDCEFBC6B73B909772B567 /* PBXTargetDependency */,
+				F278EA5AAFD40A9154DD36AA0108F87E /* PBXTargetDependency */,
+				1F6BE54A06761B59DBA36E675BCEB2BF /* PBXTargetDependency */,
+				528216A051EAFB197945583B3F3D4531 /* PBXTargetDependency */,
 			);
 			name = "Pods-PryvApiSwiftKitExample";
 			productName = "Pods-PryvApiSwiftKitExample";
@@ -611,10 +773,11 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 97FB48851F6DB73B604EEB9ED0CD954B /* Products */;
+			productRefGroup = 21DEB8481540E55871D5C558BFE96800 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */,
 				04AFC708359363290935C681A1CE226D /* Mocker */,
 				C5D432A2AF89A0B0A4B79A5E43D31728 /* Pods-PryvApiSwiftKitExample */,
 				C2475DF9F44E9D65027E1A832B9C71FC /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */,
@@ -626,14 +789,37 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		023A775AB3F7A84DBF9E6891C4C64C14 /* Resources */ = {
+		2EB736C6F5ADDCBFEC3E7074C40E36E0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EB736C6F5ADDCBFEC3E7074C40E36E0 /* Resources */ = {
+		575AA240CB7226897E88DB1EEF433984 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8E57E4DB6A31EE18475FE79D070D7FC /* documents@2x.png in Resources */,
+				5215DCBE6710AD5AA86A0A70744BA3BB /* file@2x.png in Resources */,
+				C7915A24356037F0D9E71B5784D65C68 /* FileBrowser.xib in Resources */,
+				35BB6778460759C81019D6B31D079568 /* folder@2x.png in Resources */,
+				5CB7558219F71F41DC2BE90FB50CCE3F /* image@2x.png in Resources */,
+				5984D9DC8F924C72F6018A3C3FE8B82A /* pdf@2x.png in Resources */,
+				20F2028BF02713C97C6725DAD0D44926 /* PreviewTransitionViewController.xib in Resources */,
+				7C9A69AA851BCF1B95C919C4D6B28955 /* WebviewPreviewViewContoller.xib in Resources */,
+				7759D7A510B77D3EAABFAE095F6E1DCE /* zip@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		600C064A194B80CA376DC8A8087604D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7C4BB409B24F8D290AC5E8A0D969E98A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -661,16 +847,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8EBCF7A83A222DDFCB2C03990C6FC2A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0223C180A7A27174E3E3F01F0C1D076C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88AD1A35AE18C3983F7CBB826CA7B246 /* FBFile.swift in Sources */,
+				B35ED9D9DC5748427E30E6AAFA5897E7 /* FileBrowser-dummy.m in Sources */,
+				CA4D6850D16D95809EE6283CC72260FC /* FileBrowser.swift in Sources */,
+				5866D559DB2BCFCB1083E844B3848326 /* FileListPreview.swift in Sources */,
+				F3C7AE52EA1046C4002D23E34F065421 /* FileListSearch.swift in Sources */,
+				1CAD51550A23BBA011BE2040CD920891 /* FileListTableView.swift in Sources */,
+				F1A3B28A72F6AA7BA1987CAF0316ADC0 /* FileListViewController.swift in Sources */,
+				8445A2A92C57F2EFE9D5943CA2811FF1 /* FileParser.swift in Sources */,
+				D1FEC1A52914D75E022A7FFFEA37BC3F /* PreviewManager.swift in Sources */,
+				7559DE245E16704C9A80CAB12C795CD9 /* PreviewTransitionViewController.swift in Sources */,
+				59EB715BC99B619BCDD230721E2A1B55 /* WebviewPreviewViewContoller.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0705511B603E3801961C3CEF771B1129 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -705,19 +902,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		838152D4F1D7FC59F156F71210231515 /* Sources */ = {
+		D5CDE7E75DEA21DE64D6263388DA2395 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EBB3F9DB6183290D0897387EC95C282 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */,
+				9F8D40D754572CEF0AF0B8EDA3AB6FF8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD91644A18D375CAA7B033DF82820C00 /* Sources */ = {
+		D6BA5E871A7EB17AF396DAAFA1B8DF53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59BC31895A7CF79272B974F6B663F8A1 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */,
+				AD54683850BB2387F8FA7A2D801891AD /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,23 +932,29 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4D4C11F837448652427A0BAF1458D34E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftKeychainWrapper;
-			target = CF903DF43E111410ECA0C288D36FA21A /* SwiftKeychainWrapper */;
-			targetProxy = B20A8E439FCEA4111F4C63A0FFF2F026 /* PBXContainerItemProxy */;
-		};
-		68A6B486B7FA333A38AE807BE966D854 /* PBXTargetDependency */ = {
+		1F6BE54A06761B59DBA36E675BCEB2BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PryvApiSwiftKit;
 			target = B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */;
-			targetProxy = 1B826BD475698A1C16E0459A7F7980BE /* PBXContainerItemProxy */;
+			targetProxy = 549C4AA78A7DBE0563A584EE168BB958 /* PBXContainerItemProxy */;
 		};
-		9000231DA13D1E82CECC673F88633A93 /* PBXTargetDependency */ = {
+		29AE7EC3FF695CCEFED71334938BA176 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Mocker;
-			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
-			targetProxy = 04DC45AE35E960288BFA1901C1A1AF00 /* PBXContainerItemProxy */;
+			name = SwiftKeychainWrapper;
+			target = CF903DF43E111410ECA0C288D36FA21A /* SwiftKeychainWrapper */;
+			targetProxy = F0F7CEE132EA7B0F4EBFC12D611C55D7 /* PBXContainerItemProxy */;
+		};
+		2CD1A92561CDCEFBC6B73B909772B567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FileBrowser;
+			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
+			targetProxy = 8D0172F88F5A12EA32B54AEBB08270FA /* PBXContainerItemProxy */;
+		};
+		528216A051EAFB197945583B3F3D4531 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftKeychainWrapper;
+			target = CF903DF43E111410ECA0C288D36FA21A /* SwiftKeychainWrapper */;
+			targetProxy = D04BB1D6F3C4373FD7B3E927AF55B244 /* PBXContainerItemProxy */;
 		};
 		9ADF31115D31F6B6260F76BA681787BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -759,17 +962,11 @@
 			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
 			targetProxy = 6E0D97448F08E14FB42D949BB714811E /* PBXContainerItemProxy */;
 		};
-		B903B66D6021E4B020D1BA88615E4ED8 /* PBXTargetDependency */ = {
+		DB9027A7A391EF13EE4628158813C5BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PryvApiSwiftKit;
 			target = B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */;
-			targetProxy = CFCE132043042525C4B06DDCB4877EFA /* PBXContainerItemProxy */;
-		};
-		D4D1440D074778F107187A3CD82ABA5E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Mocker;
-			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
-			targetProxy = D888717B140E67FA6AF8D867B378FD0D /* PBXContainerItemProxy */;
+			targetProxy = 8251CA81B403B00250DAE06C4C1C6195 /* PBXContainerItemProxy */;
 		};
 		E0B7249AD9CC88868B8521EC9AD66EE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -777,18 +974,30 @@
 			target = C5D432A2AF89A0B0A4B79A5E43D31728 /* Pods-PryvApiSwiftKitExample */;
 			targetProxy = 8E7E3883EFF84AAA3C3CEA1D3D426C6F /* PBXContainerItemProxy */;
 		};
-		F420EC5262463DCB2B972026DAD496CC /* PBXTargetDependency */ = {
+		E1354CE01431BF92950CA3BAEC2D50F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftKeychainWrapper;
-			target = CF903DF43E111410ECA0C288D36FA21A /* SwiftKeychainWrapper */;
-			targetProxy = 3FB39AFB6E11280BD310AF25AFD551F0 /* PBXContainerItemProxy */;
+			name = FileBrowser;
+			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
+			targetProxy = 99AC113DF514D9D350103FBF4CA725B5 /* PBXContainerItemProxy */;
+		};
+		E9F7C33E229DA357C1C5987B8AC1E874 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Mocker;
+			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
+			targetProxy = C9C41627EE69C9FBCADB16B5A982E618 /* PBXContainerItemProxy */;
+		};
+		F278EA5AAFD40A9154DD36AA0108F87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Mocker;
+			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
+			targetProxy = B6CFEC972F9A6DB7BFEA19BA4AC0BED1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		08497E068591067E671DE3DCDF273781 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06426067262B3505743A6D9FF2FF98BD /* Mocker.xcconfig */;
+			baseConfigurationReference = 598D014E19727070EB2E190212BB672A /* Mocker.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -824,7 +1033,7 @@
 		};
 		0D68731B1708A659462C629F01084692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FA2A555B8490EF1FD1694DD9DE8479C /* SwiftKeychainWrapper.xcconfig */;
+			baseConfigurationReference = 054C01A309655D0F9642DE132B699EBD /* SwiftKeychainWrapper.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -859,7 +1068,7 @@
 		};
 		172D2AFEFD581AD4EFCCF5ED41015FA1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B891065C30CF9D7E6AC48F65A17962A /* PryvApiSwiftKit.xcconfig */;
+			baseConfigurationReference = 2B85E0D791587BD92075C44E5D975AC6 /* PryvApiSwiftKit.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -958,7 +1167,7 @@
 			};
 			name = Debug;
 		};
-		1CCEC4C3EF837DF228E8E392A6C3D9E4 /* Debug */ = {
+		1E1BF4DECDD147563279DD122A27B34B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5EDF92344659B4BECB281DBBEB6A2A8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */;
 			buildSettings = {
@@ -996,87 +1205,9 @@
 			};
 			name = Debug;
 		};
-		1D9A4AEB55BF267410E89CFCF3C96EA8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A450FF2221758F229BE64698AD53F5D3 /* Pods-PryvApiSwiftKitExample.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		35D85D6227249DFA9A41ACB366F62339 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3928AC5B5CD2AFD99B934C921FB1B0A0 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		3DF6037F71393CE4E1D4F3E623A0872E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06426067262B3505743A6D9FF2FF98BD /* Mocker.xcconfig */;
+			baseConfigurationReference = 598D014E19727070EB2E190212BB672A /* Mocker.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1111,7 +1242,7 @@
 		};
 		43CE06E37A8B99DB615367984EBD4567 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FA2A555B8490EF1FD1694DD9DE8479C /* SwiftKeychainWrapper.xcconfig */;
+			baseConfigurationReference = 054C01A309655D0F9642DE132B699EBD /* SwiftKeychainWrapper.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1144,44 +1275,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		6ED48A322EAB67A1E89B57D325C6F05E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		6FEA21093DE90C448CF13E447882DB8D /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1224,7 +1317,7 @@
 		};
 		8771CDFA373A58ECFF3248C8D6A025C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B891065C30CF9D7E6AC48F65A17962A /* PryvApiSwiftKit.xcconfig */;
+			baseConfigurationReference = 2B85E0D791587BD92075C44E5D975AC6 /* PryvApiSwiftKit.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1257,6 +1350,118 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		96803A803B2E59F37844BD89ECE42421 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1916C154CA6A0C8DFC730A0B2732288 /* FileBrowser.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FileBrowser/FileBrowser-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FileBrowser/FileBrowser-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FileBrowser/FileBrowser.modulemap";
+				PRODUCT_MODULE_NAME = FileBrowser;
+				PRODUCT_NAME = FileBrowser;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A19BF41F09673C72F4B58219057D8EA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A774D85EBEC2B0A29FD8EB02B1C1174E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3928AC5B5CD2AFD99B934C921FB1B0A0 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		A911D09016ABDBC882ADB5B9C2946E01 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1356,6 +1561,79 @@
 			};
 			name = Release;
 		};
+		BA5CD668F610A82B4F3A874565E218CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A450FF2221758F229BE64698AD53F5D3 /* Pods-PryvApiSwiftKitExample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BBFF97038ABA6479C15B0DBDB6017618 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1916C154CA6A0C8DFC730A0B2732288 /* FileBrowser.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FileBrowser/FileBrowser-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FileBrowser/FileBrowser-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FileBrowser/FileBrowser.modulemap";
+				PRODUCT_MODULE_NAME = FileBrowser;
+				PRODUCT_NAME = FileBrowser;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1373,15 +1651,6 @@
 			buildConfigurations = (
 				3DF6037F71393CE4E1D4F3E623A0872E /* Debug */,
 				08497E068591067E671DE3DCDF273781 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		440A900FFB17088776A12138A17C40D9 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6ED48A322EAB67A1E89B57D325C6F05E /* Debug */,
-				1D9A4AEB55BF267410E89CFCF3C96EA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1404,20 +1673,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		682112C6F948B1E74360BBFF879043B0 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1CCEC4C3EF837DF228E8E392A6C3D9E4 /* Debug */,
-				35D85D6227249DFA9A41ACB366F62339 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		97C26D1F56B79A699BC4DE26433A422F /* Build configuration list for PBXNativeTarget "SwiftKeychainWrapper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D68731B1708A659462C629F01084692 /* Debug */,
 				43CE06E37A8B99DB615367984EBD4567 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0B84D8566C777544D5CE32218333BF6 /* Build configuration list for PBXNativeTarget "FileBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBFF97038ABA6479C15B0DBDB6017618 /* Debug */,
+				96803A803B2E59F37844BD89ECE42421 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBBC2FBB40B07E0717B238F178106BE2 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E1BF4DECDD147563279DD122A27B34B /* Debug */,
+				A774D85EBEC2B0A29FD8EB02B1C1174E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE9EB0F6D81743A4A99A910D8625E9D0 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A19BF41F09673C72F4B58219057D8EA0 /* Debug */,
+				BA5CD668F610A82B4F3A874565E218CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
