@@ -1,11 +1,11 @@
 PODS:
   - Mocker (1.0.0)
-  - PryvApiSwiftKit (0.1.1):
-    - Mocker (~> 1.0.0)
+  - PryvApiSwiftKit (0.1.2):
+    - Mocker
 
 DEPENDENCIES:
   - Mocker (~> 1.0.0)
-  - PryvApiSwiftKit (~> 0.1.1)
+  - PryvApiSwiftKit (~> 0.1.2)
 
 SPEC REPOS:
   https://github.com/alemannosara/PryvApiSwiftKitSpecs:
@@ -15,8 +15,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Mocker: 58560cc516f6240e92492dad66f295e7cdd7cdb2
-  PryvApiSwiftKit: 1eb5b14a33c5eab623a9aae539b71290b455f572
+  PryvApiSwiftKit: 40e25c1fd30a1f718214d626803acd662f129f1c
 
-PODFILE CHECKSUM: 8415cc7bca38e3fe6d88f49234169df3fc276104
+PODFILE CHECKSUM: e2c78bddbb75536b60902fc2b7a55598718d2d89
 
 COCOAPODS: 1.8.4
