@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import PryvApiSwiftKit
 
-class WebViewController: UIViewController {
+class AuthViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!
     var service: Service?
     

@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,9 +42,9 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="serviceInfoUrlField"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the service info URL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43a-YC-i8m">
-                                <rect key="frame" x="133.5" y="383" width="147.5" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the service info URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43a-YC-i8m">
+                                <rect key="frame" x="118" y="383" width="178" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,7 +65,6 @@
                     <navigationItem key="navigationItem" id="cuS-HL-zxs"/>
                     <connections>
                         <outlet property="authButton" destination="THF-5N-x1V" id="EXh-8X-dOa"/>
-                        <outlet property="authDetailsLabel" destination="43a-YC-i8m" id="vtR-n6-2ZT"/>
                         <outlet property="serviceInfoUrlField" destination="aX2-xK-RGq" id="c8Z-0G-zdq"/>
                     </connections>
                 </viewController>
@@ -73,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="137.94642857142856"/>
         </scene>
-        <!--Web View Controller-->
+        <!--Auth View Controller-->
         <scene sceneID="efo-1D-QMh">
             <objects>
-                <viewController storyboardIdentifier="webVC" id="G8M-C4-GKs" customClass="WebViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="webVC" id="G8M-C4-GKs" customClass="AuthViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Qg-0L-LmY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,6 +108,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQE-FB-5iY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1761" y="137"/>
+        </scene>
+        <!--Connection View Controller-->
+        <scene sceneID="Ysz-i7-GJj">
+            <objects>
+                <viewController storyboardIdentifier="connectionVC" id="BrA-hH-jY3" customClass="ConnectionViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ubu-5t-A4j">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6vc-A6-W1h">
+                                <rect key="frame" x="87" y="372.5" width="240" height="161.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yeH-NF-VV3">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="41.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwl-dz-wEd">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="25.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="welcomeLabel"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="enpoint" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgP-hC-cF8">
+                                                <rect key="frame" x="0.0" y="25.5" width="240" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dny-yZ-Zgm">
+                                        <rect key="frame" x="0.0" y="41.5" width="240" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="k4f-5M-qdo"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yZ-SL-nKe">
+                                        <rect key="frame" x="0.0" y="71.5" width="240" height="90"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5q-j5-BmT">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="30"/>
+                                                <state key="normal" title="Call batch"/>
+                                                <connections>
+                                                    <action selector="callBatch:" destination="BrA-hH-jY3" eventType="touchUpInside" id="s8E-yN-C9f"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-9p-ISI">
+                                                <rect key="frame" x="0.0" y="30" width="240" height="30"/>
+                                                <state key="normal" title="See last 20 events"/>
+                                                <connections>
+                                                    <action selector="getEvents:" destination="BrA-hH-jY3" eventType="touchUpInside" id="Wgb-kb-i99"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0Z-oR-vOm">
+                                                <rect key="frame" x="0.0" y="60" width="240" height="30"/>
+                                                <state key="normal" title="Create event with file"/>
+                                                <connections>
+                                                    <action selector="createEventFromFile:" destination="BrA-hH-jY3" eventType="touchUpInside" id="bIf-9E-kLe"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6vc-A6-W1h" firstAttribute="centerY" secondItem="8k0-Hb-b1C" secondAttribute="centerY" id="Egq-GT-kzE"/>
+                            <constraint firstItem="6vc-A6-W1h" firstAttribute="centerX" secondItem="8k0-Hb-b1C" secondAttribute="centerX" id="arg-LD-opE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8k0-Hb-b1C"/>
+                    </view>
+                    <connections>
+                        <outlet property="endpointLabel" destination="mgP-hC-cF8" id="7Az-B1-Uup"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FzV-NI-3ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2506" y="137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xfq-hn-v3a">

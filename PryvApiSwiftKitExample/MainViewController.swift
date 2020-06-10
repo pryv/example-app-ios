@@ -58,18 +58,18 @@ class MainViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.endpoint {
-                let connection = Connection(apiEndpoint: endpoint)
+                let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
+                if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
-                let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? "" 
+                let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+                vc.connection = Connection(apiEndpoint: endpoint)
+                
                 let alert = UIAlertController(title: "Request accepted", message: "The token is \(token)", preferredStyle: .alert)
                 
-                // TODO: push new view controller with endpoint = "API endpoint: \n" + endpoint and connection = Connection
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
-                
-                self.showIfClientValid(endpoint: endpoint, token: token)
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login
@@ -88,23 +88,35 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func showIfClientValid(endpoint: String, token: String) {
+    private func isClientValid(endpoint: String, token: String) -> Bool {
+        var result = false
+        
         let string = endpoint.hasSuffix("/") ? (endpoint + "access-info") : (endpoint + "/access-info")
         let url = URL(string: string)
         var request = URLRequest(url: url!)
         request.addValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
         
+        let group = DispatchGroup()
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let loginResponse = data, let jsonResponse = try? JSONSerialization.jsonObject(with: loginResponse), let dictionary = jsonResponse as? [String: Any] else { print("problem encountered when parsing the response") ; return }
+            guard let loginResponse = data, let jsonResponse = try? JSONSerialization.jsonObject(with: loginResponse), let dictionary = jsonResponse as? [String: Any] else { print("problem encountered when parsing the response") ; group.leave() ; return }
             
             if let _ = dictionary["token"] as? String {
                 print("Client is valid")
+                result = true
+                group.leave()
             } else {
                 print("Client error")
+                group.leave()
             }
         }
+        
+        
+        group.enter()
         task.resume()
+        group.wait()
+        
+        return result
     }
     
 }
