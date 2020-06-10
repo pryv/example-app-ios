@@ -21,12 +21,6 @@ class ConnectionViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     @IBAction func callBatch(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "callBatchTVC") as! CreateBatchTableViewController
         vc.connection = connection
@@ -34,7 +28,9 @@ class ConnectionViewController: UIViewController {
     }
     
     @IBAction func getEvents(_ sender: Any) {
-        // TODO: create table view to show the events
+        let vc = self.storyboard?.instantiateViewController(identifier: "getEventsVC") as! GetEventsTableViewController
+        vc.connection = connection
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func createEventFromFile(_ sender: Any) {

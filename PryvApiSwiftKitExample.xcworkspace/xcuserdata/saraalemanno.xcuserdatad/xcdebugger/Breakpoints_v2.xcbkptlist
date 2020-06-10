@@ -132,5 +132,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5738A2CD-20D3-4C35-87EB-655DDCC69244"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PryvApiSwiftKitExample/GetEventsTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "connection"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5738A2CD-20D3-4C35-87EB-655DDCC69244 - d6c4e40d29ac60e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PryvApiSwiftKitExample.GetEventsTableViewController.connection.didset : Swift.Optional&lt;PryvApiSwiftKit.Connection&gt;"
+                  moduleName = "PryvApiSwiftKitExample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/PryvApiSwiftKitExample/GetEventsTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "742">
+               </Location>
+               <Location
+                  uuid = "5738A2CD-20D3-4C35-87EB-655DDCC69244 - 13735d28452e335b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; () in PryvApiSwiftKitExample.GetEventsTableViewController.connection.didset : Swift.Optional&lt;PryvApiSwiftKit.Connection&gt;"
+                  moduleName = "PryvApiSwiftKitExample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/PryvApiSwiftKitExample/GetEventsTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
