@@ -46,7 +46,8 @@ class ConnectionViewController: UIViewController {
     }
 
     @IBAction func createEventFromFile(_ sender: Any) {
-        let fileBrowser = FileBrowser()
+        let path = Bundle.main.resourceURL!
+        let fileBrowser = FileBrowser(initialPath: path)
         present(fileBrowser, animated: true, completion: nil)
         
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
