@@ -17,6 +17,8 @@ class ConnectionViewController: UIViewController {
     private let utils = Utils()
     private let key = "app-swift-example-endpoint"
     
+    var permissions = [Json]() // TODO: check these permissions for creation and get
+    
     var connection: Connection? {
         didSet {
             loadViewIfNeeded()
@@ -36,6 +38,7 @@ class ConnectionViewController: UIViewController {
     @IBAction func callBatch(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "callBatchTVC") as! CreateBatchTableViewController
         vc.connection = connection
+        vc.permissions = permissions
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -59,6 +62,8 @@ class ConnectionViewController: UIViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Select file", style: .default, handler: { _ in
+            // TODO: check if streamId + "contribute" allowed by permissions
+            // TODO: check that every field is filled with text
             let event = [
                 "streamId": alert.textFields![0].text ?? "",
                 "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)

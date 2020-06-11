@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
     private let appId = "app-swift-example"
-    private let permissions = [
+    private let permissions: [Json] = [
         [
             "streamId": "weight",
             "defaultName": "Weight",
@@ -128,6 +128,7 @@ class MainViewController: UIViewController {
     private func openConnection(apiEndpoint: String, animated: Bool) {
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
         vc.connection = Connection(apiEndpoint: apiEndpoint)
+        vc.permissions = permissions
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     

@@ -13,6 +13,7 @@ class CreateBatchTableViewController: UITableViewController {
     private var apiCalls = [(String, APICall)]()
     
     var connection: Connection?
+    var permissions = [Json]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,7 @@ class CreateBatchTableViewController: UITableViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            // TODO: check if streamId + "contribute" allowed by permissions
             let apiCall: APICall = [
                 "method": "events.create",
                 "params": [
@@ -75,7 +77,7 @@ class CreateBatchTableViewController: UITableViewController {
                     "content": alert.textFields![3].text ?? ""
                 ]
             ]
-            
+            // TODO: check that every field is filled with text
             self.apiCalls[indexPath.row] = ((alert.textFields![0].text ?? "", apiCall))
             self.tableView.reloadData()
         }))
@@ -101,6 +103,7 @@ class CreateBatchTableViewController: UITableViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+        // TODO: check if streamId + "contribute" allowed by permissions
             let apiCall: APICall = [
                 "method": "events.create",
                 "params": [
@@ -109,7 +112,7 @@ class CreateBatchTableViewController: UITableViewController {
                     "content": alert.textFields![3].text ?? ""
                 ]
             ]
-            
+            // TODO: check that every field is filled with text
             self.apiCalls.append((alert.textFields![0].text ?? "", apiCall))
             self.tableView.reloadData()
         }))
