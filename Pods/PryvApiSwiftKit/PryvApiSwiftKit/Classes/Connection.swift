@@ -61,6 +61,7 @@ public class Connection {
             events = results?.map { result in
                 if let error = result["error"] {
                     print("error encountered when getting the event from callbatch")
+                    print(error)
                     return error
                 }
                 return result["event"] ?? Event()

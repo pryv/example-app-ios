@@ -120,12 +120,11 @@ class CreateBatchTableViewController: UITableViewController {
         var handleResults = [Int: (Event) -> ()]()
         for i in 0..<apiCallsWithoutName.count {
             handleResults[i] = { event in
-                print(event["streamId"] ?? "problem encountered when getting the stream id")
+                print("event \(i + 1): \(String(describing: event))")
             }
         }
         
-        let results = connection?.api(APICalls: apiCallsWithoutName, handleResults: nil)
-        print("result for call batch: \(String(describing: results))")
+        let _ = connection?.api(APICalls: apiCallsWithoutName, handleResults: handleResults)
         self.navigationController?.popViewController(animated: true)
     }
     
