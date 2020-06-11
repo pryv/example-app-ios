@@ -15,30 +15,24 @@ class MainViewController: UIViewController {
     
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
-    private let key = "app-swift-example-endpoint"
-    private let authPayload = """
-        {
-            "requestingAppId": "app-swift-example",
-            "requestedPermissions": [
-                {
-                    "streamId": "weight",
-                    "defaultName": "Weight",
-                    "level": "contribute"
-                },
-                {
-                    "streamId": "weight",
-                    "defaultName": "Weight",
-                    "level": "read"
-                }
-            ],
-            "languageCode": "fr"
-        }
-    """
+    private let appId = "app-swift-example"
+    private let permissions = [
+        [
+            "streamId": "weight",
+            "defaultName": "Weight",
+            "level": "contribute"
+        ],
+        [
+            "streamId": "weight",
+            "defaultName": "Weight",
+            "level": "read"
+        ]
+    ]
     
     @IBOutlet private weak var authButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        if let endpoint = KeychainWrapper.standard.string(forKey: key) {
+        if let endpoint = KeychainWrapper.standard.string(forKey: appId) {
             openConnection(apiEndpoint: endpoint, animated: false)
         }
     }
@@ -48,6 +42,11 @@ class MainViewController: UIViewController {
     @IBAction func authenticate(_ sender: Any) {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
         let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
+        let authPayload: Json = [
+            "requestingAppId": appId,
+            "requestedPermissions": permissions,
+            "languageCode": "fr"
+        ]
         
         if let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback) {
             let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! AuthViewController
@@ -74,7 +73,7 @@ class MainViewController: UIViewController {
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
-                let saveSuccessful: Bool = KeychainWrapper.standard.set(endpoint, forKey: key)
+                let saveSuccessful: Bool = KeychainWrapper.standard.set(endpoint, forKey: appId)
                 if saveSuccessful { print("successfully saved the endpoint in the keychain") }
                 openConnection(apiEndpoint: endpoint, animated: true)
             }
