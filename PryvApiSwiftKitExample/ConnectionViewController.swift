@@ -51,12 +51,12 @@ class ConnectionViewController: UIViewController {
         present(fileBrowser, animated: true, completion: nil)
         
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            let event: Event = ["streamIds": ["weight"], "type": "mass/kg", "content": 90]
+            let event: Event = ["streamIds": ["weight"], "type": "mass/kg", "content": 90] // TODO: let the user create
             let eventWithFile = self.connection?.createEventWithFile(event: event, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
             
             if let result = eventWithFile {
                 let text = (result.compactMap({ (key, value) -> String in
-                    return "\(key)=\(value)"
+                    return "\(key):\(value)"
                 }) as Array).joined(separator: ", \n")
                 
                 let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController

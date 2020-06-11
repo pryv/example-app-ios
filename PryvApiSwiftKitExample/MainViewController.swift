@@ -21,11 +21,17 @@ class MainViewController: UIViewController {
             "requestingAppId": "app-swift-example",
             "requestedPermissions": [
                 {
-                    "streamId": "fitbit",
-                    "defaultName": "Fitbit",
+                    "streamId": "weight",
+                    "defaultName": "Weight",
+                    "level": "contribute"
+                },
+                {
+                    "streamId": "weight",
+                    "defaultName": "Weight",
                     "level": "read"
                 }
-            ]
+            ],
+            "languageCode": "fr"
         }
     """
     
@@ -68,7 +74,6 @@ class MainViewController: UIViewController {
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
-                // Note always same user !
                 let saveSuccessful: Bool = KeychainWrapper.standard.set(endpoint, forKey: key)
                 if saveSuccessful { print("successfully saved the endpoint in the keychain") }
                 openConnection(apiEndpoint: endpoint, animated: true)

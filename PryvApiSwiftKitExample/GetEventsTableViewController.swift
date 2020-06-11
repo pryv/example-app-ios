@@ -21,7 +21,7 @@ class GetEventsTableViewController: UITableViewController {
                     "params": []
                 ]
             ]
-            guard let events = connection!.api(APICalls: request) else { return } // FIXME: empty as type error in request body
+            guard let events = connection!.api(APICalls: request) else { return }
             events.forEach({ self.events.append($0) })
 
             loadViewIfNeeded()
@@ -39,22 +39,27 @@ class GetEventsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath)
         
         let event = events[indexPath.row]
-        let streamIds = event["streamIds"] as? [String]
-        cell.textLabel?.text = streamIds?.joined(separator: ", ")
+        if let streamIds = event["streamIds"] as? [String] {
+            cell.textLabel?.text = streamIds.joined(separator: ", ")
+        }
+        if let error = event["message"] as? String {
+            cell.textLabel?.text = "Error: \(error)"
+        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = events[indexPath.row]
-        let streamIds = event["streamIds"] as! [String]
-        let content = String(describing: event["content"] ?? "")
-        let type = event["type"] as! String
-        let message = "The \(streamIds.joined(separator: ", ")) is \(content) \(type)."
-        
-        let alert = UIAlertController(title: "Event", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
-        self.present(alert, animated: true, completion: nil)
+        if let streamIds = event["streamIds"] as? [String] {
+            let content = String(describing: event["content"] ?? "")
+            let type = event["type"] as! String
+            let message = "The \(streamIds.joined(separator: ", ")) is \(content) \(type)."
+            
+            let alert = UIAlertController(title: "Event", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
 }

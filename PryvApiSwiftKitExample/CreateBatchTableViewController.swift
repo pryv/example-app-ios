@@ -100,7 +100,7 @@ class CreateBatchTableViewController: UITableViewController {
                 ]
             ]
             
-            self.apiCalls.append((alert.textFields![1].text ?? "", apiCall))
+            self.apiCalls.append((alert.textFields![0].text ?? "", apiCall))
             self.tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in self.tableView.reloadData() }))
@@ -118,7 +118,8 @@ class CreateBatchTableViewController: UITableViewController {
             }
         }
         
-        let _ = connection?.api(APICalls: apiCallsWithoutName, handleResults: nil) // FIXME: invalid type for request - expected array but found object
+        let results = connection?.api(APICalls: apiCallsWithoutName, handleResults: nil)
+        print("result for call batch: \(String(describing: results))")
         self.navigationController?.popViewController(animated: true)
     }
     
