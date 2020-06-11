@@ -34,7 +34,7 @@ class CreateBatchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "apiCall", for: indexPath)
         let (name, apiCall) = apiCalls[indexPath.row]
         let params = apiCall["params"] as? [String: Any]
-        let streamId = params?["streamId"] as? String ?? "" 
+        let streamId = params?["streamId"] as? String ?? ""
             
         if !streamId.isEmpty { cell.textLabel?.text = name.isEmpty ? "Event \(indexPath.row + 1): \(streamId)" : name }
         else { cell.textLabel?.text = name.isEmpty ? "Event \(indexPath.row + 1)" : name }
@@ -109,7 +109,7 @@ class CreateBatchTableViewController: UITableViewController {
             self.apiCalls.append((alert.textFields![0].text ?? "", apiCall))
             self.tableView.reloadData()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in self.tableView.reloadData() }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
         
         self.present(alert, animated: true, completion: nil)
     }

@@ -46,23 +46,45 @@ class ConnectionViewController: UIViewController {
     }
 
     @IBAction func createEventFromFile(_ sender: Any) {
-        let path = Bundle.main.resourceURL!
-        let fileBrowser = FileBrowser(initialPath: path)
-        present(fileBrowser, animated: true, completion: nil)
+        let alert = UIAlertController(title: "New event", message: "Please, describe your event here", preferredStyle: .alert)
         
-        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            let event: Event = ["streamIds": ["weight"], "type": "mass/kg", "content": 90] // TODO: let the user create
-            let eventWithFile = self.connection?.createEventWithFile(event: event, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
-            
-            if let result = eventWithFile {
-                let text = (result.compactMap({ (key, value) -> String in
-                    return "\(key):\(value)"
-                }) as Array).joined(separator: ", \n")
-                
-                let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController
-                vc.text = text
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter stream id"
         }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter type"
+        }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter content"
+        }
+
+        alert.addAction(UIAlertAction(title: "Select file", style: .default, handler: { _ in
+            let event = [
+                "streamId": alert.textFields![0].text ?? "",
+                "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
+                "content": alert.textFields![2].text ?? ""
+            ]
+            
+            let path = Bundle.main.resourceURL!
+            let fileBrowser = FileBrowser(initialPath: path)
+            self.present(fileBrowser, animated: true, completion: nil)
+            
+            fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+                let eventWithFile = self.connection?.createEventWithFile(event: event, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
+                
+                if let result = eventWithFile {
+                    let text = (result.compactMap({ (key, value) -> String in
+                        return "\(key):\(value)"
+                    }) as Array).joined(separator: ", \n")
+                    
+                    let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController
+                    vc.text = text
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
