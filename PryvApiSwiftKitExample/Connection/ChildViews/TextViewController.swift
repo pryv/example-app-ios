@@ -13,6 +13,7 @@ class TextViewController: UIViewController {
     
     var text: String? {
         didSet {
+            loadViewIfNeeded()
             textLabel.text = text!
         }
     }

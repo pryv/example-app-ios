@@ -3,4 +3,198 @@
    uuid = "B9DCA41C-D2DE-4D81-922B-7202F6FBB98A"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEEA3BCA-CF6C-4600-8A42-E0002A389772"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "sendCreateEventRequest(payload:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C45D53C-417F-4DC5-8ECA-CFD24E586541"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "createEventWithFormData(event:parameters:files:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48305816-32A0-4765-BAA8-743661B60CD1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "createData(with:from:and:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC591642-35AB-41F7-90DC-D5EC884C785E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "createEventWithFormData(event:parameters:files:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48FC757A-6A7F-4E3F-82B0-B972210ABF0B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "createEventWithFormData(event:parameters:files:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A86FF55A-4CFB-4957-AB08-0908D7242587"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "createEventWithFormData(event:parameters:files:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEEA7FF3-FBFA-412D-BEBB-776D031E7662"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "addAttachmentToEvent(eventId:boundary:httpBody:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BEEA7FF3-FBFA-412D-BEBB-776D031E7662 - 3fad1d3918fc5420"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PryvApiSwiftKit.Connection.(addAttachmentToEvent in _8A8E0E00E0B122107149DA455FB3DBEB)(eventId: Swift.String, boundary: Swift.String, httpBody: Foundation.Data) -&gt; Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "PryvApiSwiftKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
+                  offsetFromSymbolStart = "2913">
+               </Location>
+               <Location
+                  uuid = "BEEA7FF3-FBFA-412D-BEBB-776D031E7662 - 1326bbc19bd4e72f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PryvApiSwiftKit.Connection.(addAttachmentToEvent in _8A8E0E00E0B122107149DA455FB3DBEB)(eventId: Swift.String, boundary: Swift.String, httpBody: Foundation.Data) -&gt; Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "PryvApiSwiftKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "181">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0E38805-4B7F-46D0-A558-13594BE261A7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "addAttachmentToEvent(eventId:boundary:httpBody:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12386839-BC58-4C07-8586-2765110A1BDB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "addAttachmentToEvent(eventId:boundary:httpBody:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E65FC66-98CB-4CD1-81B8-6CCB85BA64C9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PryvApiSwiftKitExample/Connection/ChildViews/TextViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "text"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
