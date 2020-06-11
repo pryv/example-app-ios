@@ -18,7 +18,7 @@ class GetEventsTableViewController: UITableViewController {
             let request = [
                 [
                     "method": "events.get",
-                    "params": [] // FIXME: invalid parameter format
+                    "params": [String: Any]()
                 ]
             ]
             guard let events = connection!.api(APICalls: request) else { return }
