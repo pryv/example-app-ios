@@ -13,7 +13,7 @@ class CreateBatchTableViewController: UITableViewController {
     private var apiCalls = [(String, APICall)]()
     
     var connection: Connection?
-    var permissions = [Json]()
+    var permissions = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,76 +48,26 @@ class CreateBatchTableViewController: UITableViewController {
         let apiCall = apiCalls[indexPath.row].1
         let params = apiCall["params"] as? Json
         
-        let alert = UIAlertController(title: "Edit \(name)", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Name of your new event"
-            textField.text = name
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter stream id"
-            textField.text = params?["streamId"] as? String ?? ""
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter type"
-            textField.text = params?["type"] as? String ?? ""
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter content"
-            textField.text = String(describing: params?["content"] ?? "")
-        }
-
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-            // TODO: check if streamId + "contribute" allowed by permissions
+        let alert = UIAlertController().newEventAlert(editing: true, title: "Edit \(name)", message: "Note: only stream ids in \(String(describing: permissions)) will be sent to the server", name: name, params: params) { (name, params) in
             let apiCall: APICall = [
                 "method": "events.create",
-                "params": [
-                    "streamId": alert.textFields![1].text ?? "",
-                    "type": alert.textFields![2].text ?? "",
-                    "content": alert.textFields![3].text ?? ""
-                ]
+                "params": params
             ]
-            // TODO: check that every field is filled with text
-            self.apiCalls[indexPath.row] = ((alert.textFields![0].text ?? "", apiCall))
+            self.apiCalls[indexPath.row] = (name, apiCall)
             self.tableView.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in self.tableView.reloadData() }))
-        
+        }
         self.present(alert, animated: true, completion: nil)
     }
     
     @objc private func addAPICall() {
-        let alert = UIAlertController(title: "New API call", message: "Please, describe your API call here", preferredStyle: .alert)
-        
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Name of your new event"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter stream id"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter type"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter content"
-        }
-
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-        // TODO: check if streamId + "contribute" allowed by permissions
+        let alert = UIAlertController().newEventAlert(title: "New API call", message: "Please, describe your API call here. \nNote: only stream ids \(String(describing: permissions)) will be sent to the server") { (name, params) in
             let apiCall: APICall = [
                 "method": "events.create",
-                "params": [
-                    "streamId": alert.textFields![1].text ?? "",
-                    "type": alert.textFields![2].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
-                    "content": alert.textFields![3].text ?? ""
-                ]
+                "params": params
             ]
-            // TODO: check that every field is filled with text
-            self.apiCalls.append((alert.textFields![0].text ?? "", apiCall))
+            self.apiCalls.append((name, apiCall))
             self.tableView.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
-        
+        }
         self.present(alert, animated: true, completion: nil)
     }
     

@@ -17,7 +17,8 @@ class ConnectionViewController: UIViewController {
     private let utils = Utils()
     private let key = "app-swift-example-endpoint"
     
-    var permissions = [Json]() // TODO: check these permissions for creation and get
+    var permissions = [Json]()
+    private var contributePermissions: [String]?
     
     var connection: Connection? {
         didSet {
@@ -27,6 +28,7 @@ class ConnectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(back))
     }
     
@@ -38,7 +40,7 @@ class ConnectionViewController: UIViewController {
     @IBAction func callBatch(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "callBatchTVC") as! CreateBatchTableViewController
         vc.connection = connection
-        vc.permissions = permissions
+        vc.permissions = contributePermissions ?? []
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -49,33 +51,14 @@ class ConnectionViewController: UIViewController {
     }
 
     @IBAction func createEventFromFile(_ sender: Any) {
-        let alert = UIAlertController(title: "New event", message: "Please, describe your event here", preferredStyle: .alert)
-        
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter stream id"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter type"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter content"
-        }
-
-        alert.addAction(UIAlertAction(title: "Select file", style: .default, handler: { _ in
-            // TODO: check if streamId + "contribute" allowed by permissions
-            // TODO: check that every field is filled with text
-            let event = [
-                "streamId": alert.textFields![0].text ?? "",
-                "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
-                "content": alert.textFields![2].text ?? ""
-            ]
+        let alert = UIAlertController().newEventAlert(title: "New event", message: "Please, describe your event here. \nNote: only stream ids \(String(describing: contributePermissions ?? [])) will be sent to the server") { (_, params) in
             
             let path = Bundle.main.resourceURL!
             let fileBrowser = FileBrowser(initialPath: path)
             self.present(fileBrowser, animated: true, completion: nil)
             
             fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                let eventWithFile = self.connection?.createEventWithFile(event: event, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
+                let eventWithFile = self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
                 
                 if let result = eventWithFile {
                     let text = (result.compactMap({ (key, value) -> String in
@@ -87,8 +70,7 @@ class ConnectionViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+        }
         
         self.present(alert, animated: true, completion: nil)
     }
