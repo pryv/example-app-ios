@@ -51,15 +51,19 @@ class GetEventsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = events[indexPath.row]
-        if let streamIds = event["streamIds"] as? [String] {
-            let content = String(describing: event["content"] ?? "")
-            let type = event["type"] as! String
-            let message = "The \(streamIds.joined(separator: ", ")) is \(content) \(type)."
-            
-            let alert = UIAlertController(title: "Event", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
-            self.present(alert, animated: true, completion: nil)
+        
+        var message: String?
+        if let _ = event["streamIds"] as? [String] {
+            message = (event.compactMap({ (key, value) -> String in
+                return "\(key):\(value)"
+            }) as Array).joined(separator: "\n")
+        } else {
+            message = "This event has an error: \(event["message"] ?? "")"
         }
+        
+        let alert = UIAlertController(title: "Event details", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

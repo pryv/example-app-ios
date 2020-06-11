@@ -20,7 +20,7 @@ class CreateBatchTableViewController: UITableViewController {
         self.navigationItem.title = "Create new events"
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAPICall))
-        let okButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(submitAPICalls))
+        let okButton = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitAPICalls))
         self.navigationItem.rightBarButtonItems = [addButton, okButton]
     }
 
@@ -50,15 +50,19 @@ class CreateBatchTableViewController: UITableViewController {
         let alert = UIAlertController(title: "Edit \(name)", message: nil, preferredStyle: .alert)
         
         alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Name of your new event"
             textField.text = name
         }
         alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter stream id"
             textField.text = params?["streamId"] as? String ?? ""
         }
         alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter type"
             textField.text = params?["type"] as? String ?? ""
         }
         alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter content"
             textField.text = String(describing: params?["content"] ?? "")
         }
 

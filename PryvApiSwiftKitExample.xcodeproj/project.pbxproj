@@ -106,6 +106,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B30EECDE2492293B00BBFE8C /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				B30EECDF2492294700BBFE8C /* ChildViews */,
+				B3AF43472490BD4C0011839F /* ConnectionViewController.swift */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		B30EECDF2492294700BBFE8C /* ChildViews */ = {
+			isa = PBXGroup;
+			children = (
+				B37A89F124911A3F000C0E72 /* TextViewController.swift */,
+				B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */,
+				B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */,
+			);
+			path = ChildViews;
+			sourceTree = "<group>";
+		};
 		B3D70D2A248A2FE900A1A247 = {
 			isa = PBXGroup;
 			children = (
@@ -131,15 +150,12 @@
 		B3D70D35248A2FE900A1A247 /* PryvApiSwiftKitExample */ = {
 			isa = PBXGroup;
 			children = (
+				B30EECDE2492293B00BBFE8C /* Connection */,
 				B3D70D36248A2FE900A1A247 /* AppDelegate.swift */,
 				B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */,
 				B3D70D3A248A2FE900A1A247 /* MainViewController.swift */,
 				B3C51E7B248A36B700F1D398 /* AuthViewController.swift */,
 				B3D70D3C248A2FE900A1A247 /* Main.storyboard */,
-				B37A89F124911A3F000C0E72 /* TextViewController.swift */,
-				B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */,
-				B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */,
-				B3AF43472490BD4C0011839F /* ConnectionViewController.swift */,
 				B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */,
 				B3D70D41248A2FEA00A1A247 /* LaunchScreen.storyboard */,
 				B3D70D44248A2FEA00A1A247 /* Info.plist */,
