@@ -15,8 +15,8 @@ class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
     
     private let utils = Utils()
-    private let key = "app-swift-example-endpoint"
     
+    var appId: String?
     var permissions = [Json]()
     private var contributePermissions: [String]?
     
@@ -29,11 +29,11 @@ class ConnectionViewController: UIViewController {
     
     override func viewDidLoad() {
         self.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(back))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
     }
     
-    @objc func back() {
-        if !KeychainWrapper.standard.removeObject(forKey: key) { print("Problem encountered when deleting the current key for endpoint") }
+    @objc func logout() {
+        if !KeychainWrapper.standard.removeObject(forKey: appId ?? "") { print("Problem encountered when deleting the current key for endpoint") }
         self.navigationController?.popToRootViewController(animated: true)
     }
     

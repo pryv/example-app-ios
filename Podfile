@@ -9,7 +9,7 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
-  pod 'Mocker', '~> 1.0.0'
+  pod 'Mocker'
   pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'connection-object'
   pod 'SwiftKeychainWrapper'
   pod 'FileBrowser', '~> 1.0'

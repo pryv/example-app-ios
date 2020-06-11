@@ -21,8 +21,12 @@ class CreateBatchTableViewController: UITableViewController {
         self.navigationItem.title = "Create new events"
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAPICall))
-        let okButton = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitAPICalls))
-        self.navigationItem.rightBarButtonItems = [addButton, okButton]
+        addButton.accessibilityIdentifier = "addEventButton"
+        
+        let submitButton = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitAPICalls))
+        submitButton.accessibilityIdentifier = "submitEventsButton"
+        
+        self.navigationItem.rightBarButtonItems = [addButton, submitButton]
     }
 
     // MARK: - Table view data source

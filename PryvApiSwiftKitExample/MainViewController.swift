@@ -129,6 +129,7 @@ class MainViewController: UIViewController {
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.permissions = permissions
+        vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     
