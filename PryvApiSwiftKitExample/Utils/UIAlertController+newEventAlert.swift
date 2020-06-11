@@ -25,7 +25,9 @@ extension UIAlertController {
         
         submit.isEnabled = editing
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
+        
+        alert.addAction(cancel)
         alert.addAction(submit)
         
         alert.addTextField { (textField : UITextField!) -> Void in
@@ -36,16 +38,20 @@ extension UIAlertController {
             textField.placeholder = "Enter stream id"
             textField.text = params?["streamId"] as? String ?? ""
             textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.accessibilityIdentifier = "streamIdField"
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter type"
             textField.text = params?["type"] as? String ?? ""
             textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.accessibilityIdentifier = "typeField"
+
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter content"
             textField.text = String(describing: params?["content"] ?? "")
             textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.accessibilityIdentifier = "contentField"
         }
         
         return alert

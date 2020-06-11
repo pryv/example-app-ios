@@ -27,6 +27,8 @@ class CreateBatchTableViewController: UITableViewController {
         submitButton.accessibilityIdentifier = "submitEventsButton"
         
         self.navigationItem.rightBarButtonItems = [addButton, submitButton]
+        
+        self.tableView.accessibilityIdentifier = "newEventsTable"
     }
 
     // MARK: - Table view data source
@@ -72,6 +74,9 @@ class CreateBatchTableViewController: UITableViewController {
             self.apiCalls.append((name, apiCall))
             self.tableView.reloadData()
         }
+        
+        alert.view.accessibilityIdentifier = "addEventAlert"
+        
         self.present(alert, animated: true, completion: nil)
     }
     

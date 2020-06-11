@@ -34,13 +34,18 @@ public final class MockedData {
           "requestedPermissions": [
             {
               "streamId": "diary",
-              "level": "read",
+              "level": "contribute",
               "defaultName": "Journal"
             },
             {
-              "streamId": "position",
+              "streamId": "weight",
+              "level": "read",
+              "defaultName": "Weight"
+            },
+            {
+              "streamId": "weight",
               "level": "contribute",
-              "defaultName": "Position"
+              "defaultName": "Weight"
             }
           ],
           "lang": "fr",
@@ -64,4 +69,54 @@ public final class MockedData {
             }
         }
     """.data(using: .utf8)!
+    
+    public static let callBatchResponse = """
+        {
+          "event": {
+          "id": "eventId",
+            "time": 1591274234.916,
+            "streamIds": [
+              "weight"
+            ],
+            "streamId": "weight",
+            "tags": [],
+            "type": "mass/kg",
+            "content": 90,
+            "created": 1591274234.916,
+            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+            "modified": 1591274234.916,
+            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+          }
+        }
+    """.data(using: .utf8)!
+    
+    public static let addAttachmentResponse = """
+        {
+          "event": {
+          "id": "eventId",
+            "time": 1591274234.916,
+            "streamIds": [
+              "weight"
+            ],
+            "streamId": "weight",
+            "tags": [],
+            "type": "mass/kg",
+            "content": 90,
+            "attachments": [
+              {
+                "id": "ckb97kwrp000radpv90rkvh76",
+                "fileName": "travel-expense.jpg",
+                "type": "image/jpeg",
+                "size": 1111,
+                "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
+              }
+            ],
+            "created": 1591274234.916,
+            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+            "modified": 1591274234.916,
+            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+          }
+        }
+    """.data(using: .utf8)!
+    
 }

@@ -28,6 +28,10 @@ class GetEventsTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    
+    override func viewDidLoad() {
+        self.tableView.accessibilityIdentifier = "getEventsTable"
+    }
 
     // MARK: - Table view data source
 
@@ -45,6 +49,8 @@ class GetEventsTableViewController: UITableViewController {
         if let error = event["message"] as? String {
             cell.textLabel?.text = "Error: \(error)"
         }
+        
+        cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
         
         return cell
     }

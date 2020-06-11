@@ -8,6 +8,7 @@
 
 import XCTest
 import SwiftKeychainWrapper
+import Mocker
 
 class ConnectionUITests: XCTestCase {
     private let appId = "app-swift-example-tests"
@@ -33,42 +34,120 @@ class ConnectionUITests: XCTestCase {
     
     func testCreateEventWithoutParams() {
         app.buttons["createEventsButton"].tap()
+        app.buttons["addEventButton"].tap()
+        XCTAssertFalse(!app.staticTexts["Save"].isEnabled)
         
-        // TODO: click on plus button
-        // TODO: assert OK not clickable
-        // TODO: fill streamId
-        // TODO: assert OK not clickable
-        // TODO: fill type
-        // TODO: assert OK not clickable
-        // TODO: fill content
-        // TODO: assert OK clickable
-        // TODO: assert name of cell0 = "Event 1"
+        app.textFields["streamIdField"].typeText("weight")
+        XCTAssertFalse(!app.staticTexts["Save"].isEnabled)
+        
+        app.textFields["typeField"].typeText("mass/kg")
+        XCTAssertFalse(!app.staticTexts["Save"].isEnabled)
+        
+        app.textFields["contentField"].typeText("90")
+        XCTAssertFalse(app.staticTexts["Save"].isEnabled)
+        
+        app.staticTexts["Save"].tap()
+        let myTable = app.tables.matching(identifier: "newEventsTable")
+        let cell = myTable.cells.element(matching: .cell, identifier: "newEvent0")
+        XCTAssert(cell.staticTexts["Event 1"].exists)
     }
     
     func testCreateEventWithoutFile() {
         app.buttons["createEventsButton"].tap()
+        app.buttons["addEventButton"].tap()
         
-        // TODO: click on plus button
-        // TODO: fill the form for a streamId in the mockedData
-        // TODO: click on OK
-        // TODO: click on submit
-        // TODO: assert on welcome view
-        // TODO: click on the see events buttons
-        // TODO: check that exactly one button in list
-        // TODO: clic on the event
-        // TODO: check that the text in the alert = the text in the mocked data
+        app.textFields["streamIdField"].typeText("weight")
+        app.textFields["typeField"].typeText("mass/kg")
+        app.textFields["contentField"].typeText("90")
+        app.staticTexts["Save"].tap()
+        
+        app.buttons["submitEventsButton"].tap()
+        XCTAssert(app.staticTexts["welcomeLabel"].exists)
+        
+        app.buttons["getEventsButton"].tap()
+        
+        let myTable = app.tables.matching(identifier: "getEventsTable")
+        let cell = myTable.cells.element(matching: .cell, identifier: "eventCell0")
+        XCTAssert(cell.staticTexts["weight"].exists)
+        
+        cell.tap()
+        let expectedResponse = [
+            "event": [
+                "id": "eventId",
+                "time": 1591274234.916,
+                "streamIds": [
+                  "weight"
+                ],
+                "streamId": "weight",
+                "tags": [],
+                "type": "mass/kg",
+                "content": 90,
+                "created": 1591274234.916,
+                "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+                "modified": 1591274234.916,
+                "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+            ]
+        ]
+        let expectedText = (expectedResponse.compactMap({ (key, value) -> String in
+            return "\(key):\(value)"
+        }) as Array).joined(separator: "\n")
+        
+        XCTAssert(app.staticTexts[expectedText].exists)
     }
     
     func testCreateEventWithFile() {
-        // TODO: click on the create event with file button
-        // TODO: fill the form for a streamId in the mockedData
-        // TODO: clic on OK
-        // TODO: select a file from the app
-        // TODO: assert on text view
-        // TODO: check that the text in the alert = the text in the mocked data with attachment
+        app.buttons["eventWithFileButton"].tap()
+        
+        app.textFields["streamIdField"].typeText("diary")
+        app.textFields["typeField"].typeText("mass/kg")
+        app.textFields["contentField"].typeText("80")
+        app.staticTexts["Save"].tap()
+        // TODO: select a file 'travel-expense.jpg' from the app
+        let expectedResponse = [
+            "event": [
+                "id": "eventId",
+                "time": 1591274234.916,
+                "streamIds": [
+                  "weight"
+                ],
+                "streamId": "weight",
+                "tags": [],
+                "type": "mass/kg",
+                "content": 90,
+                "attachments": [
+                  [
+                    "id": "ckb97kwrp000radpv90rkvh76",
+                    "fileName": "travel-expense.jpg",
+                    "type": "image/jpeg",
+                    "size": 1111,
+                    "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
+                  ]
+                ],
+                "created": 1591274234.916,
+                "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+                "modified": 1591274234.916,
+                "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+            ]
+        ]
+        let expectedText = (expectedResponse.compactMap({ (key, value) -> String in
+            return "\(key):\(value)"
+        }) as Array).joined(separator: "\n")
+        XCTAssertEqual(app.staticTexts["textLabel"].label, expectedText)
     }
     
     private func mockResponses() {
-        // TODO
+        let mockCallBatch = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/")!, dataType: .json, statusCode: 200, data: [
+            .post: MockedData.callBatchResponse
+        ])
+        let mockCreation = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/events")!, dataType: .json, statusCode: 200, data: [
+            .post: MockedData.callBatchResponse
+        ])
+        let mockAttachment = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/events/eventId")!, dataType: .json, statusCode: 200, data: [
+            .post: MockedData.addAttachmentResponse
+        ])
+        
+        mockCallBatch.register()
+        mockCreation.register()
+        mockAttachment.register()
     }
 }
