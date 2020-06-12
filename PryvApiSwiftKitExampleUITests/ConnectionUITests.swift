@@ -9,13 +9,14 @@
 import XCTest
 import KeychainSwift
 import Mocker
+import PryvApiSwiftKit
 @testable import PryvApiSwiftKitExample
 
 class ConnectionUITests: XCTestCase {
     private let keychain = KeychainSwift()
     private let utils = AppUtils()
     private let appId = "app-swift-example"//-tests" // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work-tests"
-    private let endpoint = "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/"
+    private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
     var app: XCUIApplication!
 
     override func setUp() {
@@ -33,9 +34,7 @@ class ConnectionUITests: XCTestCase {
 
     func testWelcomeView() {
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
-
-        let expectedApiEndpoint = "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/"
-        XCTAssertEqual(app.staticTexts["endpointLabel"].label, expectedApiEndpoint)
+        XCTAssertEqual(app.staticTexts["endpointLabel"].label, "API endpoint: \n" + endpoint)
     }
     
     func testCreateEventWithoutParams() {
@@ -89,22 +88,20 @@ class ConnectionUITests: XCTestCase {
         
         cell.tap()
         let expectedResponse = [
-            "event": [
-                "id": "eventId",
-                "time": 1591274234.916,
-                "streamIds": [
-                  "weight"
-                ],
-                "streamId": "weight",
-                "tags": [],
-                "type": "mass/kg",
-                "content": 90,
-                "created": 1591274234.916,
-                "createdBy": "ckb0rldr90001q6pv8zymgvpr",
-                "modified": 1591274234.916,
-                "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
-            ]
-        ]
+            "id": "eventId",
+            "time": 1591274234.916,
+            "streamIds": [
+              "weight"
+            ],
+            "streamId": "weight",
+            "tags": [],
+            "type": "mass/kg",
+            "content": 90,
+            "created": 1591274234.916,
+            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+            "modified": 1591274234.916,
+            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+            ] as Event
         let expectedText = utils.eventToString(expectedResponse)
         
         let predicate = NSPredicate(format: "label LIKE %@", expectedText)
@@ -129,44 +126,42 @@ class ConnectionUITests: XCTestCase {
         app.staticTexts["sample.pdf"].tap()
         
         let expectedResponse = [
-            "event": [
-                "id": "eventId",
-                "time": 1591274234.916,
-                "streamIds": [
-                  "weight"
-                ],
-                "streamId": "weight",
-                "tags": [],
-                "type": "mass/kg",
-                "content": 80,
-                "attachments": [
-                  [
-                    "id": "ckb97kwrp000radpv90rkvh76",
-                    "fileName": "sample.pdf",
-                    "type": "pdf",
-                    "size": 1111,
-                    "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
-                  ]
-                ],
-                "created": 1591274234.916,
-                "createdBy": "ckb0rldr90001q6pv8zymgvpr",
-                "modified": 1591274234.916,
-                "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
-            ]
-        ]
+            "id": "eventId",
+            "time": 1591274234.916,
+            "streamIds": [
+              "weight"
+            ],
+            "streamId": "weight",
+            "tags": [],
+            "type": "mass/kg",
+            "content": 80,
+            "attachments": [
+              [
+                "id": "ckb97kwrp000radpv90rkvh76",
+                "fileName": "sample.pdf",
+                "type": "pdf",
+                "size": 1111,
+                "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
+              ]
+            ],
+            "created": 1591274234.916,
+            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
+            "modified": 1591274234.916,
+            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
+        ] as Event
         let expectedText = utils.eventToString(expectedResponse)
         
         XCTAssertEqual(app.staticTexts["textLabel"].label, expectedText) // FIXME: order in json file 
     }
     
     private func mockResponses() {
-        let mockCallBatch = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/")!, dataType: .json, statusCode: 200, data: [
+        let mockCallBatch = Mock(url: URL(string: endpoint)!, dataType: .json, statusCode: 200, data: [
             .post: MockedData.callBatchResponse
         ])
-        let mockCreation = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/events")!, dataType: .json, statusCode: 200, data: [
+        let mockCreation = Mock(url: URL(string: endpoint + "events")!, dataType: .json, statusCode: 200, data: [
             .post: MockedData.callBatchResponse
         ])
-        let mockAttachment = Mock(url: URL(string: "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/events/eventId")!, dataType: .json, statusCode: 200, data: [
+        let mockAttachment = Mock(url: URL(string: endpoint + "events/eventId")!, dataType: .json, statusCode: 200, data: [
             .post: MockedData.addAttachmentResponse
         ])
         
