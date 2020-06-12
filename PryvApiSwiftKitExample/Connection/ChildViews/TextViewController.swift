@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A simple text view controller with a centered label 
 class TextViewController: UIViewController {
     @IBOutlet private weak var textLabel: UILabel!
     

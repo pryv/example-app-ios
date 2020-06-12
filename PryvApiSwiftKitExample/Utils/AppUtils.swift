@@ -11,12 +11,13 @@ import PryvApiSwiftKit
 
 class AppUtils {
     
-    public init() {
-        
-    }
+    public init() { }
     
-    public func eventToString(_ json: Json) -> String {
-        let array: [String] = json.compactMap({ (key, value) -> String in
+    /// Converts an event in json format to a `String` to print/add to an app's label
+    /// - Parameter event: the json formatted event
+    /// - Returns: a `String` corresponding to the `event` with format `"key: value\n`
+    public func eventToString(_ event: Event) -> String {
+        let array: [String] = event.compactMap({ (key, value) -> String in
             return "\(key):\(value)"
         }) as Array
         

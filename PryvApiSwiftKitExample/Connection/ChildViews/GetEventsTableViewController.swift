@@ -9,6 +9,7 @@
 import UIKit
 import PryvApiSwiftKit
 
+/// Request the last 20 events from the connection and show them in a `UITableView`
 class GetEventsTableViewController: UITableViewController {
     
     private var events = [Event]()

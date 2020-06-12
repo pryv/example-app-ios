@@ -10,6 +10,7 @@ import UIKit
 import PryvApiSwiftKit
 import KeychainSwift
 
+/// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
@@ -75,7 +76,7 @@ class MainViewController: UIViewController {
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
                 keychain.set(endpoint, forKey: appId)
-                openConnection(apiEndpoint: endpoint, animated: true)
+                openConnection(apiEndpoint: endpoint)
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login
@@ -94,6 +95,11 @@ class MainViewController: UIViewController {
         }
     }
     
+    /// Checks whether the client is valid once the user has logged in and accepted the auth request
+    /// - Parameters:
+    ///   - endpoint: the api endpoint received from the auth request
+    ///   - token: the token received from the auth request
+    /// - Returns: `true` if valid, i.e. if a connection can be done. `false` otherwise
     private func isClientValid(endpoint: String, token: String) -> Bool {
         var result = false
         
@@ -125,7 +131,11 @@ class MainViewController: UIViewController {
         return result
     }
     
-    private func openConnection(apiEndpoint: String, animated: Bool) {
+    /// Opens a `ConnectionViewController`
+    /// - Parameters:
+    ///   - apiEndpoint: the api endpoint received from the auth request
+    ///   - animated: whether the change of view controller is animated or not (`true` by default)
+    private func openConnection(apiEndpoint: String, animated: Bool = true) {
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.permissions = permissions

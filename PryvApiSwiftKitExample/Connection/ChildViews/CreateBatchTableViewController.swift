@@ -9,6 +9,7 @@
 import UIKit
 import PryvApiSwiftKit
 
+/// `UITableView` that can be filled with events by the user.
 class CreateBatchTableViewController: UITableViewController {
     private var apiCalls = [(String, APICall)]()
     
@@ -18,15 +19,15 @@ class CreateBatchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Create new events"
+        self.navigationItem.title = "Create events"
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAPICall))
         addButton.accessibilityIdentifier = "addEventButton"
         
-        let submitButton = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitAPICalls))
-        submitButton.accessibilityIdentifier = "submitEventsButton"
+        let sendButton = UIBarButtonItem(title: "Send", style: .done, target: self, action: #selector(sendCreationAPICalls))
+        sendButton.accessibilityIdentifier = "sendEventsButton"
         
-        self.navigationItem.rightBarButtonItems = [addButton, submitButton]
+        self.navigationItem.rightBarButtonItems = [addButton, sendButton]
         
         self.tableView.accessibilityIdentifier = "newEventsTable"
     }
@@ -56,7 +57,7 @@ class CreateBatchTableViewController: UITableViewController {
         let apiCall = apiCalls[indexPath.row].1
         let params = apiCall["params"] as? Json
         
-        let alert = UIAlertController().newEventAlert(editing: true, title: "Edit \(name)", message: "Note: only stream ids in \(String(describing: permissions)) will be sent to the server", name: name, params: params) { (name, params) in
+        let alert = UIAlertController().newEventAlert(editing: true, title: "Edit \(name)", message: "Only stream ids \(String(describing: permissions)) will be sent to the server", name: name, params: params) { (name, params) in
             let apiCall: APICall = [
                 "method": "events.create",
                 "params": params
@@ -67,8 +68,9 @@ class CreateBatchTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    /// Adds an event to the `tableView` according to the parameters filled in the `UIAlertController` text fields
     @objc private func addAPICall() {
-        let alert = UIAlertController().newEventAlert(title: "New API call", message: "Please, describe your API call here. \nNote: only stream ids \(String(describing: permissions)) will be sent to the server") { (name, params) in
+        let alert = UIAlertController().newEventAlert(title: "Your new event", message: "Only stream ids \(String(describing: permissions)) will be sent to the server") { (name, params) in
             let apiCall: APICall = [
                 "method": "events.create",
                 "params": params
@@ -82,7 +84,8 @@ class CreateBatchTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc private func submitAPICalls() {
+    /// Sends a batch of `event.create` request with all the events in the `tableView`
+    @objc private func sendCreationAPICalls() {
         let apiCallsWithoutName = apiCalls.map({$0.1})
         
         var handleResults = [Int: (Event) -> ()]()

@@ -39,6 +39,8 @@ class ConnectionUITests: XCTestCase {
     func testCreateEventWithoutParams() {
         app.buttons["createEventsButton"].tap()
         app.buttons["addEventButton"].tap()
+        
+        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [weight] will be sent to the server"].exists)
         XCTAssertFalse(app.alerts.buttons["Save"].isEnabled)
         
         app.textFields["streamIdField"].tap()
@@ -74,7 +76,7 @@ class ConnectionUITests: XCTestCase {
 
         app.alerts.buttons["Save"].tap()
 
-        app.buttons["submitEventsButton"].tap()
+        app.buttons["sendEventsButton"].tap()
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
         
         app.buttons["getEventsButton"].tap()
@@ -110,6 +112,7 @@ class ConnectionUITests: XCTestCase {
     
     func testCreateEventWithFile() {
         app.buttons["eventWithFileButton"].tap()
+        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [weight] will be sent to the server"].exists)
         
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")

@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import PryvApiSwiftKit
 
+/// A simple view controller with a web view for the auth request 
 class AuthViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!
     var service: Service?

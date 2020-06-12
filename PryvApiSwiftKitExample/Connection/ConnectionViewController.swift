@@ -11,6 +11,7 @@ import PryvApiSwiftKit
 import KeychainSwift
 import FileBrowser
 
+/// View corresponding to a user's connection, where he can create events and see the last 20 of them
 class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
     
@@ -33,26 +34,34 @@ class ConnectionViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
     }
     
+    /// Logs the current user out by deleting the saved endpoint in the keychain
     @objc func logout() {
         keychain.clear()
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func callBatch(_ sender: Any) {
+    /// Opens the `CreateBatchTableViewController` to create new events
+    /// - Parameter sender: the button to `tap()` to trigger this function
+    @IBAction func createBatchRequest(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "callBatchTVC") as! CreateBatchTableViewController
         vc.connection = connection
         vc.permissions = contributePermissions ?? []
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    /// Opens the `GetEventsTableViewController` to see the last 20 events
+    /// - Parameter sender: the button to `tap()` to trigger this function
     @IBAction func getEvents(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "getEventsVC") as! GetEventsTableViewController
         vc.connection = connection
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
+    /// Opens a `UIAlertController` to create a new event from the alert's field: streamId, type and content
+    /// When the text fields are filles, opens a file browser to select a file to attach and show the created event in a `TextViewController`
+    /// - Parameter sender: the button to `tap()` to trigger this function
     @IBAction func createEventFromFile(_ sender: Any) {
-        let alert = UIAlertController().newEventAlert(title: "New event", message: "Please, describe your event here. \nNote: only stream ids \(String(describing: contributePermissions ?? [])) will be sent to the server") { (_, params) in
+        let alert = UIAlertController().newEventAlert(title: "Your new event", message: "Only stream ids \(String(describing: permissions)) will be sent to the server") { (_, params) in
             
             let path = Bundle.main.resourceURL!
             let fileBrowser = FileBrowser(initialPath: path)

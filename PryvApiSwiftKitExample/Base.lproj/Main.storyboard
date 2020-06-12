@@ -160,12 +160,12 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="createEventsButton"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="callBatch:" destination="BrA-hH-jY3" eventType="touchUpInside" id="s8E-yN-C9f"/>
+                                                    <action selector="createBatchRequest:" destination="BrA-hH-jY3" eventType="touchUpInside" id="s8E-yN-C9f"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-9p-ISI">
                                                 <rect key="frame" x="0.0" y="30" width="240" height="30"/>
-                                                <state key="normal" title="See last 20 events"/>
+                                                <state key="normal" title="See the last 20 events"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="getEventsButton"/>
                                                 </userDefinedRuntimeAttributes>
@@ -175,7 +175,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0Z-oR-vOm">
                                                 <rect key="frame" x="0.0" y="60" width="240" height="30"/>
-                                                <state key="normal" title="Create event with file"/>
+                                                <state key="normal" title="Create event with an attachment"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="eventWithFileButton"/>
                                                 </userDefinedRuntimeAttributes>
