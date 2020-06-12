@@ -40,7 +40,7 @@ class ConnectionUITests: XCTestCase {
         app.buttons["createEventsButton"].tap()
         app.buttons["addEventButton"].tap()
         
-        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [weight] will be sent to the server"].exists)
+        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [\"weight\"] will be sent to the server"].exists)
         XCTAssertFalse(app.alerts.buttons["Save"].isEnabled)
         
         app.textFields["streamIdField"].tap()

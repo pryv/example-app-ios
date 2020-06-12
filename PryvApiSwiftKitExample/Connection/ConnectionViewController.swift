@@ -16,11 +16,10 @@ class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
     
     private let utils = AppUtils()
+    private let keychain = KeychainSwift()
     
     var appId: String?
-    var permissions = [Json]()
-    private var contributePermissions: [String]?
-    private let keychain = KeychainSwift()
+    var contributePermissions: [String]?
     
     var connection: Connection? {
         didSet {
@@ -30,7 +29,6 @@ class ConnectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        self.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
     }
     
@@ -61,7 +59,7 @@ class ConnectionViewController: UIViewController {
     /// When the text fields are filles, opens a file browser to select a file to attach and show the created event in a `TextViewController`
     /// - Parameter sender: the button to `tap()` to trigger this function
     @IBAction func createEventFromFile(_ sender: Any) {
-        let alert = UIAlertController().newEventAlert(title: "Your new event", message: "Only stream ids \(String(describing: permissions)) will be sent to the server") { (_, params) in
+        let alert = UIAlertController().newEventAlert(title: "Your new event", message: "Only stream ids \(String(describing: contributePermissions ?? [])) will be sent to the server") { (_, params) in
             
             let path = Bundle.main.resourceURL!
             let fileBrowser = FileBrowser(initialPath: path)
