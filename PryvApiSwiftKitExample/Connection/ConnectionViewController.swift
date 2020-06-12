@@ -8,17 +8,18 @@
 
 import UIKit
 import PryvApiSwiftKit
-import SwiftKeychainWrapper
+import KeychainSwift
 import FileBrowser
 
 class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
     
-    private let utils = Utils()
+    private let utils = AppUtils()
     
     var appId: String?
     var permissions = [Json]()
     private var contributePermissions: [String]?
+    private let keychain = KeychainSwift()
     
     var connection: Connection? {
         didSet {
@@ -33,7 +34,7 @@ class ConnectionViewController: UIViewController {
     }
     
     @objc func logout() {
-        if !KeychainWrapper.standard.removeObject(forKey: appId ?? "") { print("Problem encountered when deleting the current key for endpoint") }
+        keychain.clear()
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -61,10 +62,7 @@ class ConnectionViewController: UIViewController {
                 let eventWithFile = self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
                 
                 if let result = eventWithFile {
-                    let text = (result.compactMap({ (key, value) -> String in
-                        return "\(key):\(value)"
-                    }) as Array).joined(separator: ", \n")
-                    
+                    let text = self.utils.eventToString(result)
                     let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController
                     vc.text = text
                     self.navigationController?.pushViewController(vc, animated: true)

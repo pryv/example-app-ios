@@ -101,7 +101,7 @@ public final class MockedData {
             "streamId": "weight",
             "tags": [],
             "type": "mass/kg",
-            "content": 90,
+            "content": 80,
             "attachments": "attachments": [
               {
                 "id": "ckb97kwrp000radpv90rkvh76",

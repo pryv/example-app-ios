@@ -46,6 +46,8 @@ class CreateBatchTableViewController: UITableViewController {
         if !streamId.isEmpty { cell.textLabel?.text = name.isEmpty ? "Event \(indexPath.row + 1): \(streamId)" : name }
         else { cell.textLabel?.text = name.isEmpty ? "Event \(indexPath.row + 1)" : name }
         
+        cell.accessibilityIdentifier = "newEvent\(indexPath.row)"
+        
         return cell
     }
     

@@ -8,23 +8,25 @@
 
 import XCTest
 import Mocker
-import SwiftKeychainWrapper
+import KeychainSwift
 @testable import PryvApiSwiftKitExample
 
 class ServiceInfoUITests: XCTestCase {
 
     var app: XCUIApplication!
-    private let key = "app-swift-example-tests"
+    private let appId = "app-swift-example"//-tests" // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work
+    private let keychain = KeychainSwift()
+    private var values = [String]()
     
     override func setUp() {
         super.setUp()
         
+        if !keychain.delete(appId) { print("endpoint not deleted") }
         mockResponses()
         
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
-        if !KeychainWrapper.standard.removeObject(forKey: key) { print("Problem encountered when deleting the current key for endpoint") }
     }
     
     func testAuthAndBackButton() {
@@ -38,7 +40,7 @@ class ServiceInfoUITests: XCTestCase {
     // FIXME : mocking does not work so polling url not as expected
     func testAuthToConnection() {
         app.buttons["authButton"].tap()
-        sleep(100)
+        sleep(2)
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
 
         let expectedApiEndpoint = "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/"

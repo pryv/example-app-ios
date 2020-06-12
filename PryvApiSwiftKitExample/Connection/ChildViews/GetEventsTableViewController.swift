@@ -12,6 +12,8 @@ import PryvApiSwiftKit
 class GetEventsTableViewController: UITableViewController {
     
     private var events = [Event]()
+    private let utils = Utils()
+    private let appUtils = AppUtils()
     
     var connection: Connection? {
         didSet {
@@ -60,9 +62,7 @@ class GetEventsTableViewController: UITableViewController {
         
         var message: String?
         if let _ = event["streamIds"] as? [String] {
-            message = (event.compactMap({ (key, value) -> String in
-                return "\(key):\(value)"
-            }) as Array).joined(separator: "\n")
+            message = appUtils.eventToString(event)
         } else {
             message = "This event has an error: \(event["message"] ?? "")"
         }

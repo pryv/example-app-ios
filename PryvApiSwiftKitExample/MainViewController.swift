@@ -8,7 +8,7 @@
 
 import UIKit
 import PryvApiSwiftKit
-import SwiftKeychainWrapper
+import KeychainSwift
 
 class MainViewController: UIViewController {
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
@@ -28,11 +28,12 @@ class MainViewController: UIViewController {
             "level": "read"
         ]
     ]
+    private let keychain = KeychainSwift()
     
     @IBOutlet private weak var authButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        if let endpoint = KeychainWrapper.standard.string(forKey: appId) {
+        if let endpoint = keychain.get(appId) {
             openConnection(apiEndpoint: endpoint, animated: false)
         }
     }
@@ -73,8 +74,7 @@ class MainViewController: UIViewController {
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 
-                let saveSuccessful: Bool = KeychainWrapper.standard.set(endpoint, forKey: appId)
-                if saveSuccessful { print("successfully saved the endpoint in the keychain") }
+                keychain.set(endpoint, forKey: appId)
                 openConnection(apiEndpoint: endpoint, animated: true)
             }
             
