@@ -102,7 +102,7 @@ class ConnectionUITests: XCTestCase {
         app.textFields["typeField"].typeText("mass/kg")
         app.textFields["contentField"].typeText("80")
         app.staticTexts["Save"].tap()
-        // TODO: select a file 'travel-expense.jpg' from the app
+        app.staticTexts["sample.pdf"].tap()
         let expectedResponse = [
             "event": [
                 "id": "eventId",
@@ -117,8 +117,8 @@ class ConnectionUITests: XCTestCase {
                 "attachments": [
                   [
                     "id": "ckb97kwrp000radpv90rkvh76",
-                    "fileName": "travel-expense.jpg",
-                    "type": "image/jpeg",
+                    "fileName": "sample.pdf",
+                    "type": "pdf",
                     "size": 1111,
                     "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
                   ]

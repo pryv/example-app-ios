@@ -102,11 +102,11 @@ public final class MockedData {
             "tags": [],
             "type": "mass/kg",
             "content": 90,
-            "attachments": [
+            "attachments": "attachments": [
               {
                 "id": "ckb97kwrp000radpv90rkvh76",
-                "fileName": "travel-expense.jpg",
-                "type": "image/jpeg",
+                "fileName": "sample.pdf",
+                "type": "pdf",
                 "size": 1111,
                 "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
               }
