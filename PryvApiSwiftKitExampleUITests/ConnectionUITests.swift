@@ -106,7 +106,7 @@ class ConnectionUITests: XCTestCase {
         
         let predicate = NSPredicate(format: "label LIKE %@", expectedText)
         let element = app.alerts.element.staticTexts.element(matching: predicate)
-        XCTAssert(element.exists)
+        XCTAssert(element.exists) // FIXME: order in json file
     }
     
     func testCreateEventWithFile() {
@@ -165,8 +165,7 @@ class ConnectionUITests: XCTestCase {
             .post: MockedData.addAttachmentResponse
         ])
         
-        mockCallBatch.register()
-        mockCreation.register()
-        mockAttachment.register()
+        let mocks = [mockCallBatch, mockCreation, mockAttachment]
+        mocks.forEach( { mock in mock.register() })
     }
 }

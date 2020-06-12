@@ -49,14 +49,23 @@ public final class MockedData {
             }
           ],
           "lang": "fr",
-          "serviceInfo": {}
+          "serviceInfo": {
+            "register": "https://reg.pryv.me/",
+            "access": "https://access.pryv.me/access",
+            "api": "https://{username}.pryv.me/",
+            "name": "Pryv Lab",
+            "home": "https://www.pryv.com",
+            "support": "https://pryv.com/helpdesk",
+            "terms": "https://pryv.com/pryv-lab-terms-of-use/",
+            "eventTypes": "https://api.pryv.com/event-types/flat.json"
+          }
         }
     """.data(using: .utf8)!
     
     public static let acceptedResponse: Data = """
         {
             "status": "ACCEPTED",
-            "pryvAPIEndpoint": "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/",
+            "pryvAPIEndpoint": "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/",
             "serviceInfo": {
                 "register": "https://reg.pryv.me",
                 "access": "https://access.pryv2.me/access",

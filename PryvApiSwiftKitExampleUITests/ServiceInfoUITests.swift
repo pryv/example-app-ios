@@ -12,8 +12,7 @@ import KeychainSwift
 @testable import PryvApiSwiftKitExample
 
 class ServiceInfoUITests: XCTestCase {
-    // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work
-
+    
     var app: XCUIApplication!
     private let keychain = KeychainSwift()
     private var values = [String]()
@@ -46,7 +45,7 @@ class ServiceInfoUITests: XCTestCase {
         sleep(2)
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
 
-        let expectedApiEndpoint = "https://ckb97kwpg0003adpv4cee5rw5@chuangzi.pryv.me/"
+        let expectedApiEndpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
         XCTAssertEqual(app.staticTexts["endpointLabel"].label, expectedApiEndpoint)
     }
     
@@ -71,8 +70,7 @@ class ServiceInfoUITests: XCTestCase {
             .get: MockedData.acceptedResponse
         ])
         
-        mockServiceInfo.register()
-        mockAuthRequest.register()
-        mockPollRequest.register()
+        let mocks = [mockServiceInfo, mockAuthRequest, mockPollRequest]
+        mocks.forEach { mock in Mocker.register(mock) }
     }
 }
