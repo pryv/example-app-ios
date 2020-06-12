@@ -12,21 +12,24 @@ import KeychainSwift
 @testable import PryvApiSwiftKitExample
 
 class ServiceInfoUITests: XCTestCase {
+    // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work
 
     var app: XCUIApplication!
-    private let appId = "app-swift-example"//-tests" // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work
     private let keychain = KeychainSwift()
     private var values = [String]()
     
     override func setUp() {
         super.setUp()
         
-        if !keychain.delete(appId) { print("endpoint not deleted") }
         mockResponses()
         
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        
+        if (app.buttons["logoutButton"].exists) {
+            app.buttons["logoutButton"].tap()
+        }
     }
     
     func testAuthAndBackButton() {

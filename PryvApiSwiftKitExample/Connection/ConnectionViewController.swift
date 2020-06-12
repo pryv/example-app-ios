@@ -29,12 +29,16 @@ class ConnectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
+        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
+        logoutButton.accessibilityIdentifier = "logoutButton"
+        self.navigationItem.leftBarButtonItem = logoutButton
     }
     
     /// Logs the current user out by deleting the saved endpoint in the keychain
     @objc func logout() {
-        keychain.clear()
+        if let key = appId {
+            keychain.delete(key)
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     

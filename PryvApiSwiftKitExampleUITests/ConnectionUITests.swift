@@ -22,8 +22,10 @@ class ConnectionUITests: XCTestCase {
         super.setUp()
         
         if !keychain.set(endpoint, forKey: appId) { print("endpoint not set") } // FIXME: cannot set
-        mockResponses()
+        print("Keychain failure: \(SecCopyErrorMessageString(keychain.lastResultCode, nil))")
         
+        mockResponses()
+               
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
@@ -41,21 +43,21 @@ class ConnectionUITests: XCTestCase {
         app.buttons["addEventButton"].tap()
         
         XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [\"weight\"] will be sent to the server"].exists)
-        XCTAssertFalse(app.alerts.buttons["Save"].isEnabled)
+        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
-        XCTAssertFalse(app.alerts.buttons["Save"].isEnabled)
+        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["typeField"].tap()
         app.textFields["typeField"].typeText("mass/kg")
-        XCTAssertFalse(app.alerts.buttons["Save"].isEnabled)
+        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["contentField"].tap()
         app.textFields["contentField"].typeText("90")
-        XCTAssertTrue(app.alerts.buttons["Save"].isEnabled)
+        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
         
-        app.alerts.buttons["Save"].tap()
+        app.alerts.buttons["OK"].tap()
         let myTable = app.tables.matching(identifier: "newEventsTable")
         let cell = myTable.cells["newEvent0"]
         XCTAssertEqual(cell.staticTexts["newEventTitleLabel"].label, "Event 1: weight")
@@ -74,7 +76,7 @@ class ConnectionUITests: XCTestCase {
         app.textFields["contentField"].tap()
         app.textFields["contentField"].typeText("90")
 
-        app.alerts.buttons["Save"].tap()
+        app.alerts.buttons["OK"].tap()
 
         app.buttons["sendEventsButton"].tap()
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
@@ -112,7 +114,7 @@ class ConnectionUITests: XCTestCase {
     
     func testCreateEventWithFile() {
         app.buttons["eventWithFileButton"].tap()
-        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [weight] will be sent to the server"].exists)
+        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [\"weight\"] will be sent to the server"].exists)
         
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
@@ -123,7 +125,7 @@ class ConnectionUITests: XCTestCase {
         app.textFields["contentField"].tap()
         app.textFields["contentField"].typeText("80")
 
-        app.alerts.buttons["Save"].tap()
+        app.alerts.buttons["OK"].tap()
         app.staticTexts["sample.pdf"].tap()
         
         let expectedResponse = [
