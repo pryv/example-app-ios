@@ -17,7 +17,8 @@ class AppUtils {
     /// - Parameter event: the json formatted event
     /// - Returns: a `String` corresponding to the `event` with format `"key: value\n`
     public func eventToString(_ event: Event) -> String {
-        let array: [String] = event.compactMap({ (key, value) -> String in
+        let sortedEvent = event.sorted(by: { $0.0 < $1.0 })
+        let array: [String] = sortedEvent.compactMap({ (key, value) -> String in
             return "\(key):\(value)"
         }) as Array
         

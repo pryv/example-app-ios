@@ -151,7 +151,7 @@ class ConnectionUITests: XCTestCase {
         ] as Event
         let expectedText = utils.eventToString(expectedResponse)
         
-        XCTAssertEqual(app.staticTexts["textLabel"].label, expectedText) // FIXME: order in json file 
+        XCTAssertEqual(app.staticTexts["textLabel"].label, expectedText)
     }
     
     private func mockResponses() {
