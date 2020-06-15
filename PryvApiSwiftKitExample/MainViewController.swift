@@ -12,13 +12,11 @@ import KeychainSwift
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
-    
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
-    @IBOutlet private weak var authButton: UIButton!
     
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
-    private let keychain = KeychainSwift()
+    private let appId = "app-swift-example"
     private let permissions: [Json] = [
         [
             "streamId": "weight",
@@ -31,11 +29,11 @@ class MainViewController: UIViewController {
             "level": "read"
         ]
     ]
+    private let keychain = KeychainSwift()
     
-    var appId: String = "app-swift-example" // FIXME: always default value instead of the one set in the AppDelegate
+    @IBOutlet private weak var authButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        print("APP ID: \(appId)")// TODO: remove
         if let endpoint = keychain.get(appId) {
             openConnection(apiEndpoint: endpoint, animated: false)
         }
