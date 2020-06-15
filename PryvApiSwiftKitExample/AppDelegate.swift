@@ -14,14 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        let mainVC = storyboard.instantiateViewController(identifier: "mainVC") as! MainViewController
-        mainVC.appId = "app-example-swift-2"
-        navigationController.pushViewController(mainVC, animated: true)
+        window = UIWindow(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = FactoryViewController.makeMainVC(storyboard: storyboard, appId: "app-swift-example-2")
+        // TODO: get the appId from the lauchOptions
+
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
 
         return true
     }

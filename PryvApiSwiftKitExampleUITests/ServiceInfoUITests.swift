@@ -27,7 +27,7 @@ class ServiceInfoUITests: XCTestCase {
         app.launch()
         
         if (app.buttons["logoutButton"].exists) {
-            app.buttons["logoutButton"].tap() //TODO: use keychain instead as this would modify the app's behavior
+            app.buttons["logoutButton"].tap()
         }
     }
     

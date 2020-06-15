@@ -32,26 +32,20 @@ class MainViewController: UIViewController {
         ]
     ]
     
-    var appId: String = "app-example-swift" {
-        didSet {
-            // TODO: remove
-            print("APP-ID is set: \(appId)")
-            if keychain.set("https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/", forKey: appId) {
-                print("Keychain is set..")
-            }
-            // TODO: until there
-            if let endpoint = keychain.get(appId) {
-                openConnection(apiEndpoint: endpoint, animated: false)
-            }
+    var appId: String = "app-swift-example" // FIXME: always default value instead of the one set in the AppDelegate
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("APP ID: \(appId)")// TODO: remove
+        if let endpoint = keychain.get(appId) {
+            openConnection(apiEndpoint: endpoint, animated: false)
         }
-    } // FIXME: always default value instead of the one set in the AppDelegate + connection not open if keychain set
+    }
     
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
     @IBAction func authenticate(_ sender: Any) {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
         let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
-        print("App id in authenticate: \(appId)") // TODO: remove
         let authPayload: Json = [
             "requestingAppId": appId,
             "requestedPermissions": permissions,
