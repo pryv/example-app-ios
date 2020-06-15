@@ -116,7 +116,7 @@ public final class MockedData {
                 "id": "ckb97kwrp000radpv90rkvh76",
                 "fileName": "sample.pdf",
                 "type": "pdf",
-                "size": 1111,
+                "size": 211,
                 "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
               }
             ],
