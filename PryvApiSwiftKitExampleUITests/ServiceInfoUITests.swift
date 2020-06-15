@@ -17,21 +17,25 @@ class ServiceInfoUITests: XCTestCase {
     private let keychain = KeychainSwift()
     private var values = [String]()
     
+    private let mockAuthRequest = Mock(url: URL(string: "https://reg.pryv.me/access")!, dataType: .json, statusCode: 200, data: [.post: MockedData.needSigninResponse])
+    private let mockPollRequest = Mock(url: URL(string: "https://access.pryv.me/access/6CInm4R2TLaoqtl4")!, dataType: .json, statusCode: 200, data: [.get: MockedData.acceptedResponse])
+    
     override func setUp() {
-        super.setUp()
-        
-        mockResponses()
-        
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
         
         if (app.buttons["logoutButton"].exists) {
-            app.buttons["logoutButton"].tap()
+            app.buttons["logoutButton"].tap() // FIXME: should only remove the token from the keychain with test key
         }
+        
+        let mockServiceInfo = Mock(url: URL(string: "https://reg.pryv.me/service/info")!, dataType: .json, statusCode: 200, data: [.get: MockedData.serviceInfoResponse])
+        Mocker.register(mockServiceInfo)
     }
     
     func testAuthAndBackButton() {
+        Mocker.register(mockAuthRequest)
+        
         app.buttons["authButton"].tap()
         XCTAssert(app.webViews["webView"].exists)
         
@@ -41,6 +45,9 @@ class ServiceInfoUITests: XCTestCase {
     
     // FIXME : mocking does not work so polling url not as expected
     func testAuthToConnection() {
+        Mocker.register(mockAuthRequest)
+        Mocker.register(mockPollRequest)
+        
         app.buttons["authButton"].tap()
         sleep(2)
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
@@ -57,20 +64,5 @@ class ServiceInfoUITests: XCTestCase {
         XCTAssertFalse(app.webViews["webView"].exists)
         
         XCTAssertEqual(app.alerts.element.label, "Invalid URL")
-    }
-    
-    private func mockResponses() {
-        let mockServiceInfo = Mock(url: URL(string: "https://reg.pryv.me/service/info")!, dataType: .json, statusCode: 200, data: [
-            .get: MockedData.serviceInfoResponse
-        ])
-        let mockAuthRequest = Mock(url: URL(string: "https://reg.pryv.me/access")!, dataType: .json, statusCode: 200, data: [
-            .post: MockedData.needSigninResponse
-        ])
-        let mockPollRequest = Mock(url: URL(string: "https://access.pryv.me/access/6CInm4R2TLaoqtl4")!, dataType: .json, statusCode: 200, data: [
-            .get: MockedData.acceptedResponse
-        ])
-        
-        let mocks = [mockServiceInfo, mockAuthRequest, mockPollRequest]
-        mocks.forEach { mock in Mocker.register(mock) }
     }
 }
