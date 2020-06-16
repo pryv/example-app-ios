@@ -15,7 +15,8 @@ import FileBrowser
 class ConnectionViewController: UIViewController {
     @IBOutlet private weak var endpointLabel: UILabel!
     
-    private let utils = AppUtils()
+    private let appUtils = AppUtils()
+    private let utils = Utils()
     private let keychain = KeychainSwift()
     
     var appId: String?
@@ -29,9 +30,11 @@ class ConnectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
-        logoutButton.accessibilityIdentifier = "logoutButton"
-        self.navigationItem.rightBarButtonItem = logoutButton
+        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? "") {
+            let logoutButton = UIBarButtonItem(title: "Log out - \(username)", style: .plain, target: self, action: #selector(logout))
+            logoutButton.accessibilityIdentifier = "logoutButton"
+            self.navigationItem.rightBarButtonItem = logoutButton
+        }
     }
     
     /// Logs the current user out by deleting the saved endpoint in the keychain
@@ -73,7 +76,7 @@ class ConnectionViewController: UIViewController {
                 let eventWithFile = self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
                 
                 if let result = eventWithFile {
-                    let text = self.utils.eventToString(result)
+                    let text = self.appUtils.eventToString(result)
                     let vc = self.storyboard?.instantiateViewController(identifier: "textVC") as! TextViewController
                     vc.text = text
                     self.navigationController?.pushViewController(vc, animated: true)
