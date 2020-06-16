@@ -23,7 +23,6 @@
 		B3D70D3E248A2FE900A1A247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D3C248A2FE900A1A247 /* Main.storyboard */; };
 		B3D70D40248A2FEA00A1A247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */; };
 		B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D41248A2FEA00A1A247 /* LaunchScreen.storyboard */; };
-		B3D70D4E248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */; };
 		B3D70D59248A2FEA00A1A247 /* ServiceInfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */; };
 		B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */; };
 		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
@@ -76,7 +75,6 @@
 		B3D70D42248A2FEA00A1A247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3D70D44248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
 		B3D70D4F248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 		B3D70D4C248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */,
 				B3D70D4F248A2FEA00A1A247 /* Info.plist */,
 			);
 			path = PryvApiSwiftKitExampleTests;
@@ -489,7 +486,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3D70D4E248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

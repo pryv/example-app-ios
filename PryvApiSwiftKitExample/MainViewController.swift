@@ -12,7 +12,6 @@ import KeychainSwift
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
-    @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
@@ -32,6 +31,7 @@ class MainViewController: UIViewController {
     private let keychain = KeychainSwift()
     
     @IBOutlet private weak var authButton: UIButton!
+    @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         if let endpoint = keychain.get(appId) {
@@ -39,6 +39,8 @@ class MainViewController: UIViewController {
         }
     }
     
+    /// Asks for the username and password, logs the user in and opens the connection view
+    /// - Parameter sender: the button to clic on to trigger this action
     @IBAction func login(_ sender: Any) {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
         let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert)
@@ -181,6 +183,8 @@ class MainViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     
+    /// Opens a `ConnectionViewController`
+    /// - Parameter connection: the connection received from the login request 
     private func openConnection(connection: Connection) {
         keychain.set(connection.getApiEndpoint(), forKey: appId)
         
