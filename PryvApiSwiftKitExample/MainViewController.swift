@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         ]
     ]
     private let keychain = KeychainSwift()
+    private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     
     @IBOutlet private weak var authButton: UIButton!
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
@@ -57,8 +58,8 @@ class MainViewController: UIViewController {
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
             let username = alert.textFields![0].text ?? ""
             let password = alert.textFields![1].attributedText?.string ?? ""
-            let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
-            guard let connection = service.login(username: username, password: password, appId: self.appId, domain: "pryv.me") else {
+            self.service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
+            guard let connection = self.service.login(username: username, password: password, appId: self.appId, domain: "pryv.me") else {
                 self.present(UIAlertController().errorAlert(title: "Incorrect username or password", delay: 2), animated: true, completion: nil)
                 return
             }
@@ -90,7 +91,7 @@ class MainViewController: UIViewController {
     /// - Parameter sender: the button to clic on to trigger this action
     @objc func authenticate() {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
-        let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
+        service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
         let authPayload: Json = [
             "requestingAppId": appId,
             "requestedPermissions": permissions,
@@ -182,18 +183,21 @@ class MainViewController: UIViewController {
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        vc.serviceName = service.info()?.name
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     
+    // TODO: remove with login()
     /// Opens a `ConnectionViewController`
     /// - Parameter connection: the connection received from the login request 
     private func openConnection(connection: Connection) {
         keychain.set(connection.getApiEndpoint(), forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        vc.serviceName = service.info()?.name
         vc.connection = connection
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId

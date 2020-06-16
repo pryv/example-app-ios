@@ -21,6 +21,7 @@ class ConnectionViewController: UIViewController {
     
     var appId: String?
     var contributePermissions: [String]?
+    var serviceName: String?
     
     var connection: Connection? {
         didSet {
@@ -30,11 +31,13 @@ class ConnectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? "") {
-            let logoutButton = UIBarButtonItem(title: "Log out - \(username)", style: .plain, target: self, action: #selector(logout))
+        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+            let logoutButton = UIBarButtonItem(title: "\(service) - \(username)", style: .plain, target: self, action: #selector(logout))
             logoutButton.accessibilityIdentifier = "logoutButton"
             self.navigationItem.rightBarButtonItem = logoutButton
         }
+        
+        navigationItem.hidesBackButton = true
     }
     
     /// Logs the current user out by deleting the saved endpoint in the keychain
