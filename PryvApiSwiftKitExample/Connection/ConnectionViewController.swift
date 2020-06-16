@@ -45,7 +45,11 @@ class ConnectionViewController: UIViewController {
         if let key = appId {
             keychain.delete(key)
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        let alert = UIAlertController(title: "Log out", message: "Do you want to log out ?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in self.navigationController?.popToRootViewController(animated: true) }))
+        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: { _ in }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     /// Opens the `CreateBatchTableViewController` to create new events
