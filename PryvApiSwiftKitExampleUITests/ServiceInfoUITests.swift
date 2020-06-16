@@ -17,43 +17,52 @@ class ServiceInfoUITests: XCTestCase {
     private let keychain = KeychainSwift()
     private var values = [String]()
     
-    private let mockAuthRequest = Mock(url: URL(string: "https://reg.pryv.me/access")!, dataType: .json, statusCode: 200, data: [.post: MockedData.needSigninResponse])
-    private let mockPollRequest = Mock(url: URL(string: "https://access.pryv.me/access/6CInm4R2TLaoqtl4")!, dataType: .json, statusCode: 200, data: [.get: MockedData.acceptedResponse])
-    
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
         
         if (app.buttons["logoutButton"].exists) {
-            app.buttons["logoutButton"].tap() // FIXME: should only remove the token from the keychain with test key
+            app.buttons["logoutButton"].tap()
         }
+    }
+    
+    func testLogin() {
+        app.buttons["loginButton"].tap()
         
-        let mockServiceInfo = Mock(url: URL(string: "https://reg.pryv.me/service/info")!, dataType: .json, statusCode: 200, data: [.get: MockedData.serviceInfoResponse])
-        Mocker.register(mockServiceInfo)
+        app.alerts.textFields["usernameField"].tap()
+        app.alerts.textFields["usernameField"].typeText("testuser")
+        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
+        
+        app.alerts.secureTextFields["passwordField"].tap()
+        app.alerts.secureTextFields["passwordField"].typeText("testuser")
+        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
+        
+        app.alerts.buttons["OK"].tap()
+        XCTAssert(app.staticTexts["welcomeLabel"].exists)
+    }
+    
+    func testBadLogin() {
+        app.buttons["loginButton"].tap()
+        
+        app.alerts.textFields["usernameField"].tap()
+        app.alerts.textFields["usernameField"].typeText("testuser")
+        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
+        
+        app.alerts.secureTextFields["passwordField"].tap()
+        app.alerts.secureTextFields["passwordField"].typeText("random_wrong_pwd")
+        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
+        
+        app.alerts.buttons["OK"].tap()
+        XCTAssertFalse(app.staticTexts["welcomeLabel"].exists)
     }
     
     func testAuthAndBackButton() {
-        Mocker.register(mockAuthRequest)
-        
         app.buttons["authButton"].tap()
         XCTAssert(app.webViews["webView"].exists)
         
         app.navigationBars.buttons.element(boundBy: 0).tap()
         XCTAssert(app.staticTexts["appName"].exists)
-    }
-    
-    // FIXME : mocking does not work so polling url not as expected
-    func testAuthToConnection() {
-        Mocker.register(mockAuthRequest)
-        Mocker.register(mockPollRequest)
-        
-        app.buttons["authButton"].tap()
-        sleep(2)
-        XCTAssert(app.staticTexts["welcomeLabel"].exists)
-
-        let expectedApiEndpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
-        XCTAssertEqual(app.staticTexts["endpointLabel"].label, expectedApiEndpoint)
     }
     
     func testBadServiceInfoUrl() {

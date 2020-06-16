@@ -46,20 +46,20 @@ extension UIAlertController {
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Stream id"
             textField.text = params?["streamId"] as? String ?? ""
-            textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
             textField.accessibilityIdentifier = "streamIdField"
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Type"
             textField.text = params?["type"] as? String ?? ""
-            textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
             textField.accessibilityIdentifier = "typeField"
 
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Content"
             textField.text = String(describing: params?["content"] ?? "")
-            textField.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
+            textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
             textField.accessibilityIdentifier = "contentField"
         }
         
@@ -67,7 +67,7 @@ extension UIAlertController {
     }
     
     /// Assert the three fields corresponding to streamId, type and content are not empty to enable the `Save` button
-    @objc func textDidChangeInLoginAlert() {
+    @objc func textDidChangeInEventEditor() {
         if let streamId = textFields?[1].text, let type = textFields?[2].text, let content = textFields?[3].text, let action = actions.last {
             action.isEnabled = streamId.count > 0 && type.count > 0 && content.count > 0
         }

@@ -39,6 +39,44 @@ class MainViewController: UIViewController {
         }
     }
     
+    @IBAction func login(_ sender: Any) {
+        let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
+        let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert)
+
+        let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
+            let username = alert.textFields![0].text ?? ""
+            let password = alert.textFields![1].text ?? ""
+            let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
+            guard let connection = service.login(username: username, password: password, appId: self.appId) else {
+                let alert = UIAlertController(title: "Incorrect username or password", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            self.openConnection(connection: connection)
+        })
+        submit.isEnabled = false
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
+        
+        alert.addAction(cancel)
+        alert.addAction(submit)
+        
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "username"
+            textField.addTarget(alert, action: #selector(alert.textDidChangeOnLoginAlert), for: .editingChanged)
+            textField.accessibilityIdentifier = "usernameField"
+        }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "password"
+            textField.isSecureTextEntry = true
+            textField.addTarget(alert, action: #selector(alert.textDidChangeOnLoginAlert), for: .editingChanged)
+            textField.accessibilityIdentifier = "passwordField"
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
     @IBAction func authenticate(_ sender: Any) {
@@ -74,8 +112,6 @@ class MainViewController: UIViewController {
             if let endpoint = authResult.endpoint {
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
-                
-                keychain.set(endpoint, forKey: appId)
                 openConnection(apiEndpoint: endpoint)
             }
             
@@ -136,11 +172,23 @@ class MainViewController: UIViewController {
     ///   - apiEndpoint: the api endpoint received from the auth request
     ///   - animated: whether the change of view controller is animated or not (`true` by default)
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
+        keychain.set(apiEndpoint, forKey: appId)
+        
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
+    }
+    
+    private func openConnection(connection: Connection) {
+        keychain.set(connection.getApiEndpoint(), forKey: appId)
+        
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        vc.connection = connection
+        vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
+        vc.appId = appId
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

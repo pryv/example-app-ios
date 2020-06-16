@@ -25,11 +25,11 @@
 		B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D41248A2FEA00A1A247 /* LaunchScreen.storyboard */; };
 		B3D70D4E248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */; };
 		B3D70D59248A2FEA00A1A247 /* ServiceInfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */; };
+		B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */; };
 		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E03998249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E0399C24936A8000B9DE6C /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03999249366D500B9DE6C /* AppUtils.swift */; };
 		B3E0399F24936AED00B9DE6C /* ConnectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9724925EB000DB90D3 /* ConnectionUITests.swift */; };
-		B3E75830248A6BB6005E3431 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7582F248A6BB6005E3431 /* MockedData.swift */; };
 		E92BFF5B5266B3F8D08AEB7C /* Pods_PryvApiSwiftKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,9 +81,9 @@
 		B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
 		B3D70D5A248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+textDidChangeOnLoginAlert.swift"; sourceTree = "<group>"; };
 		B3E03996249355E000B9DE6C /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		B3E03999249366D500B9DE6C /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
-		B3E7582F248A6BB6005E3431 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
+				B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */,
 				B3E03999249366D500B9DE6C /* AppUtils.swift */,
 			);
 			path = Utils;
@@ -201,7 +202,6 @@
 				B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */,
 				B3D6FC9724925EB000DB90D3 /* ConnectionUITests.swift */,
 				B3D70D5A248A2FEA00A1A247 /* Info.plist */,
-				B3E7582F248A6BB6005E3431 /* MockedData.swift */,
 			);
 			path = PryvApiSwiftKitExampleUITests;
 			sourceTree = "<group>";
@@ -472,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B37A89F02490FE34000C0E72 /* GetEventsTableViewController.swift in Sources */,
+				B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */,
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,
 				B3AF43482490BD4C0011839F /* ConnectionViewController.swift in Sources */,
@@ -497,7 +498,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3A756C124936BF9009A6958 /* AppUtils.swift in Sources */,
-				B3E75830248A6BB6005E3431 /* MockedData.swift in Sources */,
 				B3D70D59248A2FEA00A1A247 /* ServiceInfoUITests.swift in Sources */,
 				B3E0399F24936AED00B9DE6C /* ConnectionUITests.swift in Sources */,
 			);

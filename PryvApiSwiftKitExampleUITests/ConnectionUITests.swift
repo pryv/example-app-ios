@@ -15,29 +15,44 @@ import PryvApiSwiftKit
 class ConnectionUITests: XCTestCase {
     private let keychain = KeychainSwift()
     private let utils = AppUtils()
-    private let appId = "app-swift-example"//-tests" // FIXME: UITest should use another key to avoid interfering with the add, but if does not use the same key in keychain as the app => will not work-tests"
+    private let appId = "app-swift-example"
+    private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
     var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
-        
-        if !keychain.set(endpoint, forKey: appId) { print("endpoint not set") } // FIXME: cannot set
-        print("Keychain failure: \(SecCopyErrorMessageString(keychain.lastResultCode, nil))")
-        
-        mockResponses()
                
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        
+        if (!app.buttons["logoutButton"].exists) {
+            app.buttons["loginButton"].tap()
+            app.alerts.textFields["usernameField"].tap()
+            app.alerts.textFields["usernameField"].typeText("testuser")
+            app.alerts.secureTextFields["passwordField"].tap()
+            app.alerts.secureTextFields["passwordField"].typeText("testuser")
+            app.alerts.buttons["OK"].tap()
+        }
     }
 
     func testWelcomeView() {
         XCTAssert(app.staticTexts["welcomeLabel"].exists)
-        XCTAssertEqual(app.staticTexts["endpointLabel"].label, "API endpoint: \n" + endpoint)
+        
+        // Note: cannot check the token as not always the same
+        let endpoint = app.staticTexts["endpointLabel"].label
+        XCTAssert(endpoint.contains("API endpoint: \nhttps://"))
+        XCTAssert(endpoint.contains("testuser.pryv.me/"))
     }
     
-    func testCreateEventWithoutParams() {
+    func testCreateAndEditEvent() {
+        let streamId = "weight"
+        let type = "mass/kg"
+        let content = "90"
+        
+        // Create
+        
         app.buttons["createEventsButton"].tap()
         app.buttons["addEventButton"].tap()
         
@@ -45,24 +60,41 @@ class ConnectionUITests: XCTestCase {
         XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["streamIdField"].tap()
-        app.textFields["streamIdField"].typeText("weight")
+        app.textFields["streamIdField"].typeText(streamId)
         XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["typeField"].tap()
-        app.textFields["typeField"].typeText("mass/kg")
+        app.textFields["typeField"].typeText(type)
         XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
         
         app.textFields["contentField"].tap()
-        app.textFields["contentField"].typeText("90")
+        app.textFields["contentField"].typeText(content)
         XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
         
         app.alerts.buttons["OK"].tap()
         let myTable = app.tables.matching(identifier: "newEventsTable")
         let cell = myTable.cells["newEvent0"]
         XCTAssertEqual(cell.staticTexts["newEventTitleLabel"].label, "Event 1: weight")
+        
+        // Edit
+        
+        cell.tap()
+        
+        XCTAssertEqual(app.textFields["streamIdField"].value as! String, streamId)
+        XCTAssertEqual(app.textFields["typeField"].value as! String, type)
+        XCTAssertEqual(app.textFields["contentField"].value as! String, content)
+        
+        app.textFields["streamIdField"].tap()
+        app.textFields["streamIdField"].doubleTap()
+        app.textFields["streamIdField"].typeText(XCUIKeyboardKey.delete.rawValue)
+        app.textFields["streamIdField"].typeText("height")
+        
+        app.alerts.buttons["OK"].tap()
+        XCTAssertEqual(cell.staticTexts["newEventTitleLabel"].label, "Event 1: height")
+        
     }
     
-    func testCreateEventWithoutFile() {
+    func testCreateEventAndSubmit() {
         app.buttons["createEventsButton"].tap()
         app.buttons["addEventButton"].tap()
 
@@ -87,26 +119,11 @@ class ConnectionUITests: XCTestCase {
         XCTAssertEqual(cell.staticTexts["eventTitleLabel"].label, "weight")
         
         cell.tap()
-        let expectedResponse = [
-            "id": "eventId",
-            "time": 1591274234.916,
-            "streamIds": [
-              "weight"
-            ],
-            "streamId": "weight",
-            "tags": [],
-            "type": "mass/kg",
-            "content": 90,
-            "created": 1591274234.916,
-            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
-            "modified": 1591274234.916,
-            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
-            ] as Event
-        let expectedText = utils.eventToString(expectedResponse)
-        
-        let predicate = NSPredicate(format: "label LIKE %@", expectedText)
-        let element = app.alerts.element.staticTexts.element(matching: predicate)
-        XCTAssert(element.exists) // FIXME: order in json file
+        let event = app.alerts.element.staticTexts.element.label
+        XCTAssert(event.contains("streamId:weight\n"))
+        XCTAssert(event.contains("streamIds:(\n\"weight\"\n)\n"))
+        XCTAssert(event.contains("type: mass/kg\n"))
+        XCTAssert(event.contains("content: 90\n"))
     }
     
     func testCreateEventWithFile() {
@@ -125,47 +142,14 @@ class ConnectionUITests: XCTestCase {
         app.alerts.buttons["OK"].tap()
         app.staticTexts["sample.pdf"].tap()
         
-        let expectedResponse = [
-            "id": "eventId",
-            "time": 1591274234.916,
-            "streamIds": [
-              "weight"
-            ],
-            "streamId": "weight",
-            "tags": [],
-            "type": "mass/kg",
-            "content": 80,
-            "attachments": [
-              [
-                "id": "ckb97kwrp000radpv90rkvh76",
-                "fileName": "sample.pdf",
-                "type": "pdf",
-                "size": 1111,
-                "readToken": "ckb97kwrp000sadpv485eu3eg-e21g0DgCivlKKvmysxVKtGq3vhM"
-              ]
-            ],
-            "created": 1591274234.916,
-            "createdBy": "ckb0rldr90001q6pv8zymgvpr",
-            "modified": 1591274234.916,
-            "modifiedBy": "ckb0rldr90001q6pv8zymgvpr"
-        ] as Event
-        let expectedText = utils.eventToString(expectedResponse)
+        let event = app.staticTexts["textLabel"].label
         
-        XCTAssertEqual(app.staticTexts["textLabel"].label, expectedText)
-    }
-    
-    private func mockResponses() {
-        let mockCallBatch = Mock(url: URL(string: endpoint)!, dataType: .json, statusCode: 200, data: [
-            .post: MockedData.callBatchResponse
-        ])
-        let mockCreation = Mock(url: URL(string: endpoint + "events")!, dataType: .json, statusCode: 200, data: [
-            .post: MockedData.callBatchResponse
-        ])
-        let mockAttachment = Mock(url: URL(string: endpoint + "events/eventId")!, dataType: .json, statusCode: 200, data: [
-            .post: MockedData.addAttachmentResponse
-        ])
-        
-        let mocks = [mockCallBatch, mockCreation, mockAttachment]
-        mocks.forEach( { mock in mock.register() })
+        XCTAssert(event.contains("streamId:weight\n"))
+        XCTAssert(event.contains("streamIds:(\n\"weight\"\n)\n"))
+        XCTAssert(event.contains("type: mass/kg\n"))
+        XCTAssert(event.contains("content: 90\n"))
+        XCTAssert(event.contains("attachments:(\n"))
+        XCTAssert(event.contains("fileName:sample.pdf"))
+        XCTAssert(event.contains("type: pdf"))
     }
 }
