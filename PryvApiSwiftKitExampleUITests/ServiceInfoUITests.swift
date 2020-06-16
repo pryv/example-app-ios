@@ -54,6 +54,9 @@ class ServiceInfoUITests: XCTestCase {
         XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
         
         app.alerts.buttons["OK"].tap()
+        XCTAssertEqual(app.alerts.element.label, "Incorrect username or password")
+        
+        app.alerts.buttons["OK"].tap()
         XCTAssertFalse(app.staticTexts["welcomeLabel"].exists)
     }
     

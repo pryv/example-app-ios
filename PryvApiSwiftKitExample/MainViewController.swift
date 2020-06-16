@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
 
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
             let username = alert.textFields![0].text ?? ""
-            let password = alert.textFields![1].text ?? ""
+            let password = alert.textFields![1].attributedText?.string ?? ""
             let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
             guard let connection = service.login(username: username, password: password, appId: self.appId) else {
                 let alert = UIAlertController(title: "Incorrect username or password", message: nil, preferredStyle: .alert)

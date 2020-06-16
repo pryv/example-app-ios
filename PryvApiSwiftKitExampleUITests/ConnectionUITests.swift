@@ -43,7 +43,7 @@ class ConnectionUITests: XCTestCase {
         // Note: cannot check the token as not always the same
         let endpoint = app.staticTexts["endpointLabel"].label
         XCTAssert(endpoint.contains("API endpoint: \nhttps://"))
-        XCTAssert(endpoint.contains("testuser.pryv.me/"))
+        XCTAssert(endpoint.lowercased().contains("testuser.pryv.me/"))
     }
     
     func testCreateAndEditEvent() {
@@ -120,10 +120,9 @@ class ConnectionUITests: XCTestCase {
         
         cell.tap()
         let event = app.alerts.element.staticTexts.element.label
-        XCTAssert(event.contains("streamId:weight\n"))
-        XCTAssert(event.contains("streamIds:(\n\"weight\"\n)\n"))
-        XCTAssert(event.contains("type: mass/kg\n"))
-        XCTAssert(event.contains("content: 90\n"))
+        XCTAssert(event.contains("streamId:weight"))
+        XCTAssert(event.contains("type:mass/kg"))
+        XCTAssert(event.contains("content:90"))
     }
     
     func testCreateEventWithFile() {
@@ -137,19 +136,18 @@ class ConnectionUITests: XCTestCase {
         app.textFields["typeField"].typeText("mass/kg")
 
         app.textFields["contentField"].tap()
-        app.textFields["contentField"].typeText("80")
+        app.textFields["contentField"].typeText("90")
 
         app.alerts.buttons["OK"].tap()
         app.staticTexts["sample.pdf"].tap()
         
         let event = app.staticTexts["textLabel"].label
         
-        XCTAssert(event.contains("streamId:weight\n"))
-        XCTAssert(event.contains("streamIds:(\n\"weight\"\n)\n"))
-        XCTAssert(event.contains("type: mass/kg\n"))
-        XCTAssert(event.contains("content: 90\n"))
-        XCTAssert(event.contains("attachments:(\n"))
-        XCTAssert(event.contains("fileName:sample.pdf"))
-        XCTAssert(event.contains("type: pdf"))
+        XCTAssert(event.contains("streamId:weight"))
+        XCTAssert(event.contains("type:mass/kg"))
+        XCTAssert(event.contains("content:90"))
+        XCTAssert(event.contains("attachments:("))
+        XCTAssert(event.contains("fileName = \"sample.pdf\""))
+        XCTAssert(event.contains("type = pdf"))
     }
 }

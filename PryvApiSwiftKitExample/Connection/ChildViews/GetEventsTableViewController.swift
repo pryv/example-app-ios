@@ -68,7 +68,7 @@ class GetEventsTableViewController: UITableViewController {
             message = "This event has an error: \(event["message"] ?? "")"
         }
         
-        let alert = UIAlertController(title: "Event details", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
         self.present(alert, animated: true, completion: nil)
     }
