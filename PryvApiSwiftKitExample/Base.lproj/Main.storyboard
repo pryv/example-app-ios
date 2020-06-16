@@ -38,25 +38,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzk-5R-DC6">
-                                <rect key="frame" x="188" y="498" width="38" height="30"/>
-                                <state key="normal" title="Login"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="loginButton"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="arQ-38-2hb"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="43a-YC-i8m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3wM-ex-Ein"/>
-                            <constraint firstItem="tzk-5R-DC6" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LUW-T3-TW7"/>
                             <constraint firstItem="43a-YC-i8m" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="23" id="aKi-ZA-m5X"/>
                             <constraint firstItem="k5H-Eh-l7d" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="246.5" id="gbQ-xy-5jZ"/>
                             <constraint firstItem="aX2-xK-RGq" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="58" id="gjQ-PP-fUL"/>
-                            <constraint firstItem="tzk-5R-DC6" firstAttribute="top" secondItem="aX2-xK-RGq" secondAttribute="bottom" constant="46" id="x2K-Tz-zye"/>
                             <constraint firstItem="k5H-Eh-l7d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yfy-g1-jPo"/>
                             <constraint firstItem="aX2-xK-RGq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zvT-XP-Mdq"/>
                         </constraints>

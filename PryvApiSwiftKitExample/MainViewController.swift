@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
         serviceInfoUrlField.text = defaultServiceInfoUrl
     }
     
+    // TODO: remove / use only for tests ?
     /// Asks for the username and password, logs the user in and opens the connection view
     /// - Parameter sender: the button to clic on to trigger this action
     @IBAction func login(_ sender: Any) {
