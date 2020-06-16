@@ -55,8 +55,6 @@ class ServiceInfoUITests: XCTestCase {
         
         app.alerts.buttons["OK"].tap()
         XCTAssertEqual(app.alerts.element.label, "Incorrect username or password")
-        
-        app.alerts.buttons["OK"].tap()
         XCTAssertFalse(app.staticTexts["welcomeLabel"].exists)
     }
     
@@ -73,8 +71,7 @@ class ServiceInfoUITests: XCTestCase {
         app.textFields["serviceInfoUrlField"].typeText("hello")
         app.buttons["authButton"].tap()
         
+        XCTAssertEqual(app.alerts.element.staticTexts.element.label, "Please, type a valid service info URL")
         XCTAssertFalse(app.webViews["webView"].exists)
-        
-        XCTAssertEqual(app.alerts.element.label, "Invalid URL")
     }
 }

@@ -49,10 +49,8 @@ class MainViewController: UIViewController {
             let username = alert.textFields![0].text ?? ""
             let password = alert.textFields![1].attributedText?.string ?? ""
             let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
-            guard let connection = service.login(username: username, password: password, appId: self.appId) else {
-                let alert = UIAlertController(title: "Incorrect username or password", message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
-                self.present(alert, animated: true, completion: nil)
+            guard let connection = service.login(username: username, password: password, appId: self.appId, domain: "pryv.me") else {
+                self.present(UIAlertController().errorAlert(title: "Incorrect username or password", delay: 2), animated: true, completion: nil)
                 return
             }
             self.openConnection(connection: connection)
@@ -97,9 +95,7 @@ class MainViewController: UIViewController {
             
             self.navigationController?.pushViewController(vc, animated: false)
         } else {
-            let alert = UIAlertController(title: "Invalid URL", message: "Please, type a valid service info URL", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
-            self.present(alert, animated: true, completion: nil)
+            self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
     
