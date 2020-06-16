@@ -9,9 +9,8 @@
 import UIKit
 import PryvApiSwiftKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
-    @IBOutlet private weak var authDetailsLabel: UILabel!
     
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
         let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
         
         if let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback) {
-            let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! WebViewController
+            let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! AuthViewController
             vc.service = service
             vc.authUrl = authUrl
             
@@ -59,12 +58,12 @@ class ViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.endpoint {
-                self.authButton.isHidden = true
-                self.serviceInfoUrlField.isHidden = true
-                self.authDetailsLabel.text = "API endpoint: \n" + endpoint
+                let connection = Connection(apiEndpoint: endpoint)
                 
                 let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? "" 
                 let alert = UIAlertController(title: "Request accepted", message: "The token is \(token)", preferredStyle: .alert)
+                
+                // TODO: push new view controller with endpoint = "API endpoint: \n" + endpoint and connection = Connection
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                     self.navigationController?.popViewController(animated: true)
                 }))

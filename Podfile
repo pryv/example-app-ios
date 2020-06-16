@@ -9,8 +9,9 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
-  pod 'Mocker', '~> 1.0.0'
-  pod 'PryvApiSwiftKit', '~> 0.1.1'
+  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'connection-object'
+  pod 'KeychainSwift'
+  pod 'FileBrowser', '~> 1.0'
 
   target 'PryvApiSwiftKitExampleTests' do
     inherit! :search_paths

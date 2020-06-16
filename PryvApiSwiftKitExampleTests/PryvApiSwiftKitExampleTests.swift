@@ -2,12 +2,11 @@
 //  PryvApiSwiftKitExampleTests.swift
 //  PryvApiSwiftKitExampleTests
 //
-//  Created by Sara Alemanno on 05.06.20.
+//  Created by Sara Alemanno on 16.06.20.
 //  Copyright © 2020 Pryv. All rights reserved.
 //
 
 import XCTest
-@testable import PryvApiSwiftKitExample
 
 class PryvApiSwiftKitExampleTests: XCTestCase {
 

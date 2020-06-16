@@ -10,7 +10,7 @@ import XCTest
 import Mocker
 @testable import PryvApiSwiftKitExample
 
-class PryvApiSwiftKitExampleUITests: XCTestCase {
+class ServiceInfoUITests: XCTestCase {
 
     var app: XCUIApplication!
     
@@ -43,9 +43,9 @@ class PryvApiSwiftKitExampleUITests: XCTestCase {
     }
     
     private func mockResponses() {
-        let mockAccessEndpoint = Mock(url: URL(string: "https://reg.pryv.me/access")!, contentType: .json, statusCode: 200, data: [
+        let mockAccessEndpoint = Mock(url: URL(string: "https://reg.pryv.me/access")!, dataType: .json, statusCode: 200, data: [
             .post: MockedData.authResponse
         ])
-        Mocker.register(mockAccessEndpoint)
+        mockAccessEndpoint.register()
     }
 }

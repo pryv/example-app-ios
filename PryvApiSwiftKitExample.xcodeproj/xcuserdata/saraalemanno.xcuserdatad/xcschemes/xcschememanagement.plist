@@ -7,7 +7,25 @@
 		<key>PryvApiSwiftKitExample.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>7</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B3D70D32248A2FE900A1A247</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3D70D48248A2FEA00A1A247</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3D70D53248A2FEA00A1A247</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

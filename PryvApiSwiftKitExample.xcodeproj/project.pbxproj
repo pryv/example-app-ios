@@ -9,17 +9,28 @@
 /* Begin PBXBuildFile section */
 		50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */; };
 		62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
+		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
+		B37A89F02490FE34000C0E72 /* GetEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */; };
+		B37A89F224911A3F000C0E72 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A89F124911A3F000C0E72 /* TextViewController.swift */; };
+		B3A756C124936BF9009A6958 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03999249366D500B9DE6C /* AppUtils.swift */; };
+		B3AF43482490BD4C0011839F /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF43472490BD4C0011839F /* ConnectionViewController.swift */; };
+		B3AF434A2490C6C20011839F /* CreateBatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
-		B3C51E7C248A36B700F1D398 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* WebViewController.swift */; };
+		B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* AuthViewController.swift */; };
+		B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */; };
+		B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */; };
 		B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D36248A2FE900A1A247 /* AppDelegate.swift */; };
 		B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */; };
-		B3D70D3B248A2FE900A1A247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D3A248A2FE900A1A247 /* ViewController.swift */; };
+		B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D3A248A2FE900A1A247 /* MainViewController.swift */; };
 		B3D70D3E248A2FE900A1A247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D3C248A2FE900A1A247 /* Main.storyboard */; };
 		B3D70D40248A2FEA00A1A247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */; };
 		B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D70D41248A2FEA00A1A247 /* LaunchScreen.storyboard */; };
-		B3D70D4E248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */; };
-		B3D70D59248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D58248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.swift */; };
-		B3E75830248A6BB6005E3431 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7582F248A6BB6005E3431 /* MockedData.swift */; };
+		B3D70D59248A2FEA00A1A247 /* ServiceInfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */; };
+		B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */; };
+		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
+		B3E03998249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
+		B3E0399C24936A8000B9DE6C /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03999249366D500B9DE6C /* AppUtils.swift */; };
+		B3E0399F24936AED00B9DE6C /* ConnectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9724925EB000DB90D3 /* ConnectionUITests.swift */; };
 		E92BFF5B5266B3F8D08AEB7C /* Pods_PryvApiSwiftKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,23 +59,33 @@
 		80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
 		984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
+		B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsTableViewController.swift; sourceTree = "<group>"; };
+		B37A89F124911A3F000C0E72 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PryvApiSwiftKitExampleDebug.entitlements; sourceTree = "<group>"; };
+		B3AF43472490BD4C0011839F /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
+		B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBatchTableViewController.swift; sourceTree = "<group>"; };
 		B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		B3C51E7B248A36B700F1D398 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		B3C51E7B248A36B700F1D398 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+errorAlert.swift"; sourceTree = "<group>"; };
+		B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+newEventAlert.swift"; sourceTree = "<group>"; };
+		B3D6FC9724925EB000DB90D3 /* ConnectionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionUITests.swift; sourceTree = "<group>"; };
 		B3D70D33248A2FE900A1A247 /* PryvApiSwiftKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PryvApiSwiftKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D36248A2FE900A1A247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B3D70D3A248A2FE900A1A247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B3D70D3A248A2FE900A1A247 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3D70D3D248A2FE900A1A247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3D70D42248A2FEA00A1A247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3D70D44248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
 		B3D70D4F248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3D70D58248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleUITests.swift; sourceTree = "<group>"; };
+		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
 		B3D70D5A248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3E7582F248A6BB6005E3431 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
+		B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+textDidChangeOnLoginAlert.swift"; sourceTree = "<group>"; };
+		B3E03996249355E000B9DE6C /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
+		B3E03999249366D500B9DE6C /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +119,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B30EECDE2492293B00BBFE8C /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				B30EECDF2492294700BBFE8C /* ChildViews */,
+				B3AF43472490BD4C0011839F /* ConnectionViewController.swift */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		B30EECDF2492294700BBFE8C /* ChildViews */ = {
+			isa = PBXGroup;
+			children = (
+				B37A89F124911A3F000C0E72 /* TextViewController.swift */,
+				B37A89EF2490FE34000C0E72 /* GetEventsTableViewController.swift */,
+				B3AF43492490C6C20011839F /* CreateBatchTableViewController.swift */,
+			);
+			path = ChildViews;
+			sourceTree = "<group>";
+		};
+		B3D6FC8C2492366700DB90D3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
+				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
+				B3DDC0EF2498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift */,
+				B3E03999249366D500B9DE6C /* AppUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		B3D70D2A248A2FE900A1A247 = {
 			isa = PBXGroup;
 			children = (
@@ -123,10 +174,13 @@
 		B3D70D35248A2FE900A1A247 /* PryvApiSwiftKitExample */ = {
 			isa = PBXGroup;
 			children = (
+				B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */,
+				B3D6FC8C2492366700DB90D3 /* Utils */,
+				B30EECDE2492293B00BBFE8C /* Connection */,
 				B3D70D36248A2FE900A1A247 /* AppDelegate.swift */,
 				B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */,
-				B3D70D3A248A2FE900A1A247 /* ViewController.swift */,
-				B3C51E7B248A36B700F1D398 /* WebViewController.swift */,
+				B3D70D3A248A2FE900A1A247 /* MainViewController.swift */,
+				B3C51E7B248A36B700F1D398 /* AuthViewController.swift */,
 				B3D70D3C248A2FE900A1A247 /* Main.storyboard */,
 				B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */,
 				B3D70D41248A2FEA00A1A247 /* LaunchScreen.storyboard */,
@@ -138,8 +192,8 @@
 		B3D70D4C248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				B3D70D4D248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift */,
 				B3D70D4F248A2FEA00A1A247 /* Info.plist */,
+				B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */,
 			);
 			path = PryvApiSwiftKitExampleTests;
 			sourceTree = "<group>";
@@ -147,9 +201,10 @@
 		B3D70D57248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B3D70D58248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.swift */,
+				B3E03996249355E000B9DE6C /* sample.pdf */,
+				B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */,
+				B3D6FC9724925EB000DB90D3 /* ConnectionUITests.swift */,
 				B3D70D5A248A2FEA00A1A247 /* Info.plist */,
-				B3E7582F248A6BB6005E3431 /* MockedData.swift */,
 			);
 			path = PryvApiSwiftKitExampleUITests;
 			sourceTree = "<group>";
@@ -254,6 +309,7 @@
 					};
 					B3D70D48248A2FEA00A1A247 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 						TestTargetID = B3D70D32248A2FE900A1A247;
 					};
 					B3D70D53248A2FEA00A1A247 = {
@@ -287,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E03997249355E000B9DE6C /* sample.pdf in Resources */,
 				B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */,
 				B3D70D40248A2FEA00A1A247 /* Assets.xcassets in Resources */,
 				B3D70D3E248A2FE900A1A247 /* Main.storyboard in Resources */,
@@ -304,6 +361,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E03998249355E000B9DE6C /* sample.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,10 +475,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3D70D3B248A2FE900A1A247 /* ViewController.swift in Sources */,
-				B3C51E7C248A36B700F1D398 /* WebViewController.swift in Sources */,
+				B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */,
+				B37A89F02490FE34000C0E72 /* GetEventsTableViewController.swift in Sources */,
+				B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */,
+				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
+				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,
+				B3AF43482490BD4C0011839F /* ConnectionViewController.swift in Sources */,
+				B3E0399C24936A8000B9DE6C /* AppUtils.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
+				B3AF434A2490C6C20011839F /* CreateBatchTableViewController.swift in Sources */,
 				B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */,
+				B37A89F224911A3F000C0E72 /* TextViewController.swift in Sources */,
+				B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3D70D4E248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.swift in Sources */,
+				B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +502,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E75830248A6BB6005E3431 /* MockedData.swift in Sources */,
-				B3D70D59248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.swift in Sources */,
+				B3A756C124936BF9009A6958 /* AppUtils.swift in Sources */,
+				B3D70D59248A2FEA00A1A247 /* ServiceInfoUITests.swift in Sources */,
+				B3E0399F24936AED00B9DE6C /* ConnectionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +641,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -583,9 +651,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -595,12 +664,14 @@
 			baseConfigurationReference = C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PryvApiSwiftKitExample/PryvApiSwiftKitExampleDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PryvApiSwiftKitExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -614,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = PryvApiSwiftKitExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -621,6 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -632,6 +705,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PryvApiSwiftKitExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
@@ -642,6 +716,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PryvApiSwiftKitExample.app/PryvApiSwiftKitExample";
@@ -654,6 +729,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PryvApiSwiftKitExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
@@ -664,6 +740,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PryvApiSwiftKitExample.app/PryvApiSwiftKitExample";
