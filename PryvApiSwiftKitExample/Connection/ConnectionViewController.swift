@@ -31,7 +31,7 @@ class ConnectionViewController: UIViewController {
     override func viewDidLoad() {
         let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
         logoutButton.accessibilityIdentifier = "logoutButton"
-        self.navigationItem.leftBarButtonItem = logoutButton
+        self.navigationItem.rightBarButtonItem = logoutButton
     }
     
     /// Logs the current user out by deleting the saved endpoint in the keychain

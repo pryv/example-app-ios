@@ -15,16 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THF-5N-x1V">
-                                <rect key="frame" x="163" y="460" width="88" height="30"/>
-                                <state key="normal" title="Authenticate"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="authButton"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="authenticate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvh-23-Wb6"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pryv API app example" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5H-Eh-l7d">
                                 <rect key="frame" x="108.5" y="334.5" width="197" height="25.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -63,12 +53,10 @@
                         <constraints>
                             <constraint firstItem="43a-YC-i8m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3wM-ex-Ein"/>
                             <constraint firstItem="tzk-5R-DC6" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LUW-T3-TW7"/>
-                            <constraint firstItem="THF-5N-x1V" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Ubm-qZ-m2L"/>
-                            <constraint firstItem="THF-5N-x1V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ZyX-vy-CDb"/>
                             <constraint firstItem="43a-YC-i8m" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="23" id="aKi-ZA-m5X"/>
-                            <constraint firstItem="THF-5N-x1V" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="100" id="dIB-Qp-8Aw"/>
+                            <constraint firstItem="k5H-Eh-l7d" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="246.5" id="gbQ-xy-5jZ"/>
                             <constraint firstItem="aX2-xK-RGq" firstAttribute="top" secondItem="k5H-Eh-l7d" secondAttribute="bottom" constant="58" id="gjQ-PP-fUL"/>
-                            <constraint firstItem="tzk-5R-DC6" firstAttribute="top" secondItem="THF-5N-x1V" secondAttribute="bottom" constant="8" id="q4o-Uy-cK7"/>
+                            <constraint firstItem="tzk-5R-DC6" firstAttribute="top" secondItem="aX2-xK-RGq" secondAttribute="bottom" constant="46" id="x2K-Tz-zye"/>
                             <constraint firstItem="k5H-Eh-l7d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yfy-g1-jPo"/>
                             <constraint firstItem="aX2-xK-RGq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zvT-XP-Mdq"/>
                         </constraints>
@@ -76,7 +64,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="cuS-HL-zxs"/>
                     <connections>
-                        <outlet property="authButton" destination="THF-5N-x1V" id="EXh-8X-dOa"/>
                         <outlet property="serviceInfoUrlField" destination="aX2-xK-RGq" id="c8Z-0G-zdq"/>
                     </connections>
                 </viewController>

@@ -40,6 +40,10 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        let loginButton = UIBarButtonItem(title: "Log in", style: .plain, target: self, action: #selector(authenticate))
+        loginButton.accessibilityIdentifier = "loginButton"
+        self.navigationItem.rightBarButtonItem = loginButton
+        
         serviceInfoUrlField.text = defaultServiceInfoUrl
     }
     
@@ -83,7 +87,7 @@ class MainViewController: UIViewController {
     
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
-    @IBAction func authenticate(_ sender: Any) {
+    @objc func authenticate() {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
         let service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
         let authPayload: Json = [
