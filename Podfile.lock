@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 839fcbf2cbd951f3b63806925c8aaad9280706c3
+    :commit: adb61da4d42695ca7b15de6e0a07d63578135e13
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
