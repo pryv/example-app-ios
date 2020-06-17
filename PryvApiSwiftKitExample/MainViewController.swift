@@ -182,7 +182,7 @@ class MainViewController: UIViewController {
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         keychain.set(apiEndpoint, forKey: appId)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionTableViewController
         vc.serviceName = service.info()?.name
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
@@ -196,7 +196,7 @@ class MainViewController: UIViewController {
     private func openConnection(connection: Connection) {
         keychain.set(connection.getApiEndpoint(), forKey: appId)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionTableViewController
         vc.serviceName = service.info()?.name
         vc.connection = connection
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
