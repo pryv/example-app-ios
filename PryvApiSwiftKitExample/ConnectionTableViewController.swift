@@ -59,6 +59,7 @@ class ConnectionTableViewController: UITableViewController {
     private let utils = Utils()
     private let keychain = KeychainSwift()
     
+    private var refreshEnabled = true // set to true when a new event is added, avoids loading the events if no change
     private var events = [Event]()
     
     var appId: String?
@@ -156,21 +157,27 @@ class ConnectionTableViewController: UITableViewController {
             }]
             
             let _ = self.connection?.api(APICalls: [apiCall], handleResults: handleResults)
+            
+            self.refreshEnabled = true
         }
         self.present(alert, animated: true)
     }
 
     @objc private func getEvents() {
-        let request = [
-            [
-                "method": "events.get",
-                "params": [String: Any]()
+        if refreshEnabled {
+            refreshEnabled = false
+            
+            let request = [
+                [
+                    "method": "events.get",
+                    "params": [String: Any]()
+                ]
             ]
-        ]
-        if let result = connection!.api(APICalls: request) { self.events = result }
+            if let result = connection!.api(APICalls: request) { self.events = result }
 
-        loadViewIfNeeded()
-        self.tableView.reloadData()
+            loadViewIfNeeded()
+            self.tableView.reloadData()
+        }
         self.refreshControl?.endRefreshing()
     }
     
