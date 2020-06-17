@@ -41,6 +41,9 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        
         let loginButton = UIBarButtonItem(title: "Log in", style: .plain, target: self, action: #selector(authenticate))
         loginButton.accessibilityIdentifier = "loginButton"
         self.navigationItem.rightBarButtonItem = loginButton

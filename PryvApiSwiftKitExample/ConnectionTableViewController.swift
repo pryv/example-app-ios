@@ -81,15 +81,17 @@ class ConnectionTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
-            let logoutButton = UIBarButtonItem(title: "\(service) - \(username)", style: .plain, target: self, action: #selector(logout))
+        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? "") {
+            let logoutButton = UIBarButtonItem(title: "\(username)", style: .plain, target: self, action: #selector(logout))
             logoutButton.accessibilityIdentifier = "logoutButton"
             self.navigationItem.rightBarButtonItem = logoutButton
         }
         
         navigationItem.hidesBackButton = true
-        tableView.allowsSelection = false
+        navigationItem.title = serviceName ?? "Last events"
+        navigationItem.largeTitleDisplayMode = .automatic
         
+        tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
     }
 
