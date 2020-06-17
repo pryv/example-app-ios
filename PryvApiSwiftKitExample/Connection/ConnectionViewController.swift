@@ -42,13 +42,14 @@ class ConnectionViewController: UIViewController {
     
     /// Logs the current user out by deleting the saved endpoint in the keychain
     @objc func logout() {
-        if let key = appId {
-            keychain.delete(key)
-        }
-        
-        let alert = UIAlertController(title: "Log out", message: "Do you want to log out ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in self.navigationController?.popToRootViewController(animated: true) }))
-        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: { _ in }))
+        let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
+            if let key = self.appId {
+                self.keychain.delete(key)
+            }
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
         self.present(alert, animated: true, completion: nil)
     }
     
