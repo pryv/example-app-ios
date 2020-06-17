@@ -13,7 +13,7 @@ import FileBrowser
 
 class EventTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var attachmentImageView: UIImageView! // TODO: show image
+    @IBOutlet private weak var attachmentImageView: UIImageView!
     @IBOutlet private weak var streamIdLabel: UILabel!
     @IBOutlet private weak var typeLabel: UILabel!
     @IBOutlet private weak var contentLabel: UILabel!
@@ -53,6 +53,13 @@ class EventTableViewCell: UITableViewCell {
             attachmentLabel.text = fileName!
         }
     }
+   
+//    TODO
+//    var file: Media? {
+//        didSet {
+//            attachmentImageView.image = UIImage(data: file!.data)
+//        }
+//    }
     
 }
 
@@ -61,7 +68,7 @@ class ConnectionTableViewController: UITableViewController {
     private let utils = Utils()
     private let keychain = KeychainSwift()
     
-    private var refreshEnabled = true // set to true when a new event is added, avoids loading the events if no change
+    private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
     private var events = [Event]()
     
     var appId: String?
@@ -113,15 +120,17 @@ class ConnectionTableViewController: UITableViewController {
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
+//        TODO
+//        guard let eventId = event["id"] as? String else { print("Error for event at row \(indexPath.row): unknown event") ; return UITableViewCell() }
         
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
         cell.content = String(describing: content)
+//        TODO
+//        cell.file = connection.getAttachment(from: eventId) TODO: implement in the lib + use here
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
-        
-        // TODO: how to get the file if image and show ??
         
         if let attachments = event["attachments"] as? [Json], let fileName = attachments[0]["fileName"] as? String { // TODO: note takes the most recent one => last ?
             cell.fileName = fileName
