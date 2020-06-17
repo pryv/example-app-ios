@@ -66,21 +66,13 @@ class ConnectionTableViewController: UITableViewController {
     var serviceName: String?
     var connection: Connection? {
         didSet {
-            let request = [
-                [
-                    "method": "events.get",
-                    "params": [String: Any]()
-                ]
-            ]
-            guard let events = connection!.api(APICalls: request) else { return }
-            events.forEach({ self.events.append($0) })
-
-            loadViewIfNeeded()
-            self.tableView.reloadData()
+            getEvents()
         }
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
         logoutButton.accessibilityIdentifier = "logoutButton"
         self.navigationItem.leftBarButtonItem = logoutButton
@@ -99,6 +91,8 @@ class ConnectionTableViewController: UITableViewController {
         
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
+        
+        refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
     }
 
     // MARK: - Table view data source
@@ -165,5 +159,21 @@ class ConnectionTableViewController: UITableViewController {
         }
         self.present(alert, animated: true)
     }
+
+    @objc private func getEvents() {
+        let request = [
+            [
+                "method": "events.get",
+                "params": [String: Any]()
+            ]
+        ]
+        if let result = connection!.api(APICalls: request) { self.events = result }
+
+        loadViewIfNeeded()
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    
 
 }
