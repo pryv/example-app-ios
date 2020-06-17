@@ -22,42 +22,11 @@ class ServiceInfoUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        if (app.buttons["logoutButton"].exists) {
-            app.buttons["logoutButton"].tap()
+        if (app.navigationBars["connectionNavBar"].buttons["logoutButton"].exists) {
+            app.navigationBars["connectionNavBar"].buttons["logoutButton"].tap()
+            app.alerts.element.buttons["Log out"].tap()
         }
     }
-    
-//    TODO ?
-//    func testLogin() {
-//        app.buttons["loginButton"].tap()
-//
-//        app.alerts.textFields["usernameField"].tap()
-//        app.alerts.textFields["usernameField"].typeText("testuser")
-//        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
-//
-//        app.alerts.secureTextFields["passwordField"].tap()
-//        app.alerts.secureTextFields["passwordField"].typeText("testuser")
-//        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
-//
-//        app.alerts.buttons["OK"].tap()
-//        XCTAssert(app.staticTexts["welcomeLabel"].exists)
-//    }
-//
-//    func testBadLogin() {
-//        app.buttons["loginButton"].tap()
-//
-//        app.alerts.textFields["usernameField"].tap()
-//        app.alerts.textFields["usernameField"].typeText("testuser")
-//        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
-//
-//        app.alerts.secureTextFields["passwordField"].tap()
-//        app.alerts.secureTextFields["passwordField"].typeText("random_wrong_pwd")
-//        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
-//
-//        app.alerts.buttons["OK"].tap()
-//        XCTAssertEqual(app.alerts.element.label, "Incorrect username or password")
-//        XCTAssertFalse(app.staticTexts["welcomeLabel"].exists)
-//    }
     
     func testBadServiceInfoUrl() {
         app.textFields["serviceInfoUrlField"].tap()
@@ -68,5 +37,10 @@ class ServiceInfoUITests: XCTestCase {
         
         XCTAssertEqual(app.alerts.element.staticTexts.element.label, "Please, type a valid service info URL")
         XCTAssertFalse(app.webViews["webView"].exists)
+    }
+    
+    func testLogin() {
+        app.buttons["loginButton"].tap()
+        XCTAssert(app.webViews["webView"].exists)
     }
 }

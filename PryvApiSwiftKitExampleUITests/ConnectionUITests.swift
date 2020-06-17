@@ -25,15 +25,16 @@ class ConnectionUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-//        TODO ??
-//        if (!app.buttons["logoutButton"].exists) {
-//            app.buttons["loginButton"].tap()
-//            app.alerts.textFields["usernameField"].tap()
-//            app.alerts.textFields["usernameField"].typeText("testuser")
-//            app.alerts.secureTextFields["passwordField"].tap()
-//            app.alerts.secureTextFields["passwordField"].typeText("testuser")
-//            app.alerts.buttons["OK"].tap()
-//        }
+        // TODO: instead of login
+        if (!app.buttons["logoutButton"].exists) {
+            app.buttons["loginButton"].tap()
+            app.textFields.element(boundBy: 0).tap()
+            app.textFields.element(boundBy: 0).typeText("Testuser")
+            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.tab.rawValue)
+            app.textFields.element(boundBy: 0).typeText("testuser")
+            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.tab.rawValue)
+            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.enter.rawValue)
+        }
     }
 
     func testConnectionViewBasicUI() {
@@ -46,9 +47,8 @@ class ConnectionUITests: XCTestCase {
     
     func testCreateSimpleEvent() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
-        app.alerts.element.buttons["Simple event"].tap() //FIXME
-        
-        XCTAssert(app.alerts.element.staticTexts["Note: only stream ids in [\"weight\"]) will be accepted."].exists)
+        app.sheets.element.buttons["Simple event"].tap()
+        sleep(1)
 
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
@@ -62,10 +62,10 @@ class ConnectionUITests: XCTestCase {
         app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab - Testuser"].exists)
         
-        app.swipeDown()
-        
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
+        
+        cell.pullToRefresh()
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -76,9 +76,8 @@ class ConnectionUITests: XCTestCase {
     
     func testCreateEventWithFile() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
-        app.alerts.element.buttons["Event with attachment"].tap() //FIXME
-        
-        XCTAssert(app.alerts.element.staticTexts["Note: only stream ids in [\"weight\"]) will be accepted."].exists)
+        app.sheets.element.buttons["Event with attachment"].tap()
+        sleep(1)
         
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
@@ -90,12 +89,13 @@ class ConnectionUITests: XCTestCase {
         app.textFields["contentField"].typeText("80")
 
         app.alerts.buttons["OK"].tap()
-        app.staticTexts["sample.pdf"].tap() //FIXME
-               
-        app.swipeDown()
+        sleep(1)
+        app.otherElements["fileBrowserCreate"].staticTexts["sample.pdf"].tap()
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
+        
+        cell.pullToRefresh()
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -114,7 +114,7 @@ class ConnectionUITests: XCTestCase {
         
         cell.buttons["addAttachmentButton"].tap()
         sleep(1)
-        app.otherElements["fileBrowser"].staticTexts["sample.pdf"].tap()
+        app.otherElements["fileBrowserAdd"].staticTexts["sample.pdf"].tap()
         
         cell.pullToRefresh()
         

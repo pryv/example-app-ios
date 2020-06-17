@@ -112,7 +112,7 @@ class ConnectionTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
         logoutButton.accessibilityIdentifier = "logoutButton"
         self.navigationItem.leftBarButtonItem = logoutButton
         
@@ -175,7 +175,7 @@ class ConnectionTableViewController: UITableViewController {
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
     @objc private func logout() {
         let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
             if let key = self.appId {
                 self.keychain.delete(key)
             }
@@ -188,6 +188,7 @@ class ConnectionTableViewController: UITableViewController {
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
         alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
             let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
             let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
@@ -206,11 +207,13 @@ class ConnectionTableViewController: UITableViewController {
             }
             self.present(alert, animated: true)
         })
+        
         alert.addAction(UIAlertAction(title: "Event with attachment", style: .default) { _ in
             let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
             let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
                 let path = Bundle.main.resourceURL!
                 let fileBrowser = FileBrowser(initialPath: path)
+                fileBrowser.view.accessibilityIdentifier = "fileBrowserCreate"
                 self.present(fileBrowser, animated: true, completion: nil)
 
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
@@ -221,10 +224,10 @@ class ConnectionTableViewController: UITableViewController {
 
             self.present(alert, animated: true, completion: nil)
         })
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.present(alert, animated: true)
-        
-        
     }
     
     /// Adds an attachment to an existing event in the `tableView`
@@ -235,7 +238,7 @@ class ConnectionTableViewController: UITableViewController {
         
         let path = Bundle.main.resourceURL!
         let fileBrowser = FileBrowser(initialPath: path)
-        fileBrowser.view.accessibilityIdentifier = "fileBrowser"
+        fileBrowser.view.accessibilityIdentifier = "fileBrowserAdd"
         self.present(fileBrowser, animated: true, completion: nil)
 
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
