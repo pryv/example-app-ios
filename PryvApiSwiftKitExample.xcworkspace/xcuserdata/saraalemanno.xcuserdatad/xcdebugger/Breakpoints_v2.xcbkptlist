@@ -126,8 +126,8 @@
             filePath = "PryvApiSwiftKitExample/ConnectionTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "getEvents()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "PryvApiSwiftKitExample/ConnectionTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "getEvents()"
             landmarkType = "7">
          </BreakpointContent>

@@ -12,7 +12,6 @@
 		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
 		B387CC8C2499F345005878DB /* ConnectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionTableViewController.swift */; };
 		B3A756C124936BF9009A6958 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E03999249366D500B9DE6C /* AppUtils.swift */; };
-		B3AF43482490BD4C0011839F /* FormerConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF43472490BD4C0011839F /* FormerConnectionViewController.swift */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
 		B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* AuthViewController.swift */; };
 		B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */; };
@@ -60,7 +59,6 @@
 		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
 		B387CC8B2499F345005878DB /* ConnectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewController.swift; sourceTree = "<group>"; };
 		B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PryvApiSwiftKitExampleDebug.entitlements; sourceTree = "<group>"; };
-		B3AF43472490BD4C0011839F /* FormerConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormerConnectionViewController.swift; sourceTree = "<group>"; };
 		B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B3C51E7B248A36B700F1D398 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+errorAlert.swift"; sourceTree = "<group>"; };
@@ -115,14 +113,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B30EECDE2492293B00BBFE8C /* FormerConnection */ = {
-			isa = PBXGroup;
-			children = (
-				B3AF43472490BD4C0011839F /* FormerConnectionViewController.swift */,
-			);
-			path = FormerConnection;
-			sourceTree = "<group>";
-		};
 		B3D6FC8C2492366700DB90D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +151,6 @@
 			children = (
 				B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */,
 				B3D6FC8C2492366700DB90D3 /* Utils */,
-				B30EECDE2492293B00BBFE8C /* FormerConnection */,
 				B3D70D36248A2FE900A1A247 /* AppDelegate.swift */,
 				B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */,
 				B3D70D3A248A2FE900A1A247 /* MainViewController.swift */,
@@ -465,7 +454,6 @@
 				B3DDC0F02498B97D00789EDE /* UIAlertController+textDidChangeOnLoginAlert.swift in Sources */,
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,
-				B3AF43482490BD4C0011839F /* FormerConnectionViewController.swift in Sources */,
 				B3E0399C24936A8000B9DE6C /* AppUtils.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
 				B387CC8C2499F345005878DB /* ConnectionTableViewController.swift in Sources */,

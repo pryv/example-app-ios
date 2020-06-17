@@ -9,6 +9,7 @@
 import UIKit
 import KeychainSwift
 import PryvApiSwiftKit
+import FileBrowser
 
 class EventTableViewCell: UITableViewCell {
     
@@ -128,7 +129,7 @@ class ConnectionTableViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - Interactions with the user, apart from the table view
+    // MARK: - Table view interactions
     
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
     @objc private func logout() {
@@ -145,24 +146,47 @@ class ConnectionTableViewController: UITableViewController {
     
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
-        let message: String? = contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: contributePermissions!)) will be accepted."
-        let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
-            let apiCall: APICall = [
-                "method": "events.create",
-                "params": params
-            ]
-            
-            let handleResults: [Int: (Event) -> ()] = [0: { event in
-                print("new event: \(String(describing: event))")
-            }]
-            
-            let _ = self.connection?.api(APICalls: [apiCall], handleResults: handleResults)
-            
-            self.refreshEnabled = true
-        }
-        self.present(alert, animated: true)
-    }
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
+            let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
+            let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
+                let apiCall: APICall = [
+                    "method": "events.create",
+                    "params": params
+                ]
+    
+                let handleResults: [Int: (Event) -> ()] = [0: { event in
+                    print("new event: \(String(describing: event))")
+                }]
+    
+                let _ = self.connection?.api(APICalls: [apiCall], handleResults: handleResults)
+    
+                self.refreshEnabled = true
+            }
+            self.present(alert, animated: true)
+        })
+        alert.addAction(UIAlertAction(title: "Event with attachment", style: .default) { _ in
+            let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
+            let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
+                let path = Bundle.main.resourceURL!
+                let fileBrowser = FileBrowser(initialPath: path)
+                self.present(fileBrowser, animated: true, completion: nil)
 
+                fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+                    let _ = self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
+                    self.refreshEnabled = true
+                }
+            }
+
+            self.present(alert, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        
+        
+    }
+    
+    /// Updates the list of events shown (only if an event was added)
     @objc private func getEvents() {
         if refreshEnabled {
             refreshEnabled = false
