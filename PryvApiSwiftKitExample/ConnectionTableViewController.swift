@@ -81,15 +81,21 @@ class ConnectionTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? "") {
-            let logoutButton = UIBarButtonItem(title: "\(username)", style: .plain, target: self, action: #selector(logout))
-            logoutButton.accessibilityIdentifier = "logoutButton"
-            self.navigationItem.rightBarButtonItem = logoutButton
-        }
+        let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        logoutButton.accessibilityIdentifier = "logoutButton"
+        self.navigationItem.leftBarButtonItem = logoutButton
         
-        navigationItem.hidesBackButton = true
-        navigationItem.title = serviceName ?? "Last events"
+        let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
+        logoutButton.accessibilityIdentifier = "addEventButton"
+        self.navigationItem.rightBarButtonItem = addEventButton
+        
+        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+            navigationItem.title = "\(service) - \(username)"
+        } else {
+             navigationItem.title = "Last events"
+        }
         navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.hidesBackButton = true
         
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
@@ -140,6 +146,24 @@ class ConnectionTableViewController: UITableViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
+    @objc private func addEvent() {
+        let message: String? = contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: contributePermissions!)) will be accepted."
+        let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
+            let apiCall: APICall = [
+                "method": "events.create",
+                "params": params
+            ]
+            
+            let handleResults: [Int: (Event) -> ()] = [0: { event in
+                print("new event: \(String(describing: event))")
+            }]
+            
+            let _ = self.connection?.api(APICalls: [apiCall], handleResults: handleResults)
+        }
+        self.present(alert, animated: true)
     }
 
 }
