@@ -119,80 +119,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "460542A4-0B52-4338-9686-F36DDFADBEBD"
+            uuid = "8C3A8FF4-0DD1-486A-8AD6-2A3E1BC6FA26"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            filePath = "PryvApiSwiftKitExample/ConnectionTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "addFileToEvent(eventId:filePath:mimeType:)"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "getEvents()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "88B0862A-0C00-49B9-8575-CB6185201259"
+            uuid = "63C246B3-C07E-4799-93D2-C5BB92C023CD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
+            filePath = "PryvApiSwiftKitExample/ConnectionTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "createEventWithFile(event:filePath:mimeType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "39B9839E-82F4-445F-A476-28D219D958A1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "createEventWithFile(event:filePath:mimeType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AACCBF16-7392-43A4-A045-CE1A4BE1D4D6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "createEventWithFile(event:filePath:mimeType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FF7F3C64-921F-4965-A446-F7829C7E734E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "createEventWithFormData(event:parameters:files:)"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "getEvents()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
