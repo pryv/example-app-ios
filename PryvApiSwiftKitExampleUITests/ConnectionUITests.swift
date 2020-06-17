@@ -70,8 +70,8 @@ class ConnectionUITests: XCTestCase {
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
-        XCTAssertFalse(cell.staticTexts["attachmentLabel"].isHittable)
-        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
+        XCTAssertFalse(cell.staticTexts["attachmentLabel"].exists)
+        XCTAssertFalse(cell.images["attachmentImageView"].exists)
     }
     
     func testCreateEventWithFile() {
@@ -101,7 +101,7 @@ class ConnectionUITests: XCTestCase {
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "80")
         XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
-        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
+        XCTAssertFalse(cell.images["attachmentImageView"].exists)
     }
     
     func testAddFileToEvent() {
@@ -113,14 +113,23 @@ class ConnectionUITests: XCTestCase {
         let content = cell.staticTexts["contentLabel"].label
         
         cell.buttons["addAttachmentButton"].tap()
-        app.staticTexts["sample3.pdf"].tap() //FIXME
+        sleep(1)
+        app.otherElements["fileBrowser"].staticTexts["sample.pdf"].tap()
         
-        app.swipeDown()
+        cell.pullToRefresh()
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, content)
-        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample3.pdf")
-        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
+        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
+        XCTAssertFalse(cell.images["attachmentImageView"].exists)
+    }
+}
+
+extension XCUIElement {
+    func pullToRefresh() {
+        let start = self.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let finish = self.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 6))
+        start.press(forDuration: 0, thenDragTo: finish)
     }
 }

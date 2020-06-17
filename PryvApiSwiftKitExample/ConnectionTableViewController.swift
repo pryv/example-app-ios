@@ -107,7 +107,6 @@ class ConnectionTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"
-        refreshControl?.accessibilityIdentifier = "refresh"
     }
     
     override func viewDidLoad() {
@@ -236,6 +235,7 @@ class ConnectionTableViewController: UITableViewController {
         
         let path = Bundle.main.resourceURL!
         let fileBrowser = FileBrowser(initialPath: path)
+        fileBrowser.view.accessibilityIdentifier = "fileBrowser"
         self.present(fileBrowser, animated: true, completion: nil)
 
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
