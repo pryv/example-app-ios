@@ -18,6 +18,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var typeLabel: UILabel!
     @IBOutlet private weak var contentLabel: UILabel!
     @IBOutlet private weak var attachmentLabel: UILabel!
+    @IBOutlet weak var addAttachmentButton: UIButton!
     
     @IBOutlet private weak var attachmentTitleLabel: UILabel!
     @IBOutlet private weak var contentTitleLabel: UILabel!
@@ -117,10 +118,12 @@ class ConnectionTableViewController: UITableViewController {
         cell.streamId = streamId
         cell.type = type
         cell.content = String(describing: content)
+        cell.addAttachmentButton.tag = indexPath.row
+        cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
         // TODO: how to get the file if image and show ??
         
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments[0]["fileName"] as? String { // TODO: note takes the first one ?
+        if let attachments = event["attachments"] as? [Json], let fileName = attachments[0]["fileName"] as? String { // TODO: note takes the most recent one => last ?
             cell.fileName = fileName
         }
         
@@ -184,6 +187,22 @@ class ConnectionTableViewController: UITableViewController {
         self.present(alert, animated: true)
         
         
+    }
+    
+    /// Adds an attachment to an existing event in the `tableView`
+    /// - Parameter sender: the button that trigger this action
+    @objc private func addAttachment(_ sender: UIButton) {
+        let event = events[sender.tag]
+        guard let eventId = event["id"] as? String else { return }
+        
+        let path = Bundle.main.resourceURL!
+        let fileBrowser = FileBrowser(initialPath: path)
+        self.present(fileBrowser, animated: true, completion: nil)
+
+        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+            let _ = self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
+            self.refreshEnabled = true
+        }
     }
     
     /// Updates the list of events shown (only if an event was added)
