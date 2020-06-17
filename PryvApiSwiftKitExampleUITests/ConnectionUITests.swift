@@ -13,11 +13,9 @@ import PryvApiSwiftKit
 @testable import PryvApiSwiftKitExample
 
 class ConnectionUITests: XCTestCase {
-    private let keychain = KeychainSwift()
-    private let utils = AppUtils()
-    private let appId = "app-swift-example"
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
+    
     var app: XCUIApplication!
 
     override func setUp() {
@@ -27,76 +25,30 @@ class ConnectionUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        if (!app.buttons["logoutButton"].exists) {
-            app.buttons["loginButton"].tap()
-            app.alerts.textFields["usernameField"].tap()
-            app.alerts.textFields["usernameField"].typeText("testuser")
-            app.alerts.secureTextFields["passwordField"].tap()
-            app.alerts.secureTextFields["passwordField"].typeText("testuser")
-            app.alerts.buttons["OK"].tap()
-        }
+//        TODO ??
+//        if (!app.buttons["logoutButton"].exists) {
+//            app.buttons["loginButton"].tap()
+//            app.alerts.textFields["usernameField"].tap()
+//            app.alerts.textFields["usernameField"].typeText("testuser")
+//            app.alerts.secureTextFields["passwordField"].tap()
+//            app.alerts.secureTextFields["passwordField"].typeText("testuser")
+//            app.alerts.buttons["OK"].tap()
+//        }
     }
 
-    func testWelcomeView() {
-        XCTAssert(app.staticTexts["welcomeLabel"].exists)
-        
-        // Note: cannot check the token as not always the same
-        let endpoint = app.staticTexts["endpointLabel"].label
-        XCTAssert(endpoint.contains("API endpoint: \nhttps://"))
-        XCTAssert(endpoint.lowercased().contains("testuser.pryv.me/"))
+    func testConnectionViewBasicUI() {
+        XCTAssert(app.staticTexts["Pryv Lab - Testuser"].exists)
+        XCTAssert(app.navigationBars["connectionNavBar"].exists)
+        XCTAssert(app.navigationBars["connectionNavBar"].buttons["logoutButton"].isHittable)
+        XCTAssert(app.navigationBars["connectionNavBar"].buttons["addEventButton"].isHittable)
+        XCTAssert(app.tables["eventsTableView"].exists)
     }
     
-    func testCreateAndEditEvent() {
-        let streamId = "weight"
-        let type = "mass/kg"
-        let content = "90"
+    func testCreateSimpleEvent() {
+        app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
+        app.alerts.element.buttons["Simple event"].tap() //FIXME
         
-        // Create
-        
-        app.buttons["createEventsButton"].tap()
-        app.buttons["addEventButton"].tap()
-        
-        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [\"weight\"] will be sent to the server"].exists)
-        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
-        
-        app.textFields["streamIdField"].tap()
-        app.textFields["streamIdField"].typeText(streamId)
-        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
-        
-        app.textFields["typeField"].tap()
-        app.textFields["typeField"].typeText(type)
-        XCTAssertFalse(app.alerts.buttons["OK"].isEnabled)
-        
-        app.textFields["contentField"].tap()
-        app.textFields["contentField"].typeText(content)
-        XCTAssertTrue(app.alerts.buttons["OK"].isEnabled)
-        
-        app.alerts.buttons["OK"].tap()
-        let myTable = app.tables.matching(identifier: "newEventsTable")
-        let cell = myTable.cells["newEvent0"]
-        XCTAssertEqual(cell.staticTexts["newEventTitleLabel"].label, "Event 1: weight")
-        
-        // Edit
-        
-        cell.tap()
-        
-        XCTAssertEqual(app.textFields["streamIdField"].value as! String, streamId)
-        XCTAssertEqual(app.textFields["typeField"].value as! String, type)
-        XCTAssertEqual(app.textFields["contentField"].value as! String, content)
-        
-        app.textFields["streamIdField"].tap()
-        app.textFields["streamIdField"].doubleTap()
-        app.textFields["streamIdField"].typeText(XCUIKeyboardKey.delete.rawValue)
-        app.textFields["streamIdField"].typeText("height")
-        
-        app.alerts.buttons["OK"].tap()
-        XCTAssertEqual(cell.staticTexts["newEventTitleLabel"].label, "Event 1: height")
-        
-    }
-    
-    func testCreateEventAndSubmit() {
-        app.buttons["createEventsButton"].tap()
-        app.buttons["addEventButton"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Note: only stream ids in [\"weight\"]) will be accepted."].exists)
 
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
@@ -108,26 +60,25 @@ class ConnectionUITests: XCTestCase {
         app.textFields["contentField"].typeText("90")
 
         app.alerts.buttons["OK"].tap()
-
-        app.buttons["sendEventsButton"].tap()
-        XCTAssert(app.staticTexts["welcomeLabel"].exists)
+        XCTAssert(app.staticTexts["Pryv Lab - Testuser"].exists)
         
-        app.buttons["getEventsButton"].tap()
+        app.swipeDown()
         
-        let myTable = app.tables.matching(identifier: "getEventsTable")
+        let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
-        XCTAssertEqual(cell.staticTexts["eventTitleLabel"].label, "weight")
         
-        cell.tap()
-        let event = app.alerts.element.staticTexts.element.label
-        XCTAssert(event.contains("streamId:weight"))
-        XCTAssert(event.contains("type:mass/kg"))
-        XCTAssert(event.contains("content:90"))
+        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
+        XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
+        XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
+        XCTAssertFalse(cell.staticTexts["attachmentLabel"].isHittable)
+        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
     }
     
     func testCreateEventWithFile() {
-        app.buttons["eventWithFileButton"].tap()
-        XCTAssertTrue(app.alerts.element.staticTexts["Only stream ids [\"weight\"] will be sent to the server"].exists)
+        app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
+        app.alerts.element.buttons["Event with attachment"].tap() //FIXME
+        
+        XCTAssert(app.alerts.element.staticTexts["Note: only stream ids in [\"weight\"]) will be accepted."].exists)
         
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
@@ -136,18 +87,40 @@ class ConnectionUITests: XCTestCase {
         app.textFields["typeField"].typeText("mass/kg")
 
         app.textFields["contentField"].tap()
-        app.textFields["contentField"].typeText("90")
+        app.textFields["contentField"].typeText("80")
 
         app.alerts.buttons["OK"].tap()
-        app.staticTexts["sample.pdf"].tap()
+        app.staticTexts["sample.pdf"].tap() //FIXME
+               
+        app.swipeDown()
         
-        let event = app.staticTexts["textLabel"].label
+        let myTable = app.tables.matching(identifier: "eventsTableView")
+        let cell = myTable.cells["eventCell0"]
         
-        XCTAssert(event.contains("streamId:weight"))
-        XCTAssert(event.contains("type:mass/kg"))
-        XCTAssert(event.contains("content:90"))
-        XCTAssert(event.contains("attachments:("))
-        XCTAssert(event.contains("fileName = \"sample.pdf\""))
-        XCTAssert(event.contains("type = pdf"))
+        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
+        XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
+        XCTAssertEqual(cell.staticTexts["contentLabel"].label, "80")
+        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
+        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
+    }
+    
+    func testAddFileToEvent() {
+        let myTable = app.tables.matching(identifier: "eventsTableView")
+        let cell = myTable.cells["eventCell0"]
+        
+        let streamId = cell.staticTexts["streamIdLabel"].label
+        let type = cell.staticTexts["typeLabel"].label
+        let content = cell.staticTexts["contentLabel"].label
+        
+        cell.buttons["addAttachmentButton"].tap()
+        app.staticTexts["sample3.pdf"].tap() //FIXME
+        
+        app.swipeDown()
+        
+        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
+        XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
+        XCTAssertEqual(cell.staticTexts["contentLabel"].label, content)
+        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample3.pdf")
+        XCTAssertFalse(cell.images["attachmentImageView"].isHittable)
     }
 }

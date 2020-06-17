@@ -53,6 +53,13 @@ class EventTableViewCell: UITableViewCell {
             attachmentLabel.text = fileName!
         }
     }
+       
+    //    TODO
+    //    var file: Media? {
+    //        didSet {
+    //            attachmentImageView.image = UIImage(data: file!.data)
+    //        }
+    //    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -69,13 +76,15 @@ class EventTableViewCell: UITableViewCell {
         contentLabel.isHidden = false
         contentTitleLabel.isHidden = false
     }
-   
-//    TODO
-//    var file: Media? {
-//        didSet {
-//            attachmentImageView.image = UIImage(data: file!.data)
-//        }
-//    }
+    
+    override func awakeFromNib() {
+        attachmentImageView.accessibilityIdentifier = "attachmentImageView"
+        attachmentLabel.accessibilityIdentifier = "attachmentLabel"
+        streamIdLabel.accessibilityIdentifier = "streamIdLabel"
+        typeLabel.accessibilityIdentifier = "typeLabel"
+        contentLabel.accessibilityIdentifier = "contentLabel"
+        addAttachmentButton.accessibilityIdentifier = "addAttachmentButton"
+    }
     
 }
 
@@ -96,6 +105,11 @@ class ConnectionTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"
+        refreshControl?.accessibilityIdentifier = "refresh"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,7 +118,7 @@ class ConnectionTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = logoutButton
         
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
-        logoutButton.accessibilityIdentifier = "addEventButton"
+        addEventButton.accessibilityIdentifier = "addEventButton"
         self.navigationItem.rightBarButtonItem = addEventButton
         
         if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
