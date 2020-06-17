@@ -53,6 +53,22 @@ class EventTableViewCell: UITableViewCell {
             attachmentLabel.text = fileName!
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        attachmentImageView.image = nil
+        streamIdLabel.text = nil
+        typeLabel.text = nil
+        contentLabel.text = nil
+        attachmentLabel.text = nil
+        
+        attachmentLabel.isHidden = true
+        attachmentTitleLabel.isHidden = true
+        
+        contentLabel.isHidden = false
+        contentTitleLabel.isHidden = false
+    }
    
 //    TODO
 //    var file: Media? {
@@ -132,7 +148,7 @@ class ConnectionTableViewController: UITableViewController {
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String { 
+        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
             cell.fileName = fileName
         }
         
