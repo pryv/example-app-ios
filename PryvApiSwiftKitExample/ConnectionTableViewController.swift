@@ -132,7 +132,7 @@ class ConnectionTableViewController: UITableViewController {
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments[0]["fileName"] as? String { // TODO: note takes the most recent one => last ?
+        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String { 
             cell.fileName = fileName
         }
         
