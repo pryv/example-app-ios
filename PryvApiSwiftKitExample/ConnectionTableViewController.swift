@@ -12,18 +12,14 @@ import PryvApiSwiftKit
 
 class EventTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var attachmentImageView: UIImageView!
+    @IBOutlet private weak var attachmentImageView: UIImageView! // TODO: show image
     @IBOutlet private weak var streamIdLabel: UILabel!
     @IBOutlet private weak var typeLabel: UILabel!
     @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet private weak var attachmentLabel: UILabel!
     
-    // TODO
-//    var attachment: String? {
-//        didSet {
-//            attachmentImageView.isHidden = false
-//            attachmentImageView.image = UIImage(named: attachment!) // TODO: fix and check
-//        }
-//    }
+    @IBOutlet private weak var attachmentTitleLabel: UILabel!
+    @IBOutlet private weak var contentTitleLabel: UILabel!
     
     var streamId: String? {
         didSet {
@@ -39,14 +35,21 @@ class EventTableViewCell: UITableViewCell {
     
     var content: String? {
         didSet {
-            contentLabel.text = content!
+            if content != "nil" { // TODO: check if really == "nil" when image
+                contentLabel.text = content!
+            } else {
+                contentLabel.isHidden = true
+                contentTitleLabel.isHidden = true
+            }
         }
     }
     
-    override func awakeFromNib() {
-        // TODO
-//        guard let _ = attachment else { attachmentImageView.isHidden = true ; return }
-        attachmentImageView.isHidden = true
+    var fileName: String? {
+        didSet {
+            attachmentLabel.isHidden = false
+            attachmentTitleLabel.isHidden = false
+            attachmentLabel.text = fileName!
+        }
     }
     
 }
@@ -97,7 +100,7 @@ class ConnectionTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,6 +113,13 @@ class ConnectionTableViewController: UITableViewController {
         cell.streamId = streamId
         cell.type = type
         cell.content = String(describing: content)
+        
+        // TODO: how to get the file if image and show ??
+        
+        if let attachments = event["attachments"] as? [Json], let fileName = attachments[0]["fileName"] as? String { // TODO: note takes the first one ?
+            cell.fileName = fileName
+        }
+        
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
 
         return cell
