@@ -51,45 +51,6 @@ class MainViewController: UIViewController {
         serviceInfoUrlField.text = defaultServiceInfoUrl
     }
     
-    // TODO: remove / use only for tests ?
-    /// Asks for the username and password, logs the user in and opens the connection view
-    /// - Parameter sender: the button to clic on to trigger this action
-    @IBAction func login(_ sender: Any) {
-        let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
-        let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert)
-
-        let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
-            let username = alert.textFields![0].text ?? ""
-            let password = alert.textFields![1].attributedText?.string ?? ""
-            self.service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
-            guard let connection = self.service.login(username: username, password: password, appId: self.appId, domain: "pryv.me") else {
-                self.present(UIAlertController().errorAlert(title: "Incorrect username or password", delay: 2), animated: true, completion: nil)
-                return
-            }
-            self.openConnection(connection: connection)
-        })
-        submit.isEnabled = false
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
-        
-        alert.addAction(cancel)
-        alert.addAction(submit)
-        
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "username"
-            textField.addTarget(alert, action: #selector(alert.textDidChangeOnLoginAlert), for: .editingChanged)
-            textField.accessibilityIdentifier = "usernameField"
-        }
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "password"
-            textField.isSecureTextEntry = true
-            textField.addTarget(alert, action: #selector(alert.textDidChangeOnLoginAlert), for: .editingChanged)
-            textField.accessibilityIdentifier = "passwordField"
-        }
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
     @objc func authenticate() {
@@ -191,20 +152,6 @@ class MainViewController: UIViewController {
         vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
-    }
-    
-    // TODO: remove with login()
-    /// Opens a `ConnectionViewController`
-    /// - Parameter connection: the connection received from the login request 
-    private func openConnection(connection: Connection) {
-        keychain.set(connection.getApiEndpoint(), forKey: appId)
-        
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionTableViewController
-        vc.serviceName = service.info()?.name
-        vc.connection = connection
-        vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
-        vc.appId = appId
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

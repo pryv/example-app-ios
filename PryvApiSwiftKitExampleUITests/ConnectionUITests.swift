@@ -25,15 +25,15 @@ class ConnectionUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        // TODO: instead of login
         if (!app.buttons["logoutButton"].exists) {
             app.buttons["loginButton"].tap()
-            app.textFields.element(boundBy: 0).tap()
-            app.textFields.element(boundBy: 0).typeText("Testuser")
-            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.tab.rawValue)
-            app.textFields.element(boundBy: 0).typeText("testuser")
-            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.tab.rawValue)
-            app.textFields.element(boundBy: 0).typeText(XCUIKeyboardKey.enter.rawValue)
+            app.staticTexts["Username or email"].tap()
+            app.typeText("Testuser")
+            app.staticTexts["Password"].tap()
+            app.typeText("testuser")
+            app.buttons["SIGN IN"].tap()
+            app.buttons["ACCEPT"].tap()
+            sleep(2)
         }
     }
 

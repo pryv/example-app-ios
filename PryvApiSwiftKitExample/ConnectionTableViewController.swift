@@ -89,7 +89,6 @@ class EventTableViewCell: UITableViewCell {
 }
 
 class ConnectionTableViewController: UITableViewController {
-    private let appUtils = AppUtils()
     private let utils = Utils()
     private let keychain = KeychainSwift()
     
@@ -156,8 +155,8 @@ class ConnectionTableViewController: UITableViewController {
         cell.streamId = streamId
         cell.type = type
         cell.content = String(describing: content)
-//        TODO
-//        cell.file = connection.getAttachment(from: eventId) TODO: implement in the lib + use here
+//        TODO: implement in the lib + use here
+//        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
