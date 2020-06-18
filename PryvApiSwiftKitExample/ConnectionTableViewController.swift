@@ -119,7 +119,7 @@ class ConnectionTableViewController: UITableViewController {
         addEventButton.accessibilityIdentifier = "addEventButton"
         self.navigationItem.rightBarButtonItem = addEventButton
         
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
             navigationItem.title = "\(service) - \(username)"
         } else {
              navigationItem.title = "Last events"
