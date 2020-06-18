@@ -8,7 +8,7 @@ PODS:
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `connection-object`)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `ui-review`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -18,20 +18,20 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: connection-object
+    :branch: ui-review
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 59a87e72fb2ef3313cc0414a2afa27ed6b4e4db4
+    :commit: adb61da4d42695ca7b15de6e0a07d63578135e13
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: aa8e63442f121d620b5488a3ab1d0e8f309cd8b1
+  PryvApiSwiftKit: 20e85e814b3d66e4aad95c18a045d042577d2c25
 
-PODFILE CHECKSUM: 0cdcf72694518d1d9ab4f2c575c99068c5ae0e42
+PODFILE CHECKSUM: 54ab094c3a2a6796917345f14b1e32eee98d3eaf
 
 COCOAPODS: 1.8.4
