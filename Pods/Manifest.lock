@@ -1,8 +1,10 @@
 PODS:
+  - Alamofire (5.2.1)
   - FileBrowser (1.0.0)
   - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
   - PryvApiSwiftKit (0.1.2):
+    - Alamofire
     - Mocker
 
 DEPENDENCIES:
@@ -12,6 +14,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Alamofire
     - FileBrowser
     - KeychainSwift
     - Mocker
@@ -23,14 +26,15 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: cedb2b60928aa280ea9317ae46d1065e77d56f22
+    :commit: c7ead6ef7afc21eb7a5d542aa13ce4cf7a7d5af7
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: 78c8186df321fa82792ef0fa20de007ea5e9c125
+  PryvApiSwiftKit: 6e12e7fbe6ae74cb047bbe3ef8a3604564b73b32
 
 PODFILE CHECKSUM: 4c86c01e3533f8d752e7a0d650a92215e996b77b
 

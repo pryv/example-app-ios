@@ -20,16 +20,16 @@ extension UIAlertController {
     ///   - params: params of the event (only if editing)
     ///   - callback: function to execute when the button `Save` is hit
     /// - Returns: the `UIAlertController` with a title and a message and four text fields: name, streamId, type and content and a `Save` and `Cancel` button
-    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, params: Json? = nil, callback: @escaping (String, Json) -> ()) -> UIAlertController {
+    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, params: Json? = nil, callback: @escaping (Json) -> ()) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
             let params: Json = [
-                "streamId": alert.textFields![1].text ?? "",
-                "type": alert.textFields![2].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
-                "content": alert.textFields![3].text ?? ""
+                "streamId": alert.textFields![0].text ?? "",
+                "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
+                "content": alert.textFields![2].text ?? ""
             ]
-            callback(alert.textFields![0].text ?? "", params)
+            callback(params)
         })
         
         submit.isEnabled = editing
@@ -39,10 +39,6 @@ extension UIAlertController {
         alert.addAction(cancel)
         alert.addAction(submit)
         
-        alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Name of your new event"
-            textField.text = name
-        }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Stream id"
             textField.text = params?["streamId"] as? String ?? ""
@@ -68,7 +64,7 @@ extension UIAlertController {
     
     /// Assert the three fields corresponding to streamId, type and content are not empty to enable the `Save` button
     @objc func textDidChangeInEventEditor() {
-        if let streamId = textFields?[1].text, let type = textFields?[2].text, let content = textFields?[3].text, let action = actions.last {
+        if let streamId = textFields?[0].text, let type = textFields?[1].text, let content = textFields?[2].text, let action = actions.last {
             action.isEnabled = streamId.count > 0 && type.count > 0 && content.count > 0
         }
     }

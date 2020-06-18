@@ -22,6 +22,9 @@
   "dependencies": {
     "Mocker": [
 
+    ],
+    "Alamofire": [
+
     ]
   }
 }
