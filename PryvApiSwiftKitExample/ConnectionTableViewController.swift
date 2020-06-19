@@ -163,7 +163,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
         cell.streamId = streamId
         cell.type = type
         cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
-        print(String(describing: content).replacingOccurrences(of: "\n", with: ""))
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
