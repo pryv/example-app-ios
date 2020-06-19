@@ -10,6 +10,7 @@ import UIKit
 import KeychainSwift
 import PryvApiSwiftKit
 import FileBrowser
+import CoreLocation
 
 class EventTableViewCell: UITableViewCell {
     
@@ -88,9 +89,10 @@ class EventTableViewCell: UITableViewCell {
     
 }
 
-class ConnectionTableViewController: UITableViewController {
+class ConnectionTableViewController: UITableViewController, CLLocationManagerDelegate {
     private let utils = Utils()
     private let keychain = KeychainSwift()
+    private let locationManager = CLLocationManager()
     
     private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
     private var events = [Event]()
@@ -131,6 +133,12 @@ class ConnectionTableViewController: UITableViewController {
         tableView.accessibilityIdentifier = "eventsTableView"
         
         refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
+
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.requestAlwaysAuthorization()
     }
 
     // MARK: - Table view data source
@@ -154,7 +162,7 @@ class ConnectionTableViewController: UITableViewController {
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content)
+        cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
@@ -254,7 +262,7 @@ class ConnectionTableViewController: UITableViewController {
             let request = [
                 [
                     "method": "events.get",
-                    "params": [String: Any]()
+                    "params": Json()
                 ]
             ]
             if let result = connection!.api(APICalls: request) { self.events = result }
@@ -264,7 +272,53 @@ class ConnectionTableViewController: UITableViewController {
         }
         self.refreshControl?.endRefreshing()
     }
+        
+    // MARK: - location tracking
     
+    /// Checks the result of asking for location authorization
+    /// - Parameters:
+    ///   - manager: location managaer
+    ///   - status: the status of the authorization request
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            locationManager.startUpdatingLocation()
+//            locationManager.startMonitoringSignificantLocationChanges()
+        }
+    }
     
+    /// Manage newly received location updates
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array with the latest location(s)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var apiCalls = [APICall]()
+        for location in locations {
+            let params: Json = [
+                "streamId": "diary",
+                "type": "position/wgs84",
+                "content": [
+                  "latitude": location.coordinate.latitude,
+                  "longitude": location.coordinate.longitude,
+                  "altitude": location.altitude,
+                  "horizontalAccuracy": location.horizontalAccuracy,
+                  "verticalAccuracy": location.verticalAccuracy,
+                  "speed": location.speed
+                ]
+            ]
+            
+            let apiCall: APICall = [
+                "method": "events.create",
+                "params": params
+            ]
+            apiCalls.append(apiCall)
+        }
+        
+        print("Sending location...")
+        guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Problem encountered when tracking position: \(error)")
+    }
 
 }
