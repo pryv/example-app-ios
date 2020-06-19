@@ -136,7 +136,7 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
 
         locationManager.delegate = self
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.requestAlwaysAuthorization()
     }
@@ -162,7 +162,8 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content)
+        cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
+        print(String(describing: content).replacingOccurrences(of: "\n", with: ""))
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
@@ -282,6 +283,7 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
             locationManager.startUpdatingLocation()
+//            locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     
