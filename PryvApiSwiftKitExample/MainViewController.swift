@@ -26,6 +26,16 @@ class MainViewController: UIViewController {
             "streamId": "weight",
             "defaultName": "Weight",
             "level": "read"
+        ],
+        [
+            "streamId": "diary",
+            "defaultName": "Diary",
+            "level": "read"
+        ],
+        [
+            "streamId": "diary",
+            "defaultName": "Diary",
+            "level": "contribute"
         ]
     ]
     private let keychain = KeychainSwift()
