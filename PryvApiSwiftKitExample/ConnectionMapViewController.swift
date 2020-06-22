@@ -31,7 +31,13 @@ class ConnectionMapViewController: UIViewController {
                           center: initialLocation.coordinate,
                           latitudinalMeters: meters,
                           longitudinalMeters: meters)
-                        mapView.setRegion(coordinateRegion, animated: true)
+                        
+                        mapView.setCameraBoundary(
+                          MKMapView.CameraBoundary(coordinateRegion: coordinateRegion),
+                          animated: true)
+                        
+                        let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 10000)
+                        mapView.setCameraZoomRange(zoomRange, animated: true)
                     }
                 }
             }
