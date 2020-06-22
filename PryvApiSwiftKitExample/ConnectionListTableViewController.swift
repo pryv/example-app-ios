@@ -130,7 +130,7 @@ class ConnectionListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,7 +144,7 @@ class ConnectionListTableViewController: UITableViewController {
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
+        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: " ")
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
