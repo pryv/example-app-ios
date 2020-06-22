@@ -268,6 +268,7 @@
                 <tabBarController storyboardIdentifier="connectionTBC" automaticallyAdjustsScrollViewInsets="NO" id="IWS-qQ-P0V" customClass="ConnectionTabBarViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="j7i-Nx-CXn">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -292,17 +293,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
-                                <rect key="frame" x="71.5" y="772" width="271" height="32"/>
+                                <rect key="frame" x="119" y="772" width="176" height="32"/>
                                 <segments>
                                     <segment title="Day"/>
                                     <segment title="Week"/>
                                     <segment title="Month"/>
-                                    <segment title="Custom"/>
                                 </segments>
                                 <connections>
                                     <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
                                 </connections>
                             </segmentedControl>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="X8j-of-2qw">
+                                <rect key="frame" x="0.0" y="642" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -317,7 +321,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" landscapeImage="map" largeContentSizeImage="map" selectedImage="map" id="Wab-Wp-qPC"/>
                     <connections>
-                        <outlet property="filterControl" destination="h6z-pU-JLg" id="3wg-SD-loo"/>
                         <outlet property="mapView" destination="5i7-Ki-qAC" id="hRu-pB-t7q"/>
                     </connections>
                 </viewController>
