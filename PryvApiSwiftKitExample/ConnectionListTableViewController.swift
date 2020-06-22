@@ -109,7 +109,6 @@ class ConnectionListTableViewController: UITableViewController {
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
         self.navigationItem.rightBarButtonItem = addEventButton
-        
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
         
