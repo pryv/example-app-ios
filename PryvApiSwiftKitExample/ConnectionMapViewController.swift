@@ -86,8 +86,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
             ]
         ]
         if let result = connection!.api(APICalls: request) {
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
+            cleanMapView()
             show(events: result.filter{ event in
                 (event["type"] as? String)?.contains("position") ?? false
             })
@@ -113,7 +112,9 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         
-        showRoute(coordinates: coordinates)
+        if coordinates.count > 0 {
+            showRoute(coordinates: coordinates)
+        }
     }
     
     private func showRoute(coordinates: [CLLocationCoordinate2D]) {
@@ -126,6 +127,14 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         polylineRenderer.strokeColor = .systemGreen
         polylineRenderer.lineWidth = 5
         return polylineRenderer
+    }
+    
+    private func cleanMapView() {
+        let allAnnotations = mapView.annotations
+        mapView.removeAnnotations(allAnnotations)
+        
+        let allOverlays = mapView.overlays
+        mapView.removeOverlays(allOverlays)
     }
     
 }
