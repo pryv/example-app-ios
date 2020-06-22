@@ -271,6 +271,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="connectionTabBar"/>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="1Qp-o2-F3A" kind="relationship" relationship="viewControllers" id="rSG-4e-mGm"/>
@@ -305,6 +308,9 @@
                                                     <segment title="Week"/>
                                                     <segment title="Month"/>
                                                 </segments>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="filterController"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
                                                 </connections>
@@ -340,7 +346,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sKC-rK-jXt"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" landscapeImage="map" largeContentSizeImage="map" selectedImage="map" id="Wab-Wp-qPC"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" landscapeImage="map" largeContentSizeImage="map" selectedImage="map" id="Wab-Wp-qPC">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="mapButtonItem"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <connections>
                         <outlet property="datePicker" destination="X8j-of-2qw" id="bRB-Va-1k0"/>
                         <outlet property="mapView" destination="5i7-Ki-qAC" id="hRu-pB-t7q"/>

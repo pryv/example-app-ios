@@ -100,8 +100,14 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
                 coordinates.append(coordinate)
                 
                 if i == 0 {
+                    let time = event["time"] as? Double
                     let point = MKPointAnnotation()
                     point.coordinate = coordinate
+                    if let _ = time {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd"
+                        point.title = formatter.string(from: Date(timeIntervalSince1970: time!))
+                    }
                     mapView.addAnnotation(point)
                     
                     let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
