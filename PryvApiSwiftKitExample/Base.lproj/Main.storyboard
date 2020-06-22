@@ -302,6 +302,9 @@
                         <viewLayoutGuide key="safeArea" id="sKC-rK-jXt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" landscapeImage="map" largeContentSizeImage="map" selectedImage="map" id="Wab-Wp-qPC"/>
+                    <connections>
+                        <outlet property="mapView" destination="5i7-Ki-qAC" id="hRu-pB-t7q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPo-9j-0jr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

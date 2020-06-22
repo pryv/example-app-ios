@@ -29,6 +29,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         listVC.appId = appId
         
         let mapVC = self.storyboard?.instantiateViewController(identifier: "connectionMapVC") as! ConnectionMapViewController
+        mapVC.connection = connection
         
         viewControllers = [listVC, mapVC]
         navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"

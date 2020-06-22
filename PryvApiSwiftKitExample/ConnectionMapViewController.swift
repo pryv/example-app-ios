@@ -7,24 +7,61 @@
 //
 
 import UIKit
+import MapKit
+import PryvApiSwiftKit
 
 class ConnectionMapViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    @IBOutlet private weak var mapView: MKMapView!
+    
+    private var events = [Event]() {
+        didSet {
+            loadViewIfNeeded()
+            for i in 0..<events.count {
+                let event = events[i]
+                if let content = event["content"] as? [String: Any], let latitude = content["latitude"] as? Double, let longitude = content["longitude"] as? Double {
+                    let point = MKPointAnnotation()
+                    point.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    mapView.addAnnotation(point)
+                    
+                    if i == event.count - 1 {
+                        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+                        let meters: CLLocationDistance = 2000
+                        let coordinateRegion = MKCoordinateRegion(
+                          center: initialLocation.coordinate,
+                          latitudinalMeters: meters,
+                          longitudinalMeters: meters)
+                        mapView.setRegion(coordinateRegion, animated: true)
+                    }
+                }
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var connection: Connection? {
+        didSet {
+            getEvents()
+        }
     }
-    */
+    
+    func getEvents() {
+        var dayComponent = DateComponents()
+        dayComponent.day = -7
+        let oneWeekAgo = Calendar.current.date(byAdding: dayComponent, to: Date())
+        
+        let request = [
+            [
+                "method": "events.get",
+                "params": [
+                    "fromTime": oneWeekAgo?.timeIntervalSince1970
+                ]
+            ]
+        ]
+        if let result = connection!.api(APICalls: request) {
+            self.events = result.filter{ event in
+                (event["type"] as? String)?.contains("position") ?? false
+            }
+        }
+    }
 
 }
