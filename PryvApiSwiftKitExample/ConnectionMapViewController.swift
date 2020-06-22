@@ -76,8 +76,6 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
             params["fromTime"] = calendar.date(byAdding: dateComponent, to: endOfDay)?.timeIntervalSince1970
             params["toTime"] = endOfDay.timeIntervalSince1970
         }
-        params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970 ?? 0
-        params["toTime"] = toDate.timeIntervalSince1970
         
         let request = [
             [

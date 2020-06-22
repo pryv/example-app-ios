@@ -215,32 +215,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0729C1E5-44BF-4E64-A043-C7BB16D2A8AD"
+            uuid = "0014476A-C543-4D5D-B42C-40652EE76CC6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PryvApiSwiftKitExample/ConnectionMapViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "showRoute(coordinates:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "814B68CF-476F-4995-ADEE-5E5DB0C9714A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PryvApiSwiftKitExample/ConnectionMapViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "mapView(_:rendererFor:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "show(events:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
