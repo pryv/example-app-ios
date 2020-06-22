@@ -88,7 +88,7 @@
         <!--Connection Table View Controller-->
         <scene sceneID="xl3-yT-MHR">
             <objects>
-                <tableViewController storyboardIdentifier="connectionVC" id="1Qp-o2-F3A" customClass="ConnectionTableViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="connectionListVC" id="1Qp-o2-F3A" customClass="ConnectionTableViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="s8v-9o-IsV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -241,7 +241,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLI-gf-8EM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="140"/>
+            <point key="canvasLocation" x="3230" y="-204"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xfq-hn-v3a">
@@ -260,6 +260,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3p-8b-eqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="137.94642857142856"/>
+        </scene>
+        <!--Connection Tab Bar View Controller-->
+        <scene sceneID="zVp-lA-eez">
+            <objects>
+                <tabBarController storyboardIdentifier="connectionTBC" automaticallyAdjustsScrollViewInsets="NO" id="My9-bH-zBj" customClass="ConnectionTabBarViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jDY-9L-ouo">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yb2-qW-UP9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2450.7246376811595" y="136.60714285714286"/>
         </scene>
     </scenes>
     <resources>

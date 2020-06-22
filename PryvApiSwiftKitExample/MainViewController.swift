@@ -156,10 +156,10 @@ class MainViewController: UIViewController {
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         keychain.set(apiEndpoint, forKey: appId)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionTableViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.serviceName = service.info()?.name
         vc.connection = Connection(apiEndpoint: apiEndpoint)
-        vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
+        vc.permissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }

@@ -106,10 +106,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
