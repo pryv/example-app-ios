@@ -45,10 +45,11 @@ class ConnectionMapViewController: UIViewController {
         }
     }
     
-    private func getEvents(_ filter: TimeFilter) { // 1: day, 7: week, 31: month
+    private func getEvents(_ filter: TimeFilter) {
+        let calendar = Calendar.current
         var dayComponent = DateComponents()
         dayComponent.day = filter.rawValue
-        let fromTime = Calendar.current.date(byAdding: dayComponent, to: Date())
+        let fromTime = calendar.date(byAdding: dayComponent, to: calendar.startOfDay(for: Date()))
         
         let request = [
             [
