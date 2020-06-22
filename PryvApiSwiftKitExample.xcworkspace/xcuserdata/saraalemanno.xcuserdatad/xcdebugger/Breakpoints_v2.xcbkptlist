@@ -215,16 +215,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0014476A-C543-4D5D-B42C-40652EE76CC6"
+            uuid = "FDAE8993-BCB0-4741-B1BF-272FDB9D955F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PryvApiSwiftKitExample/ConnectionMapViewController.swift"
+            filePath = "PryvApiSwiftKitExample/ConnectionListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "show(events:)"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "addEvent()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

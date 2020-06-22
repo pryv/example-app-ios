@@ -90,7 +90,6 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
-    
     private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
     private var events = [Event]()
     
@@ -108,11 +107,20 @@ class ConnectionListTableViewController: UITableViewController {
         
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
-        self.navigationItem.rightBarButtonItem = addEventButton
+        tabBarController?.navigationItem.rightBarButtonItem = addEventButton
+        
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
         
         refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     // MARK: - Table view data source
