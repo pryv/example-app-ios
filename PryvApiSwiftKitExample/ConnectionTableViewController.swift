@@ -109,10 +109,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
-        logoutButton.accessibilityIdentifier = "logoutButton"
-        self.navigationItem.leftBarButtonItem = logoutButton
-        
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
         self.navigationItem.rightBarButtonItem = addEventButton
@@ -123,7 +119,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
              navigationItem.title = "Last events"
         }
         navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.hidesBackButton = true
         
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"
@@ -174,19 +169,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
     }
     
     // MARK: - Table view interactions
-    
-    /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
-    @objc private func logout() {
-        let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
-            if let key = self.appId {
-                self.keychain.delete(key)
-            }
-            self.navigationController?.popToRootViewController(animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
-        self.present(alert, animated: true, completion: nil)
-    }
     
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
