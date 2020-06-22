@@ -88,7 +88,7 @@ class EventTableViewCell: UITableViewCell {
     
 }
 
-class ConnectionTableViewController: UITableViewController {
+class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
     
     private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
