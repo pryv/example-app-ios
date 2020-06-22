@@ -9,10 +9,12 @@
 import UIKit
 import PryvApiSwiftKit
 import KeychainSwift
+import CoreLocation
 
-class ConnectionTabBarViewController: UITabBarController {
+class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
     private let keychain = KeychainSwift()
     private let utils = Utils()
+    private let locationManager = CLLocationManager()
     
     var serviceName: String?
     var connection: Connection?
@@ -29,7 +31,7 @@ class ConnectionTabBarViewController: UITabBarController {
         viewControllers = [listVC]
         navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,9 +43,15 @@ class ConnectionTabBarViewController: UITabBarController {
         if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
             navigationItem.title = "\(service) - \(username)"
         } else {
-             navigationItem.title = "Last events"
+            navigationItem.title = "Last events"
         }
         navigationItem.largeTitleDisplayMode = .automatic
+        
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.requestAlwaysAuthorization()
     }
     
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
@@ -58,5 +66,53 @@ class ConnectionTabBarViewController: UITabBarController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
+    // MARK: - location tracking
+    
+    /// Checks the result of asking for location authorization
+    /// - Parameters:
+    ///   - manager: location managaer
+    ///   - status: the status of the authorization request
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            locationManager.startUpdatingLocation()
+            //            locationManager.startMonitoringSignificantLocationChanges()
+        }
+    }
+    
+    /// Manage newly received location updates
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array with the latest location(s)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var apiCalls = [APICall]()
+        for location in locations {
+            let params: Json = [
+                "streamId": "diary",
+                "type": "position/wgs84",
+                "content": [
+                    "latitude": location.coordinate.latitude,
+                    "longitude": location.coordinate.longitude,
+                    "altitude": location.altitude,
+                    "horizontalAccuracy": location.horizontalAccuracy,
+                    "verticalAccuracy": location.verticalAccuracy,
+                    "speed": location.speed
+                ]
+            ]
+            
+            let apiCall: APICall = [
+                "method": "events.create",
+                "params": params
+            ]
+            apiCalls.append(apiCall)
+        }
+        
+        print("Sending location...")
+        guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Problem encountered when tracking position: \(error)")
+    }
+    
 }
