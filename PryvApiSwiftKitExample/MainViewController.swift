@@ -156,11 +156,7 @@ class MainViewController: UIViewController {
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         keychain.set(apiEndpoint, forKey: appId)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionViewController
-        vc.service = service
-        vc.apiEndpoint = apiEndpoint
-        vc.appId = appId
-        vc.permissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
+        let vc = ConnectionViewController(service: service, apiEndpoint: apiEndpoint, appId: appId, permissions: permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""}))
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     
