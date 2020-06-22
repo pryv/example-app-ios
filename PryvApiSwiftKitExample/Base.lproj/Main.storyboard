@@ -291,24 +291,38 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5i7-Ki-qAC">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
+                                <rect key="frame" x="119" y="772" width="176" height="32"/>
+                                <segments>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                    <segment title="Month"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5i7-Ki-qAC" firstAttribute="top" secondItem="sKC-rK-jXt" secondAttribute="top" id="4Wh-bW-gSO"/>
                             <constraint firstItem="5i7-Ki-qAC" firstAttribute="leading" secondItem="sKC-rK-jXt" secondAttribute="leading" id="EYw-YU-7jF"/>
+                            <constraint firstItem="h6z-pU-JLg" firstAttribute="bottom" secondItem="5i7-Ki-qAC" secondAttribute="bottom" constant="-10" id="LC0-ef-0zt"/>
                             <constraint firstItem="sKC-rK-jXt" firstAttribute="trailing" secondItem="5i7-Ki-qAC" secondAttribute="trailing" id="LGF-oy-Zcg"/>
+                            <constraint firstItem="h6z-pU-JLg" firstAttribute="centerX" secondItem="sKC-rK-jXt" secondAttribute="centerX" id="WPB-nu-VjO"/>
                             <constraint firstItem="sKC-rK-jXt" firstAttribute="bottom" secondItem="5i7-Ki-qAC" secondAttribute="bottom" id="k9d-wJ-OBm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sKC-rK-jXt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" landscapeImage="map" largeContentSizeImage="map" selectedImage="map" id="Wab-Wp-qPC"/>
                     <connections>
+                        <outlet property="filterControl" destination="h6z-pU-JLg" id="3wg-SD-loo"/>
                         <outlet property="mapView" destination="5i7-Ki-qAC" id="hRu-pB-t7q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPo-9j-0jr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3635" y="519"/>
+            <point key="canvasLocation" x="3634.7826086956525" y="518.97321428571422"/>
         </scene>
     </scenes>
     <resources>
