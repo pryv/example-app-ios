@@ -90,7 +90,6 @@ class EventTableViewCell: UITableViewCell {
 }
 
 class ConnectionTableViewController: UITableViewController, CLLocationManagerDelegate {
-    private let utils = Utils()
     private let keychain = KeychainSwift()
     private let locationManager = CLLocationManager()
     
@@ -112,13 +111,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
         self.navigationItem.rightBarButtonItem = addEventButton
-        
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
-            navigationItem.title = "\(service) - \(username)"
-        } else {
-             navigationItem.title = "Last events"
-        }
-        navigationItem.largeTitleDisplayMode = .automatic
         
         tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "eventsTableView"

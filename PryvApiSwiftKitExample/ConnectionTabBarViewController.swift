@@ -12,6 +12,7 @@ import KeychainSwift
 
 class ConnectionTabBarViewController: UITabBarController {
     private let keychain = KeychainSwift()
+    private let utils = Utils()
     
     var serviceName: String?
     var connection: Connection?
@@ -36,6 +37,13 @@ class ConnectionTabBarViewController: UITabBarController {
         logoutButton.accessibilityIdentifier = "logoutButton"
         navigationItem.leftBarButtonItem = logoutButton
         navigationItem.hidesBackButton = true
+        
+        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+            navigationItem.title = "\(service) - \(username)"
+        } else {
+             navigationItem.title = "Last events"
+        }
+        navigationItem.largeTitleDisplayMode = .automatic
     }
     
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
