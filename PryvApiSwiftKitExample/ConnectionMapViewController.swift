@@ -65,7 +65,9 @@ class ConnectionMapViewController: UIViewController {
         
         var params = Json()
         params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970 ?? 0
-        params["toTime"] = toDate.timeIntervalSince1970
+        if duration != .day || calendar.isDateInToday(toDate) {
+            params["toTime"] = toDate.timeIntervalSince1970
+        }
         
         let request = [
             [
