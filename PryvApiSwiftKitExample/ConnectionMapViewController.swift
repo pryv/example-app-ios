@@ -14,6 +14,7 @@ enum TimeFilter: Int {
     case day = -1
     case week = -7
     case month = -31
+    case custom
 }
 
 class ConnectionMapViewController: UIViewController {
@@ -40,23 +41,32 @@ class ConnectionMapViewController: UIViewController {
             getEvents(.week)
         case 2:
             getEvents(.month)
+        case 3:
+            // TODO: open an alert with time check and default time with one week
+            getEvents(.custom)
+            return
         default:
             return
         }
     }
     
-    private func getEvents(_ filter: TimeFilter) {
-        let calendar = Calendar.current
-        var dayComponent = DateComponents()
-        dayComponent.day = filter.rawValue
-        let fromTime = calendar.date(byAdding: dayComponent, to: calendar.startOfDay(for: Date()))
+    private func getEvents(_ filter: TimeFilter, fromTime: Double? = nil, toTime: Double? = nil) {
+        var params = Json()
+        switch filter {
+        case .custom:
+            if let _ = fromTime { params["fromTime"] = fromTime! }
+            if let _ = toTime { params["toTime"] = toTime! }
+        default:
+            let calendar = Calendar.current
+            var dayComponent = DateComponents()
+            dayComponent.day = filter.rawValue
+            params["fromTime"] = calendar.date(byAdding: dayComponent, to: calendar.startOfDay(for: Date()))?.timeIntervalSince1970
+        }
         
         let request = [
             [
                 "method": "events.get",
-                "params": [
-                    "fromTime": fromTime?.timeIntervalSince1970
-                ]
+                "params": params
             ]
         ]
         if let result = connection!.api(APICalls: request) {

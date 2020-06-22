@@ -292,11 +292,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
-                                <rect key="frame" x="119" y="772" width="176" height="32"/>
+                                <rect key="frame" x="71.5" y="772" width="271" height="32"/>
                                 <segments>
                                     <segment title="Day"/>
                                     <segment title="Week"/>
                                     <segment title="Month"/>
+                                    <segment title="Custom"/>
                                 </segments>
                                 <connections>
                                     <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
