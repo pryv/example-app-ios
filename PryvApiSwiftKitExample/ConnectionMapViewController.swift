@@ -19,35 +19,53 @@ enum TimeFilter: Int {
 class ConnectionMapViewController: UIViewController {
     
     @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var datePicker: UIDatePicker!
+    
+    private var duration = TimeFilter.week
+    private var currentDate = Date()
+    private let calendar = Calendar.current
     
     var connection: Connection? {
         didSet {
             loadViewIfNeeded()
-            getEvents(.week)
+            getEvents(toDate: currentDate, duration)
         }
     }
     
-    @IBAction func switchFilter(_ sender: UISegmentedControl) {
+    override func viewDidLoad() {
+        datePicker.maximumDate = Date()
+        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+    }
+    
+    @objc private func dateChanged(sender: UIDatePicker) {
+        currentDate = sender.date
+        if calendar.isDateInToday(currentDate) {
+            currentDate = Date()
+        }
+        getEvents(toDate: currentDate, duration)
+    }
+    
+    @IBAction private func switchFilter(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            getEvents(.day)
+            duration = .day
         case 1:
-            getEvents(.week)
+            duration = .week
         case 2:
-            getEvents(.month)
+            duration = .month
         default:
             return
         }
+        getEvents(toDate: currentDate, duration)
     }
     
-    private func getEvents(_ filter: TimeFilter, fromTime: Double? = nil, toTime: Double? = nil) {
-        let calendar = Calendar.current
+    private func getEvents(toDate: Date, _ duration: TimeFilter) {
         var dateComponent = DateComponents()
-        dateComponent.day = filter.rawValue
+        dateComponent.day = duration.rawValue
         
         var params = Json()
-        params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: Date()))?.timeIntervalSince1970
-        if let _ = toTime { params["toTime"] = toTime! }
+        params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970 ?? 0
+        params["toTime"] = toDate.timeIntervalSince1970
         
         let request = [
             [
