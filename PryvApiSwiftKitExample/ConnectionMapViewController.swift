@@ -11,7 +11,7 @@ import MapKit
 import PryvApiSwiftKit
 
 enum TimeFilter: Int {
-    case day = -1
+    case day = 1
     case week = -7
     case month = -31
 }
@@ -64,10 +64,19 @@ class ConnectionMapViewController: UIViewController {
         dateComponent.day = duration.rawValue
         
         var params = Json()
-        params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970 ?? 0
-        if duration != .day || calendar.isDateInToday(toDate) {
-            params["toTime"] = toDate.timeIntervalSince1970
+        switch duration {
+        case .day:
+            params["fromTime"] = calendar.startOfDay(for: toDate).timeIntervalSince1970
+            params["toTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970
+        case .week, .month:
+            var dayComp = DateComponents()
+            dayComp.day = 1
+            let endOfDay = calendar.date(byAdding: dayComp, to: calendar.startOfDay(for: toDate))!
+            params["fromTime"] = calendar.date(byAdding: dateComponent, to: endOfDay)?.timeIntervalSince1970
+            params["toTime"] = endOfDay.timeIntervalSince1970
         }
+        params["fromTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970 ?? 0
+        params["toTime"] = toDate.timeIntervalSince1970
         
         let request = [
             [
