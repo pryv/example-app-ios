@@ -4,29 +4,26 @@ PODS:
   - Mocker (2.2.0)
   - PryvApiSwiftKit (0.1.2):
     - Mocker
-  - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
-  - XLPagerTabStrip (~> 9.0)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `ui-review`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - FileBrowser
     - KeychainSwift
     - Mocker
-    - XLPagerTabStrip
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: master
+    :branch: ui-review
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 51a5f72b708e084be4964e93b73ed3976ee4a13e
+    :commit: adb61da4d42695ca7b15de6e0a07d63578135e13
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -34,8 +31,7 @@ SPEC CHECKSUMS:
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PryvApiSwiftKit: 20e85e814b3d66e4aad95c18a045d042577d2c25
-  XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 0fbd791a137654f3dd94b35f2420b38089f06c13
+PODFILE CHECKSUM: 54ab094c3a2a6796917345f14b1e32eee98d3eaf
 
 COCOAPODS: 1.8.4

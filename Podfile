@@ -9,10 +9,9 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
-  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
+  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'ui-review'
   pod 'KeychainSwift'
   pod 'FileBrowser', '~> 1.0'
-  pod 'XLPagerTabStrip', '~> 9.0'
 
   target 'PryvApiSwiftKitExampleTests' do
     inherit! :search_paths

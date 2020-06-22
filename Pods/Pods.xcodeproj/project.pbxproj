@@ -7,151 +7,95 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F045699B8CE52D73DB46CA759F09E94 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */; };
-		0FB240FD4D094B38A39CE5AF890BFDB5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 880B9BDE8D9ADEEC002F28C957BBA1CE /* QuickLook.framework */; };
-		17F81AE9958B61708DAC28162F52F6BA /* Data+append.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3ED9B9E21BD0A36A0F96CFFD43458 /* Data+append.swift */; };
-		1B7E7B16CDEC321A263291419E7CE00B /* XLPagerTabStrip.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78BA4BB1A553AB4136F879792D99C87D /* XLPagerTabStrip.bundle */; };
-		1CAD51550A23BBA011BE2040CD920891 /* FileListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A56AD093E259FDBDE0DE1835DC36E0 /* FileListTableView.swift */; };
-		20F2028BF02713C97C6725DAD0D44926 /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882109CE68AD24B11854E6EF7C588FD9 /* PreviewTransitionViewController.xib */; };
-		2367B4DB0679243185EF0CDFDF4787D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 29743625DE0534B62ACF9C1190105BD4 /* Mocker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26102C252C4B4535F2C3713C8220C64F /* Mocker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4137F45B2CA31DD953C0A6C803C2D5 /* Mocker-dummy.m */; };
-		28336F1C947B57D07831C63C31B84A0C /* IndicatorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C944F80188B538068A0AB5776873D9E5 /* IndicatorInfo.swift */; };
-		292208651E587C8DD3CC462EB514DD48 /* PryvApiSwiftKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 686B27BDD0BE9893429B4476A2DB3360 /* PryvApiSwiftKit-dummy.m */; };
-		2B39B33ECADFF6B44583C4DBA8854A9C /* ButtonBarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C495E2DF03264A96FF703B625C05D21 /* ButtonBarViewCell.swift */; };
-		2BC8DF4EADD024A30A84555CB575CAC6 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A9FDE323A7966FC42AC3619930D3E8 /* SwipeDirection.swift */; };
-		2DABB7F30476F072B6A15D510614C93E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52BD30CC7DE787A1C950F66C1392F7F /* UIKit.framework */; };
-		311557DC2943E068608D1B6A7B663232 /* SegmentedPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87318FE1540B81CAAA9AB207DB3667E7 /* SegmentedPagerTabStripViewController.swift */; };
-		320E018022758AFD782991C7D8854DB1 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554ABE68D728BF854C2B5B3C5585E43 /* TegKeychainConstants.swift */; };
-		35BB6778460759C81019D6B31D079568 /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F48EF4CFCD52522A0EBEA1D5AAECA91B /* folder@2x.png */; };
-		399F2A0161278488DC1E5ADD297DE3B7 /* BaseButtonBarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EF6BC71C3E6E84AB9C8E751A23D353 /* BaseButtonBarPagerTabStripViewController.swift */; };
-		3F1E6AE0B8A22678DB406AE072F213FC /* PagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D111CE37831580D18C53C2CD4898DE1 /* PagerTabStripViewController.swift */; };
-		3FA7FFEA091A1145AAD5BBE5A32BF4DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		445D61C3F4F1E353873FE474EA856E02 /* FXPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB000C4F435BB86C79D3ADC5BAD1C35 /* FXPageControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		462916B5E66AC042EEDB568A444A2D11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6C76E95FE7F13F7AA297FC10C9E98 /* Utils.swift */; };
-		485A776035D4B1EF97E8AE0E95A66502 /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F39006536CE261EC0E316E36CC4C7A2 /* KeychainSwiftAccessOptions.swift */; };
-		4B255EB0716A1BB473E696C20812C697 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA46CDD49A75539146D867418A8F0FA /* KeychainSwift-dummy.m */; };
+		07EE5758978BC7740C1CFFEAA526054C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		08CF94701923565A46557FBA1F0A0079 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */; };
+		0F582977E678A6436A61AE6B87E15321 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB240FD4D094B38A39CE5AF890BFDB5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */; };
+		17F81AE9958B61708DAC28162F52F6BA /* Data+append.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5E4A2C28E74A8ED62D28BE01E99592 /* Data+append.swift */; };
+		1CAD51550A23BBA011BE2040CD920891 /* FileListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B589A83B643F3A697ED81C703F875E /* FileListTableView.swift */; };
+		20F2028BF02713C97C6725DAD0D44926 /* PreviewTransitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E6953A4AA7A72057BF22327321C64FA /* PreviewTransitionViewController.xib */; };
+		2367B4DB0679243185EF0CDFDF4787D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62ADC79FEBC14484B04513B9A4B83816 /* Mocker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26102C252C4B4535F2C3713C8220C64F /* Mocker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AEAEB403D0BF3D5066DAD2EC2A142F /* Mocker-dummy.m */; };
+		292208651E587C8DD3CC462EB514DD48 /* PryvApiSwiftKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D340259AE4FBACAEF84AD1FF73CDB57 /* PryvApiSwiftKit-dummy.m */; };
+		31487013F92B645B14375D8B73E6D796 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		320E018022758AFD782991C7D8854DB1 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07E705604E8FF4573495512F999C1D1 /* TegKeychainConstants.swift */; };
+		344C08E7CF7730ED3D3394BE7534AE38 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		345854987CEBE62DF6C535942FD4D274 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */; };
+		35BB6778460759C81019D6B31D079568 /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8524C6A4D437E9FF51F1CD377747134D /* folder@2x.png */; };
+		3FA7FFEA091A1145AAD5BBE5A32BF4DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		462916B5E66AC042EEDB568A444A2D11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACD37C298BA56C10D59D0D10664DCE /* Utils.swift */; };
+		485A776035D4B1EF97E8AE0E95A66502 /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9D310C8C2DBF0DFD9424A9ECFFA2B /* KeychainSwiftAccessOptions.swift */; };
+		4B255EB0716A1BB473E696C20812C697 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B7491A78401BB79D1369BC7526C3F0 /* KeychainSwift-dummy.m */; };
 		4BE4CACF6060599EC43AA12560C47F6B /* Pods-PryvApiSwiftKitExampleTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 778DCADB1AFE9E7D54DF56E0F1FB2B31 /* Pods-PryvApiSwiftKitExampleTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4DC6C132AEF3E02BDD5ABC89333233B3 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD86388BB35C7AA3A09C4287640A09 /* KeychainSwift.swift */; };
-		4EFAEEB95B51C858A229A157804E4BC0 /* PryvServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659079677E2A98A773CAA5DD2B3D575D /* PryvServiceInfo.swift */; };
-		4F86F33F807A003D18DEDBCA01210037 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8F1AAC9472F86E952290CA93F1FB3 /* BarView.swift */; };
-		50C48CA93A7F8AF887DCF47C9A95DB3A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D58062F89702B9D88F562BA47C31CCB /* Connection.swift */; };
-		5215DCBE6710AD5AA86A0A70744BA3BB /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A281CDE1EEEE3305BEBF4E807F6B887E /* file@2x.png */; };
-		54D8CF9D05ED1AF2D8D0AE1D48E5FD1C /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5866D559DB2BCFCB1083E844B3848326 /* FileListPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3E0D19BDF48E392A8E5F570F94CC4D /* FileListPreview.swift */; };
-		5984D9DC8F924C72F6018A3C3FE8B82A /* pdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6AA5780E9AC3726C5D77D1D34514618 /* pdf@2x.png */; };
-		59BA6FD61F0A9B68CD58C371DA1F1D60 /* BarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB3A3AF211480D5A6D5ED50C37DD41D /* BarPagerTabStripViewController.swift */; };
-		59EB715BC99B619BCDD230721E2A1B55 /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F463CFD422E21C6D93DEB1E246AB5 /* WebviewPreviewViewContoller.swift */; };
-		5CB7558219F71F41DC2BE90FB50CCE3F /* image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1C123E410E425430DB7F6A5B631FCBF /* image@2x.png */; };
-		69B419B8DBDE3DC6EA250BA01BEEAC62 /* XLPagerTabStrip-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05EA8DE1CE7B607DDFF44E493C54CCBB /* XLPagerTabStrip-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A332AF6C1B4A44654EEA9A031A751F6 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21562DD234625C8D0647FC561CD7547E /* ButtonCell.xib */; };
-		74DDBF47539EB98680E83BD95227DD8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		7559DE245E16704C9A80CAB12C795CD9 /* PreviewTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0180FE23EDC57B64B602FC496218C3F /* PreviewTransitionViewController.swift */; };
-		775542D5BE6B24392EF7FCA2CE7C5E97 /* TwitterPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA413D662E10B6589D3A204C2A1A0615 /* TwitterPagerTabStripViewController.swift */; };
-		7759D7A510B77D3EAABFAE095F6E1DCE /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3539F26A71DD0080D572ACD17D4A409A /* zip@2x.png */; };
-		79FA1CC5F06F15BB7D5C97FFA68999D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		7A9B1050C7076E50098FE981A7209035 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9CC673756A92A9F745D7255D2255E /* Media.swift */; };
-		7C9A69AA851BCF1B95C919C4D6B28955 /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC48DCBB9A5F5B4C9C299893B93ABFF9 /* WebviewPreviewViewContoller.xib */; };
-		8192316D2AB5E5AC7E60D4DC3FF0E3F1 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E1802BE4F1615D4724BC1A5D5930B /* AuthState.swift */; };
-		8445A2A92C57F2EFE9D5943CA2811FF1 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25248EC90FF56AAC95899AB6ADBA6952 /* FileParser.swift */; };
-		85F1F61E88063BB7A2BB8E70E6E1A4CA /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		879783884B75E5A4611C1A8D1B3AAF44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		88AD1A35AE18C3983F7CBB826CA7B246 /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77DC75DC5210D9146DA61FE2E8E3F7 /* FBFile.swift */; };
-		911CC04F55219F3CB8EE70FA8F7347E7 /* ButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B682E2750DB9C38444BAA64EEC342 /* ButtonBarView.swift */; };
-		9A5BF303ACEB39A7720513D5928D5A53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		A06E7BE7BC6A89C4E6906CB50AB4DA68 /* Mocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B0F0D4FBC468B3AFEB1E6AABD2506 /* Mocker.swift */; };
-		A11856A9061239E1483498A551DC117C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BA931F5FC80BE565C1290686E85B3 /* WebKit.framework */; };
-		A26276F206FFA15CF0A57BE54526140C /* XLPagerTabStrip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5D3CAB625528574CF40C758E9CB24F /* XLPagerTabStrip-dummy.m */; };
-		A75283431AC3FF78D619F192AA21739B /* FileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C1C995A4CCC8F84ED035B186DBFF29 /* FileBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7AEEE825346429BB80914A7D2365A51 /* PagerTabStripBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE06F9350818B6FD4755CD01ED435E4 /* PagerTabStripBehaviour.swift */; };
-		A8E57E4DB6A31EE18475FE79D070D7FC /* documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D73E8C677A061C53426CBFC4341D8840 /* documents@2x.png */; };
-		B35ED9D9DC5748427E30E6AAFA5897E7 /* FileBrowser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE55F174407F71237EE8E18001112AC7 /* FileBrowser-dummy.m */; };
-		B782167EE22A36FAEDBDB9EDF943AFEF /* PryvApiSwiftKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F49FD9D0F7C6DEF396924E6E316E20E /* PryvApiSwiftKit.swift */; };
-		BCBEC9A979159FC175BDB4753C835FA9 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */; };
-		C3905037CE8620D38EF4DA0AB90C106C /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A272F90BB45C297FCFCB21B558710BC /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4DC6C132AEF3E02BDD5ABC89333233B3 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD42A0C71CA11F13F1EBD30B84BB2ACB /* KeychainSwift.swift */; };
+		4EFAEEB95B51C858A229A157804E4BC0 /* PryvServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C01149FEBD3EC404B6A6BAF00E71B4A /* PryvServiceInfo.swift */; };
+		50C48CA93A7F8AF887DCF47C9A95DB3A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C1287FD1F2C2186BD540EBF3105909 /* Connection.swift */; };
+		5215DCBE6710AD5AA86A0A70744BA3BB /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 740108A6A3B414AAEED5B4EB7072A22C /* file@2x.png */; };
+		5866D559DB2BCFCB1083E844B3848326 /* FileListPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439320DAC2BE2A3DEDCC62516E11B2D /* FileListPreview.swift */; };
+		5984D9DC8F924C72F6018A3C3FE8B82A /* pdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDA86D6C70869CBD661BF8BFFD053FE2 /* pdf@2x.png */; };
+		59EB715BC99B619BCDD230721E2A1B55 /* WebviewPreviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02301F7A40BCB9EBFB4D6C5A2CBBDC4 /* WebviewPreviewViewContoller.swift */; };
+		5CB7558219F71F41DC2BE90FB50CCE3F /* image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C8DCB9A2C0B91B2AD7C77C416E0638 /* image@2x.png */; };
+		74DDBF47539EB98680E83BD95227DD8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		7559DE245E16704C9A80CAB12C795CD9 /* PreviewTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFC87F973D8B929697511F1E79DA37 /* PreviewTransitionViewController.swift */; };
+		7759D7A510B77D3EAABFAE095F6E1DCE /* zip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FA51F7000BFEA697EFC16CAEA112D30 /* zip@2x.png */; };
+		7A9B1050C7076E50098FE981A7209035 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DF396C920BC49420E9A6798794C0B /* Media.swift */; };
+		7C9A69AA851BCF1B95C919C4D6B28955 /* WebviewPreviewViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3BECE80F97FE4F7D81CCA1EF054E /* WebviewPreviewViewContoller.xib */; };
+		8192316D2AB5E5AC7E60D4DC3FF0E3F1 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3954471E98807931C2CAA18A597C0E /* AuthState.swift */; };
+		8445A2A92C57F2EFE9D5943CA2811FF1 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82249BD6990A898F2CC44D461EBC4938 /* FileParser.swift */; };
+		879783884B75E5A4611C1A8D1B3AAF44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		88AD1A35AE18C3983F7CBB826CA7B246 /* FBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31E55BD47DD7CB01211A1C54913653 /* FBFile.swift */; };
+		9A5BF303ACEB39A7720513D5928D5A53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EA03C7B037196ED3C069F105533794 /* Foundation.framework */; };
+		A06E7BE7BC6A89C4E6906CB50AB4DA68 /* Mocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D507D91C9BE5A7857AC0B25644AE5 /* Mocker.swift */; };
+		A11856A9061239E1483498A551DC117C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */; };
+		A75283431AC3FF78D619F192AA21739B /* FileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DC83B88ACE5FC515FA47B833DE3D12C /* FileBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8E57E4DB6A31EE18475FE79D070D7FC /* documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADD86DC0D675D154730E27AB459D719 /* documents@2x.png */; };
+		B35ED9D9DC5748427E30E6AAFA5897E7 /* FileBrowser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAAEBECFC7F49672117FFE278AF5599 /* FileBrowser-dummy.m */; };
+		B782167EE22A36FAEDBDB9EDF943AFEF /* PryvApiSwiftKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BBE9E1B19EE706AE1D8C1A3D33F4D /* PryvApiSwiftKit.swift */; };
+		C3905037CE8620D38EF4DA0AB90C106C /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 004A0205419D074B017567897FE9AE05 /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C563EAF140957E5DB9BE08B467AF7EDB /* Pods-PryvApiSwiftKitExampleTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF09DA2685D9571209FD98DF7E655F0 /* Pods-PryvApiSwiftKitExampleTests-dummy.m */; };
-		C7915A24356037F0D9E71B5784D65C68 /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E48132A99EECE8465E17253CCFACC83 /* FileBrowser.xib */; };
-		CA4D6850D16D95809EE6283CC72260FC /* FileBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9026BCA9DD9E847AB60D3F7831C5577C /* FileBrowser.swift */; };
-		CA9B8B0F6ED469BF4B99ABAD080D3E43 /* PryvApiSwiftKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 964BD31EB792A027B4A0B99C881C371B /* PryvApiSwiftKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBBDA101D0A80A7AE5C1172953D6164F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558376AAA3782D3AFA5A3B4298785F17 /* Service.swift */; };
-		CD9264608BD3A7327989F7340AC56CCB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
-		CFBC2A313C1E0794B7B7E321AFA34AD6 /* FileBrowser-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF577AE3D7BC6EA2CA4FA29111B5EEB /* FileBrowser-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D1FEC1A52914D75E022A7FFFEA37BC3F /* PreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D3C1E1D29A7944813CD58362A888 /* PreviewManager.swift */; };
-		E07AC101B32B7CE657A30EF5B236A1B8 /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C48A5FAAA85D4EEBF15052B02DD6E3 /* Mocker.framework */; };
-		E554C1894F7994C45693A532CC18769A /* ButtonBarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E26D2BB113344996271AA28493A16E /* ButtonBarPagerTabStripViewController.swift */; };
-		E74923A11C921F5FE54DDC23089017DB /* PryvApiSwiftKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B71B8E1902F63858F43AEF1A79F11565 /* PryvApiSwiftKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EB286E2F52AE057B8C53D0DE5B165B9C /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58002C1323400F0F8416F4598DEF84 /* Mock.swift */; };
-		F1A3B28A72F6AA7BA1987CAF0316ADC0 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED2E02D6E23355D428A5D0F036154EF /* FileListViewController.swift */; };
-		F2E3366710556B8D518FF6F12259CFA5 /* PagerTabStripError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0CA8207D6A79CFFDB65A2C6EA768F1 /* PagerTabStripError.swift */; };
-		F3C7AE52EA1046C4002D23E34F065421 /* FileListSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BEE54739AF07B713B746CB7DEB70CA /* FileListSearch.swift */; };
-		F74A51C82DB485E1D24EC23630AB16B6 /* MockingURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FBC48B93F08B221A6A79E8EA6E876F /* MockingURLProtocol.swift */; };
-		F805832DAAFB6DFA063DCE467BC59B9F /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9A3FAEE84669DC23AA0F73BC7B228E /* FXPageControl.m */; };
-		FB7C01AB26481D05ABFF2C7F60D7D67C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */; };
+		C7915A24356037F0D9E71B5784D65C68 /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637D462EE821814736E192D046A73431 /* FileBrowser.xib */; };
+		CA4D6850D16D95809EE6283CC72260FC /* FileBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B2AAB736E9E3C37D24617A6162DEF /* FileBrowser.swift */; };
+		CA9B8B0F6ED469BF4B99ABAD080D3E43 /* PryvApiSwiftKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DF10D960A4ECBE26080121F9ED12B1C /* PryvApiSwiftKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CBBDA101D0A80A7AE5C1172953D6164F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB017DD5700FE5D53509CE0ACF39FF0D /* Service.swift */; };
+		CFBC2A313C1E0794B7B7E321AFA34AD6 /* FileBrowser-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA2B67C33677229A5D537230200E103 /* FileBrowser-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1FEC1A52914D75E022A7FFFEA37BC3F /* PreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C644351639A0A444A8EAA02ACCFB5D9 /* PreviewManager.swift */; };
+		E07AC101B32B7CE657A30EF5B236A1B8 /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */; };
+		E74923A11C921F5FE54DDC23089017DB /* PryvApiSwiftKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2AEA2C9AD79B4614BB960E096419D5 /* PryvApiSwiftKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB286E2F52AE057B8C53D0DE5B165B9C /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CBD8C6AD01EFBD379C216ECE9B2650 /* Mock.swift */; };
+		F1A3B28A72F6AA7BA1987CAF0316ADC0 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99DB9FF2F6B68E7E63E6E8B3036D048 /* FileListViewController.swift */; };
+		F3C7AE52EA1046C4002D23E34F065421 /* FileListSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAAE6BFE875916E2AB711C4418B36BD /* FileListSearch.swift */; };
+		F74A51C82DB485E1D24EC23630AB16B6 /* MockingURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A649716432EFE2E9A2E94BC7C6A7C8 /* MockingURLProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		36F4B3CE18A915B51EBFFDF59A84539D /* PBXContainerItemProxy */ = {
+		19FB20CEBAA01650AE93EEDAEB41FBED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
 			remoteInfo = PryvApiSwiftKit;
 		};
-		3BFBC0D255018173021831359FD01F9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
-			remoteInfo = FileBrowser;
-		};
-		4816C5F0DB2F2DFCF17C8BD6D06F30E2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
-			remoteInfo = Mocker;
-		};
-		4935F07A2C3102388211CA0EB69469E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
-			remoteInfo = PryvApiSwiftKit;
-		};
-		4C3F3BA7CEE85A2964C44DCE4B09A83E /* PBXContainerItemProxy */ = {
+		1E1A242182E6CF67B4C042B2A2F37A35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 07E54A78BCF82272E99319D7F7F5E8C1;
 			remoteInfo = KeychainSwift;
 		};
-		4DA0B4F1CCFF0AF022A5D7CBBB11BA3B /* PBXContainerItemProxy */ = {
+		3BD99A8FEAB3F36C5DE5FC3515E4FF96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC5C3A7662FFA04D04D29F4657D032CE;
-			remoteInfo = XLPagerTabStrip;
+			remoteGlobalIDString = 07E54A78BCF82272E99319D7F7F5E8C1;
+			remoteInfo = KeychainSwift;
 		};
-		5A32BA6A74048523A86C20124E889A7E /* PBXContainerItemProxy */ = {
+		475BAEBA4AC4DC28630C74C708F8D5D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
-			remoteInfo = FileBrowser;
-		};
-		5B8329DD02E7A5BBD4BB45C327ED895A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EBF90A3A56D4C5830C212D000AB67BC1;
-			remoteInfo = "XLPagerTabStrip-XLPagerTabStrip";
-		};
-		64269687B8FEBD4C3E53E7695BB24923 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
-			remoteInfo = Mocker;
+			remoteGlobalIDString = B57D756A6D634D05A2BF53D961A7CFBC;
+			remoteInfo = PryvApiSwiftKit;
 		};
 		6E0D97448F08E14FB42D949BB714811E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -160,12 +104,26 @@
 			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
 			remoteInfo = Mocker;
 		};
-		6E85CF74B3BBEA27ACF74186E2DCD593 /* PBXContainerItemProxy */ = {
+		6EB7D4FC81574EEB4EA1ABA2C392B52A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC5C3A7662FFA04D04D29F4657D032CE;
-			remoteInfo = XLPagerTabStrip;
+			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
+			remoteInfo = FileBrowser;
+		};
+		75C6D37D72F3AF163E09ADF8D3066C61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2ABD7286FA80127BB84D1DB98B812CD5;
+			remoteInfo = FileBrowser;
+		};
+		776F9F08A7084D6ECD46DDAF7FA5BEF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
+			remoteInfo = Mocker;
 		};
 		8E7E3883EFF84AAA3C3CEA1D3D426C6F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -174,149 +132,116 @@
 			remoteGlobalIDString = C5D432A2AF89A0B0A4B79A5E43D31728;
 			remoteInfo = "Pods-PryvApiSwiftKitExample";
 		};
-		FEAA3FD0756274EE8AC07CA93D48CC4A /* PBXContainerItemProxy */ = {
+		BA82C97259851D581CD94F7522E8AB7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 07E54A78BCF82272E99319D7F7F5E8C1;
-			remoteInfo = KeychainSwift;
+			remoteGlobalIDString = 04AFC708359363290935C681A1CE226D;
+			remoteInfo = Mocker;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05EA8DE1CE7B607DDFF44E493C54CCBB /* XLPagerTabStrip-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "XLPagerTabStrip-umbrella.h"; sourceTree = "<group>"; };
+		004A0205419D074B017567897FE9AE05 /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		08700F00E4B34ECF9A04232739560F87 /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		0AB000C4F435BB86C79D3ADC5BAD1C35 /* FXPageControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FXPageControl.h; path = Sources/FXPageControl.h; sourceTree = "<group>"; };
+		08AEAEB403D0BF3D5066DAD2EC2A142F /* Mocker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Mocker-dummy.m"; sourceTree = "<group>"; };
 		0BF09DA2685D9571209FD98DF7E655F0 /* Pods-PryvApiSwiftKitExampleTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExampleTests-dummy.m"; sourceTree = "<group>"; };
 		0CFA0ECD2E5ED89C9E3D4A52437D00C8 /* Pods-PryvApiSwiftKitExampleTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExampleTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		0D0CA8207D6A79CFFDB65A2C6EA768F1 /* PagerTabStripError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PagerTabStripError.swift; path = Sources/PagerTabStripError.swift; sourceTree = "<group>"; };
-		0E6B0F0D4FBC468B3AFEB1E6AABD2506 /* Mocker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mocker.swift; path = Sources/Mocker.swift; sourceTree = "<group>"; };
+		0DE9D310C8C2DBF0DFD9424A9ECFFA2B /* KeychainSwiftAccessOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwiftAccessOptions.swift; path = Sources/KeychainSwiftAccessOptions.swift; sourceTree = "<group>"; };
 		0EEA2AFC7E3F4002A1065DFE473EBB00 /* Pods-PryvApiSwiftKitExampleTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExampleTests-Info.plist"; sourceTree = "<group>"; };
 		128E413C3A8F81B4AF124CDFE6F2B86B /* Pods-PryvApiSwiftKitExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-Info.plist"; sourceTree = "<group>"; };
-		1400A89EBED4ECC3983CE3B1A44E4A86 /* ResourceBundle-XLPagerTabStrip-XLPagerTabStrip-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-XLPagerTabStrip-XLPagerTabStrip-Info.plist"; sourceTree = "<group>"; };
-		18C48A5FAAA85D4EEBF15052B02DD6E3 /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13C1287FD1F2C2186BD540EBF3105909 /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = PryvApiSwiftKit/Classes/Connection.swift; sourceTree = "<group>"; };
+		15EA03C7B037196ED3C069F105533794 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		17CBD8C6AD01EFBD379C216ECE9B2650 /* Mock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = Sources/Mock.swift; sourceTree = "<group>"; };
 		1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Mocker.framework; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E4803662718E0A915700DC7DFF221D5 /* KeychainSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KeychainSwift-Info.plist"; sourceTree = "<group>"; };
-		1F3E0D19BDF48E392A8E5F570F94CC4D /* FileListPreview.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListPreview.swift; path = FileBrowser/FileListPreview.swift; sourceTree = "<group>"; };
+		20A2BD5AC584D8E8680C983F2E6533B3 /* PryvApiSwiftKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PryvApiSwiftKit.modulemap; sourceTree = "<group>"; };
 		2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PryvApiSwiftKit.framework; path = PryvApiSwiftKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		21562DD234625C8D0647FC561CD7547E /* ButtonCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ButtonCell.xib; path = Sources/ButtonCell.xib; sourceTree = "<group>"; };
-		25248EC90FF56AAC95899AB6ADBA6952 /* FileParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileParser.swift; path = FileBrowser/FileParser.swift; sourceTree = "<group>"; };
-		26FBC48B93F08B221A6A79E8EA6E876F /* MockingURLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockingURLProtocol.swift; path = Sources/MockingURLProtocol.swift; sourceTree = "<group>"; };
-		27D0C6D94C8888B5B847325360B02A4C /* Mocker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-prefix.pch"; sourceTree = "<group>"; };
-		29743625DE0534B62ACF9C1190105BD4 /* Mocker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-umbrella.h"; sourceTree = "<group>"; };
-		2A0B682E2750DB9C38444BAA64EEC342 /* ButtonBarView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ButtonBarView.swift; path = Sources/ButtonBarView.swift; sourceTree = "<group>"; };
-		2B35C1E4B07ED4CE67CBF5868321D434 /* PryvApiSwiftKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PryvApiSwiftKit.modulemap; sourceTree = "<group>"; };
+		2A02966BFF70A24241476A022BBD7222 /* FileBrowser-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FileBrowser-Info.plist"; sourceTree = "<group>"; };
 		2B441E2CC4DE964DF8FEA574F3A0CB10 /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C495E2DF03264A96FF703B625C05D21 /* ButtonBarViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ButtonBarViewCell.swift; path = Sources/ButtonBarViewCell.swift; sourceTree = "<group>"; };
-		2F39006536CE261EC0E316E36CC4C7A2 /* KeychainSwiftAccessOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwiftAccessOptions.swift; path = Sources/KeychainSwiftAccessOptions.swift; sourceTree = "<group>"; };
-		2F77DC75DC5210D9146DA61FE2E8E3F7 /* FBFile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FBFile.swift; path = FileBrowser/FBFile.swift; sourceTree = "<group>"; };
-		315650619DE7487F281737C26CD0F272 /* XLPagerTabStrip-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "XLPagerTabStrip-prefix.pch"; sourceTree = "<group>"; };
-		32EF6BC71C3E6E84AB9C8E751A23D353 /* BaseButtonBarPagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseButtonBarPagerTabStripViewController.swift; path = Sources/BaseButtonBarPagerTabStripViewController.swift; sourceTree = "<group>"; };
-		3539F26A71DD0080D572ACD17D4A409A /* zip@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "zip@2x.png"; path = "FileBrowser/Resources/zip@2x.png"; sourceTree = "<group>"; };
-		35B602FFA0557784D33815A3A43FBA09 /* FileBrowser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-prefix.pch"; sourceTree = "<group>"; };
-		36B76DBE34406FBFA67A58B0E982AB0F /* FileBrowser-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FileBrowser-Info.plist"; sourceTree = "<group>"; };
+		2DF10D960A4ECBE26080121F9ED12B1C /* PryvApiSwiftKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-umbrella.h"; sourceTree = "<group>"; };
+		2E2AEA2C9AD79B4614BB960E096419D5 /* PryvApiSwiftKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PryvApiSwiftKit.h; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.h; sourceTree = "<group>"; };
+		2FA51F7000BFEA697EFC16CAEA112D30 /* zip@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "zip@2x.png"; path = "FileBrowser/Resources/zip@2x.png"; sourceTree = "<group>"; };
 		3928AC5B5CD2AFD99B934C921FB1B0A0 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
-		3A272F90BB45C297FCFCB21B558710BC /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		3B597E82E1313A7717C5227D6231F38E /* Pods-PryvApiSwiftKitExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-acknowledgements.plist"; sourceTree = "<group>"; };
-		3CC0D8C86009A6CF4153318C14E61C5F /* Mocker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Mocker.modulemap; sourceTree = "<group>"; };
-		3F49FD9D0F7C6DEF396924E6E316E20E /* PryvApiSwiftKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvApiSwiftKit.swift; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.swift; sourceTree = "<group>"; };
-		40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XLPagerTabStrip.xcconfig; sourceTree = "<group>"; };
-		44A9FDE323A7966FC42AC3619930D3E8 /* SwipeDirection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwipeDirection.swift; path = Sources/SwipeDirection.swift; sourceTree = "<group>"; };
-		487F463CFD422E21C6D93DEB1E246AB5 /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebviewPreviewViewContoller.swift; path = FileBrowser/WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
+		3C31E55BD47DD7CB01211A1C54913653 /* FBFile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FBFile.swift; path = FileBrowser/FBFile.swift; sourceTree = "<group>"; };
+		3DD6F0222655819203A01B8B494F9040 /* KeychainSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-prefix.pch"; sourceTree = "<group>"; };
+		48C8DCB9A2C0B91B2AD7C77C416E0638 /* image@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "image@2x.png"; path = "FileBrowser/Resources/image@2x.png"; sourceTree = "<group>"; };
 		49114DDEDF6DD9F1B68D0C6189D47B6E /* Pods-PryvApiSwiftKitExampleTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExampleTests.modulemap"; sourceTree = "<group>"; };
 		4927AAB24AA6E54FE4F4D0480A5CC496 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4AF577AE3D7BC6EA2CA4FA29111B5EEB /* FileBrowser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-umbrella.h"; sourceTree = "<group>"; };
-		4CE06F9350818B6FD4755CD01ED435E4 /* PagerTabStripBehaviour.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PagerTabStripBehaviour.swift; path = Sources/PagerTabStripBehaviour.swift; sourceTree = "<group>"; };
-		4D111CE37831580D18C53C2CD4898DE1 /* PagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PagerTabStripViewController.swift; path = Sources/PagerTabStripViewController.swift; sourceTree = "<group>"; };
-		4E48132A99EECE8465E17253CCFACC83 /* FileBrowser.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FileBrowser.xib; path = FileBrowser/Resources/FileBrowser.xib; sourceTree = "<group>"; };
+		4ADD86DC0D675D154730E27AB459D719 /* documents@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "documents@2x.png"; path = "FileBrowser/Resources/documents@2x.png"; sourceTree = "<group>"; };
 		50BC25640672AE01DAE6DDED934A6CFB /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		520E1802BE4F1615D4724BC1A5D5930B /* AuthState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthState.swift; path = PryvApiSwiftKit/Classes/AuthState.swift; sourceTree = "<group>"; };
-		54CC9ADCA50A050065CCA05AE44D2E9F /* Mocker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Mocker-Info.plist"; sourceTree = "<group>"; };
-		558376AAA3782D3AFA5A3B4298785F17 /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = PryvApiSwiftKit/Classes/Service.swift; sourceTree = "<group>"; };
+		5359496B3ED22B193C63DCE78668E9DD /* PryvApiSwiftKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PryvApiSwiftKit-Info.plist"; sourceTree = "<group>"; };
 		59F6F2B4589CCE6A8354A1F11845361A /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh"; sourceTree = "<group>"; };
 		5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FileBrowser.framework; path = FileBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AA46CDD49A75539146D867418A8F0FA /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
-		5B4137F45B2CA31DD953C0A6C803C2D5 /* Mocker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Mocker-dummy.m"; sourceTree = "<group>"; };
-		5D58062F89702B9D88F562BA47C31CCB /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = PryvApiSwiftKit/Classes/Connection.swift; sourceTree = "<group>"; };
-		6501CEC10DE8B907EA258E07474DF7F9 /* PryvApiSwiftKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-prefix.pch"; sourceTree = "<group>"; };
-		659079677E2A98A773CAA5DD2B3D575D /* PryvServiceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvServiceInfo.swift; path = PryvApiSwiftKit/Classes/PryvServiceInfo.swift; sourceTree = "<group>"; };
-		66FE4EA56D0617B1DE852335C35C4B16 /* XLPagerTabStrip.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = XLPagerTabStrip.modulemap; sourceTree = "<group>"; };
-		67F8768B23AFEAB00759CD729D3D66CB /* Mocker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Mocker.xcconfig; sourceTree = "<group>"; };
-		686B27BDD0BE9893429B4476A2DB3360 /* PryvApiSwiftKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PryvApiSwiftKit-dummy.m"; sourceTree = "<group>"; };
+		5C644351639A0A444A8EAA02ACCFB5D9 /* PreviewManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewManager.swift; path = FileBrowser/PreviewManager.swift; sourceTree = "<group>"; };
+		5DC83B88ACE5FC515FA47B833DE3D12C /* FileBrowser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FileBrowser.h; path = FileBrowser/FileBrowser.h; sourceTree = "<group>"; };
+		62ADC79FEBC14484B04513B9A4B83816 /* Mocker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-umbrella.h"; sourceTree = "<group>"; };
+		637D462EE821814736E192D046A73431 /* FileBrowser.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FileBrowser.xib; path = FileBrowser/Resources/FileBrowser.xib; sourceTree = "<group>"; };
+		67A9CA52E96D02A2284A46D71CE00789 /* PryvApiSwiftKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-prefix.pch"; sourceTree = "<group>"; };
+		69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
+		6BC0F9FF14EED942910442AB4D0527BB /* FileBrowser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-prefix.pch"; sourceTree = "<group>"; };
+		6BD3877495F5A14DC9761D12C852FE15 /* KeychainSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KeychainSwift.xcconfig; sourceTree = "<group>"; };
 		6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExample.framework; path = "Pods-PryvApiSwiftKitExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3EF2C9EFCBB91EBFF6748632C3F4E5 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist"; sourceTree = "<group>"; };
-		6E9A3FAEE84669DC23AA0F73BC7B228E /* FXPageControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FXPageControl.m; path = Sources/FXPageControl.m; sourceTree = "<group>"; };
-		6EFFAC35B3D6DF018C7FD86C041D6A6D /* XLPagerTabStrip-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "XLPagerTabStrip-Info.plist"; sourceTree = "<group>"; };
 		6F41E9D6726513640C679A1FBE8F0BB8 /* Pods-PryvApiSwiftKitExampleTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExampleTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		72B7DA8690C2A3337B1CD3FFA56BB77F /* PryvApiSwiftKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PryvApiSwiftKit-Info.plist"; sourceTree = "<group>"; };
+		740108A6A3B414AAEED5B4EB7072A22C /* file@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "file@2x.png"; path = "FileBrowser/Resources/file@2x.png"; sourceTree = "<group>"; };
 		778DCADB1AFE9E7D54DF56E0F1FB2B31 /* Pods-PryvApiSwiftKitExampleTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExampleTests-umbrella.h"; sourceTree = "<group>"; };
-		78BA4BB1A553AB4136F879792D99C87D /* XLPagerTabStrip.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = XLPagerTabStrip.bundle; path = "XLPagerTabStrip-XLPagerTabStrip.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AD9CC673756A92A9F745D7255D2255E /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = PryvApiSwiftKit/Classes/Media.swift; sourceTree = "<group>"; };
-		7CAD86388BB35C7AA3A09C4287640A09 /* KeychainSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwift.swift; path = Sources/KeychainSwift.swift; sourceTree = "<group>"; };
-		7D557EB6C77FBB056AD7A0FB0C203920 /* FileBrowser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileBrowser.xcconfig; sourceTree = "<group>"; };
+		77B7491A78401BB79D1369BC7526C3F0 /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
+		7E6953A4AA7A72057BF22327321C64FA /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = PreviewTransitionViewController.xib; path = FileBrowser/Resources/PreviewTransitionViewController.xib; sourceTree = "<group>"; };
 		7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FBF37E46A0B366BECCEDAE16F7323AC /* KeychainSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KeychainSwift.modulemap; sourceTree = "<group>"; };
-		80A56AD093E259FDBDE0DE1835DC36E0 /* FileListTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListTableView.swift; path = FileBrowser/FileListTableView.swift; sourceTree = "<group>"; };
-		838ABFB64CAB9011701EE2587B469DBE /* KeychainSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KeychainSwift.xcconfig; sourceTree = "<group>"; };
-		87318FE1540B81CAAA9AB207DB3667E7 /* SegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegmentedPagerTabStripViewController.swift; path = Sources/SegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
-		880B9BDE8D9ADEEC002F28C957BBA1CE /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
-		882109CE68AD24B11854E6EF7C588FD9 /* PreviewTransitionViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = PreviewTransitionViewController.xib; path = FileBrowser/Resources/PreviewTransitionViewController.xib; sourceTree = "<group>"; };
-		9026BCA9DD9E847AB60D3F7831C5577C /* FileBrowser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileBrowser.swift; path = FileBrowser/FileBrowser.swift; sourceTree = "<group>"; };
-		93C1C995A4CCC8F84ED035B186DBFF29 /* FileBrowser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FileBrowser.h; path = FileBrowser/FileBrowser.h; sourceTree = "<group>"; };
-		964BD31EB792A027B4A0B99C881C371B /* PryvApiSwiftKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PryvApiSwiftKit-umbrella.h"; sourceTree = "<group>"; };
-		9958E850F4257A005970B20CFBC953E7 /* FileBrowser.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileBrowser.modulemap; sourceTree = "<group>"; };
+		82249BD6990A898F2CC44D461EBC4938 /* FileParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileParser.swift; path = FileBrowser/FileParser.swift; sourceTree = "<group>"; };
+		842DF396C920BC49420E9A6798794C0B /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = PryvApiSwiftKit/Classes/Media.swift; sourceTree = "<group>"; };
+		8524C6A4D437E9FF51F1CD377747134D /* folder@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "folder@2x.png"; path = "FileBrowser/Resources/folder@2x.png"; sourceTree = "<group>"; };
+		93A7777695E160C667EFFD38AE46642E /* FileBrowser.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileBrowser.modulemap; sourceTree = "<group>"; };
+		969B2AAB736E9E3C37D24617A6162DEF /* FileBrowser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileBrowser.swift; path = FileBrowser/FileBrowser.swift; sourceTree = "<group>"; };
+		96AE3BECE80F97FE4F7D81CCA1EF054E /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = WebviewPreviewViewContoller.xib; path = FileBrowser/Resources/WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
+		989D507D91C9BE5A7857AC0B25644AE5 /* Mocker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mocker.swift; path = Sources/Mocker.swift; sourceTree = "<group>"; };
 		9B59FB563A5745DD41407078BBD221A1 /* Pods-PryvApiSwiftKitExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PryvApiSwiftKitExample-frameworks.sh"; sourceTree = "<group>"; };
+		9C01149FEBD3EC404B6A6BAF00E71B4A /* PryvServiceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvServiceInfo.swift; path = PryvApiSwiftKit/Classes/PryvServiceInfo.swift; sourceTree = "<group>"; };
+		9D340259AE4FBACAEF84AD1FF73CDB57 /* PryvApiSwiftKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PryvApiSwiftKit-dummy.m"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E0FD012ADC3C7179C684035672383E5 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KeychainSwift.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A281CDE1EEEE3305BEBF4E807F6B887E /* file@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "file@2x.png"; path = "FileBrowser/Resources/file@2x.png"; sourceTree = "<group>"; };
+		A18B316799A09818E994DE6851BF7864 /* KeychainSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KeychainSwift.modulemap; sourceTree = "<group>"; };
+		A439320DAC2BE2A3DEDCC62516E11B2D /* FileListPreview.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListPreview.swift; path = FileBrowser/FileListPreview.swift; sourceTree = "<group>"; };
 		A450FF2221758F229BE64698AD53F5D3 /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
-		A5C8F1AAC9472F86E952290CA93F1FB3 /* BarView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarView.swift; path = Sources/BarView.swift; sourceTree = "<group>"; };
-		AB27D3C1E1D29A7944813CD58362A888 /* PreviewManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewManager.swift; path = FileBrowser/PreviewManager.swift; sourceTree = "<group>"; };
-		AC48DCBB9A5F5B4C9C299893B93ABFF9 /* WebviewPreviewViewContoller.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = WebviewPreviewViewContoller.xib; path = FileBrowser/Resources/WebviewPreviewViewContoller.xib; sourceTree = "<group>"; };
-		B0180FE23EDC57B64B602FC496218C3F /* PreviewTransitionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewTransitionViewController.swift; path = FileBrowser/PreviewTransitionViewController.swift; sourceTree = "<group>"; };
+		A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAA2B67C33677229A5D537230200E103 /* FileBrowser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileBrowser-umbrella.h"; sourceTree = "<group>"; };
+		AB017DD5700FE5D53509CE0ACF39FF0D /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = PryvApiSwiftKit/Classes/Service.swift; sourceTree = "<group>"; };
+		ABCFC87F973D8B929697511F1E79DA37 /* PreviewTransitionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PreviewTransitionViewController.swift; path = FileBrowser/PreviewTransitionViewController.swift; sourceTree = "<group>"; };
+		AD42A0C71CA11F13F1EBD30B84BB2ACB /* KeychainSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwift.swift; path = Sources/KeychainSwift.swift; sourceTree = "<group>"; };
+		ADE5EC786C63C150279004D53038CE4E /* Mocker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Mocker.xcconfig; sourceTree = "<group>"; };
 		B6821ADCF247E84E45DF142BF54BB756 /* Pods-PryvApiSwiftKitExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExample-umbrella.h"; sourceTree = "<group>"; };
-		B71B8E1902F63858F43AEF1A79F11565 /* PryvApiSwiftKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PryvApiSwiftKit.h; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.h; sourceTree = "<group>"; };
+		B99DB9FF2F6B68E7E63E6E8B3036D048 /* FileListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListViewController.swift; path = FileBrowser/FileListViewController.swift; sourceTree = "<group>"; };
+		BA009742096C53365549490A63E1D274 /* Mocker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Mocker.modulemap; sourceTree = "<group>"; };
+		BAAAEBECFC7F49672117FFE278AF5599 /* FileBrowser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FileBrowser-dummy.m"; sourceTree = "<group>"; };
+		BB7D21452890958C91C614ED12916526 /* PryvApiSwiftKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PryvApiSwiftKit.xcconfig; sourceTree = "<group>"; };
 		BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PryvApiSwiftKitExampleTests.framework; path = "Pods-PryvApiSwiftKitExampleTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		C6C6C76E95FE7F13F7AA297FC10C9E98 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = PryvApiSwiftKit/Classes/Utils.swift; sourceTree = "<group>"; };
-		C944F80188B538068A0AB5776873D9E5 /* IndicatorInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IndicatorInfo.swift; path = Sources/IndicatorInfo.swift; sourceTree = "<group>"; };
-		CB58002C1323400F0F8416F4598DEF84 /* Mock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = Sources/Mock.swift; sourceTree = "<group>"; };
+		BC5E4A2C28E74A8ED62D28BE01E99592 /* Data+append.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+append.swift"; path = "PryvApiSwiftKit/Classes/Data+append.swift"; sourceTree = "<group>"; };
+		BEAAE6BFE875916E2AB711C4418B36BD /* FileListSearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListSearch.swift; path = FileBrowser/FileListSearch.swift; sourceTree = "<group>"; };
+		C02301F7A40BCB9EBFB4D6C5A2CBBDC4 /* WebviewPreviewViewContoller.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebviewPreviewViewContoller.swift; path = FileBrowser/WebviewPreviewViewContoller.swift; sourceTree = "<group>"; };
+		C50BBE9E1B19EE706AE1D8C1A3D33F4D /* PryvApiSwiftKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PryvApiSwiftKit.swift; path = PryvApiSwiftKit/Classes/PryvApiSwiftKit.swift; sourceTree = "<group>"; };
+		C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		CFE40B5BCAF61A98D8A106064C77B5CC /* Pods-PryvApiSwiftKitExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExample-dummy.m"; sourceTree = "<group>"; };
 		D0C8D4B47EEB6A3A7A4B3DA3D5757011 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap"; sourceTree = "<group>"; };
-		D1C123E410E425430DB7F6A5B631FCBF /* image@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "image@2x.png"; path = "FileBrowser/Resources/image@2x.png"; sourceTree = "<group>"; };
-		D4BEE54739AF07B713B746CB7DEB70CA /* FileListSearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListSearch.swift; path = FileBrowser/FileListSearch.swift; sourceTree = "<group>"; };
-		D52A5994556F9792B8E7C156572C6903 /* PryvApiSwiftKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PryvApiSwiftKit.xcconfig; sourceTree = "<group>"; };
-		D554ABE68D728BF854C2B5B3C5585E43 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = Sources/TegKeychainConstants.swift; sourceTree = "<group>"; };
+		D4A649716432EFE2E9A2E94BC7C6A7C8 /* MockingURLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockingURLProtocol.swift; path = Sources/MockingURLProtocol.swift; sourceTree = "<group>"; };
+		D4B589A83B643F3A697ED81C703F875E /* FileListTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListTableView.swift; path = FileBrowser/FileListTableView.swift; sourceTree = "<group>"; };
 		D5EDF92344659B4BECB281DBBEB6A2A8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D62C822210F3DFFDEA68C80759AE348E /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h"; sourceTree = "<group>"; };
-		D73E8C677A061C53426CBFC4341D8840 /* documents@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "documents@2x.png"; path = "FileBrowser/Resources/documents@2x.png"; sourceTree = "<group>"; };
-		DA9BA931F5FC80BE565C1290686E85B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		DA3954471E98807931C2CAA18A597C0E /* AuthState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthState.swift; path = PryvApiSwiftKit/Classes/AuthState.swift; sourceTree = "<group>"; };
 		DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
-		DED2E02D6E23355D428A5D0F036154EF /* FileListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileListViewController.swift; path = FileBrowser/FileListViewController.swift; sourceTree = "<group>"; };
-		E2E26D2BB113344996271AA28493A16E /* ButtonBarPagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ButtonBarPagerTabStripViewController.swift; path = Sources/ButtonBarPagerTabStripViewController.swift; sourceTree = "<group>"; };
-		E52BD30CC7DE787A1C950F66C1392F7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		ED5D3CAB625528574CF40C758E9CB24F /* XLPagerTabStrip-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "XLPagerTabStrip-dummy.m"; sourceTree = "<group>"; };
+		E579C84C5BF1BF4A7EE98117C0DAB6CD /* Mocker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Mocker-prefix.pch"; sourceTree = "<group>"; };
+		EBACD37C298BA56C10D59D0D10664DCE /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = PryvApiSwiftKit/Classes/Utils.swift; sourceTree = "<group>"; };
+		ECDFA05D2BA399F33A938C073623E81B /* KeychainSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KeychainSwift-Info.plist"; sourceTree = "<group>"; };
+		EDA86D6C70869CBD661BF8BFFD053FE2 /* pdf@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pdf@2x.png"; path = "FileBrowser/Resources/pdf@2x.png"; sourceTree = "<group>"; };
 		EE53C3412C8CB2520539FB3FD146A50D /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m"; sourceTree = "<group>"; };
-		EE55F174407F71237EE8E18001112AC7 /* FileBrowser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FileBrowser-dummy.m"; sourceTree = "<group>"; };
 		EF4E46045C7D96A27EA98CBC54BDB7EF /* Pods-PryvApiSwiftKitExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PryvApiSwiftKitExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F1DDEA945255A18F0B9913AB1C2AB718 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = XLPagerTabStrip.framework; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F48EF4CFCD52522A0EBEA1D5AAECA91B /* folder@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "folder@2x.png"; path = "FileBrowser/Resources/folder@2x.png"; sourceTree = "<group>"; };
-		F6A0DE3C85D5E01092DC0DD71B6B86F7 /* KeychainSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-prefix.pch"; sourceTree = "<group>"; };
-		F6AA5780E9AC3726C5D77D1D34514618 /* pdf@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pdf@2x.png"; path = "FileBrowser/Resources/pdf@2x.png"; sourceTree = "<group>"; };
+		F07E705604E8FF4573495512F999C1D1 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = Sources/TegKeychainConstants.swift; sourceTree = "<group>"; };
 		F74AE10460663522E59FE92FD0AF05D1 /* Pods-PryvApiSwiftKitExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PryvApiSwiftKitExample.modulemap"; sourceTree = "<group>"; };
-		F8E3ED9B9E21BD0A36A0F96CFFD43458 /* Data+append.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+append.swift"; path = "PryvApiSwiftKit/Classes/Data+append.swift"; sourceTree = "<group>"; };
-		FA413D662E10B6589D3A204C2A1A0615 /* TwitterPagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TwitterPagerTabStripViewController.swift; path = Sources/TwitterPagerTabStripViewController.swift; sourceTree = "<group>"; };
-		FFB3A3AF211480D5A6D5ED50C37DD41D /* BarPagerTabStripViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarPagerTabStripViewController.swift; path = Sources/BarPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		F7F93618D47470FD6190CA8F1AC1B5D7 /* FileBrowser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileBrowser.xcconfig; sourceTree = "<group>"; };
+		FD3ED757C3BB1E17CDE66D59BB0185F3 /* Mocker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Mocker-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0FD2D10FD6321FFD178496667854F045 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1BC3A058A9240AF4808B3D0DD772BE07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,14 +249,6 @@
 				9A5BF303ACEB39A7720513D5928D5A53 /* Foundation.framework in Frameworks */,
 				0FB240FD4D094B38A39CE5AF890BFDB5 /* QuickLook.framework in Frameworks */,
 				A11856A9061239E1483498A551DC117C /* WebKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		35B27BE83917CFE86F2CCB968B7CD053 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79FA1CC5F06F15BB7D5C97FFA68999D7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,21 +268,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		73ACAF771CEBD80856D52C1A3F0AD8EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31487013F92B645B14375D8B73E6D796 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A82BCF6BD789E596756033D4651FF51 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				879783884B75E5A4611C1A8D1B3AAF44 /* Foundation.framework in Frameworks */,
 				E07AC101B32B7CE657A30EF5B236A1B8 /* Mocker.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AF7861E3E33A6BA2B9F973559B8C53D5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB7C01AB26481D05ABFF2C7F60D7D67C /* Foundation.framework in Frameworks */,
-				2DABB7F30476F072B6A15D510614C93E /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,120 +293,69 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C431B1F9FE283D531E8BE1C96A570BD0 /* Frameworks */ = {
+		F0614E592E00AB372ED98B6DD35475BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD9264608BD3A7327989F7340AC56CCB /* Foundation.framework in Frameworks */,
+				07EE5758978BC7740C1CFFEAA526054C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		12503DE7F47A762C571F3C685D65AA6B /* Support Files */ = {
+		24D4142BAC738D35514F28A69F18649C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				3CC0D8C86009A6CF4153318C14E61C5F /* Mocker.modulemap */,
-				67F8768B23AFEAB00759CD729D3D66CB /* Mocker.xcconfig */,
-				5B4137F45B2CA31DD953C0A6C803C2D5 /* Mocker-dummy.m */,
-				54CC9ADCA50A050065CCA05AE44D2E9F /* Mocker-Info.plist */,
-				27D0C6D94C8888B5B847325360B02A4C /* Mocker-prefix.pch */,
-				29743625DE0534B62ACF9C1190105BD4 /* Mocker-umbrella.h */,
+				15EA03C7B037196ED3C069F105533794 /* Foundation.framework */,
+				69E518730DC437156B67BC7000BFD150 /* QuickLook.framework */,
+				C53017B2F047E6AAD5582836428D36CF /* WebKit.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Mocker";
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		2446E4963CF9F664F561441DFAE483E3 /* Pods */ = {
+		29DF665119D21B9BD34847DCCBA86D9B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9FDC3EC13C3991BEB0B283AF9D72B82D /* FileBrowser */,
-				F270B63BAA1924C4D968C34F051DEBEA /* KeychainSwift */,
-				E2973EF0B22FC7C231BBF0E456821340 /* Mocker */,
-				4FCC8AD736F3586B4ED4D6A9532CBCC6 /* PryvApiSwiftKit */,
-				B630FBAE0CD2BBA9FCBBF47C909FDD14 /* XLPagerTabStrip */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		33A2F10B227DFFDD2A91E2F30D700AA9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D73E8C677A061C53426CBFC4341D8840 /* documents@2x.png */,
-				A281CDE1EEEE3305BEBF4E807F6B887E /* file@2x.png */,
-				4E48132A99EECE8465E17253CCFACC83 /* FileBrowser.xib */,
-				F48EF4CFCD52522A0EBEA1D5AAECA91B /* folder@2x.png */,
-				D1C123E410E425430DB7F6A5B631FCBF /* image@2x.png */,
-				F6AA5780E9AC3726C5D77D1D34514618 /* pdf@2x.png */,
-				882109CE68AD24B11854E6EF7C588FD9 /* PreviewTransitionViewController.xib */,
-				AC48DCBB9A5F5B4C9C299893B93ABFF9 /* WebviewPreviewViewContoller.xib */,
-				3539F26A71DD0080D572ACD17D4A409A /* zip@2x.png */,
+				4ADD86DC0D675D154730E27AB459D719 /* documents@2x.png */,
+				740108A6A3B414AAEED5B4EB7072A22C /* file@2x.png */,
+				637D462EE821814736E192D046A73431 /* FileBrowser.xib */,
+				8524C6A4D437E9FF51F1CD377747134D /* folder@2x.png */,
+				48C8DCB9A2C0B91B2AD7C77C416E0638 /* image@2x.png */,
+				EDA86D6C70869CBD661BF8BFFD053FE2 /* pdf@2x.png */,
+				7E6953A4AA7A72057BF22327321C64FA /* PreviewTransitionViewController.xib */,
+				96AE3BECE80F97FE4F7D81CCA1EF054E /* WebviewPreviewViewContoller.xib */,
+				2FA51F7000BFEA697EFC16CAEA112D30 /* zip@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		3F7C7861E66501BC50673DCB1192E8B7 /* Products */ = {
+		349E08C0EF72FE0BD29D04CE4B1EBE67 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */,
-				9E0FD012ADC3C7179C684035672383E5 /* KeychainSwift.framework */,
-				1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */,
-				6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */,
-				7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
-				BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */,
-				2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */,
-				78BA4BB1A553AB4136F879792D99C87D /* XLPagerTabStrip.bundle */,
-				F1DDEA945255A18F0B9913AB1C2AB718 /* XLPagerTabStrip.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		487C03B999B8B0D2FAA5CA6AFAA998B0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1400A89EBED4ECC3983CE3B1A44E4A86 /* ResourceBundle-XLPagerTabStrip-XLPagerTabStrip-Info.plist */,
-				66FE4EA56D0617B1DE852335C35C4B16 /* XLPagerTabStrip.modulemap */,
-				40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */,
-				ED5D3CAB625528574CF40C758E9CB24F /* XLPagerTabStrip-dummy.m */,
-				6EFFAC35B3D6DF018C7FD86C041D6A6D /* XLPagerTabStrip-Info.plist */,
-				315650619DE7487F281737C26CD0F272 /* XLPagerTabStrip-prefix.pch */,
-				05EA8DE1CE7B607DDFF44E493C54CCBB /* XLPagerTabStrip-umbrella.h */,
+				A18B316799A09818E994DE6851BF7864 /* KeychainSwift.modulemap */,
+				6BD3877495F5A14DC9761D12C852FE15 /* KeychainSwift.xcconfig */,
+				77B7491A78401BB79D1369BC7526C3F0 /* KeychainSwift-dummy.m */,
+				ECDFA05D2BA399F33A938C073623E81B /* KeychainSwift-Info.plist */,
+				3DD6F0222655819203A01B8B494F9040 /* KeychainSwift-prefix.pch */,
+				004A0205419D074B017567897FE9AE05 /* KeychainSwift-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/XLPagerTabStrip";
+			path = "../Target Support Files/KeychainSwift";
 			sourceTree = "<group>";
 		};
-		4FCC8AD736F3586B4ED4D6A9532CBCC6 /* PryvApiSwiftKit */ = {
+		3C7E3471138930D7EBE9AD9C3250DCB5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				520E1802BE4F1615D4724BC1A5D5930B /* AuthState.swift */,
-				5D58062F89702B9D88F562BA47C31CCB /* Connection.swift */,
-				F8E3ED9B9E21BD0A36A0F96CFFD43458 /* Data+append.swift */,
-				7AD9CC673756A92A9F745D7255D2255E /* Media.swift */,
-				B71B8E1902F63858F43AEF1A79F11565 /* PryvApiSwiftKit.h */,
-				3F49FD9D0F7C6DEF396924E6E316E20E /* PryvApiSwiftKit.swift */,
-				659079677E2A98A773CAA5DD2B3D575D /* PryvServiceInfo.swift */,
-				558376AAA3782D3AFA5A3B4298785F17 /* Service.swift */,
-				C6C6C76E95FE7F13F7AA297FC10C9E98 /* Utils.swift */,
-				515F58CA759E6A272E671849F243CFE5 /* Support Files */,
-			);
-			name = PryvApiSwiftKit;
-			path = PryvApiSwiftKit;
-			sourceTree = "<group>";
-		};
-		515F58CA759E6A272E671849F243CFE5 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				2B35C1E4B07ED4CE67CBF5868321D434 /* PryvApiSwiftKit.modulemap */,
-				D52A5994556F9792B8E7C156572C6903 /* PryvApiSwiftKit.xcconfig */,
-				686B27BDD0BE9893429B4476A2DB3360 /* PryvApiSwiftKit-dummy.m */,
-				72B7DA8690C2A3337B1CD3FFA56BB77F /* PryvApiSwiftKit-Info.plist */,
-				6501CEC10DE8B907EA258E07474DF7F9 /* PryvApiSwiftKit-prefix.pch */,
-				964BD31EB792A027B4A0B99C881C371B /* PryvApiSwiftKit-umbrella.h */,
+				BA009742096C53365549490A63E1D274 /* Mocker.modulemap */,
+				ADE5EC786C63C150279004D53038CE4E /* Mocker.xcconfig */,
+				08AEAEB403D0BF3D5066DAD2EC2A142F /* Mocker-dummy.m */,
+				FD3ED757C3BB1E17CDE66D59BB0185F3 /* Mocker-Info.plist */,
+				E579C84C5BF1BF4A7EE98117C0DAB6CD /* Mocker-prefix.pch */,
+				62ADC79FEBC14484B04513B9A4B83816 /* Mocker-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/PryvApiSwiftKit";
+			path = "../Target Support Files/Mocker";
 			sourceTree = "<group>";
 		};
 		5EBA70F81FC5864ADADC3D138C32C73B /* Pods-PryvApiSwiftKitExample */ = {
@@ -510,6 +375,36 @@
 			path = "Target Support Files/Pods-PryvApiSwiftKitExample";
 			sourceTree = "<group>";
 		};
+		7AAF8BD78ED1766827796E787339CABA /* FileBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				3C31E55BD47DD7CB01211A1C54913653 /* FBFile.swift */,
+				5DC83B88ACE5FC515FA47B833DE3D12C /* FileBrowser.h */,
+				969B2AAB736E9E3C37D24617A6162DEF /* FileBrowser.swift */,
+				A439320DAC2BE2A3DEDCC62516E11B2D /* FileListPreview.swift */,
+				BEAAE6BFE875916E2AB711C4418B36BD /* FileListSearch.swift */,
+				D4B589A83B643F3A697ED81C703F875E /* FileListTableView.swift */,
+				B99DB9FF2F6B68E7E63E6E8B3036D048 /* FileListViewController.swift */,
+				82249BD6990A898F2CC44D461EBC4938 /* FileParser.swift */,
+				5C644351639A0A444A8EAA02ACCFB5D9 /* PreviewManager.swift */,
+				ABCFC87F973D8B929697511F1E79DA37 /* PreviewTransitionViewController.swift */,
+				C02301F7A40BCB9EBFB4D6C5A2CBBDC4 /* WebviewPreviewViewContoller.swift */,
+				29DF665119D21B9BD34847DCCBA86D9B /* Resources */,
+				885D128C59E23A5965C7DBC84E517E49 /* Support Files */,
+			);
+			name = FileBrowser;
+			path = FileBrowser;
+			sourceTree = "<group>";
+		};
+		7EFC8EBE862FBEFFAD6A466309AF50AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A84468E30AE4BAABB695E32CD948E362 /* Mocker.framework */,
+				24D4142BAC738D35514F28A69F18649C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		836AC565166251539BE66E652A10D3FB /* Pods-PryvApiSwiftKitExampleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +421,31 @@
 			path = "Target Support Files/Pods-PryvApiSwiftKitExampleTests";
 			sourceTree = "<group>";
 		};
+		868C77EFABAAD78BDD64AEE218D800A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF8BD78ED1766827796E787339CABA /* FileBrowser */,
+				D71FAFD12CAD92C08AFDA3F8166D8FA7 /* KeychainSwift */,
+				FF200262EB83D041DC6F2EB6C9646AC4 /* Mocker */,
+				F9DC1FA88BCA4E4FFBD5415693197D9B /* PryvApiSwiftKit */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		885D128C59E23A5965C7DBC84E517E49 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				93A7777695E160C667EFFD38AE46642E /* FileBrowser.modulemap */,
+				F7F93618D47470FD6190CA8F1AC1B5D7 /* FileBrowser.xcconfig */,
+				BAAAEBECFC7F49672117FFE278AF5599 /* FileBrowser-dummy.m */,
+				2A02966BFF70A24241476A022BBD7222 /* FileBrowser-Info.plist */,
+				6BC0F9FF14EED942910442AB4D0527BB /* FileBrowser-prefix.pch */,
+				AAA2B67C33677229A5D537230200E103 /* FileBrowser-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FileBrowser";
+			sourceTree = "<group>";
+		};
 		93892028FF1D92160BABE571834C36E1 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,36 +454,6 @@
 				836AC565166251539BE66E652A10D3FB /* Pods-PryvApiSwiftKitExampleTests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		9FAFD41F128A27C348545CD1A0BE0996 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				18C48A5FAAA85D4EEBF15052B02DD6E3 /* Mocker.framework */,
-				C7A57C9E6726D5A93BA6EBB22243438B /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9FDC3EC13C3991BEB0B283AF9D72B82D /* FileBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				2F77DC75DC5210D9146DA61FE2E8E3F7 /* FBFile.swift */,
-				93C1C995A4CCC8F84ED035B186DBFF29 /* FileBrowser.h */,
-				9026BCA9DD9E847AB60D3F7831C5577C /* FileBrowser.swift */,
-				1F3E0D19BDF48E392A8E5F570F94CC4D /* FileListPreview.swift */,
-				D4BEE54739AF07B713B746CB7DEB70CA /* FileListSearch.swift */,
-				80A56AD093E259FDBDE0DE1835DC36E0 /* FileListTableView.swift */,
-				DED2E02D6E23355D428A5D0F036154EF /* FileListViewController.swift */,
-				25248EC90FF56AAC95899AB6ADBA6952 /* FileParser.swift */,
-				AB27D3C1E1D29A7944813CD58362A888 /* PreviewManager.swift */,
-				B0180FE23EDC57B64B602FC496218C3F /* PreviewTransitionViewController.swift */,
-				487F463CFD422E21C6D93DEB1E246AB5 /* WebviewPreviewViewContoller.swift */,
-				33A2F10B227DFFDD2A91E2F30D700AA9 /* Resources */,
-				D4712EE794646833BD583F81E759A500 /* Support Files */,
-			);
-			name = FileBrowser;
-			path = FileBrowser;
 			sourceTree = "<group>";
 		};
 		A7151D8CFFAACF96B3954E4C8A3A4717 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */ = {
@@ -583,133 +473,90 @@
 			path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
 			sourceTree = "<group>";
 		};
-		B630FBAE0CD2BBA9FCBBF47C909FDD14 /* XLPagerTabStrip */ = {
+		BFDBF2E6B09DC1906695EB14F7690439 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FFB3A3AF211480D5A6D5ED50C37DD41D /* BarPagerTabStripViewController.swift */,
-				A5C8F1AAC9472F86E952290CA93F1FB3 /* BarView.swift */,
-				32EF6BC71C3E6E84AB9C8E751A23D353 /* BaseButtonBarPagerTabStripViewController.swift */,
-				E2E26D2BB113344996271AA28493A16E /* ButtonBarPagerTabStripViewController.swift */,
-				2A0B682E2750DB9C38444BAA64EEC342 /* ButtonBarView.swift */,
-				2C495E2DF03264A96FF703B625C05D21 /* ButtonBarViewCell.swift */,
-				0AB000C4F435BB86C79D3ADC5BAD1C35 /* FXPageControl.h */,
-				6E9A3FAEE84669DC23AA0F73BC7B228E /* FXPageControl.m */,
-				C944F80188B538068A0AB5776873D9E5 /* IndicatorInfo.swift */,
-				4CE06F9350818B6FD4755CD01ED435E4 /* PagerTabStripBehaviour.swift */,
-				0D0CA8207D6A79CFFDB65A2C6EA768F1 /* PagerTabStripError.swift */,
-				4D111CE37831580D18C53C2CD4898DE1 /* PagerTabStripViewController.swift */,
-				87318FE1540B81CAAA9AB207DB3667E7 /* SegmentedPagerTabStripViewController.swift */,
-				44A9FDE323A7966FC42AC3619930D3E8 /* SwipeDirection.swift */,
-				FA413D662E10B6589D3A204C2A1A0615 /* TwitterPagerTabStripViewController.swift */,
-				BF904857D79F138F212C20D7FD94A772 /* Resources */,
-				487C03B999B8B0D2FAA5CA6AFAA998B0 /* Support Files */,
+				5A623AE5EAEA24C90EBA1C867466622A /* FileBrowser.framework */,
+				9E0FD012ADC3C7179C684035672383E5 /* KeychainSwift.framework */,
+				1D4AE396CC91228FE660B84E90FBD20A /* Mocker.framework */,
+				6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */,
+				7F97699B5BDB25C87E907EA1EC6FD1CB /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
+				BBA1C6A886A0794938692BBEA8E2E20A /* Pods_PryvApiSwiftKitExampleTests.framework */,
+				2147D56E50BCA0DB07FFEB6B01EA9EEC /* PryvApiSwiftKit.framework */,
 			);
-			name = XLPagerTabStrip;
-			path = XLPagerTabStrip;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		BF904857D79F138F212C20D7FD94A772 /* Resources */ = {
+		CD72BCA790E039FE0769CD576CC24845 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				21562DD234625C8D0647FC561CD7547E /* ButtonCell.xib */,
+				20A2BD5AC584D8E8680C983F2E6533B3 /* PryvApiSwiftKit.modulemap */,
+				BB7D21452890958C91C614ED12916526 /* PryvApiSwiftKit.xcconfig */,
+				9D340259AE4FBACAEF84AD1FF73CDB57 /* PryvApiSwiftKit-dummy.m */,
+				5359496B3ED22B193C63DCE78668E9DD /* PryvApiSwiftKit-Info.plist */,
+				67A9CA52E96D02A2284A46D71CE00789 /* PryvApiSwiftKit-prefix.pch */,
+				2DF10D960A4ECBE26080121F9ED12B1C /* PryvApiSwiftKit-umbrella.h */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		C7A57C9E6726D5A93BA6EBB22243438B /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				C1BAC891C4602206864921F2FCCEEC20 /* Foundation.framework */,
-				880B9BDE8D9ADEEC002F28C957BBA1CE /* QuickLook.framework */,
-				E52BD30CC7DE787A1C950F66C1392F7F /* UIKit.framework */,
-				DA9BA931F5FC80BE565C1290686E85B3 /* WebKit.framework */,
-			);
-			name = iOS;
+			name = "Support Files";
+			path = "../Target Support Files/PryvApiSwiftKit";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				9FAFD41F128A27C348545CD1A0BE0996 /* Frameworks */,
-				2446E4963CF9F664F561441DFAE483E3 /* Pods */,
-				3F7C7861E66501BC50673DCB1192E8B7 /* Products */,
+				7EFC8EBE862FBEFFAD6A466309AF50AB /* Frameworks */,
+				868C77EFABAAD78BDD64AEE218D800A5 /* Pods */,
+				BFDBF2E6B09DC1906695EB14F7690439 /* Products */,
 				93892028FF1D92160BABE571834C36E1 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D4712EE794646833BD583F81E759A500 /* Support Files */ = {
+		D71FAFD12CAD92C08AFDA3F8166D8FA7 /* KeychainSwift */ = {
 			isa = PBXGroup;
 			children = (
-				9958E850F4257A005970B20CFBC953E7 /* FileBrowser.modulemap */,
-				7D557EB6C77FBB056AD7A0FB0C203920 /* FileBrowser.xcconfig */,
-				EE55F174407F71237EE8E18001112AC7 /* FileBrowser-dummy.m */,
-				36B76DBE34406FBFA67A58B0E982AB0F /* FileBrowser-Info.plist */,
-				35B602FFA0557784D33815A3A43FBA09 /* FileBrowser-prefix.pch */,
-				4AF577AE3D7BC6EA2CA4FA29111B5EEB /* FileBrowser-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/FileBrowser";
-			sourceTree = "<group>";
-		};
-		DC3D5489D1073C6B34BCAAAAF1975301 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				7FBF37E46A0B366BECCEDAE16F7323AC /* KeychainSwift.modulemap */,
-				838ABFB64CAB9011701EE2587B469DBE /* KeychainSwift.xcconfig */,
-				5AA46CDD49A75539146D867418A8F0FA /* KeychainSwift-dummy.m */,
-				1E4803662718E0A915700DC7DFF221D5 /* KeychainSwift-Info.plist */,
-				F6A0DE3C85D5E01092DC0DD71B6B86F7 /* KeychainSwift-prefix.pch */,
-				3A272F90BB45C297FCFCB21B558710BC /* KeychainSwift-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/KeychainSwift";
-			sourceTree = "<group>";
-		};
-		E2973EF0B22FC7C231BBF0E456821340 /* Mocker */ = {
-			isa = PBXGroup;
-			children = (
-				CB58002C1323400F0F8416F4598DEF84 /* Mock.swift */,
-				0E6B0F0D4FBC468B3AFEB1E6AABD2506 /* Mocker.swift */,
-				26FBC48B93F08B221A6A79E8EA6E876F /* MockingURLProtocol.swift */,
-				12503DE7F47A762C571F3C685D65AA6B /* Support Files */,
-			);
-			name = Mocker;
-			path = Mocker;
-			sourceTree = "<group>";
-		};
-		F270B63BAA1924C4D968C34F051DEBEA /* KeychainSwift */ = {
-			isa = PBXGroup;
-			children = (
-				7CAD86388BB35C7AA3A09C4287640A09 /* KeychainSwift.swift */,
-				2F39006536CE261EC0E316E36CC4C7A2 /* KeychainSwiftAccessOptions.swift */,
-				D554ABE68D728BF854C2B5B3C5585E43 /* TegKeychainConstants.swift */,
-				DC3D5489D1073C6B34BCAAAAF1975301 /* Support Files */,
+				AD42A0C71CA11F13F1EBD30B84BB2ACB /* KeychainSwift.swift */,
+				0DE9D310C8C2DBF0DFD9424A9ECFFA2B /* KeychainSwiftAccessOptions.swift */,
+				F07E705604E8FF4573495512F999C1D1 /* TegKeychainConstants.swift */,
+				349E08C0EF72FE0BD29D04CE4B1EBE67 /* Support Files */,
 			);
 			name = KeychainSwift;
 			path = KeychainSwift;
 			sourceTree = "<group>";
 		};
+		F9DC1FA88BCA4E4FFBD5415693197D9B /* PryvApiSwiftKit */ = {
+			isa = PBXGroup;
+			children = (
+				DA3954471E98807931C2CAA18A597C0E /* AuthState.swift */,
+				13C1287FD1F2C2186BD540EBF3105909 /* Connection.swift */,
+				BC5E4A2C28E74A8ED62D28BE01E99592 /* Data+append.swift */,
+				842DF396C920BC49420E9A6798794C0B /* Media.swift */,
+				2E2AEA2C9AD79B4614BB960E096419D5 /* PryvApiSwiftKit.h */,
+				C50BBE9E1B19EE706AE1D8C1A3D33F4D /* PryvApiSwiftKit.swift */,
+				9C01149FEBD3EC404B6A6BAF00E71B4A /* PryvServiceInfo.swift */,
+				AB017DD5700FE5D53509CE0ACF39FF0D /* Service.swift */,
+				EBACD37C298BA56C10D59D0D10664DCE /* Utils.swift */,
+				CD72BCA790E039FE0769CD576CC24845 /* Support Files */,
+			);
+			name = PryvApiSwiftKit;
+			path = PryvApiSwiftKit;
+			sourceTree = "<group>";
+		};
+		FF200262EB83D041DC6F2EB6C9646AC4 /* Mocker */ = {
+			isa = PBXGroup;
+			children = (
+				17CBD8C6AD01EFBD379C216ECE9B2650 /* Mock.swift */,
+				989D507D91C9BE5A7857AC0B25644AE5 /* Mocker.swift */,
+				D4A649716432EFE2E9A2E94BC7C6A7C8 /* MockingURLProtocol.swift */,
+				3C7E3471138930D7EBE9AD9C3250DCB5 /* Support Files */,
+			);
+			name = Mocker;
+			path = Mocker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2E74127AF027B11FF09F7F50BB4B9622 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				445D61C3F4F1E353873FE474EA856E02 /* FXPageControl.h in Headers */,
-				69B419B8DBDE3DC6EA250BA01BEEAC62 /* XLPagerTabStrip-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3470A00E31233DDBE86C656BB0ED2764 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				54D8CF9D05ED1AF2D8D0AE1D48E5FD1C /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97BD77ADDCAB6FA6CF7529B5308B0918 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -727,11 +574,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A57173C4BE22C757C1FBEA607F35D0C0 /* Headers */ = {
+		D2219FEB401FA576A0BB829204575638 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85F1F61E88063BB7A2BB8E70E6E1A4CA /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */,
+				0F582977E678A6436A61AE6B87E15321 /* Pods-PryvApiSwiftKitExample-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +587,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				25E270DB498F3A3486ECCB7A76FA80C8 /* Mocker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E56EC3B9ED92E5E9A225FD5D6C916EB8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				344C08E7CF7730ED3D3394BE7534AE38 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -857,21 +712,20 @@
 		};
 		C2475DF9F44E9D65027E1A832B9C71FC /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5072D6C67A49B25A1EF81BE95F7E67A8 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */;
+			buildConfigurationList = 8DE760D871823BED258E560E18874AAA /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */;
 			buildPhases = (
-				3470A00E31233DDBE86C656BB0ED2764 /* Headers */,
-				BCF36244B741A06A1B6C7D948D3AB71F /* Sources */,
-				C431B1F9FE283D531E8BE1C96A570BD0 /* Frameworks */,
-				B9BBF93342A291E395489A16003ADAC7 /* Resources */,
+				E56EC3B9ED92E5E9A225FD5D6C916EB8 /* Headers */,
+				D53CB00E067D735B7093565B35F0E5A0 /* Sources */,
+				73ACAF771CEBD80856D52C1A3F0AD8EF /* Frameworks */,
+				38A2820F713E2648C448AB4FA06F89A0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C27DAE27A168CA35D224DF593AF741BB /* PBXTargetDependency */,
-				25B3DD7B6D30416D8E3AF766C175E15B /* PBXTargetDependency */,
-				9CC3C137E5B219D041F2A8594F0CA12C /* PBXTargetDependency */,
-				365FF78959F21EAD8A1D7E8CB7028CC9 /* PBXTargetDependency */,
-				6106CBDC73CD1EE682ADC5DA5C0C4BF3 /* PBXTargetDependency */,
+				2F61566F419CF6FF9667B67D937B90D3 /* PBXTargetDependency */,
+				CE68FC6308189421DDAE266BB2D09885 /* PBXTargetDependency */,
+				5A5750C1F36A61211F24088F2EF10AE6 /* PBXTargetDependency */,
+				0ACFF743F02BEF66431C5870BE99DBB5 /* PBXTargetDependency */,
 			);
 			name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
 			productName = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests";
@@ -880,62 +734,25 @@
 		};
 		C5D432A2AF89A0B0A4B79A5E43D31728 /* Pods-PryvApiSwiftKitExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB64841567EFE04B1B8780CF0B0DD0A1 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */;
+			buildConfigurationList = 683A0DC6EB55991B2AC54738F66D6DE1 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */;
 			buildPhases = (
-				A57173C4BE22C757C1FBEA607F35D0C0 /* Headers */,
-				C5588C2BE244744F25E4C52DE0FD1EA5 /* Sources */,
-				35B27BE83917CFE86F2CCB968B7CD053 /* Frameworks */,
-				2E325791731551E3C31A37EDB972E1D6 /* Resources */,
+				D2219FEB401FA576A0BB829204575638 /* Headers */,
+				3058B29DAD75BCB427DFE442F70550F0 /* Sources */,
+				F0614E592E00AB372ED98B6DD35475BB /* Frameworks */,
+				5336B92F90E41EAA8D7B9AEB3E39D7F3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A939556FE099FA17A24C1F08F28A7837 /* PBXTargetDependency */,
-				EE7B0A5BFBE83E3FA8B4F3D0C1E2EB83 /* PBXTargetDependency */,
-				F504CBA136EE55C1557536F72A4B94FA /* PBXTargetDependency */,
-				1EF79494A41043B51B963F1253E79829 /* PBXTargetDependency */,
-				618FAB6FB1A77F4DD10098EA93A60D0A /* PBXTargetDependency */,
+				12434B32605353AE26C8DB6290EAE014 /* PBXTargetDependency */,
+				E665DC7F8E5399DD2BF50450AEA3AF73 /* PBXTargetDependency */,
+				5157F5E23D0778DD14F30333379FDA48 /* PBXTargetDependency */,
+				E43C70C9EB4544545D3D7FBC02DC9BCE /* PBXTargetDependency */,
 			);
 			name = "Pods-PryvApiSwiftKitExample";
 			productName = "Pods-PryvApiSwiftKitExample";
 			productReference = 6CF63F8ACEDA6E6CCC48A9D9E9A6C627 /* Pods_PryvApiSwiftKitExample.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		DC5C3A7662FFA04D04D29F4657D032CE /* XLPagerTabStrip */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 88D866DA052EF93195E917061DB86D9A /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */;
-			buildPhases = (
-				2E74127AF027B11FF09F7F50BB4B9622 /* Headers */,
-				BCDC6490FBBA170437C0B29649B4ED6F /* Sources */,
-				AF7861E3E33A6BA2B9F973559B8C53D5 /* Frameworks */,
-				47847C1AE9C5FA9092141B090DA283A9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8608636E5CBFC36C931368912AC4340E /* PBXTargetDependency */,
-			);
-			name = XLPagerTabStrip;
-			productName = XLPagerTabStrip;
-			productReference = F1DDEA945255A18F0B9913AB1C2AB718 /* XLPagerTabStrip.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		EBF90A3A56D4C5830C212D000AB67BC1 /* XLPagerTabStrip-XLPagerTabStrip */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0DC3A1F894722359353AC05A476C7644 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip-XLPagerTabStrip" */;
-			buildPhases = (
-				E55B2DFC65133EF5AF928D548C83EA56 /* Sources */,
-				0FD2D10FD6321FFD178496667854F045 /* Frameworks */,
-				1E70F53E5F27CFA6149993D34EA76E62 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "XLPagerTabStrip-XLPagerTabStrip";
-			productName = "XLPagerTabStrip-XLPagerTabStrip";
-			productReference = 78BA4BB1A553AB4136F879792D99C87D /* XLPagerTabStrip.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -955,7 +772,7 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 3F7C7861E66501BC50673DCB1192E8B7 /* Products */;
+			productRefGroup = BFDBF2E6B09DC1906695EB14F7690439 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -966,29 +783,12 @@
 				C2475DF9F44E9D65027E1A832B9C71FC /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests */,
 				267F77C2E416594BEB3F2FAE4A7CA04B /* Pods-PryvApiSwiftKitExampleTests */,
 				B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */,
-				DC5C3A7662FFA04D04D29F4657D032CE /* XLPagerTabStrip */,
-				EBF90A3A56D4C5830C212D000AB67BC1 /* XLPagerTabStrip-XLPagerTabStrip */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1E70F53E5F27CFA6149993D34EA76E62 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A332AF6C1B4A44654EEA9A031A751F6 /* ButtonCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		29186A7FC9690C20BDE41949C4FFD3AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E325791731551E3C31A37EDB972E1D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1002,11 +802,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		47847C1AE9C5FA9092141B090DA283A9 /* Resources */ = {
+		38A2820F713E2648C448AB4FA06F89A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B7E7B16CDEC321A263291419E7CE00B /* XLPagerTabStrip.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5336B92F90E41EAA8D7B9AEB3E39D7F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,13 +829,6 @@
 				20F2028BF02713C97C6725DAD0D44926 /* PreviewTransitionViewController.xib in Resources */,
 				7C9A69AA851BCF1B95C919C4D6B28955 /* WebviewPreviewViewContoller.xib in Resources */,
 				7759D7A510B77D3EAABFAE095F6E1DCE /* zip@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B9BBF93342A291E395489A16003ADAC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1084,6 +883,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3058B29DAD75BCB427DFE442F70550F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08CF94701923565A46557FBA1F0A0079 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		401AD64AA2638AD2E002D0FCCDC73ACA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1092,41 +899,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BCDC6490FBBA170437C0B29649B4ED6F /* Sources */ = {
+		D53CB00E067D735B7093565B35F0E5A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59BA6FD61F0A9B68CD58C371DA1F1D60 /* BarPagerTabStripViewController.swift in Sources */,
-				4F86F33F807A003D18DEDBCA01210037 /* BarView.swift in Sources */,
-				399F2A0161278488DC1E5ADD297DE3B7 /* BaseButtonBarPagerTabStripViewController.swift in Sources */,
-				E554C1894F7994C45693A532CC18769A /* ButtonBarPagerTabStripViewController.swift in Sources */,
-				911CC04F55219F3CB8EE70FA8F7347E7 /* ButtonBarView.swift in Sources */,
-				2B39B33ECADFF6B44583C4DBA8854A9C /* ButtonBarViewCell.swift in Sources */,
-				F805832DAAFB6DFA063DCE467BC59B9F /* FXPageControl.m in Sources */,
-				28336F1C947B57D07831C63C31B84A0C /* IndicatorInfo.swift in Sources */,
-				A7AEEE825346429BB80914A7D2365A51 /* PagerTabStripBehaviour.swift in Sources */,
-				F2E3366710556B8D518FF6F12259CFA5 /* PagerTabStripError.swift in Sources */,
-				3F1E6AE0B8A22678DB406AE072F213FC /* PagerTabStripViewController.swift in Sources */,
-				311557DC2943E068608D1B6A7B663232 /* SegmentedPagerTabStripViewController.swift in Sources */,
-				2BC8DF4EADD024A30A84555CB575CAC6 /* SwipeDirection.swift in Sources */,
-				775542D5BE6B24392EF7FCA2CE7C5E97 /* TwitterPagerTabStripViewController.swift in Sources */,
-				A26276F206FFA15CF0A57BE54526140C /* XLPagerTabStrip-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCF36244B741A06A1B6C7D948D3AB71F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BCBEC9A979159FC175BDB4753C835FA9 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5588C2BE244744F25E4C52DE0FD1EA5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F045699B8CE52D73DB46CA759F09E94 /* Pods-PryvApiSwiftKitExample-dummy.m in Sources */,
+				345854987CEBE62DF6C535942FD4D274 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,13 +915,6 @@
 				4DC6C132AEF3E02BDD5ABC89333233B3 /* KeychainSwift.swift in Sources */,
 				485A776035D4B1EF97E8AE0E95A66502 /* KeychainSwiftAccessOptions.swift in Sources */,
 				320E018022758AFD782991C7D8854DB1 /* TegKeychainConstants.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E55B2DFC65133EF5AF928D548C83EA56 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,41 +932,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1EF79494A41043B51B963F1253E79829 /* PBXTargetDependency */ = {
+		0ACFF743F02BEF66431C5870BE99DBB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PryvApiSwiftKit;
 			target = B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */;
-			targetProxy = 4935F07A2C3102388211CA0EB69469E7 /* PBXContainerItemProxy */;
+			targetProxy = 19FB20CEBAA01650AE93EEDAEB41FBED /* PBXContainerItemProxy */;
 		};
-		25B3DD7B6D30416D8E3AF766C175E15B /* PBXTargetDependency */ = {
+		12434B32605353AE26C8DB6290EAE014 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = KeychainSwift;
-			target = 07E54A78BCF82272E99319D7F7F5E8C1 /* KeychainSwift */;
-			targetProxy = 4C3F3BA7CEE85A2964C44DCE4B09A83E /* PBXContainerItemProxy */;
+			name = FileBrowser;
+			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
+			targetProxy = 6EB7D4FC81574EEB4EA1ABA2C392B52A /* PBXContainerItemProxy */;
 		};
-		365FF78959F21EAD8A1D7E8CB7028CC9 /* PBXTargetDependency */ = {
+		2F61566F419CF6FF9667B67D937B90D3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = PryvApiSwiftKit;
-			target = B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */;
-			targetProxy = 36F4B3CE18A915B51EBFFDF59A84539D /* PBXContainerItemProxy */;
+			name = FileBrowser;
+			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
+			targetProxy = 75C6D37D72F3AF163E09ADF8D3066C61 /* PBXContainerItemProxy */;
 		};
-		6106CBDC73CD1EE682ADC5DA5C0C4BF3 /* PBXTargetDependency */ = {
+		5157F5E23D0778DD14F30333379FDA48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = XLPagerTabStrip;
-			target = DC5C3A7662FFA04D04D29F4657D032CE /* XLPagerTabStrip */;
-			targetProxy = 4DA0B4F1CCFF0AF022A5D7CBBB11BA3B /* PBXContainerItemProxy */;
+			name = Mocker;
+			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
+			targetProxy = BA82C97259851D581CD94F7522E8AB7B /* PBXContainerItemProxy */;
 		};
-		618FAB6FB1A77F4DD10098EA93A60D0A /* PBXTargetDependency */ = {
+		5A5750C1F36A61211F24088F2EF10AE6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = XLPagerTabStrip;
-			target = DC5C3A7662FFA04D04D29F4657D032CE /* XLPagerTabStrip */;
-			targetProxy = 6E85CF74B3BBEA27ACF74186E2DCD593 /* PBXContainerItemProxy */;
-		};
-		8608636E5CBFC36C931368912AC4340E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "XLPagerTabStrip-XLPagerTabStrip";
-			target = EBF90A3A56D4C5830C212D000AB67BC1 /* XLPagerTabStrip-XLPagerTabStrip */;
-			targetProxy = 5B8329DD02E7A5BBD4BB45C327ED895A /* PBXContainerItemProxy */;
+			name = Mocker;
+			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
+			targetProxy = 776F9F08A7084D6ECD46DDAF7FA5BEF7 /* PBXContainerItemProxy */;
 		};
 		9ADF31115D31F6B6260F76BA681787BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1204,23 +968,11 @@
 			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
 			targetProxy = 6E0D97448F08E14FB42D949BB714811E /* PBXContainerItemProxy */;
 		};
-		9CC3C137E5B219D041F2A8594F0CA12C /* PBXTargetDependency */ = {
+		CE68FC6308189421DDAE266BB2D09885 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Mocker;
-			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
-			targetProxy = 4816C5F0DB2F2DFCF17C8BD6D06F30E2 /* PBXContainerItemProxy */;
-		};
-		A939556FE099FA17A24C1F08F28A7837 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FileBrowser;
-			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
-			targetProxy = 5A32BA6A74048523A86C20124E889A7E /* PBXContainerItemProxy */;
-		};
-		C27DAE27A168CA35D224DF593AF741BB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FileBrowser;
-			target = 2ABD7286FA80127BB84D1DB98B812CD5 /* FileBrowser */;
-			targetProxy = 3BFBC0D255018173021831359FD01F9F /* PBXContainerItemProxy */;
+			name = KeychainSwift;
+			target = 07E54A78BCF82272E99319D7F7F5E8C1 /* KeychainSwift */;
+			targetProxy = 3BD99A8FEAB3F36C5DE5FC3515E4FF96 /* PBXContainerItemProxy */;
 		};
 		E0B7249AD9CC88868B8521EC9AD66EE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1228,24 +980,24 @@
 			target = C5D432A2AF89A0B0A4B79A5E43D31728 /* Pods-PryvApiSwiftKitExample */;
 			targetProxy = 8E7E3883EFF84AAA3C3CEA1D3D426C6F /* PBXContainerItemProxy */;
 		};
-		EE7B0A5BFBE83E3FA8B4F3D0C1E2EB83 /* PBXTargetDependency */ = {
+		E43C70C9EB4544545D3D7FBC02DC9BCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PryvApiSwiftKit;
+			target = B57D756A6D634D05A2BF53D961A7CFBC /* PryvApiSwiftKit */;
+			targetProxy = 475BAEBA4AC4DC28630C74C708F8D5D0 /* PBXContainerItemProxy */;
+		};
+		E665DC7F8E5399DD2BF50450AEA3AF73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KeychainSwift;
 			target = 07E54A78BCF82272E99319D7F7F5E8C1 /* KeychainSwift */;
-			targetProxy = FEAA3FD0756274EE8AC07CA93D48CC4A /* PBXContainerItemProxy */;
-		};
-		F504CBA136EE55C1557536F72A4B94FA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Mocker;
-			target = 04AFC708359363290935C681A1CE226D /* Mocker */;
-			targetProxy = 64269687B8FEBD4C3E53E7695BB24923 /* PBXContainerItemProxy */;
+			targetProxy = 1E1A242182E6CF67B4C042B2A2F37A35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		172D2AFEFD581AD4EFCCF5ED41015FA1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52A5994556F9792B8E7C156572C6903 /* PryvApiSwiftKit.xcconfig */;
+			baseConfigurationReference = BB7D21452890958C91C614ED12916526 /* PryvApiSwiftKit.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1344,78 +1096,7 @@
 			};
 			name = Debug;
 		};
-		2BB042CB7DAA8DDEEB3426C5D1BA4C77 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 838ABFB64CAB9011701EE2587B469DBE /* KeychainSwift.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KeychainSwift/KeychainSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KeychainSwift/KeychainSwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KeychainSwift/KeychainSwift.modulemap";
-				PRODUCT_MODULE_NAME = KeychainSwift;
-				PRODUCT_NAME = KeychainSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		38AC3B11498A863855448DB70C322179 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67F8768B23AFEAB00759CD729D3D66CB /* Mocker.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Mocker/Mocker-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Mocker/Mocker-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Mocker/Mocker.modulemap";
-				PRODUCT_MODULE_NAME = Mocker;
-				PRODUCT_NAME = Mocker;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.1;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		421319E94E733945868E162B465B00AF /* Release */ = {
+		1BB1D0EDC79707F2445021914C675CBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A450FF2221758F229BE64698AD53F5D3 /* Pods-PryvApiSwiftKitExample.release.xcconfig */;
 			buildSettings = {
@@ -1454,26 +1135,156 @@
 			};
 			name = Release;
 		};
-		58C6AEA56689CFE0595D13BE333D7BC7 /* Debug */ = {
+		2B05106A7357FC86F54192C29203AA86 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */;
+			baseConfigurationReference = D5EDF92344659B4BECB281DBBEB6A2A8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/XLPagerTabStrip";
-				IBSC_MODULE = XLPagerTabStrip;
-				INFOPLIST_FILE = "Target Support Files/XLPagerTabStrip/ResourceBundle-XLPagerTabStrip-XLPagerTabStrip-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				PRODUCT_NAME = XLPagerTabStrip;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2BB042CB7DAA8DDEEB3426C5D1BA4C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BD3877495F5A14DC9761D12C852FE15 /* KeychainSwift.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KeychainSwift/KeychainSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KeychainSwift/KeychainSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KeychainSwift/KeychainSwift.modulemap";
+				PRODUCT_MODULE_NAME = KeychainSwift;
+				PRODUCT_NAME = KeychainSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		38AC3B11498A863855448DB70C322179 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADE5EC786C63C150279004D53038CE4E /* Mocker.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Mocker/Mocker-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Mocker/Mocker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Mocker/Mocker.modulemap";
+				PRODUCT_MODULE_NAME = Mocker;
+				PRODUCT_NAME = Mocker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		547CA13748AF59A24B5E95A81028D476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		6910BE5D7229688673FB25DD71863111 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67F8768B23AFEAB00759CD729D3D66CB /* Mocker.xcconfig */;
+			baseConfigurationReference = ADE5EC786C63C150279004D53038CE4E /* Mocker.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1547,78 +1358,7 @@
 			};
 			name = Release;
 		};
-		8771CDFA373A58ECFF3248C8D6A025C0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52A5994556F9792B8E7C156572C6903 /* PryvApiSwiftKit.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit.modulemap";
-				PRODUCT_MODULE_NAME = PryvApiSwiftKit;
-				PRODUCT_NAME = PryvApiSwiftKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		96803A803B2E59F37844BD89ECE42421 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D557EB6C77FBB056AD7A0FB0C203920 /* FileBrowser.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FileBrowser/FileBrowser-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FileBrowser/FileBrowser-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/FileBrowser/FileBrowser.modulemap";
-				PRODUCT_MODULE_NAME = FileBrowser;
-				PRODUCT_NAME = FileBrowser;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9685CFCD6D3D92EA2EB3569630E9BFAA /* Release */ = {
+		7DBBE265414B1FD6C66821AB67755900 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3928AC5B5CD2AFD99B934C921FB1B0A0 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */;
 			buildSettings = {
@@ -1657,9 +1397,45 @@
 			};
 			name = Release;
 		};
-		9F0443855CA5B9A50AE6FEE5D362E6B0 /* Debug */ = {
+		8771CDFA373A58ECFF3248C8D6A025C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */;
+			baseConfigurationReference = BB7D21452890958C91C614ED12916526 /* PryvApiSwiftKit.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/PryvApiSwiftKit/PryvApiSwiftKit.modulemap";
+				PRODUCT_MODULE_NAME = PryvApiSwiftKit;
+				PRODUCT_NAME = PryvApiSwiftKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		96803A803B2E59F37844BD89ECE42421 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7F93618D47470FD6190CA8F1AC1B5D7 /* FileBrowser.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1670,27 +1446,27 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/FileBrowser/FileBrowser-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FileBrowser/FileBrowser-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip.modulemap";
-				PRODUCT_MODULE_NAME = XLPagerTabStrip;
-				PRODUCT_NAME = XLPagerTabStrip;
+				MODULEMAP_FILE = "Target Support Files/FileBrowser/FileBrowser.modulemap";
+				PRODUCT_MODULE_NAME = FileBrowser;
+				PRODUCT_NAME = FileBrowser;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		A911D09016ABDBC882ADB5B9C2946E01 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1792,7 +1568,7 @@
 		};
 		BBFF97038ABA6479C15B0DBDB6017618 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D557EB6C77FBB056AD7A0FB0C203920 /* FileBrowser.xcconfig */;
+			baseConfigurationReference = F7F93618D47470FD6190CA8F1AC1B5D7 /* FileBrowser.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1824,62 +1600,9 @@
 			};
 			name = Debug;
 		};
-		D1C3A9887FA027696EA4F68AB3247B46 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/XLPagerTabStrip";
-				IBSC_MODULE = XLPagerTabStrip;
-				INFOPLIST_FILE = "Target Support Files/XLPagerTabStrip/ResourceBundle-XLPagerTabStrip-XLPagerTabStrip-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				PRODUCT_NAME = XLPagerTabStrip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		D43951F6AFB26750906F6BC3783C430A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40472881CF640F11392E5C587BF4BFF8 /* XLPagerTabStrip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/XLPagerTabStrip/XLPagerTabStrip.modulemap";
-				PRODUCT_MODULE_NAME = XLPagerTabStrip;
-				PRODUCT_NAME = XLPagerTabStrip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		DB2B1568A4BD4B3105AD080141C023CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 838ABFB64CAB9011701EE2587B469DBE /* KeychainSwift.xcconfig */;
+			baseConfigurationReference = 6BD3877495F5A14DC9761D12C852FE15 /* KeychainSwift.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1913,94 +1636,9 @@
 			};
 			name = Release;
 		};
-		E195B3DB1196CDC00FC9373C53A11DCD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5EDF92344659B4BECB281DBBEB6A2A8 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		FA1AA2C77E1CD75EF8CE951F0B239BBF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBAFE46AE8CBD154389952E282C8D489 /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0DC3A1F894722359353AC05A476C7644 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip-XLPagerTabStrip" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				58C6AEA56689CFE0595D13BE333D7BC7 /* Debug */,
-				D1C3A9887FA027696EA4F68AB3247B46 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1B1D7CF136EDD2031CF6FC6367D74554 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2028,15 +1666,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5072D6C67A49B25A1EF81BE95F7E67A8 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E195B3DB1196CDC00FC9373C53A11DCD /* Debug */,
-				9685CFCD6D3D92EA2EB3569630E9BFAA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		51862C7464AA1CF30EF93EB5CFBE13D1 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2046,11 +1675,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88D866DA052EF93195E917061DB86D9A /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */ = {
+		683A0DC6EB55991B2AC54738F66D6DE1 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9F0443855CA5B9A50AE6FEE5D362E6B0 /* Debug */,
-				D43951F6AFB26750906F6BC3783C430A /* Release */,
+				547CA13748AF59A24B5E95A81028D476 /* Debug */,
+				1BB1D0EDC79707F2445021914C675CBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DE760D871823BED258E560E18874AAA /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B05106A7357FC86F54192C29203AA86 /* Debug */,
+				7DBBE265414B1FD6C66821AB67755900 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2069,15 +1707,6 @@
 			buildConfigurations = (
 				2BB042CB7DAA8DDEEB3426C5D1BA4C77 /* Debug */,
 				DB2B1568A4BD4B3105AD080141C023CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FB64841567EFE04B1B8780CF0B0DD0A1 /* Build configuration list for PBXNativeTarget "Pods-PryvApiSwiftKitExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FA1AA2C77E1CD75EF8CE951F0B239BBF /* Debug */,
-				421319E94E733945868E162B465B00AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

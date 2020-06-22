@@ -11,9 +11,9 @@ import KeychainSwift
 import PryvApiSwiftKit
 import FileBrowser
 import CoreLocation
-import XLPagerTabStrip
 
 class EventTableViewCell: UITableViewCell {
+    
     @IBOutlet private weak var attachmentImageView: UIImageView!
     @IBOutlet private weak var streamIdLabel: UILabel!
     @IBOutlet private weak var typeLabel: UILabel!
@@ -89,7 +89,7 @@ class EventTableViewCell: UITableViewCell {
     
 }
 
-class ConnectionListTableViewController: UITableViewController, CLLocationManagerDelegate, IndicatorInfoProvider {
+class ConnectionTableViewController: UITableViewController, CLLocationManagerDelegate {
     private let utils = Utils()
     private let keychain = KeychainSwift()
     private let locationManager = CLLocationManager()
@@ -319,11 +319,6 @@ class ConnectionListTableViewController: UITableViewController, CLLocationManage
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Problem encountered when tracking position: \(error)")
-    }
-    
-    // MARK: - Indicator info part
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-      return IndicatorInfo(title: "List")
     }
 
 }
