@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FileBrowser" "${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift" "${PODS_CONFIGURATION_BUILD_DIR}/Mocker" "${PODS_CONFIGURATION_BUILD_DIR}/PryvApiSwiftKit"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FileBrowser" "${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift" "${PODS_CONFIGURATION_BUILD_DIR}/Mocker" "${PODS_CONFIGURATION_BUILD_DIR}/PryvApiSwiftKit" "${PODS_CONFIGURATION_BUILD_DIR}/XLPagerTabStrip"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FileBrowser/FileBrowser.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift/KeychainSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Mocker/Mocker.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PryvApiSwiftKit/PryvApiSwiftKit.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FileBrowser/FileBrowser.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/KeychainSwift/KeychainSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Mocker/Mocker.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PryvApiSwiftKit/PryvApiSwiftKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -framework "FileBrowser" -framework "KeychainSwift" -framework "Mocker" -framework "PryvApiSwiftKit" -framework "QuickLook" -framework "WebKit"
+OTHER_LDFLAGS = $(inherited) -framework "FileBrowser" -framework "Foundation" -framework "KeychainSwift" -framework "Mocker" -framework "PryvApiSwiftKit" -framework "QuickLook" -framework "UIKit" -framework "WebKit" -framework "XLPagerTabStrip"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
