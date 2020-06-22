@@ -16,7 +16,7 @@ enum TimeFilter: Int {
     case month = -31
 }
 
-class ConnectionMapViewController: UIViewController {
+class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var datePicker: UIDatePicker!
@@ -35,6 +35,7 @@ class ConnectionMapViewController: UIViewController {
     override func viewDidLoad() {
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        mapView.delegate = self;
     }
     
     @objc private func dateChanged(sender: UIDatePicker) {
@@ -94,25 +95,37 @@ class ConnectionMapViewController: UIViewController {
     }
     
     private func show(events: [Event]) {
+        var coordinates = [CLLocationCoordinate2D]()
         for i in 0..<events.count {
             let event = events[i]
             if let content = event["content"] as? [String: Any], let latitude = content["latitude"] as? Double, let longitude = content["longitude"] as? Double {
-                let point = MKPointAnnotation()
-                point.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                mapView.addAnnotation(point)
+                let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                coordinates.append(coordinate)
                 
                 if i == 0 {
-                    let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-                    let meters: CLLocationDistance = 5000
-                    let coordinateRegion = MKCoordinateRegion(
-                      center: initialLocation.coordinate,
-                      latitudinalMeters: meters,
-                      longitudinalMeters: meters)
+                    let point = MKPointAnnotation()
+                    point.coordinate = coordinate
+                    mapView.addAnnotation(point)
                     
+                    let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
                     mapView.setRegion(coordinateRegion, animated: true)
                 }
             }
         }
+        
+        showRoute(coordinates: coordinates)
     }
-
+    
+    private func showRoute(coordinates: [CLLocationCoordinate2D]) {
+        let geodesic = MKGeodesicPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(geodesic)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = .systemGreen
+        polylineRenderer.lineWidth = 5
+        return polylineRenderer
+    }
+    
 }
