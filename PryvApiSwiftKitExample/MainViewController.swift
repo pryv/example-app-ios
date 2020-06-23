@@ -16,28 +16,11 @@ class MainViewController: UIViewController {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
     private let appId = "app-swift-example"
-    private let permissions: [Json] = [
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "contribute"
-        ],
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "contribute"
-        ]
-    ]
+    // master token permissions
+    private let permissions: [Json] = [[
+        "streamId": "*",
+        "level": "manage"
+    ]]
     private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     
@@ -92,7 +75,7 @@ class MainViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.endpoint {
-                let token = utils.extractTokenAndEndpoint(from: endpoint)?.token ?? ""
+                let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 openConnection(apiEndpoint: endpoint)
             }

@@ -20,46 +20,36 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
     
-    @IBOutlet private weak var attachmentTitleLabel: UILabel!
-    @IBOutlet private weak var contentTitleLabel: UILabel!
+    @IBOutlet private weak var typeStackView: UIStackView!
+    @IBOutlet private weak var contentStackView: UIStackView!
+    @IBOutlet private weak var attachmentStackView: UIStackView!
     
-    var streamId: String? {
+    var data: (Connection?, Event)? {
         didSet {
-            streamIdLabel.text = streamId!
-        }
-    }
-    
-    var type: String? {
-        didSet {
-            typeLabel.text = type!
-        }
-    }
-    
-    var content: String? {
-        didSet {
-            if content != "nil" { // TODO: check if really == "nil" when image
-                contentLabel.text = content!
-            } else {
-                contentLabel.isHidden = true
-                contentTitleLabel.isHidden = true
+            let (connection, event) = data!
+            guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return }
+            streamIdLabel.text = streamId
+            
+            if type.contains("picture") { // If the event has a picture attached, show it.
+                attachmentImageView.isHidden = false
+                attachmentImageView.image = UIImage(data: (connection?.getImagePreview(eventId: eventId))!)
+            } else { // Otherwise, show the type of content, the actual content and the name of the file attached
+                typeStackView.isHidden = false
+                typeLabel.text = type
+                
+                let contentString = String(describing: content)
+                if !contentString.contains("null") {
+                    contentStackView.isHidden = false
+                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
+                }
+                
+                if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
+                    attachmentStackView.isHidden = false
+                    attachmentLabel.text = fileName
+                }
             }
         }
     }
-    
-    var fileName: String? {
-        didSet {
-            attachmentLabel.isHidden = false
-            attachmentTitleLabel.isHidden = false
-            attachmentLabel.text = fileName!
-        }
-    }
-       
-    //    TODO
-    //    var file: Media? {
-    //        didSet {
-    //            attachmentImageView.image = UIImage(data: file!.data)
-    //        }
-    //    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -69,15 +59,16 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.text = nil
         contentLabel.text = nil
         attachmentLabel.text = nil
-        
-        attachmentLabel.isHidden = true
-        attachmentTitleLabel.isHidden = true
-        
-        contentLabel.isHidden = false
-        contentTitleLabel.isHidden = false
+
+        attachmentImageView.isHidden = true
+        attachmentStackView.isHidden = true
+        contentStackView.isHidden = true
+        typeStackView.isHidden = true
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         attachmentImageView.accessibilityIdentifier = "attachmentImageView"
         attachmentLabel.accessibilityIdentifier = "attachmentLabel"
         streamIdLabel.accessibilityIdentifier = "streamIdLabel"
@@ -110,6 +101,8 @@ class ConnectionListTableViewController: UITableViewController {
         tabBarController?.navigationItem.rightBarButtonItem = addEventButton
         
         tableView.allowsSelection = false
+        tableView.estimatedRowHeight = 100;
+        tableView.rowHeight = UITableView.automaticDimension;
         tableView.accessibilityIdentifier = "eventsTableView"
         
         refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
@@ -128,31 +121,15 @@ class ConnectionListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
-//        TODO
-//        guard let eventId = event["id"] as? String else { print("Error for event at row \(indexPath.row): unknown event") ; return UITableViewCell() }
-        
-        guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
-        cell.streamId = streamId
-        cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
-//        TODO: implement in the lib + use here
-//        cell.file = connection.getAttachment(from: eventId)
+        cell.data = (connection, event)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
-        
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
-            cell.fileName = fileName
-        }
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
 

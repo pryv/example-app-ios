@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ADDatePicker.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FileBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
