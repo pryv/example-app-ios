@@ -20,8 +20,8 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
     
-    @IBOutlet private weak var attachmentTitleLabel: UILabel!
-    @IBOutlet private weak var contentTitleLabel: UILabel!
+    @IBOutlet private weak var contentStackView: UIStackView!
+    @IBOutlet private weak var attachmentStackView: UIStackView!
     
     var streamId: String? {
         didSet {
@@ -40,16 +40,14 @@ class EventTableViewCell: UITableViewCell {
             if content != "nil" { // TODO: check if really == "nil" when image
                 contentLabel.text = content!
             } else {
-                contentLabel.isHidden = true
-                contentTitleLabel.isHidden = true
+                contentStackView.isHidden = true
             }
         }
     }
     
     var fileName: String? {
         didSet {
-            attachmentLabel.isHidden = false
-            attachmentTitleLabel.isHidden = false
+            attachmentStackView.isHidden = false
             attachmentLabel.text = fileName!
         }
     }
@@ -70,11 +68,8 @@ class EventTableViewCell: UITableViewCell {
         contentLabel.text = nil
         attachmentLabel.text = nil
         
-        attachmentLabel.isHidden = true
-        attachmentTitleLabel.isHidden = true
-        
-        contentLabel.isHidden = false
-        contentTitleLabel.isHidden = false
+        attachmentStackView.isHidden = true
+        contentStackView.isHidden = false
     }
     
     override func awakeFromNib() {
@@ -110,6 +105,8 @@ class ConnectionListTableViewController: UITableViewController {
         tabBarController?.navigationItem.rightBarButtonItem = addEventButton
         
         tableView.allowsSelection = false
+        tableView.estimatedRowHeight = 100;
+        tableView.rowHeight = UITableView.automaticDimension;
         tableView.accessibilityIdentifier = "eventsTableView"
         
         refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
@@ -128,10 +125,6 @@ class ConnectionListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
@@ -144,7 +137,7 @@ class ConnectionListTableViewController: UITableViewController {
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: " ")
+        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "") // TODO: format
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row
