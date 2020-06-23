@@ -137,7 +137,7 @@ class ConnectionListTableViewController: UITableViewController {
         guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "") // TODO: format
+        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // TODO: format
 //        TODO: implement in the lib + use here
 //        cell.file = connection.getAttachment(from: eventId)
         cell.addAttachmentButton.tag = indexPath.row

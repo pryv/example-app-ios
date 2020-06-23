@@ -1,5 +1,4 @@
 PODS:
-  - ADDatePicker (1.0.0)
   - Alamofire (5.2.1)
   - FileBrowser (1.0.0)
   - KeychainSwift (19.0.0)
@@ -7,20 +6,21 @@ PODS:
   - PryvApiSwiftKit (0.1.2):
     - Alamofire
     - Mocker
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - ADDatePicker
   - FileBrowser (~> 1.0)
   - KeychainSwift
   - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `get-event-streamed`)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - ADDatePicker
     - Alamofire
     - FileBrowser
     - KeychainSwift
     - Mocker
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
@@ -33,13 +33,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
-  ADDatePicker: 62cd9bb25b71b261bbd008020ea9347b84979873
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PryvApiSwiftKit: 6e12e7fbe6ae74cb047bbe3ef8a3604564b73b32
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 6baff92c6c630952a88154ff1f7ae7ffc9e682ee
+PODFILE CHECKSUM: 02cdb1d05a4bd0a659f78fd941daa7374519f792
 
 COCOAPODS: 1.8.4

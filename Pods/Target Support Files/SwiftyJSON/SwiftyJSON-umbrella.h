@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "ADHorizontalCalendar.h"
 
-FOUNDATION_EXPORT double ADDatePickerVersionNumber;
-FOUNDATION_EXPORT const unsigned char ADDatePickerVersionString[];
+FOUNDATION_EXPORT double SwiftyJSONVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftyJSONVersionString[];
 
