@@ -136,15 +136,19 @@ class ConnectionListTableViewController: UITableViewController {
         
         guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
-        cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
-        cell.file = connection?.getImagePreview(eventId: eventId) // TODO: check if image
+        
+        if type.contains("picture") {
+            cell.file = connection?.getImagePreview(eventId: eventId)
+        } else {
+            cell.type = type
+            cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
+            if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
+                cell.fileName = fileName
+            }
+        }
+        
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
-        
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
-            cell.fileName = fileName
-        }
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
 
