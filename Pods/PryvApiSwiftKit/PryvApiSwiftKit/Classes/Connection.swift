@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 public typealias Event = Json
 public typealias Parameters = [String: String]
@@ -24,7 +23,7 @@ public class Connection {
     /// - Parameter apiEndpoint
     public init(apiEndpoint: String) {
         self.apiEndpoint = apiEndpoint
-        (self.endpoint, self.token) = utils.extractTokenAndEndpoint(from: apiEndpoint) ?? ("", nil)
+        (self.endpoint, self.token) = utils.extractTokenAndEndpoint(apiEndpoint: apiEndpoint) ?? ("", nil)
     }
     
     // MARK: - public library
@@ -116,10 +115,6 @@ public class Connection {
         
         task.resume()
     }
-
-    public func getEventsStreamed(params: Json? = nil, forEachEvent: ((Event) -> ())? = nil) {
-         // TODO: implement
-    }
     
     /// Create an event with attached file
     /// - Parameters:
@@ -172,6 +167,19 @@ public class Connection {
         }
         
         return nil
+    }
+    
+    /// Get an image preview for a given event, if this event contains an image attachment
+    /// - Parameter eventId
+    /// - Returns: the data containing the preview
+    /// # Note
+    ///     This function is only applicable for events that contain image. In case the event does not have any image attached, its behavior is undefined.
+    public func getImagePreview(eventId: String) -> Data? {
+        let previewPath = "\(eventId)?w=256&h=256&auth=\(token ?? "")"
+        let string = apiEndpoint.hasSuffix("/") ? apiEndpoint + "previews/events/\(previewPath)" : apiEndpoint + "/previews/events/\(previewPath)"
+        guard let url = URL(string: string) else { print("problem encountered: cannot access register url \(string)") ; return nil }
+        let nsData = NSData(contentsOf: url)
+        return nsData as Data?
     }
     
     // MARK: - private helpers functions for the library

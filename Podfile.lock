@@ -1,41 +1,37 @@
 PODS:
-  - Alamofire (5.2.1)
   - FileBrowser (1.0.0)
   - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
   - PryvApiSwiftKit (0.1.2):
-    - Alamofire
     - Mocker
 
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `get-event-streamed`)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Alamofire
     - FileBrowser
     - KeychainSwift
     - Mocker
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: get-event-streamed
+    :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: c7ead6ef7afc21eb7a5d542aa13ce4cf7a7d5af7
+    :commit: 26db74ab8777caebc074cfa66f9f4f2fba65707a
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
-  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: 6e12e7fbe6ae74cb047bbe3ef8a3604564b73b32
+  PryvApiSwiftKit: 20e85e814b3d66e4aad95c18a045d042577d2c25
 
-PODFILE CHECKSUM: 4c86c01e3533f8d752e7a0d650a92215e996b77b
+PODFILE CHECKSUM: 28525c0d39ddb943716f7d242ce928e7bb9167d3
 
 COCOAPODS: 1.8.4

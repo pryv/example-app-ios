@@ -16,28 +16,11 @@ class MainViewController: UIViewController {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
     private let appId = "app-swift-example"
-    private let permissions: [Json] = [
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "contribute"
-        ],
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "contribute"
-        ]
-    ]
+    // master token permissions
+    private let permissions: [Json] = [[
+        "streamId": "*",
+        "level": "manage"
+    ]]
     private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     
@@ -92,7 +75,7 @@ class MainViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.endpoint {
-                let token = utils.extractTokenAndEndpoint(from: endpoint)?.token ?? ""
+                let token = utils.extractTokenAndEndpoint(apiEndpoint: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 openConnection(apiEndpoint: endpoint)
             }
@@ -156,10 +139,10 @@ class MainViewController: UIViewController {
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         keychain.set(apiEndpoint, forKey: appId)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionVC") as! ConnectionTableViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.serviceName = service.info()?.name
         vc.connection = Connection(apiEndpoint: apiEndpoint)
-        vc.contributePermissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
+        vc.permissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }

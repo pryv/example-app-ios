@@ -10,8 +10,8 @@ import UIKit
 import KeychainSwift
 import PryvApiSwiftKit
 import FileBrowser
-import CoreLocation
 
+/// A custom cell to show the details of an event
 class EventTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var attachmentImageView: UIImageView!
@@ -21,46 +21,36 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
     
-    @IBOutlet private weak var attachmentTitleLabel: UILabel!
-    @IBOutlet private weak var contentTitleLabel: UILabel!
+    @IBOutlet private weak var typeStackView: UIStackView!
+    @IBOutlet private weak var contentStackView: UIStackView!
+    @IBOutlet private weak var attachmentStackView: UIStackView!
     
-    var streamId: String? {
+    var data: (Connection?, Event)? {
         didSet {
-            streamIdLabel.text = streamId!
-        }
-    }
-    
-    var type: String? {
-        didSet {
-            typeLabel.text = type!
-        }
-    }
-    
-    var content: String? {
-        didSet {
-            if content != "nil" { // TODO: check if really == "nil" when image
-                contentLabel.text = content!
-            } else {
-                contentLabel.isHidden = true
-                contentTitleLabel.isHidden = true
+            let (connection, event) = data!
+            guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return }
+            streamIdLabel.text = streamId
+            
+            if type.contains("picture") { // If the event has a picture attached, show it.
+                attachmentImageView.isHidden = false
+                attachmentImageView.image = UIImage(data: (connection?.getImagePreview(eventId: eventId))!)
+            } else { // Otherwise, show the type of content, the actual content and the name of the file attached
+                typeStackView.isHidden = false
+                typeLabel.text = type
+                
+                let contentString = String(describing: content)
+                if !contentString.contains("null") {
+                    contentStackView.isHidden = false
+                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // formatting the json string to make it readable
+                }
+                
+                if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
+                    attachmentStackView.isHidden = false
+                    attachmentLabel.text = fileName
+                }
             }
         }
     }
-    
-    var fileName: String? {
-        didSet {
-            attachmentLabel.isHidden = false
-            attachmentTitleLabel.isHidden = false
-            attachmentLabel.text = fileName!
-        }
-    }
-       
-    //    TODO
-    //    var file: Media? {
-    //        didSet {
-    //            attachmentImageView.image = UIImage(data: file!.data)
-    //        }
-    //    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -70,15 +60,16 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.text = nil
         contentLabel.text = nil
         attachmentLabel.text = nil
-        
-        attachmentLabel.isHidden = true
-        attachmentTitleLabel.isHidden = true
-        
-        contentLabel.isHidden = false
-        contentTitleLabel.isHidden = false
+
+        attachmentImageView.isHidden = true
+        attachmentStackView.isHidden = true
+        contentStackView.isHidden = true
+        typeStackView.isHidden = true
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         attachmentImageView.accessibilityIdentifier = "attachmentImageView"
         attachmentLabel.accessibilityIdentifier = "attachmentLabel"
         streamIdLabel.accessibilityIdentifier = "streamIdLabel"
@@ -89,12 +80,9 @@ class EventTableViewCell: UITableViewCell {
     
 }
 
-class ConnectionTableViewController: UITableViewController, CLLocationManagerDelegate {
-    private let utils = Utils()
+class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
-    private let locationManager = CLLocationManager()
-    
-    private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
+    private var refreshEnabled = true // set to true when a new event is added or an event is modified, avoids loading the events if no change
     private var events = [Event]()
     
     var appId: String?
@@ -106,39 +94,27 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.accessibilityIdentifier = "connectionNavBar"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
-        logoutButton.accessibilityIdentifier = "logoutButton"
-        self.navigationItem.leftBarButtonItem = logoutButton
-        
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
-        self.navigationItem.rightBarButtonItem = addEventButton
-        
-        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
-            navigationItem.title = "\(service) - \(username)"
-        } else {
-             navigationItem.title = "Last events"
-        }
-        navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.hidesBackButton = true
+        tabBarController?.navigationItem.rightBarButtonItem = addEventButton
         
         tableView.allowsSelection = false
+        tableView.estimatedRowHeight = 100;
+        tableView.rowHeight = UITableView.automaticDimension;
         tableView.accessibilityIdentifier = "eventsTableView"
         
         refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
-
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.requestAlwaysAuthorization()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     // MARK: - Table view data source
@@ -146,31 +122,15 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
-//        TODO
-//        guard let eventId = event["id"] as? String else { print("Error for event at row \(indexPath.row): unknown event") ; return UITableViewCell() }
-        
-        guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
-        cell.streamId = streamId
-        cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
-//        TODO: implement in the lib + use here
-//        cell.file = connection.getAttachment(from: eventId)
+        cell.data = (connection, event)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
-        
-        if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
-            cell.fileName = fileName
-        }
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
 
@@ -178,19 +138,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
     }
     
     // MARK: - Table view interactions
-    
-    /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
-    @objc private func logout() {
-        let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
-            if let key = self.appId {
-                self.keychain.delete(key)
-            }
-            self.navigationController?.popToRootViewController(animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
-        self.present(alert, animated: true, completion: nil)
-    }
     
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
@@ -271,54 +218,6 @@ class ConnectionTableViewController: UITableViewController, CLLocationManagerDel
             self.tableView.reloadData()
         }
         self.refreshControl?.endRefreshing()
-    }
-        
-    // MARK: - location tracking
-    
-    /// Checks the result of asking for location authorization
-    /// - Parameters:
-    ///   - manager: location managaer
-    ///   - status: the status of the authorization request
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            locationManager.startUpdatingLocation()
-//            locationManager.startMonitoringSignificantLocationChanges()
-        }
-    }
-    
-    /// Manage newly received location updates
-    /// - Parameters:
-    ///   - manager: location manager
-    ///   - locations: array with the latest location(s)
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var apiCalls = [APICall]()
-        for location in locations {
-            let params: Json = [
-                "streamId": "diary",
-                "type": "position/wgs84",
-                "content": [
-                  "latitude": location.coordinate.latitude,
-                  "longitude": location.coordinate.longitude,
-                  "altitude": location.altitude,
-                  "horizontalAccuracy": location.horizontalAccuracy,
-                  "verticalAccuracy": location.verticalAccuracy,
-                  "speed": location.speed
-                ]
-            ]
-            
-            let apiCall: APICall = [
-                "method": "events.create",
-                "params": params
-            ]
-            apiCalls.append(apiCall)
-        }
-        
-        print("Sending location...")
-        guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Problem encountered when tracking position: \(error)")
     }
 
 }

@@ -12,7 +12,7 @@ import Mocker
 import PryvApiSwiftKit
 @testable import PryvApiSwiftKitExample
 
-class ConnectionUITests: XCTestCase {
+class ConnectionListUITests: XCTestCase {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
     
