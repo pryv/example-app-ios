@@ -16,28 +16,10 @@ class MainViewController: UIViewController {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
     private let appId = "app-swift-example"
-    private let permissions: [Json] = [
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "contribute"
-        ],
-        [
-            "streamId": "weight",
-            "defaultName": "Weight",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "read"
-        ],
-        [
-            "streamId": "diary",
-            "defaultName": "Diary",
-            "level": "contribute"
-        ]
-    ]
+    private let permissions: [Json] = [[
+        "streamId": "*",
+        "level": "manage"
+    ]]
     private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     
