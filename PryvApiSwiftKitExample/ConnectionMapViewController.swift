@@ -72,6 +72,8 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     /// - Parameters:
     ///   - until: the date corresponding to the `toTime` in the `events.get` method
     ///   - during: the duration of the timeslot to show
+    /// # Note
+    ///     Here, we use the streamed get events method. Indeed, we may get a lot of events, which requires streaming.
     private func getEvents(until: Date, during: TimeFilter) {
         var daysComponent = DateComponents()
         daysComponent.day = during.rawValue
@@ -89,18 +91,17 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
             params["toTime"] = endOfDay.timeIntervalSince1970
         }
         
-        let request = [
-            [
-                "method": "events.get",
-                "params": params
-            ]
-        ]
-        
-        if let result = connection!.api(APICalls: request) {
-            cleanMapView()
-            show(events: result.filter{ event in
-                (event["type"] as? String)?.contains("position") ?? false
-            })
+        var events = [Event]()
+        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }) { result in
+            switch result {
+            case .failure(_):
+                return
+            case .success(_):
+                self.cleanMapView()
+                self.show(events: events.filter{ event in
+                    (event["type"] as? String)?.contains("position") ?? false
+                })
+            }
         }
     }
     

@@ -202,6 +202,8 @@ class ConnectionListTableViewController: UITableViewController {
     }
     
     /// Updates the list of events shown (only if an event was added)
+    /// # Note
+    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
     @objc private func getEvents() {
         if refreshEnabled {
             refreshEnabled = false

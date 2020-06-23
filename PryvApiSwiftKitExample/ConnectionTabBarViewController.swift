@@ -57,7 +57,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         navigationItem.leftBarButtonItem = logoutButton
         navigationItem.hidesBackButton = true
         
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
             navigationItem.title = "\(service) - \(username)"
         } else {
             navigationItem.title = "Last events"
