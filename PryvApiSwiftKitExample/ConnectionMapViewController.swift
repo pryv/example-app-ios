@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 import PryvApiSwiftKit
 
-enum TimeFilter: Int {
+/// Filter for the events timeslot to show on the map
+private enum TimeFilter: Int {
     case day = 1
     case week = -7
     case month = -31
@@ -39,7 +40,11 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
     }
     
-    @objc private func dateChanged(datePicker: UIDatePicker) {
+    // MARK: - Interactions and settings for the events to show on the map
+    
+    /// Filters the list of events according to the newly set date in the date picker
+    /// - Parameter datePicker
+    @objc private func dateChanged(_ datePicker: UIDatePicker) {
         currentDate = datePicker.date
         if calendar.isDateInToday(currentDate) {
             currentDate = Date()
@@ -47,8 +52,10 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         getEvents(until: currentDate, during: duration)
     }
     
-    @IBAction private func switchFilter(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+    /// Filters the list of events according to the newly set duration in the segmented control
+    /// - Parameter segControl: the segmented control with day, week or month duration filter
+    @IBAction private func switchFilter(_ segControl: UISegmentedControl) {
+        switch segControl.selectedSegmentIndex {
         case 0:
             duration = .day
         case 1:
@@ -61,16 +68,20 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         getEvents(until: currentDate, during: duration)
     }
     
+    /// Loads the events from the Pryv backend using `events.get` method, filters them by time/duration and shows them on the map
+    /// - Parameters:
+    ///   - until: the date corresponding to the `toTime` in the `events.get` method
+    ///   - during: the duration of the timeslot to show
     private func getEvents(until: Date, during: TimeFilter) {
         var daysComponent = DateComponents()
         daysComponent.day = during.rawValue
         
         var params = Json()
         switch during {
-        case .day:
+        case .day: // Take the time of this day at midnight until the time of this day at 23:59
             params["fromTime"] = calendar.startOfDay(for: until).timeIntervalSince1970
             params["toTime"] = calendar.date(byAdding: daysComponent, to: calendar.startOfDay(for: until))?.timeIntervalSince1970
-        case .week, .month:
+        case .week, .month: // Take the time from the selected day - duration in days until the selected day
             var oneDayComponent = DateComponents()
             oneDayComponent.day = 1
             let endOfDay = calendar.date(byAdding: oneDayComponent, to: calendar.startOfDay(for: until))!
@@ -93,6 +104,11 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    /// Show the events on the map using markers and paths
+    /// The last position will have a marker, the others will be drawn using a path between them
+    /// # Note
+    ///     This path does not follow any route, it is a simple straight line
+    /// - Parameter events
     private func show(events: [Event]) {
         var coordinates = [CLLocationCoordinate2D]()
         for i in 0..<events.count {
@@ -123,11 +139,16 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    /// Draw the path between the coordinates on the map
+    /// # Note
+    ///     This path does not follow any route, it is a simple straight line
+    /// - Parameter coordinates
     private func showRoute(coordinates: [CLLocationCoordinate2D]) {
         let geodesic = MKGeodesicPolyline(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(geodesic)
     }
     
+    /// Clean the map view by remove all the paths and markers
     private func cleanMapView() {
         let allAnnotations = mapView.annotations
         mapView.removeAnnotations(allAnnotations)
@@ -138,6 +159,11 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK:- map view delegate functions
     
+    /// Render the mapView details such as the paths
+    /// - Parameters:
+    ///   - mapView
+    ///   - overlay: the paths overlay
+    /// - Returns: a renderer for the paths
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = .systemGreen

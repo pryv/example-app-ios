@@ -11,6 +11,7 @@ import KeychainSwift
 import PryvApiSwiftKit
 import FileBrowser
 
+/// A custom cell to show the details of an event
 class EventTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var attachmentImageView: UIImageView!
@@ -40,7 +41,7 @@ class EventTableViewCell: UITableViewCell {
                 let contentString = String(describing: content)
                 if !contentString.contains("null") {
                     contentStackView.isHidden = false
-                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
+                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // formatting the json string to make it readable
                 }
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
@@ -81,7 +82,7 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
-    private var refreshEnabled = true // set to true when a new event is added or an event is modified => avoids loading the events if no change
+    private var refreshEnabled = true // set to true when a new event is added or an event is modified, avoids loading the events if no change
     private var events = [Event]()
     
     var appId: String?

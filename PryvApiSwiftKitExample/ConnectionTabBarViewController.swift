@@ -41,6 +41,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         configureLocation()
     }
     
+    /// Configures the location tracking parameters
     private func configureLocation() {
         locationManager.delegate = self
         locationManager.allowsBackgroundLocationUpdates = true
@@ -49,6 +50,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         locationManager.requestAlwaysAuthorization()
     }
     
+    /// Configures the UI for the view with the log out button and the title
     private func configureUI() {
         let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
         logoutButton.accessibilityIdentifier = "logoutButton"
@@ -84,8 +86,13 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     ///   - status: the status of the authorization request
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
+            /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
+                Let this line uncommented to have frequent location notifications */
             locationManager.startUpdatingLocation()
-            //            locationManager.startMonitoringSignificantLocationChanges()
+            
+            /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
+                Uncomment this line and comment the line below to avoid using too much power */
+            // locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     
@@ -120,6 +127,10 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
     }
     
+    /// Manage newly received location updates in case of an error
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array with the latest location(s)
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Problem encountered when tracking position: \(error)")
     }
