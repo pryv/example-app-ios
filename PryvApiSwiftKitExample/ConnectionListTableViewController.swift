@@ -37,7 +37,7 @@ class EventTableViewCell: UITableViewCell {
     
     var content: String? {
         didSet {
-            if content != "nil" { // TODO: check if really == "nil" when image
+            if !(content?.contains("null") ?? true) {
                 contentLabel.text = content!
             } else {
                 contentStackView.isHidden = true
@@ -51,13 +51,15 @@ class EventTableViewCell: UITableViewCell {
             attachmentLabel.text = fileName!
         }
     }
-       
-    //    TODO
-    //    var file: Media? {
-    //        didSet {
-    //            attachmentImageView.image = UIImage(data: file!.data)
-    //        }
-    //    }
+    
+    var file: Data? {
+        didSet {
+            if let data = file {
+                attachmentImageView.isHidden = false
+                attachmentImageView.image = UIImage(data: data)
+            }
+        }
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -131,15 +133,12 @@ class ConnectionListTableViewController: UITableViewController {
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
-//        TODO
-//        guard let eventId = event["id"] as? String else { print("Error for event at row \(indexPath.row): unknown event") ; return UITableViewCell() }
         
-        guard let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
+        guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
         cell.streamId = streamId
         cell.type = type
-        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // TODO: format
-//        TODO: implement in the lib + use here
-//        cell.file = connection.getAttachment(from: eventId)
+        cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
+        cell.file = connection?.getImagePreview(eventId: eventId) // TODO: check if image
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         

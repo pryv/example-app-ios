@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 public typealias Event = Json
 public typealias Parameters = [String: String]
@@ -24,7 +23,7 @@ public class Connection {
     /// - Parameter apiEndpoint
     public init(apiEndpoint: String) {
         self.apiEndpoint = apiEndpoint
-        (self.endpoint, self.token) = utils.extractTokenAndEndpoint(from: apiEndpoint) ?? ("", nil)
+        (self.endpoint, self.token) = utils.extractTokenAndEndpoint(apiEndpoint: apiEndpoint) ?? ("", nil)
     }
     
     // MARK: - public library
@@ -116,40 +115,6 @@ public class Connection {
         
         task.resume()
     }
-
-    /// Streamed [get event](https://api.pryv.com/reference/#get-events)
-    /// - Parameters:
-    ///   - queryParams: see `events.get` parameters
-    ///   - forEachEvent: function taking one event as parameter, will be called for each event
-    ///   - log: function taking the result of the request as parameter
-    /// - Returns: the two escaping callbacks to handle the results: the events and the success/failure of the request 
-    public func getEventsStreamed(queryParams: Json? = Json(), forEachEvent: @escaping (Event) -> (), log: @escaping (Result<String, Error>) -> ()) {
-        let parameters: Json = [
-            "method": "events.get",
-            "params": queryParams!
-        ]
-        
-        var request = URLRequest(url: URL(string: endpoint)!)
-        request.httpMethod = "POST"
-        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.setValue(token ?? "", forHTTPHeaderField: "Authorization")
-        request.httpBody = try! JSONSerialization.data(withJSONObject: [parameters])
-        
-        var partialChunk: String? = nil
-        AF.streamRequest(request).responseStream { stream in
-            switch stream.event {
-            case let .stream(result):
-                switch result {
-                case let .success(data):
-                    guard let string = String(data: data, encoding: .utf8) else { return }
-                    let remaining = self.parseEventsChunked(string: (partialChunk ?? "") + string, forEachEvent: forEachEvent)
-                    partialChunk = remaining
-                }
-            case .complete(_):
-                log(.success("Streaming completed"))
-            }
-        }
-    }
     
     /// Create an event with attached file
     /// - Parameters:
@@ -202,6 +167,19 @@ public class Connection {
         }
         
         return nil
+    }
+    
+    /// Get an image preview for a given event, if this event contains an image attachment
+    /// - Parameter eventId
+    /// - Returns: the data containing the preview
+    /// # Note
+    ///     This function is only applicable for events that contain image. In case the event does not have any image attached, its behavior is undefined.
+    public func getImagePreview(eventId: String) -> Data? {
+        let previewPath = "\(eventId)?w=256&h=256&auth=\(token ?? "")"
+        let string = apiEndpoint.hasSuffix("/") ? apiEndpoint + "previews/events/\(previewPath)" : apiEndpoint + "/previews/events/\(previewPath)"
+        guard let url = URL(string: string) else { print("problem encountered: cannot access register url \(string)") ; return nil }
+        let nsData = NSData(contentsOf: url)
+        return nsData as Data?
     }
     
     // MARK: - private helpers functions for the library
@@ -308,64 +286,6 @@ public class Connection {
         body.append("--\(boundary)--\r\n")
         
         return body
-    }
-    
-    /// Parse a string containing a chunk of the `events.get` response
-    /// - Parameters:
-    ///   - string: the string corresponding to the chunk of the `events.get` response
-    ///   - forEachEvent: function taking one event as parameter, will be called for each event
-    /// - Returns: the remaining string, if an event if not entirely received and whether the response was entirely received, i.e. streaming is completed
-    private func parseEventsChunked(string: String, forEachEvent: @escaping (Event) -> ()) -> String? {
-        let start = "\"results\":[{\"events\":["
-        let end = "]}]"
-        let eventsString = string.replacingOccurrences(of: start, with: "").replacingOccurrences(of: end, with: "")
-
-        let chunks = eventsString.split(separator: "{").filter({!$0.contains("meta") && !$0.contains("apiVersion")}).map({String($0)})
-        var events = [String]()
-        var last: String? = nil
-        for chunk in chunks {
-            if chunk.last == "[" { // if it has an attachment
-                last = chunk + "{"
-            }
-            else {
-                if let preceding = last {
-                    if chunk.contains("]") {
-                        last = nil
-                        events.append(preceding + chunk)
-                    }
-                    else {
-                        last = preceding + chunk + "{"
-                    }
-                } else {
-                    events.append(chunk)
-                }
-            }
-        }
-        
-        if let preceding = last { events.append(preceding) }
-
-        var remaining: String? = nil
-        events = events.map { substring in
-                var event = substring
-                if event.hasSuffix(",") { event.removeLast() }
-                if !event.hasSuffix("}") { remaining = event ; return nil }
-                if !event.hasPrefix("{") { event = "{" + event}
-                if event.hasSuffix("}}") { event.removeLast() }
-                return event
-            }
-        .filter{$0 != nil}.map{$0!}
-
-        let results: [Event?] = events.map { event in
-            if let data = event.data(using: .utf8), let json = try? JSONSerialization.jsonObject(with: data), let dictionary = json as? Event {
-                return dictionary } else {  return nil }
-        }
-        results.forEach({ event in if let _ = event { forEachEvent(event!) } })
-        
-        #if DEBUG
-        print("Batch size: \(results.count)")
-        #endif
-        
-        return remaining
     }
     
 }
