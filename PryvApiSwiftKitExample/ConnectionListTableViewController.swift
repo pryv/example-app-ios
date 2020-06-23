@@ -20,6 +20,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
     
+    @IBOutlet private weak var typeStackView: UIStackView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var attachmentStackView: UIStackView!
     
@@ -31,6 +32,7 @@ class EventTableViewCell: UITableViewCell {
     
     var type: String? {
         didSet {
+            typeStackView.isHidden = false
             typeLabel.text = type!
         }
     }
@@ -38,9 +40,8 @@ class EventTableViewCell: UITableViewCell {
     var content: String? {
         didSet {
             if !(content?.contains("null") ?? true) {
+                contentStackView.isHidden = false
                 contentLabel.text = content!
-            } else {
-                contentStackView.isHidden = true
             }
         }
     }
@@ -69,9 +70,11 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.text = nil
         contentLabel.text = nil
         attachmentLabel.text = nil
-        
+
+        attachmentImageView.isHidden = true
         attachmentStackView.isHidden = true
-        contentStackView.isHidden = false
+        contentStackView.isHidden = true
+        typeStackView.isHidden = true
     }
     
     override func awakeFromNib() {

@@ -9,7 +9,7 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
-  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'show-event-content'
+  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
   pod 'KeychainSwift'
   pod 'FileBrowser', '~> 1.0'
 

@@ -8,7 +8,7 @@ PODS:
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `show-event-content`)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -18,12 +18,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: show-event-content
+    :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 9be15d60e8bf200a19b034e1d6609cedc66a435b
+    :commit: 09288991f48a11e64b37b4911ec3946e7cb0ca67
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PryvApiSwiftKit: 20e85e814b3d66e4aad95c18a045d042577d2c25
 
-PODFILE CHECKSUM: 9e5672f2673bd04929756767b1686607a8cf5f15
+PODFILE CHECKSUM: 28525c0d39ddb943716f7d242ce928e7bb9167d3
 
 COCOAPODS: 1.8.4

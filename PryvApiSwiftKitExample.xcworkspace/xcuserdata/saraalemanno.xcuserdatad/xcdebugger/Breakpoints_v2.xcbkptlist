@@ -215,31 +215,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FDAE8993-BCB0-4741-B1BF-272FDB9D955F"
+            uuid = "9E561BE8-AC11-4E4F-8F26-41DAD6D24309"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PryvApiSwiftKitExample/ConnectionListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "addEvent()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "432C5893-6AD1-4EBF-9558-F6ED6E973CB1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PryvApiSwiftKitExample/ConnectionListTableViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -247,81 +231,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B502FB1D-466D-47D7-9FFB-F39BDB336AE5"
+            uuid = "E097641F-BC2C-4A0E-B569-AB26646849B0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PryvApiSwiftKitExample/ConnectionListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "file"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "type"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "206A9C37-E60A-456C-82E8-12C9BEA6C216"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "getImagePreview(eventId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "206A9C37-E60A-456C-82E8-12C9BEA6C216 - dd05b56361bb3296"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PryvApiSwiftKit.Connection.getImagePreview(eventId: Swift.String) -&gt; Swift.Optional&lt;Foundation.Data&gt;"
-                  moduleName = "PryvApiSwiftKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "2198">
-               </Location>
-               <Location
-                  uuid = "206A9C37-E60A-456C-82E8-12C9BEA6C216 - dd05b56361bb3296"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PryvApiSwiftKit.Connection.getImagePreview(eventId: Swift.String) -&gt; Swift.Optional&lt;Foundation.Data&gt;"
-                  moduleName = "PryvApiSwiftKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/saraalemanno/Documents/GitHub/app-swift-example/Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "2727">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5EB92A49-69A7-460F-8EA8-ED315CFBBFAD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/PryvApiSwiftKit/PryvApiSwiftKit/Classes/Connection.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "getImagePreview(eventId:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
