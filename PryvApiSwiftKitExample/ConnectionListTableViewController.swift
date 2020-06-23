@@ -24,40 +24,29 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var attachmentStackView: UIStackView!
     
-    var streamId: String? {
+    var data: (Connection?, Event)? {
         didSet {
-            streamIdLabel.text = streamId!
-        }
-    }
-    
-    var type: String? {
-        didSet {
-            typeStackView.isHidden = false
-            typeLabel.text = type!
-        }
-    }
-    
-    var content: String? {
-        didSet {
-            if !(content?.contains("null") ?? true) {
-                contentStackView.isHidden = false
-                contentLabel.text = content!
-            }
-        }
-    }
-    
-    var fileName: String? {
-        didSet {
-            attachmentStackView.isHidden = false
-            attachmentLabel.text = fileName!
-        }
-    }
-    
-    var file: Data? {
-        didSet {
-            if let data = file {
+            let (connection, event) = data!
+            guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return }
+            streamIdLabel.text = streamId
+            
+            if type.contains("picture") { // If the event has a picture attached, show it.
                 attachmentImageView.isHidden = false
-                attachmentImageView.image = UIImage(data: data)
+                attachmentImageView.image = UIImage(data: (connection?.getImagePreview(eventId: eventId))!)
+            } else { // Otherwise, show the type of content, the actual content and the name of the file attached
+                typeStackView.isHidden = false
+                typeLabel.text = type
+                
+                let contentString = String(describing: content)
+                if !contentString.contains("null") {
+                    contentStackView.isHidden = false
+                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
+                }
+                
+                if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
+                    attachmentStackView.isHidden = false
+                    attachmentLabel.text = fileName
+                }
             }
         }
     }
@@ -78,6 +67,8 @@ class EventTableViewCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         attachmentImageView.accessibilityIdentifier = "attachmentImageView"
         attachmentLabel.accessibilityIdentifier = "attachmentLabel"
         streamIdLabel.accessibilityIdentifier = "streamIdLabel"
@@ -136,20 +127,7 @@ class ConnectionListTableViewController: UITableViewController {
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
-        
-        guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return UITableViewCell() }
-        cell.streamId = streamId
-        
-        if type.contains("picture") {
-            cell.file = connection?.getImagePreview(eventId: eventId)
-        } else {
-            cell.type = type
-            cell.content = String(describing: content).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "")
-            if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
-                cell.fileName = fileName
-            }
-        }
-        
+        cell.data = (connection, event)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         

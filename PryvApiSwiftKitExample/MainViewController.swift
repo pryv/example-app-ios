@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
     private let utils = Utils()
     private let appId = "app-swift-example"
+    // master token permissions
     private let permissions: [Json] = [[
         "streamId": "*",
         "level": "manage"
