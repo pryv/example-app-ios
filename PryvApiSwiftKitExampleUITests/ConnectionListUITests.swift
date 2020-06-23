@@ -79,10 +79,6 @@ class ConnectionListUITests: XCTestCase {
         app.sheets.element.buttons["Event with attachment"].tap()
         sleep(1)
         
-        
-        let collectionViewsQuery = XCUIApplication().alerts["Create an event"].scrollViews.otherElements.collectionViews
-        collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["streamIdField"]/*[[".cells",".textFields[\"Stream id\"]",".textFields[\"streamIdField\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-        collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["typeField"]/*[[".cells",".textFields[\"Type\"]",".textFields[\"typeField\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.textFields["streamIdField"].tap()
         app.textFields["streamIdField"].typeText("weight")
 

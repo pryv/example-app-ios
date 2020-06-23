@@ -28,22 +28,23 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     var connection: Connection? {
         didSet {
             loadViewIfNeeded()
-            getEvents(toDate: currentDate, duration)
+            getEvents(until: currentDate, during: duration)
         }
     }
     
     override func viewDidLoad() {
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-        mapView.delegate = self;
+        
+        mapView.delegate = self
     }
     
-    @objc private func dateChanged(sender: UIDatePicker) {
-        currentDate = sender.date
+    @objc private func dateChanged(datePicker: UIDatePicker) {
+        currentDate = datePicker.date
         if calendar.isDateInToday(currentDate) {
             currentDate = Date()
         }
-        getEvents(toDate: currentDate, duration)
+        getEvents(until: currentDate, during: duration)
     }
     
     @IBAction private func switchFilter(_ sender: UISegmentedControl) {
@@ -57,23 +58,23 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         default:
             return
         }
-        getEvents(toDate: currentDate, duration)
+        getEvents(until: currentDate, during: duration)
     }
     
-    private func getEvents(toDate: Date, _ duration: TimeFilter) {
-        var dateComponent = DateComponents()
-        dateComponent.day = duration.rawValue
+    private func getEvents(until: Date, during: TimeFilter) {
+        var daysComponent = DateComponents()
+        daysComponent.day = during.rawValue
         
         var params = Json()
-        switch duration {
+        switch during {
         case .day:
-            params["fromTime"] = calendar.startOfDay(for: toDate).timeIntervalSince1970
-            params["toTime"] = calendar.date(byAdding: dateComponent, to: calendar.startOfDay(for: toDate))?.timeIntervalSince1970
+            params["fromTime"] = calendar.startOfDay(for: until).timeIntervalSince1970
+            params["toTime"] = calendar.date(byAdding: daysComponent, to: calendar.startOfDay(for: until))?.timeIntervalSince1970
         case .week, .month:
-            var dayComp = DateComponents()
-            dayComp.day = 1
-            let endOfDay = calendar.date(byAdding: dayComp, to: calendar.startOfDay(for: toDate))!
-            params["fromTime"] = calendar.date(byAdding: dateComponent, to: endOfDay)?.timeIntervalSince1970
+            var oneDayComponent = DateComponents()
+            oneDayComponent.day = 1
+            let endOfDay = calendar.date(byAdding: oneDayComponent, to: calendar.startOfDay(for: until))!
+            params["fromTime"] = calendar.date(byAdding: daysComponent, to: endOfDay)?.timeIntervalSince1970
             params["toTime"] = endOfDay.timeIntervalSince1970
         }
         
@@ -83,6 +84,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
                 "params": params
             ]
         ]
+        
         if let result = connection!.api(APICalls: request) {
             cleanMapView()
             show(events: result.filter{ event in
@@ -126,19 +128,21 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         mapView.addOverlay(geodesic)
     }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = .systemGreen
-        polylineRenderer.lineWidth = 5
-        return polylineRenderer
-    }
-    
     private func cleanMapView() {
         let allAnnotations = mapView.annotations
         mapView.removeAnnotations(allAnnotations)
         
         let allOverlays = mapView.overlays
         mapView.removeOverlays(allOverlays)
+    }
+    
+    // MARK:- map view delegate functions
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = .systemGreen
+        polylineRenderer.lineWidth = 5
+        return polylineRenderer
     }
     
 }

@@ -37,6 +37,19 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+        configureLocation()
+    }
+    
+    private func configureLocation() {
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    private func configureUI() {
         let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
         logoutButton.accessibilityIdentifier = "logoutButton"
         navigationItem.leftBarButtonItem = logoutButton
@@ -48,12 +61,6 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
             navigationItem.title = "Last events"
         }
         navigationItem.largeTitleDisplayMode = .automatic
-        
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.requestAlwaysAuthorization()
     }
     
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
@@ -69,7 +76,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - location tracking
+    // MARK: - location manager
     
     /// Checks the result of asking for location authorization
     /// - Parameters:
