@@ -1,0 +1,11 @@
+### .DS_Store ###
+.DS_Store
+
+
+### Xcode ###
+build
+Example/*.xcodeproj/*
+Example/*.xcodeproj/project.pbxproj
+Example/*.xcworkspace/contents.xcworkspacedata
+Example/*.xcworkspace/xcuserdata/*.xcuserdatad/*
+Example/*/xcuserdata/*.xcuserdatad/xcdebugger/*

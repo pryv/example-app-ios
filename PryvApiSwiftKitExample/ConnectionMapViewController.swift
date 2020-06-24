@@ -92,16 +92,11 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         var events = [Event]()
-        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }) { result in
-            switch result {
-            case .failure(_):
-                return
-            case .success(_):
-                self.cleanMapView()
-                self.show(events: events.filter{ event in
-                    (event["type"] as? String)?.contains("position") ?? false
-                })
-            }
+        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }) { _ in
+            self.cleanMapView()
+            self.show(events: events.filter{ event in
+                (event["type"] as? String)?.contains("position") ?? false
+            })
         }
     }
     

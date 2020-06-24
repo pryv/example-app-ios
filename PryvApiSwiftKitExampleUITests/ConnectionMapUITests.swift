@@ -39,6 +39,8 @@ class ConnectionMapUITests: XCTestCase {
         datePickers.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "June")
         datePickers.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: "22")
         datePickers.pickerWheels.element(boundBy: 2).adjust(toPickerWheelValue: "2020")
+        
+        sleep(2)
     }
     
     // Assuming that before the 22nd of June 2020, there are no position events.

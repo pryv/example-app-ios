@@ -124,7 +124,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         }
         
         print("Sending location...")
-        guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
+        connection?.api(APICalls: apiCalls) { result, err in
+            if err != nil || result == nil {
+                print("Problem encountered when sending position to the server: \(err?.localizedDescription)")
+            }
+        }
     }
     
     /// Manage newly received location updates in case of an error

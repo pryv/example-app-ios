@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `cleaning`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -21,12 +21,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: master
+    :branch: cleaning
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 5705e7b75a9a720c866861b0433ed465cd3d03e3
+    :commit: f73070987b74b04c077194e6098a99d74aa1f548
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -34,8 +34,8 @@ SPEC CHECKSUMS:
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: 6e12e7fbe6ae74cb047bbe3ef8a3604564b73b32
+  PryvApiSwiftKit: ee52c9007fb152b0172d83444c5ac07b9e9dd0bb
 
-PODFILE CHECKSUM: 28525c0d39ddb943716f7d242ce928e7bb9167d3
+PODFILE CHECKSUM: ead50e578c75414ca6f4256039bdf149e8df5d18
 
 COCOAPODS: 1.8.4

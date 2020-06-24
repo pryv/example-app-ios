@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
             "languageCode": "fr"
         ]
         
-        if let authUrl = service.setUpAuth(authPayload: authPayload, stateChangedCallback: stateChangedCallback) {
+        if let authUrl = service.setUpAuth(authSettings: authPayload, stateChangedCallback: stateChangedCallback) {
             let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! AuthViewController
             vc.service = service
             vc.authUrl = authUrl
