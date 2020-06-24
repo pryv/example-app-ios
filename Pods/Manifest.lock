@@ -26,7 +26,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 5705e7b75a9a720c866861b0433ed465cd3d03e3
+    :commit: f9c06448806ccd49e0b6167f484bbcf1cdee68ce
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: 6e12e7fbe6ae74cb047bbe3ef8a3604564b73b32
+  PryvApiSwiftKit: ee52c9007fb152b0172d83444c5ac07b9e9dd0bb
 
 PODFILE CHECKSUM: 28525c0d39ddb943716f7d242ce928e7bb9167d3
 

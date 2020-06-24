@@ -32,7 +32,9 @@ class ConnectionListUITests: XCTestCase {
             app.staticTexts["Password"].tap()
             app.typeText("testuser")
             app.buttons["SIGN IN"].tap()
-            app.buttons["ACCEPT"].tap()
+            if app.buttons["ACCEPT"].exists {
+                app.buttons["ACCEPT"].tap()
+            }
             sleep(2)
         }
     }

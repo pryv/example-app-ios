@@ -155,9 +155,13 @@ class ConnectionListTableViewController: UITableViewController {
                     print("new event: \(String(describing: event))")
                 }]
     
-                let _ = self.connection?.api(APICalls: [apiCall], handleResults: handleResults)
-    
-                self.refreshEnabled = true
+                self.connection?.api(APICalls: [apiCall], handleResults: handleResults) { _, err in
+                    if let error = err {
+                        print("problem encountered when adding a new event: \(error.localizedDescription)")
+                    } else {
+                        self.refreshEnabled = true
+                    }
+                }
             }
             self.present(alert, animated: true)
         })
@@ -171,8 +175,13 @@ class ConnectionListTableViewController: UITableViewController {
                 self.present(fileBrowser, animated: true, completion: nil)
 
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    let _ = self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
-                    self.refreshEnabled = true
+                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
+                        if let error = err {
+                            print("problem encountered when adding a new event: \(error.localizedDescription)")
+                        } else {
+                            self.refreshEnabled = true
+                        }
+                    }
                 }
             }
 
@@ -196,8 +205,13 @@ class ConnectionListTableViewController: UITableViewController {
         self.present(fileBrowser, animated: true, completion: nil)
 
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            let _ = self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue)
-            self.refreshEnabled = true
+            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
+                if let error = err {
+                    print("problem encountered when adding a file to an event: \(error.localizedDescription)")
+                } else {
+                    self.refreshEnabled = true
+                }
+            }
         }
     }
     
@@ -214,10 +228,23 @@ class ConnectionListTableViewController: UITableViewController {
                     "params": Json()
                 ]
             ]
-            if let result = connection!.api(APICalls: request) { self.events = result }
+            
+            events.removeAll()
+            connection!.api(APICalls: request) { res, err in
+                if let error = err {
+                    print("problem encountered when getting the events: \(error.localizedDescription)")
+                }
+                if let results = res {
+                    for result in results {
+                        if let json = result as? [String: [Event]] {
+                            self.events.append(contentsOf: json["events"] ?? [Event]())
+                        }
+                    }
 
-            loadViewIfNeeded()
-            self.tableView.reloadData()
+                    self.loadViewIfNeeded()
+                    self.tableView.reloadData()
+                }
+            }
         }
         self.refreshControl?.endRefreshing()
     }
