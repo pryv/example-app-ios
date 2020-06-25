@@ -54,6 +54,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         alert.addAction(title: "Done", style: .default, handler: { _ in
             if let _ = pickedDate {
                 self.selectedDate = pickedDate!
+                self.currentDateLabel.text = self.formatter.string(from: self.selectedDate)
                 self.getEvents(until: self.selectedDate, during: self.duration)
             }
         })
