@@ -1,0 +1,6 @@
+framework module RLBAlertsPickers {
+  umbrella header "RLBAlertsPickers-umbrella.h"
+
+  export *
+  module * { export * }
+}

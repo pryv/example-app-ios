@@ -5,7 +5,6 @@
 //  Created by Sara Alemanno on 17.06.20.
 //  Copyright © 2020 Pryv. All rights reserved.
 //
-
 import UIKit
 import KeychainSwift
 import PryvApiSwiftKit
@@ -118,7 +117,6 @@ class ConnectionListTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
