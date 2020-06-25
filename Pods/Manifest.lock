@@ -1,20 +1,26 @@
 PODS:
+  - Alamofire (5.2.1)
   - FileBrowser (1.0.0)
   - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
   - PryvApiSwiftKit (0.1.2):
+    - Alamofire
     - Mocker
+  - RLBAlertsPickers (1.1.2)
 
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
   - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
+  - RLBAlertsPickers (~> 1.1.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Alamofire
     - FileBrowser
     - KeychainSwift
     - Mocker
+    - RLBAlertsPickers
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
@@ -23,15 +29,17 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 26db74ab8777caebc074cfa66f9f4f2fba65707a
+    :commit: f9c06448806ccd49e0b6167f484bbcf1cdee68ce
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: 20e85e814b3d66e4aad95c18a045d042577d2c25
+  PryvApiSwiftKit: ee52c9007fb152b0172d83444c5ac07b9e9dd0bb
+  RLBAlertsPickers: 2548943b0cb16620904cbd926a645362d1b43963
 
-PODFILE CHECKSUM: 28525c0d39ddb943716f7d242ce928e7bb9167d3
+PODFILE CHECKSUM: 68d9a5e0d05d491690cc517b72d66fa44b1a61ab
 
 COCOAPODS: 1.8.4

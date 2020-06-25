@@ -161,16 +161,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FileBrowser/FileBrowser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Mocker/Mocker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PryvApiSwiftKit/PryvApiSwiftKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RLBAlertsPickers/RLBAlertsPickers.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FileBrowser/FileBrowser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Mocker/Mocker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PryvApiSwiftKit/PryvApiSwiftKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RLBAlertsPickers/RLBAlertsPickers.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

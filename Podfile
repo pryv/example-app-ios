@@ -12,6 +12,7 @@ target 'PryvApiSwiftKitExample' do
   pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
   pod 'KeychainSwift'
   pod 'FileBrowser', '~> 1.0'
+  pod 'RLBAlertsPickers', '~> 1.1.1'
 
   target 'PryvApiSwiftKitExampleTests' do
     inherit! :search_paths
