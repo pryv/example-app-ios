@@ -314,41 +314,88 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5i7-Ki-qAC">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovx-82-t5N">
-                                <rect key="frame" x="0.0" y="672" width="414" height="141"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
+                                <rect key="frame" x="119" y="762" width="176" height="32"/>
+                                <segments>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                    <segment title="Month"/>
+                                </segments>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="filterController"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-cf-PRt">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H2V-fm-3rr">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYa-MM-iR1">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
-                                                <segments>
-                                                    <segment title="Day"/>
-                                                    <segment title="Week"/>
-                                                    <segment title="Month"/>
-                                                </segments>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="filterController"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="switchFilter:" destination="eMd-Q3-6DR" eventType="valueChanged" id="qMu-ab-4w9"/>
-                                                </connections>
-                                            </segmentedControl>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="X8j-of-2qw">
-                                                <rect key="frame" x="0.0" y="31" width="414" height="110"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="110" id="J3W-BL-ZqD"/>
-                                                </constraints>
-                                            </datePicker>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-uS-TDc">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a53-Ow-zgC">
+                                                <rect key="frame" x="96" y="0.0" width="222" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oA-bN-GOo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xW-6t-o9f">
+                                                        <rect key="frame" x="110" y="0.0" width="20" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="I7q-nC-WTF"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfd-fB-TOx">
+                                                        <rect key="frame" x="130" y="0.0" width="42" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-oe-8zg">
+                                                        <rect key="frame" x="172" y="0.0" width="20" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="UcJ-ie-xq7"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfD-kF-V0O">
+                                                        <rect key="frame" x="192" y="0.0" width="30" height="50"/>
+                                                        <state key="normal" title="Edit"/>
+                                                        <connections>
+                                                            <action selector="openDatePicker:" destination="eMd-Q3-6DR" eventType="touchUpInside" id="php-H1-lmF"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgz-so-xzI">
+                                                <rect key="frame" x="318" y="0.0" width="96" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="a53-Ow-zgC" firstAttribute="centerY" secondItem="wYa-MM-iR1" secondAttribute="centerY" id="Yhn-DJ-CNX"/>
+                                            <constraint firstItem="a53-Ow-zgC" firstAttribute="centerX" secondItem="wYa-MM-iR1" secondAttribute="centerX" id="pjd-yv-Xy5"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="H2V-fm-3rr" firstAttribute="top" secondItem="Ovx-82-t5N" secondAttribute="top" id="Bra-0F-RyJ"/>
-                                    <constraint firstItem="H2V-fm-3rr" firstAttribute="leading" secondItem="Ovx-82-t5N" secondAttribute="leading" id="Y32-zm-jfk"/>
-                                    <constraint firstAttribute="bottom" secondItem="H2V-fm-3rr" secondAttribute="bottom" id="k0A-Mr-nch"/>
-                                    <constraint firstAttribute="trailing" secondItem="H2V-fm-3rr" secondAttribute="trailing" id="ksS-f5-ki6"/>
+                                    <constraint firstAttribute="height" constant="50" id="1CM-Pu-7ZJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="wYa-MM-iR1" secondAttribute="trailing" id="8y2-7a-Kkd"/>
+                                    <constraint firstItem="wYa-MM-iR1" firstAttribute="top" secondItem="eLX-cf-PRt" secondAttribute="top" id="9Dr-y5-98g"/>
+                                    <constraint firstItem="wYa-MM-iR1" firstAttribute="centerX" secondItem="eLX-cf-PRt" secondAttribute="centerX" id="FXd-AM-i7w"/>
+                                    <constraint firstAttribute="bottom" secondItem="wYa-MM-iR1" secondAttribute="bottom" id="ZxG-Ct-fEg"/>
+                                    <constraint firstItem="wYa-MM-iR1" firstAttribute="leading" secondItem="eLX-cf-PRt" secondAttribute="leading" id="iKH-m2-Y9K"/>
+                                    <constraint firstItem="wYa-MM-iR1" firstAttribute="centerY" secondItem="eLX-cf-PRt" secondAttribute="centerY" id="oXY-sX-nHO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -356,12 +403,13 @@
                         <constraints>
                             <constraint firstItem="5i7-Ki-qAC" firstAttribute="top" secondItem="sKC-rK-jXt" secondAttribute="top" id="4Wh-bW-gSO"/>
                             <constraint firstItem="5i7-Ki-qAC" firstAttribute="leading" secondItem="sKC-rK-jXt" secondAttribute="leading" id="EYw-YU-7jF"/>
-                            <constraint firstItem="sKC-rK-jXt" firstAttribute="trailing" secondItem="Ovx-82-t5N" secondAttribute="trailing" id="L43-dB-pAD"/>
                             <constraint firstItem="sKC-rK-jXt" firstAttribute="trailing" secondItem="5i7-Ki-qAC" secondAttribute="trailing" id="LGF-oy-Zcg"/>
+                            <constraint firstItem="eLX-cf-PRt" firstAttribute="leading" secondItem="sKC-rK-jXt" secondAttribute="leading" id="Luy-rl-VV7"/>
+                            <constraint firstItem="sKC-rK-jXt" firstAttribute="bottom" secondItem="h6z-pU-JLg" secondAttribute="bottom" constant="20" id="MlU-C4-iSh"/>
+                            <constraint firstItem="sKC-rK-jXt" firstAttribute="trailing" secondItem="eLX-cf-PRt" secondAttribute="trailing" id="bR4-JN-tcF"/>
+                            <constraint firstItem="eLX-cf-PRt" firstAttribute="top" secondItem="sKC-rK-jXt" secondAttribute="top" id="hUD-i9-TFx"/>
                             <constraint firstItem="sKC-rK-jXt" firstAttribute="bottom" secondItem="5i7-Ki-qAC" secondAttribute="bottom" id="k9d-wJ-OBm"/>
-                            <constraint firstItem="Ovx-82-t5N" firstAttribute="bottom" secondItem="5i7-Ki-qAC" secondAttribute="bottom" id="qL7-q6-WeY"/>
-                            <constraint firstItem="Ovx-82-t5N" firstAttribute="leading" secondItem="sKC-rK-jXt" secondAttribute="leading" id="vWX-zX-uDv"/>
-                            <constraint firstItem="Ovx-82-t5N" firstAttribute="centerX" secondItem="sKC-rK-jXt" secondAttribute="centerX" id="yni-ux-7cI"/>
+                            <constraint firstItem="h6z-pU-JLg" firstAttribute="centerX" secondItem="sKC-rK-jXt" secondAttribute="centerX" id="wRT-rE-PxC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sKC-rK-jXt"/>
                     </view>
@@ -371,13 +419,13 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <connections>
-                        <outlet property="datePicker" destination="X8j-of-2qw" id="bRB-Va-1k0"/>
+                        <outlet property="currentDateLabel" destination="gfd-fB-TOx" id="2o9-Zf-cHv"/>
                         <outlet property="mapView" destination="5i7-Ki-qAC" id="hRu-pB-t7q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPo-9j-0jr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3634.7826086956525" y="518.97321428571422"/>
+            <point key="canvasLocation" x="3634.7826086956525" y="518.30357142857144"/>
         </scene>
     </scenes>
     <resources>

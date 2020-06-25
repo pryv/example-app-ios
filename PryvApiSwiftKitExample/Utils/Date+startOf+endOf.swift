@@ -28,23 +28,23 @@ extension Date {
         var calendar = Calendar.current
         calendar.firstWeekday = 2  // Monday
         let components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
-        return calendar.date(from: components)!.startOfDay
+        return calendar.date(from: components)!
     }
 
     var endOfWeek: Date {
-        return Calendar.current.date(byAdding: .day, value: 7, to: startOfWeek)!.endOfDay
+        return Calendar.current.date(byAdding: .day, value: 7, to: startOfWeek)!
     }
 
     var startOfMonth: Date {
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([.year, .month], from: self)
-        return calendar.date(from: components)!.startOfDay
+        return calendar.date(from: components)!
     }
 
     var endOfMonth: Date {
         var components = DateComponents()
         components.month = 1
         components.second = -1
-        return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!.endOfDay
+        return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import PryvApiSwiftKit
+import RLBAlertsPickers
 
 /// Filter for the events timeslot to show on the map
 private enum TimeFilter {
@@ -19,12 +20,13 @@ private enum TimeFilter {
 
 class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet private weak var currentDateLabel: UILabel!
     @IBOutlet private weak var mapView: MKMapView!
-    @IBOutlet private weak var datePicker: UIDatePicker!
     
     private var duration = TimeFilter.week
     private var selectedDate = Date()
     private let calendar = Calendar.current
+    private let formatter = DateFormatter()
     
     var connection: Connection? {
         didSet {
@@ -34,22 +36,29 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewDidLoad() {
-        datePicker.maximumDate = Date()
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-        
+        formatter.dateFormat = "dd.MM.yyyy"
+        currentDateLabel.text = formatter.string(from: selectedDate)
         mapView.delegate = self
     }
     
     // MARK: - Interactions and settings for the events to show on the map
     
     /// Filters the list of events according to the newly set date in the date picker
-    /// - Parameter datePicker
-    @objc private func dateChanged(_ datePicker: UIDatePicker) {
-        selectedDate = datePicker.date
-        if calendar.isDateInToday(selectedDate) {
-            selectedDate = Date()
-        }
-        getEvents(until: selectedDate, during: duration)
+    /// - Parameter sender: the button to tap to open the date picker alert
+    @IBAction func openDatePicker(_ sender: Any) {
+        var pickedDate: Date?
+        let minDate = calendar.date(byAdding: .year, value: -5, to: Date()) // max 5 years ago
+        
+        let alert = UIAlertController(style: .alert, title: nil)
+        alert.addDatePicker(mode: .date, date: selectedDate, minimumDate: minDate, maximumDate: Date()) { pickedDate = $0 }
+        alert.addAction(title: "Done", style: .default, handler: { _ in
+            if let _ = pickedDate {
+                self.selectedDate = pickedDate!
+                self.getEvents(until: self.selectedDate, during: self.duration)
+            }
+        })
+        
+        alert.show()
     }
     
     /// Filters the list of events according to the newly set duration in the segmented control
@@ -113,8 +122,6 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
                     let point = MKPointAnnotation()
                     point.coordinate = coordinate
                     if let _ = time {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd"
                         point.title = formatter.string(from: Date(timeIntervalSince1970: time!))
                     }
                     mapView.addAnnotation(point)
