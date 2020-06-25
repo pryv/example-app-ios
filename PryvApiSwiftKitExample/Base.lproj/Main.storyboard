@@ -315,10 +315,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovx-82-t5N">
-                                <rect key="frame" x="0.0" y="692" width="414" height="121"/>
+                                <rect key="frame" x="0.0" y="672" width="414" height="141"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H2V-fm-3rr">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-pU-JLg">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
@@ -335,9 +335,9 @@
                                                 </connections>
                                             </segmentedControl>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="X8j-of-2qw">
-                                                <rect key="frame" x="0.0" y="31" width="414" height="90"/>
+                                                <rect key="frame" x="0.0" y="31" width="414" height="110"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="90" id="J3W-BL-ZqD"/>
+                                                    <constraint firstAttribute="height" constant="110" id="J3W-BL-ZqD"/>
                                                 </constraints>
                                             </datePicker>
                                         </subviews>

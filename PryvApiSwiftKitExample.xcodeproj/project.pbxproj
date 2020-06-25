@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */; };
 		62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
+		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
 		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
 		B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */; };
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
@@ -56,6 +57,7 @@
 		80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
 		984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
 		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
 		B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionListTableViewController.swift; sourceTree = "<group>"; };
 		B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTabBarViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
+				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */,
 				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,
+				B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
 				B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */,
 				B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */,

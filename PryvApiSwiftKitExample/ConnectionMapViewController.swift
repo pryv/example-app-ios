@@ -10,11 +10,11 @@ import UIKit
 import MapKit
 import PryvApiSwiftKit
 
-/// Filter for the events timeslot to show on the map
-private enum TimeFilter: Int {
-    case day = 1
-    case week = -7
-    case month = -31
+/// Filter for the events timeslots to show on the map
+private enum TimeFilter {
+    case day
+    case week
+    case month
 }
 
 class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
@@ -23,13 +23,13 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet private weak var datePicker: UIDatePicker!
     
     private var duration = TimeFilter.week
-    private var currentDate = Date()
+    private var selectedDate = Date()
     private let calendar = Calendar.current
     
     var connection: Connection? {
         didSet {
             loadViewIfNeeded()
-            getEvents(until: currentDate, during: duration)
+            getEvents(until: selectedDate, during: duration)
         }
     }
     
@@ -45,11 +45,11 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     /// Filters the list of events according to the newly set date in the date picker
     /// - Parameter datePicker
     @objc private func dateChanged(_ datePicker: UIDatePicker) {
-        currentDate = datePicker.date
-        if calendar.isDateInToday(currentDate) {
-            currentDate = Date()
+        selectedDate = datePicker.date
+        if calendar.isDateInToday(selectedDate) {
+            selectedDate = Date()
         }
-        getEvents(until: currentDate, during: duration)
+        getEvents(until: selectedDate, during: duration)
     }
     
     /// Filters the list of events according to the newly set duration in the segmented control
@@ -65,7 +65,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         default:
             return
         }
-        getEvents(until: currentDate, during: duration)
+        getEvents(until: selectedDate, during: duration)
     }
     
     /// Loads the events from the Pryv backend using `events.get` method, filters them by time/duration and shows them on the map
@@ -73,20 +73,17 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     ///   - until: the date corresponding to the `toTime` in the `events.get` method
     ///   - during: the duration of the timeslot to show
     private func getEvents(until: Date, during: TimeFilter) {
-        var daysComponent = DateComponents()
-        daysComponent.day = during.rawValue
-        
         var params = Json()
         switch during {
-        case .day: // Take the time of this day at midnight until the time of this day at 23:59
-            params["fromTime"] = calendar.startOfDay(for: until).timeIntervalSince1970
-            params["toTime"] = calendar.date(byAdding: daysComponent, to: calendar.startOfDay(for: until))?.timeIntervalSince1970
-        case .week, .month: // Take the time from the selected day - duration in days until the selected day
-            var oneDayComponent = DateComponents()
-            oneDayComponent.day = 1
-            let endOfDay = calendar.date(byAdding: oneDayComponent, to: calendar.startOfDay(for: until))!
-            params["fromTime"] = calendar.date(byAdding: daysComponent, to: endOfDay)?.timeIntervalSince1970
-            params["toTime"] = endOfDay.timeIntervalSince1970
+        case .day:
+            params["fromTime"] = selectedDate.startOfDay.timeIntervalSince1970
+            params["toTime"] = selectedDate.endOfDay.timeIntervalSince1970
+        case .week:
+            params["fromTime"] = selectedDate.startOfWeek.timeIntervalSince1970
+            params["toTime"] = selectedDate.endOfWeek.timeIntervalSince1970
+        case .month:
+            params["fromTime"] = selectedDate.startOfMonth.timeIntervalSince1970
+            params["toTime"] = selectedDate.endOfMonth.timeIntervalSince1970
         }
         
         let request = [
