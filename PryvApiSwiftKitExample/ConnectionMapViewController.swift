@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import PryvApiSwiftKit
 
-/// Filter for the events timeslots to show on the map
+/// Filter for the events timeslot to show on the map
 private enum TimeFilter {
     case day
     case week
@@ -86,16 +86,10 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
             params["toTime"] = selectedDate.endOfMonth.timeIntervalSince1970
         }
         
-        let request = [
-            [
-                "method": "events.get",
-                "params": params
-            ]
-        ]
-        
-        if let result = connection!.api(APICalls: request) {
-            cleanMapView()
-            show(events: result.filter{ event in
+        var events = [Event]()
+        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }) { _ in
+            self.cleanMapView()
+            self.show(events: events.filter{ event in
                 (event["type"] as? String)?.contains("position") ?? false
             })
         }

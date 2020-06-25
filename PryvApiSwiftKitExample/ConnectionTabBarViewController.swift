@@ -57,7 +57,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         navigationItem.leftBarButtonItem = logoutButton
         navigationItem.hidesBackButton = true
         
-        if let username = utils.extractUsername(apiEndpoint: connection?.getApiEndpoint() ?? ""), let service = serviceName {
+        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
             navigationItem.title = "\(service) - \(username)"
         } else {
             navigationItem.title = "Last events"
@@ -124,7 +124,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         }
         
         print("Sending location...")
-        guard let _ = connection?.api(APICalls: apiCalls) else { print("Problem encountered when sending position to the server") ; return }
+        connection?.api(APICalls: apiCalls) { result, err in
+            if err != nil || result == nil {
+                print("Problem encountered when sending position to the server: \(err?.localizedDescription)")
+            }
+        }
     }
     
     /// Manage newly received location updates in case of an error
