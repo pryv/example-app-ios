@@ -250,17 +250,20 @@ class ConnectionListTableViewController: UITableViewController {
         self.refreshControl?.endRefreshing()
     }
     
+    /// Sets up the socket io connection for real time updates
+    /// - Parameter apiEndpoint
     private func setRealtimeUpdates(apiEndpoint: String) {
         connectionSocketIO = ConnectionWebSocket(apiEndpoint: apiEndpoint.lowercased())
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
-                if let data = try? JSONSerialization.data(withJSONObject: any), let jsonResponse = try? JSONSerialization.jsonObject(with: data), let dictionary = jsonResponse as? Json, let events = dictionary["events"] as? [Event] {
-                    self.refreshControl?.beginRefreshing()
-                    self.events = events
-                    self.loadViewIfNeeded()
-                    self.tableView.reloadData()
-                    self.refreshControl?.endRefreshing()
-                }
+                let dataArray = any as NSArray
+                let dictionary = dataArray[1] as! Json
+                let events = dictionary["events"] as! [Event]
+                self.refreshControl?.beginRefreshing()
+                self.events = events
+                self.loadViewIfNeeded()
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
             }
         }
         connectionSocketIO!.connect()

@@ -165,7 +165,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     /// - Returns: a renderer for the paths
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = .systemGreen
+        polylineRenderer.strokeColor = .systemBlue
         polylineRenderer.lineWidth = 5
         return polylineRenderer
     }
