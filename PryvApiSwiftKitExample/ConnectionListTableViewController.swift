@@ -83,12 +83,14 @@ class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
     private var refreshEnabled = true // set to true when a new event is added or an event is modified, avoids loading the events if no change
     private var events = [Event]()
+    private var connectionSocketIO: ConnectionWebSocket?
     
     var appId: String?
     var contributePermissions: [String]?
     var serviceName: String?
     var connection: Connection? {
         didSet {
+            setRealtimeUpdates(apiEndpoint: connection!.getApiEndpoint())
             getEvents()
         }
     }
@@ -117,6 +119,7 @@ class ConnectionListTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
@@ -245,6 +248,22 @@ class ConnectionListTableViewController: UITableViewController {
             }
         }
         self.refreshControl?.endRefreshing()
+    }
+    
+    private func setRealtimeUpdates(apiEndpoint: String) {
+        connectionSocketIO = ConnectionWebSocket(apiEndpoint: apiEndpoint.lowercased())
+        connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
+            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
+                if let data = try? JSONSerialization.data(withJSONObject: any), let jsonResponse = try? JSONSerialization.jsonObject(with: data), let dictionary = jsonResponse as? Json, let events = dictionary["events"] as? [Event] {
+                    self.refreshControl?.beginRefreshing()
+                    self.events = events
+                    self.loadViewIfNeeded()
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                }
+            }
+        }
+        connectionSocketIO!.connect()
     }
 
 }
