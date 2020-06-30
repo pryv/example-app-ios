@@ -142,7 +142,6 @@ class MainViewController: UIViewController {
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.serviceName = service.info()?.name
         vc.connection = Connection(apiEndpoint: apiEndpoint)
-        vc.permissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }

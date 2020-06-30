@@ -18,14 +18,12 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     var serviceName: String?
     var connection: Connection?
-    var permissions: [String]?
     var appId: String?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
         listVC?.serviceName = serviceName
         listVC?.connection = connection
-        listVC?.contributePermissions = permissions
         listVC?.appId = appId
         
         let mapVC = viewControllers?[1] as? ConnectionMapViewController

@@ -12,7 +12,6 @@ public enum Message: String {
     case eventsChanged
     case streamsChanged
     case accessesChanged
-    case all = "*"
 }
 
 /// This class proposes the almost same functions as `Connection`, but with real time updates and notifications with [socket.io](https://api.pryv.com/reference/#call-with-websockets)
@@ -22,12 +21,14 @@ public class ConnectionWebSocket {
     private var socket: SocketIOClient!
     
     /// Initialize the socket io connection with a URL
-    /// - Parameter url
-    public init(url: String) {
+    /// - Parameters:
+    ///   - url
+    ///   - log: whether to show the socket io connection logs (false, by default)
+    public init(url: String, log: Bool = false) {
         let (endpoint, connectParams, namespace) = utils.parseSocketIOURL(url: url)
         
         // Connecting to the socket
-        manager = SocketManager(socketURL: URL(string: endpoint)!, config: [.log(true), .connectParams(connectParams)])
+        manager = SocketManager(socketURL: URL(string: endpoint)!, config: [.log(log), .connectParams(connectParams)])
         socket = manager.socket(forNamespace: namespace)
     }
     
