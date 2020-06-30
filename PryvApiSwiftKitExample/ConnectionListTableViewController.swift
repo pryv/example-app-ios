@@ -59,7 +59,7 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.text = nil
         contentLabel.text = nil
         attachmentLabel.text = nil
-
+        
         attachmentImageView.isHidden = true
         attachmentStackView.isHidden = true
         contentStackView.isHidden = true
@@ -82,6 +82,7 @@ class EventTableViewCell: UITableViewCell {
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
     private var events = [Event]()
+    private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
     
     var appId: String?
@@ -142,7 +143,7 @@ class ConnectionListTableViewController: UITableViewController {
                         self.events.append(contentsOf: json["events"] ?? [Event]())
                     }
                 }
-
+                
                 self.loadViewIfNeeded()
                 self.tableView.reloadData()
             }
@@ -154,26 +155,28 @@ class ConnectionListTableViewController: UITableViewController {
     private func setRealtimeUpdates(url: String) {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
-            self.refreshControl?.beginRefreshing() // FIXME
             self.events.removeAll()
             self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
                 self.events = dictionary["events"] as! [Event]
-                self.loadViewIfNeeded()
                 self.tableView.reloadData()
+                self.loadViewIfNeeded()
+                if self.created {
+                    self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+                }
+                self.created = false
             }
-            self.refreshControl?.endRefreshing() // FIXME
         }
         connectionSocketIO!.connect()
     }
-
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
         
@@ -184,7 +187,7 @@ class ConnectionListTableViewController: UITableViewController {
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
-
+        
         return cell
     }
     
@@ -200,16 +203,18 @@ class ConnectionListTableViewController: UITableViewController {
                     "method": "events.create",
                     "params": params
                 ]
-    
+                
                 let handleResults: [Int: (Event) -> ()] = [0: { event in
                     print("new event: \(String(describing: event))")
-                }]
-    
+                    }]
+                
                 self.connection?.api(APICalls: [apiCall], handleResults: handleResults) { _, err in
                     if let error = err {
                         let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                         self.present(innerAlert, animated: true, completion: nil)
+                    } else {
+                        self.created = true
                     }
                 }
             }
@@ -222,18 +227,20 @@ class ConnectionListTableViewController: UITableViewController {
                 let fileBrowser = FileBrowser(initialPath: path)
                 fileBrowser.view.accessibilityIdentifier = "fileBrowserCreate"
                 self.present(fileBrowser, animated: true, completion: nil)
-
+                
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
                     self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
                         if let error = err {
                             let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                             innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                             self.present(innerAlert, animated: true, completion: nil)
+                        } else {
+                            self.created = true
                         }
                     }
                 }
             }
-
+            
             self.present(alert, animated: true, completion: nil)
         })
         
@@ -252,7 +259,7 @@ class ConnectionListTableViewController: UITableViewController {
         let fileBrowser = FileBrowser(initialPath: path)
         fileBrowser.view.accessibilityIdentifier = "fileBrowserAdd"
         self.present(fileBrowser, animated: true, completion: nil)
-
+        
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
             self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
                 if let error = err {
@@ -261,5 +268,5 @@ class ConnectionListTableViewController: UITableViewController {
             }
         }
     }
-
+    
 }
