@@ -51,7 +51,8 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["24.06.2020"].exists)
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        XCTAssert(app.otherElements["24.06.2020"].exists)
+        sleep(1)
+        XCTAssert(app.otherElements["29.06.2020"].exists)
     }
     
     func testNoMarkers() {
@@ -67,10 +68,10 @@ class ConnectionMapUITests: XCTestCase {
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
         sleep(1)
-        XCTAssert(app.otherElements["24.06.2020"].exists)
+        XCTAssert(app.otherElements["29.06.2020"].exists)
         
         changeDate(month: "May")
-        XCTAssertFalse(app.otherElements["24.06.2020"].exists)
+        XCTAssertFalse(app.otherElements["29.06.2020"].exists)
     }
     
     func testSelectedTime() {
