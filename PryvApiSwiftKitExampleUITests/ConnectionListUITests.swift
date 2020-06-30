@@ -67,8 +67,6 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
-        cell.pullToRefresh()
-        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
@@ -97,8 +95,6 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
-        cell.pullToRefresh()
-        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "80")
@@ -118,20 +114,10 @@ class ConnectionListUITests: XCTestCase {
         sleep(1)
         app.otherElements["fileBrowserAdd"].staticTexts["sample.pdf"].tap()
         
-        cell.pullToRefresh()
-        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, content)
         XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
         XCTAssertFalse(cell.images["attachmentImageView"].exists)
-    }
-}
-
-extension XCUIElement {
-    func pullToRefresh() {
-        let start = self.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let finish = self.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 6))
-        start.press(forDuration: 0, thenDragTo: finish)
     }
 }
