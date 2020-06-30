@@ -90,7 +90,13 @@ class ConnectionListTableViewController: UITableViewController {
     var serviceName: String?
     var connection: Connection? {
         didSet {
-            setRealtimeUpdates(apiEndpoint: connection!.getApiEndpoint())
+            let utils = Utils()
+            let apiEndpoint = connection!.getApiEndpoint().lowercased()
+            guard let username = utils.extractUsername(from: apiEndpoint), let (endpoint, token) = utils.extractTokenAndEndpoint(from: apiEndpoint) else {
+                return
+            }
+            let url = "\(endpoint)\(username)?auth=\(token ?? "")"
+            setRealtimeUpdates(url: url)
             getEvents()
         }
     }
@@ -252,8 +258,8 @@ class ConnectionListTableViewController: UITableViewController {
     
     /// Sets up the socket io connection for real time updates
     /// - Parameter apiEndpoint
-    private func setRealtimeUpdates(apiEndpoint: String) {
-        connectionSocketIO = ConnectionWebSocket(apiEndpoint: apiEndpoint.lowercased())
+    private func setRealtimeUpdates(url: String) {
+        connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
