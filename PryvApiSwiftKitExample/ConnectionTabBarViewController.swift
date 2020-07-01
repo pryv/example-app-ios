@@ -52,31 +52,47 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         guard HKHealthStore.isHealthDataAvailable() else { return }
         
         let healthKitStreams = Set([dateOfBirth, bloodType, biologicalSex, weight])
-        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
-            if success {
-                // TODO
-                let birthdayComponents = try? self.healthStore.dateOfBirthComponents()
-                let biologicalSex = (try? self.healthStore.biologicalSex())?.biologicalSex.rawValue
-                let bloodType = (try? self.healthStore.bloodType())?.bloodType.rawValue
-                
-                print("BIRTHDAY: \(String(describing: birthdayComponents?.day)).\(String(describing: birthdayComponents?.month)).\(String(describing: birthdayComponents?.year))")
-                print("SEX: \(String(describing: biologicalSex))")
-                print("BLOOD: \(String(describing: bloodType))")
-                
-                let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date.distantPast, end: Date(), options: .strictEndDate)
-                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-                let sampleQuery = HKSampleQuery(sampleType: self.weight, predicate: mostRecentPredicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                    DispatchQueue.main.async {
-                        let mostRecentSample = samples?.first as? HKQuantitySample
-                        let weight = mostRecentSample?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
-                        print("WEIGHT: \(String(describing: weight))")
-                    }
-                }
-                
-                HKHealthStore().execute(sampleQuery)
+        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in return }
+        monitorHealthData()
+        healthStore.enableBackgroundDelivery(for: self.weight, frequency: .immediate, withCompletion: { succeeded, error in
+            if succeeded{
+                print("Enabled background delivery of weight changes")
+            } else if let err = error {
+                print("Failed to enable background delivery of weight changes: \(err)")
             }
+        })
+    }
+    
+    private func monitorHealthData() {
+        let birthdayComponents = try? self.healthStore.dateOfBirthComponents()
+        let biologicalSex = (try? self.healthStore.biologicalSex())?.biologicalSex.rawValue
+        let bloodType = (try? self.healthStore.bloodType())?.bloodType.rawValue
+        
+        print("BIRTHDAY: \(String(describing: birthdayComponents?.day)).\(String(describing: birthdayComponents?.month)).\(String(describing: birthdayComponents?.year))")
+        print("SEX: \(String(describing: biologicalSex))")
+        print("BLOOD: \(String(describing: bloodType))")
+        
+        let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
+            defer {
+              completionHandler()
+            }
+            guard error != nil else {
+              return
+            }
+            
+            let sampleQuery = HKSampleQuery(sampleType: self.weight, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                DispatchQueue.main.async {
+                    guard let results = samples else { return }
+                    let weights: [Double] = results.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
+                        .filter({$0 != nil}).map({$0!})
+                    let mean = weights.reduce(0, +) / Double(weights.count)
+                    print("WEIGHT: \(String(describing: mean))")
+                }
+            }
+            self.healthStore.execute(sampleQuery)
         }
         
+        healthStore.execute(weightQuery)
     }
     
     /// Configures the location tracking parameters
