@@ -35,7 +35,7 @@ class ConnectionMapUITests: XCTestCase {
         app.tabBars["connectionTabBar"].buttons["mapButtonItem"].tap()
         XCTAssert(app.maps.element(boundBy: 0).exists)
         
-        changeDate(month: "June", year: "2020")
+        changeDate(day: "20", month: "June", year: "2020")
     }
     
     // Assuming that before the 22nd of June 2020 and after the 24th of June 2020, there are no position events.
@@ -51,12 +51,11 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["24.06.2020"].exists)
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        XCTAssert(app.otherElements["24.06.2020"].exists)
+        sleep(1)
+        XCTAssert(app.otherElements["29.06.2020"].exists)
     }
     
     func testNoMarkers() {
-        changeDate(day: "20")
-        
         app.segmentedControls["filterController"].buttons["Day"].tap()
         sleep(1)
         XCTAssertFalse(app.otherElements["22.06.2020"].exists)
@@ -67,14 +66,13 @@ class ConnectionMapUITests: XCTestCase {
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
         sleep(1)
-        XCTAssert(app.otherElements["24.06.2020"].exists)
+        XCTAssert(app.otherElements["29.06.2020"].exists)
         
         changeDate(month: "May")
-        XCTAssertFalse(app.otherElements["24.06.2020"].exists)
+        XCTAssertFalse(app.otherElements["29.06.2020"].exists)
     }
     
     func testSelectedTime() {
-        changeDate(day: "20")
         XCTAssertEqual(app.staticTexts["selectedTimeValue"].label, "20.06.2020")
         
         changeDate(month: "May")

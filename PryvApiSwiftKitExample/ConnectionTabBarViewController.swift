@@ -16,16 +16,13 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private let utils = Utils()
     private let locationManager = CLLocationManager()
     
-    var serviceName: String?
+    var service: Service?
     var connection: Connection?
-    var permissions: [String]?
     var appId: String?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
-        listVC?.serviceName = serviceName
         listVC?.connection = connection
-        listVC?.contributePermissions = permissions
         listVC?.appId = appId
         
         let mapVC = viewControllers?[1] as? ConnectionMapViewController
@@ -57,10 +54,14 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         navigationItem.leftBarButtonItem = logoutButton
         navigationItem.hidesBackButton = true
         
-        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
-            navigationItem.title = "\(service) - \(username)"
-        } else {
-            navigationItem.title = "Last events"
+        service?.info().then { serviceInfo in
+            self.navigationItem.title = serviceInfo.name
+            self.connection?.username().then { username in
+                self.navigationItem.title! += "-"
+                self.navigationItem.title! += username
+            }
+        }.catch { _ in
+            self.navigationItem.title = "Last events"
         }
         navigationItem.largeTitleDisplayMode = .automatic
     }
@@ -124,10 +125,8 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         }
         
         print("Sending location...")
-        connection?.api(APICalls: apiCalls) { result, err in
-            if err != nil || result == nil {
-                print("Problem encountered when sending position to the server: \(err?.localizedDescription)")
-            }
+        connection?.api(APICalls: apiCalls).catch { error in
+            print("Problem encountered when sending position to the server: \(error.localizedDescription)")
         }
     }
     

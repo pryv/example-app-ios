@@ -59,7 +59,7 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.text = nil
         contentLabel.text = nil
         attachmentLabel.text = nil
-
+        
         attachmentImageView.isHidden = true
         attachmentStackView.isHidden = true
         contentStackView.isHidden = true
@@ -81,13 +81,11 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
-    private var refreshEnabled = true // set to true when a new event is added or an event is modified, avoids loading the events if no change
     private var events = [Event]()
+    private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
     
     var appId: String?
-    var contributePermissions: [String]?
-    var serviceName: String?
     var connection: Connection? {
         didSet {
             let utils = Utils()
@@ -112,8 +110,6 @@ class ConnectionListTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100;
         tableView.rowHeight = UITableView.automaticDimension;
         tableView.accessibilityIdentifier = "eventsTableView"
-        
-        refreshControl?.addTarget(self, action: #selector(getEvents), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,13 +119,60 @@ class ConnectionListTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
     }
-
+    
+    /// Updates the list of events shown (only if an event was added)
+    /// # Note
+    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
+    private func getEvents() {
+        let request = [
+            [
+                "method": "events.get",
+                "params": Json()
+            ]
+        ]
+        
+        events.removeAll()
+        connection!.api(APICalls: request).then { results in
+            for result in results {
+                if let json = result as? [String: [Event]] {
+                    self.events.append(contentsOf: json["events"] ?? [Event]())
+                }
+            }
+            
+            self.loadViewIfNeeded()
+            self.tableView.reloadData()
+        }.catch { error in
+            print("problem encountered when getting the events: \(error.localizedDescription)")
+        }
+    }
+    
+    /// Sets up the socket io connection for real time updates
+    /// - Parameter apiEndpoint
+    private func setRealtimeUpdates(url: String) {
+        connectionSocketIO = ConnectionWebSocket(url: url)
+        connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
+            self.events.removeAll()
+            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
+                let dataArray = any as NSArray
+                let dictionary = dataArray[1] as! Json
+                self.events = dictionary["events"] as! [Event]
+                self.tableView.reloadData()
+                self.loadViewIfNeeded()
+                if self.created {
+                    self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+                }
+                self.created = false
+            }
+        }
+        connectionSocketIO!.connect()
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
         
@@ -140,7 +183,7 @@ class ConnectionListTableViewController: UITableViewController {
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
-
+        
         return cell
     }
     
@@ -151,47 +194,45 @@ class ConnectionListTableViewController: UITableViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
-            let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
-            let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
+            let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil) { params in
                 let apiCall: APICall = [
                     "method": "events.create",
                     "params": params
                 ]
-    
+                
                 let handleResults: [Int: (Event) -> ()] = [0: { event in
                     print("new event: \(String(describing: event))")
-                }]
-    
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults) { _, err in
-                    if let error = err {
-                        print("problem encountered when adding a new event: \(error.localizedDescription)")
-                    } else {
-                        self.refreshEnabled = true
-                    }
+                    }]
+                
+                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { _ in
+                    self.created = true
+                }.catch { error in
+                    let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                    self.present(innerAlert, animated: true, completion: nil)
                 }
             }
             self.present(alert, animated: true)
         })
         
         alert.addAction(UIAlertAction(title: "Event with attachment", style: .default) { _ in
-            let message: String? = self.contributePermissions == nil ? nil : "Note: only stream ids in \(String(describing: self.contributePermissions!)) will be accepted."
-            let alert = UIAlertController().newEventAlert(title: "Create an event", message: message) { params in
+            let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil) { params in
                 let path = Bundle.main.resourceURL!
                 let fileBrowser = FileBrowser(initialPath: path)
                 fileBrowser.view.accessibilityIdentifier = "fileBrowserCreate"
                 self.present(fileBrowser, animated: true, completion: nil)
-
+                
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
-                        if let error = err {
-                            print("problem encountered when adding a new event: \(error.localizedDescription)")
-                        } else {
-                            self.refreshEnabled = true
-                        }
+                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).then { _ in
+                        self.created = true
+                    }.catch { error in
+                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                        self.present(innerAlert, animated: true, completion: nil)
                     }
                 }
             }
-
+            
             self.present(alert, animated: true, completion: nil)
         })
         
@@ -210,69 +251,14 @@ class ConnectionListTableViewController: UITableViewController {
         let fileBrowser = FileBrowser(initialPath: path)
         fileBrowser.view.accessibilityIdentifier = "fileBrowserAdd"
         self.present(fileBrowser, animated: true, completion: nil)
-
+        
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
-                if let error = err {
-                    print("problem encountered when adding a file to an event: \(error.localizedDescription)")
-                } else {
-                    self.refreshEnabled = true
-                }
+            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
+                let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(innerAlert, animated: true, completion: nil)
             }
         }
     }
     
-    /// Updates the list of events shown (only if an event was added)
-    /// # Note
-    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
-    @objc private func getEvents() {
-        if refreshEnabled {
-            refreshEnabled = false
-            
-            let request = [
-                [
-                    "method": "events.get",
-                    "params": Json()
-                ]
-            ]
-            
-            events.removeAll()
-            connection!.api(APICalls: request) { res, err in
-                if let error = err {
-                    print("problem encountered when getting the events: \(error.localizedDescription)")
-                }
-                if let results = res {
-                    for result in results {
-                        if let json = result as? [String: [Event]] {
-                            self.events.append(contentsOf: json["events"] ?? [Event]())
-                        }
-                    }
-
-                    self.loadViewIfNeeded()
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        self.refreshControl?.endRefreshing()
-    }
-    
-    /// Sets up the socket io connection for real time updates
-    /// - Parameter apiEndpoint
-    private func setRealtimeUpdates(url: String) {
-        connectionSocketIO = ConnectionWebSocket(url: url)
-        connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
-            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
-                let dataArray = any as NSArray
-                let dictionary = dataArray[1] as! Json
-                let events = dictionary["events"] as! [Event]
-                self.refreshControl?.beginRefreshing()
-                self.events = events
-                self.loadViewIfNeeded()
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            }
-        }
-        connectionSocketIO!.connect()
-    }
-
 }

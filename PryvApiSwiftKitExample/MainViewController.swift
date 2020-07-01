@@ -55,13 +55,13 @@ class MainViewController: UIViewController {
             "languageCode": "fr"
         ]
         
-        if let authUrl = service.setUpAuth(authSettings: authPayload, stateChangedCallback: stateChangedCallback) {
+        service.setUpAuth(authSettings: authPayload, stateChangedCallback: stateChangedCallback).then { authUrl in
             let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! AuthViewController
-            vc.service = service
+            vc.service = self.service
             vc.authUrl = authUrl
             
             self.navigationController?.pushViewController(vc, animated: false)
-        } else {
+        }.catch { _ in
             self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
@@ -140,9 +140,8 @@ class MainViewController: UIViewController {
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
-        vc.serviceName = service.info()?.name
+        vc.service = service
         vc.connection = Connection(apiEndpoint: apiEndpoint)
-        vc.permissions = permissions.filter({$0["level"] as! String == "contribute"}).map({$0["streamId"] as? String ?? ""})
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }

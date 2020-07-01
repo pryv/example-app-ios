@@ -97,7 +97,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         var events = [Event]()
-        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }) { _ in
+        connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }).then { _ in
             self.cleanMapView()
             self.show(events: events.filter{ event in
                 (event["type"] as? String)?.contains("position") ?? false
