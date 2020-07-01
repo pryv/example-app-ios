@@ -86,7 +86,6 @@ class ConnectionListTableViewController: UITableViewController {
     private var connectionSocketIO: ConnectionWebSocket?
     
     var appId: String?
-    var serviceName: String?
     var connection: Connection? {
         didSet {
             let utils = Utils()

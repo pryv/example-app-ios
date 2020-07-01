@@ -9,7 +9,6 @@
 import UIKit
 import PryvApiSwiftKit
 import KeychainSwift
-import Promises
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
@@ -141,9 +140,7 @@ class MainViewController: UIViewController {
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
-        service.info().then { serviceInfo in
-            vc.serviceName = serviceInfo.name
-        }
+        vc.service = service
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)

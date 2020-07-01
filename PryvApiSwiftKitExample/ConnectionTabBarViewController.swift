@@ -16,13 +16,12 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private let utils = Utils()
     private let locationManager = CLLocationManager()
     
-    var serviceName: String?
+    var service: Service?
     var connection: Connection?
     var appId: String?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
-        listVC?.serviceName = serviceName
         listVC?.connection = connection
         listVC?.appId = appId
         
@@ -55,10 +54,14 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         navigationItem.leftBarButtonItem = logoutButton
         navigationItem.hidesBackButton = true
         
-        if let username = utils.extractUsername(from: connection?.getApiEndpoint() ?? ""), let service = serviceName {
-            navigationItem.title = "\(service) - \(username)"
-        } else {
-            navigationItem.title = "Last events"
+        service?.info().then { serviceInfo in
+            self.navigationItem.title = serviceInfo.name
+            self.connection?.username().then { username in
+                self.navigationItem.title! += "-"
+                self.navigationItem.title! += username
+            }
+        }.catch { _ in
+            self.navigationItem.title = "Last events"
         }
         navigationItem.largeTitleDisplayMode = .automatic
     }

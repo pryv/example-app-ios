@@ -37,7 +37,7 @@ public class Service: Equatable {
     private var pryvServiceInfoUrl: String
     private var serviceCustomization: Json?
     
-    private var pryvServiceInfo: Promise<PryvServiceInfo>?
+    private var pryvServiceInfo: Promise<PryvServiceInfo>? = nil
     
     private var pollingInfo: (poll: String, poll_ms: Double, callback: (AuthResult) -> ())? {
         didSet {
