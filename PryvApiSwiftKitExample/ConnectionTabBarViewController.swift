@@ -10,11 +10,15 @@ import UIKit
 import PryvApiSwiftKit
 import KeychainSwift
 import CoreLocation
+import HealthKit
 
 class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
     private let keychain = KeychainSwift()
     private let utils = Utils()
     private let locationManager = CLLocationManager()
+    private let healthStore = HKHealthStore()
+    private let walkingDist = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!
+    private let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate)!
     
     var service: Service?
     var connection: Connection?
@@ -36,6 +40,53 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         
         configureUI()
         configureLocation()
+        
+        if HKHealthStore.isHealthDataAvailable() {
+            configureHealthKit()
+        }
+    }
+    
+    /// Configures the health kit data sync. with the app
+    private func configureHealthKit() {
+        let healthKitStreams = Set([walkingDist, heartRate]) // TODO: custom ?
+        
+        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
+            if success {
+                self.healthStore.enableBackgroundDelivery(for: self.walkingDist, frequency: .hourly, withCompletion: { succeeded, error in
+                    guard error != nil && succeeded else {
+                      return
+                    }
+                })
+                self.healthStore.enableBackgroundDelivery(for: self.heartRate, frequency: .daily, withCompletion: { succeeded, error in
+                    guard error != nil && succeeded else {
+                      return
+                    }
+                })
+            }
+        }
+        
+        let walkingDistQuery = HKObserverQuery(sampleType: walkingDist, predicate: nil, updateHandler: { query, completionHandler, error in
+            defer {
+              completionHandler()
+            }
+            guard error != nil else {
+              return
+            }
+            // TODO: if authorizationStatus(for type: HKObjectType) = .sharingAuthorized { get and send to pryv }
+        })
+        let heartRateQuery = HKObserverQuery(sampleType: heartRate, predicate: nil, updateHandler: { query, completionHandler, error in
+            defer {
+              completionHandler()
+            }
+            guard error != nil else {
+              return
+            }
+            // TODO: if authorizationStatus(for type: HKObjectType) = .sharingAuthorized { get and send to pryv }
+        })
+        
+        healthStore.execute(walkingDistQuery)
+        healthStore.execute(heartRateQuery)
+        
     }
     
     /// Configures the location tracking parameters

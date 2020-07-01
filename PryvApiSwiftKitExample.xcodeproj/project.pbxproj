@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */; };
 		62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
+		B300ECC924ACAF1C00AA7387 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B300ECC824ACAF1C00AA7387 /* HealthKit.framework */; };
 		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
 		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
 		B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */; };
@@ -57,6 +58,7 @@
 		80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
 		984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B300ECC824ACAF1C00AA7387 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
 		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
 		B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionListTableViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B300ECC924ACAF1C00AA7387 /* HealthKit.framework in Frameworks */,
 				B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */,
 				E92BFF5B5266B3F8D08AEB7C /* Pods_PryvApiSwiftKitExample.framework in Frameworks */,
 			);
@@ -192,6 +195,7 @@
 		B88ED49F10945DDBD3BF09CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B300ECC824ACAF1C00AA7387 /* HealthKit.framework */,
 				B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */,
 				80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */,
 				26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
