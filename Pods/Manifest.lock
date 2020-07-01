@@ -3,9 +3,13 @@ PODS:
   - FileBrowser (1.0.0)
   - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
+  - PromisesObjC (1.2.9)
+  - PromisesSwift (1.2.9):
+    - PromisesObjC (= 1.2.9)
   - PryvApiSwiftKit (0.1.2):
     - Alamofire
     - Mocker
+    - PromisesSwift
     - Socket.IO-Client-Swift
   - RLBAlertsPickers (1.1.2)
   - Socket.IO-Client-Swift (15.2.0):
@@ -24,6 +28,8 @@ SPEC REPOS:
     - FileBrowser
     - KeychainSwift
     - Mocker
+    - PromisesObjC
+    - PromisesSwift
     - RLBAlertsPickers
     - Socket.IO-Client-Swift
     - Starscream
@@ -35,7 +41,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: a29287a8b18f39540b7997faa95e9d331953d1e6
+    :commit: d519a39fc6ebf21eaff2157357371832c3b8a74a
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -43,7 +49,9 @@ SPEC CHECKSUMS:
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
-  PryvApiSwiftKit: fdf5f9087c9608f625b3ab0e4c9ce0829ec052c1
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
+  PryvApiSwiftKit: 929f7121a957d68d9aa38453c40c7bbfe2f42923
   RLBAlertsPickers: 2548943b0cb16620904cbd926a645362d1b43963
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0

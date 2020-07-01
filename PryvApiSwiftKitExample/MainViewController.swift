@@ -9,6 +9,7 @@
 import UIKit
 import PryvApiSwiftKit
 import KeychainSwift
+import Promises
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
@@ -55,13 +56,13 @@ class MainViewController: UIViewController {
             "languageCode": "fr"
         ]
         
-        if let authUrl = service.setUpAuth(authSettings: authPayload, stateChangedCallback: stateChangedCallback) {
+        service.setUpAuth(authSettings: authPayload, stateChangedCallback: stateChangedCallback).then { authUrl in
             let vc = self.storyboard?.instantiateViewController(identifier: "webVC") as! AuthViewController
-            vc.service = service
+            vc.service = self.service
             vc.authUrl = authUrl
             
             self.navigationController?.pushViewController(vc, animated: false)
-        } else {
+        }.catch { _ in
             self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
@@ -140,7 +141,9 @@ class MainViewController: UIViewController {
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
-        vc.serviceName = service.info()?.name
+        service.info().then { serviceInfo in
+            vc.serviceName = serviceInfo.name
+        }
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)

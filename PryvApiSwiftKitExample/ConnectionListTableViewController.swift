@@ -133,20 +133,17 @@ class ConnectionListTableViewController: UITableViewController {
         ]
         
         events.removeAll()
-        connection!.api(APICalls: request) { res, err in
-            if let error = err {
-                print("problem encountered when getting the events: \(error.localizedDescription)")
-            }
-            if let results = res {
-                for result in results {
-                    if let json = result as? [String: [Event]] {
-                        self.events.append(contentsOf: json["events"] ?? [Event]())
-                    }
+        connection!.api(APICalls: request).then { results in
+            for result in results {
+                if let json = result as? [String: [Event]] {
+                    self.events.append(contentsOf: json["events"] ?? [Event]())
                 }
-                
-                self.loadViewIfNeeded()
-                self.tableView.reloadData()
             }
+            
+            self.loadViewIfNeeded()
+            self.tableView.reloadData()
+        }.catch { error in
+            print("problem encountered when getting the events: \(error.localizedDescription)")
         }
     }
     
@@ -208,14 +205,12 @@ class ConnectionListTableViewController: UITableViewController {
                     print("new event: \(String(describing: event))")
                     }]
                 
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults) { _, err in
-                    if let error = err {
-                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                        self.present(innerAlert, animated: true, completion: nil)
-                    } else {
-                        self.created = true
-                    }
+                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { _ in
+                    self.created = true
+                }.catch { error in
+                    let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                    self.present(innerAlert, animated: true, completion: nil)
                 }
             }
             self.present(alert, animated: true)
@@ -229,14 +224,12 @@ class ConnectionListTableViewController: UITableViewController {
                 self.present(fileBrowser, animated: true, completion: nil)
                 
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
-                        if let error = err {
-                            let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                            innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                            self.present(innerAlert, animated: true, completion: nil)
-                        } else {
-                            self.created = true
-                        }
+                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).then { _ in
+                        self.created = true
+                    }.catch { error in
+                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                        self.present(innerAlert, animated: true, completion: nil)
                     }
                 }
             }
@@ -261,10 +254,10 @@ class ConnectionListTableViewController: UITableViewController {
         self.present(fileBrowser, animated: true, completion: nil)
         
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue) { _, err in
-                if let error = err {
-                    print("problem encountered when adding a file to an event: \(error.localizedDescription)")
-                }
+            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
+                let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(innerAlert, animated: true, completion: nil)
             }
         }
     }
