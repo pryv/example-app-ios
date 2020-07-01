@@ -19,7 +19,7 @@ PODS:
 DEPENDENCIES:
   - FileBrowser (~> 1.0)
   - KeychainSwift
-  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `fix-interface`)
+  - PryvApiSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
   - RLBAlertsPickers (~> 1.1.1)
 
 SPEC REPOS:
@@ -36,12 +36,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvApiSwiftKit:
-    :branch: fix-interface
+    :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: d519a39fc6ebf21eaff2157357371832c3b8a74a
+    :commit: 41782cb9ca8d1c00e6b32d598737d416a7838a20
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -51,11 +51,11 @@ SPEC CHECKSUMS:
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
-  PryvApiSwiftKit: 929f7121a957d68d9aa38453c40c7bbfe2f42923
+  PryvApiSwiftKit: 9b8a32a60e30d760bd433076f93a1bb3ed236953
   RLBAlertsPickers: 2548943b0cb16620904cbd926a645362d1b43963
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 7ad6a15a45c8f4798121cb5e636273fea02ff80d
+PODFILE CHECKSUM: 68d9a5e0d05d491690cc517b72d66fa44b1a61ab
 
 COCOAPODS: 1.8.4
