@@ -72,6 +72,32 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         print("SEX: \(String(describing: biologicalSex))")
         print("BLOOD: \(String(describing: bloodType))")
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        
+        let birthdayCall = [
+            [
+                "method": "streams.create",
+                "params": [
+                    "id": "birthday",
+                    "name": "birthday"
+                ]
+            ],
+            [
+                "method": "events.create",
+                "params": [
+                    "streamId": "birthday",
+                    "type": "date/iso-8601",
+                    "content": formatter.string(from: birthdayComponents!.date!)
+                ]
+            ]
+        ]
+        connection?.api(APICalls: birthdayCall).then { json in
+            print("Api calls: " + String(describing: json))
+        }.catch { error in
+            print("Api calls failed: \(error.localizedDescription)")
+        }
+        
         let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
             defer {
               completionHandler()
@@ -85,8 +111,22 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                     guard let results = samples else { return }
                     let weights: [Double] = results.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
                         .filter({$0 != nil}).map({$0!})
-                    let mean = weights.reduce(0, +) / Double(weights.count)
-                    print("WEIGHT: \(String(describing: mean))")
+                    
+                    let weightCall = [
+                        [
+                            "method": "events.create",
+                            "params": [
+                                "streamId": "weight",
+                                "type": "mass/kg",
+                                "content": weights.reduce(0, +) / Double(weights.count)
+                            ]
+                        ]
+                    ]
+                    self.connection?.api(APICalls: weightCall).then { json in
+                        print("Api calls: " + String(describing: json))
+                    }.catch { error in
+                        print("Api calls failed: \(error.localizedDescription)")
+                    }
                 }
             }
             self.healthStore.execute(sampleQuery)
