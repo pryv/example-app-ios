@@ -15,10 +15,14 @@ import HealthKit
 class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
     private let keychain = KeychainSwift()
     private let utils = Utils()
+    
     private let locationManager = CLLocationManager()
+    
     private let healthStore = HKHealthStore()
-    private let walkingDist = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!
-    private let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate)!
+    private let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
+    private let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType)!
+    private let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex)!
+    private let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
     
     var service: Service?
     var connection: Connection?
@@ -40,52 +44,38 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         
         configureUI()
         configureLocation()
-        
-        if HKHealthStore.isHealthDataAvailable() {
-            configureHealthKit()
-        }
+        configureHealthKit()
     }
     
     /// Configures the health kit data sync. with the app
     private func configureHealthKit() {
-        let healthKitStreams = Set([walkingDist, heartRate]) // TODO: custom ?
+        guard HKHealthStore.isHealthDataAvailable() else { return }
         
+        let healthKitStreams = Set([dateOfBirth, bloodType, biologicalSex, weight])
         healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
             if success {
-                self.healthStore.enableBackgroundDelivery(for: self.walkingDist, frequency: .hourly, withCompletion: { succeeded, error in
-                    guard error != nil && succeeded else {
-                      return
+                // TODO
+                let birthdayComponents = try? self.healthStore.dateOfBirthComponents()
+                let biologicalSex = (try? self.healthStore.biologicalSex())?.biologicalSex.rawValue
+                let bloodType = (try? self.healthStore.bloodType())?.bloodType.rawValue
+                
+                print("BIRTHDAY: \(String(describing: birthdayComponents?.day)).\(String(describing: birthdayComponents?.month)).\(String(describing: birthdayComponents?.year))")
+                print("SEX: \(String(describing: biologicalSex))")
+                print("BLOOD: \(String(describing: bloodType))")
+                
+                let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date.distantPast, end: Date(), options: .strictEndDate)
+                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+                let sampleQuery = HKSampleQuery(sampleType: self.weight, predicate: mostRecentPredicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                    DispatchQueue.main.async {
+                        let mostRecentSample = samples?.first as? HKQuantitySample
+                        let weight = mostRecentSample?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+                        print("WEIGHT: \(String(describing: weight))")
                     }
-                })
-                self.healthStore.enableBackgroundDelivery(for: self.heartRate, frequency: .daily, withCompletion: { succeeded, error in
-                    guard error != nil && succeeded else {
-                      return
-                    }
-                })
+                }
+                
+                HKHealthStore().execute(sampleQuery)
             }
         }
-        
-        let walkingDistQuery = HKObserverQuery(sampleType: walkingDist, predicate: nil, updateHandler: { query, completionHandler, error in
-            defer {
-              completionHandler()
-            }
-            guard error != nil else {
-              return
-            }
-            // TODO: if authorizationStatus(for type: HKObjectType) = .sharingAuthorized { get and send to pryv }
-        })
-        let heartRateQuery = HKObserverQuery(sampleType: heartRate, predicate: nil, updateHandler: { query, completionHandler, error in
-            defer {
-              completionHandler()
-            }
-            guard error != nil else {
-              return
-            }
-            // TODO: if authorizationStatus(for type: HKObjectType) = .sharingAuthorized { get and send to pryv }
-        })
-        
-        healthStore.execute(walkingDistQuery)
-        healthStore.execute(heartRateQuery)
         
     }
     
