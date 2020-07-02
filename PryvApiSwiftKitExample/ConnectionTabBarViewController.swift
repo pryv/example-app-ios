@@ -20,8 +20,6 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     private let healthStore = HKHealthStore()
     private let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
-    private let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType)!
-    private let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex)!
     private let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
     
     var service: Service?
@@ -51,7 +49,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private func configureHealthKit() {
         guard HKHealthStore.isHealthDataAvailable() else { return }
         
-        let healthKitStreams = Set([dateOfBirth, bloodType, biologicalSex, weight])
+        let healthKitStreams = Set([dateOfBirth, weight])
         healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in return }
         monitorHealthData()
         healthStore.enableBackgroundDelivery(for: self.weight, frequency: .immediate, withCompletion: { succeeded, error in
@@ -61,72 +59,86 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 print("Failed to enable background delivery of weight changes: \(err)")
             }
         })
+        // TODO: enableBackgroundDelivery(dateofbirth)
     }
     
+    /// Monitor healthkit data and send it to Pryv
     private func monitorHealthData() {
-        let birthdayComponents = try? self.healthStore.dateOfBirthComponents()
-        let biologicalSex = (try? self.healthStore.biologicalSex())?.biologicalSex.rawValue
-        let bloodType = (try? self.healthStore.bloodType())?.bloodType.rawValue
-        
-        print("BIRTHDAY: \(String(describing: birthdayComponents?.day)).\(String(describing: birthdayComponents?.month)).\(String(describing: birthdayComponents?.year))")
-        print("SEX: \(String(describing: biologicalSex))")
-        print("BLOOD: \(String(describing: bloodType))")
-        
+        let birthdayComponents = try? self.healthStore.dateOfBirthComponents() // TODO: observer query
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         
-        let birthdayCall = [
-            [
-                "method": "streams.create",
-                "params": [
-                    "id": "birthday",
-                    "name": "birthday"
-                ]
-            ],
-            [
-                "method": "events.create",
-                "params": [
-                    "streamId": "birthday",
-                    "type": "date/iso-8601",
-                    "content": formatter.string(from: birthdayComponents!.date!)
-                ]
-            ]
-        ]
-        connection?.api(APICalls: birthdayCall).then { json in
-            print("Api calls: " + String(describing: json))
-        }.catch { error in
-            print("Api calls failed: \(error.localizedDescription)")
-        }
+        #if DEBUG
+        print("Born on the \(formatter.string(from: birthdayComponents!.date!))")
+        #endif
+        
+        // TODO: check if any change before sending birthday
+        
+//        let birthdayCall = [
+//            [
+//                "method": "streams.create",
+//                "params": [
+//                    "id": "birthday",
+//                    "name": "birthday"
+//                ]
+//            ],
+//            [
+//                "method": "events.create",
+//                "params": [
+//                    "streamId": "birthday",
+//                    "type": "date/iso-8601",
+//                    "content": formatter.string(from: birthdayComponents!.date!)
+//                ]
+//            ]
+//        ]
+//        connection?.api(APICalls: birthdayCall).then { json in
+//            print("Api calls: " + String(describing: json))
+//        }.catch { error in
+//            print("Api calls failed: \(error.localizedDescription)")
+//        }
         
         let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
-            defer {
-              completionHandler()
+            defer {  completionHandler() }
+            if let err = error {
+                print("Failed to receive background notification of weight change: \(err)")
+                return
             }
-            guard error != nil else {
-              return
-            }
+
+            #if DEBUG
+            print("Received background notification of weight change")
+            #endif
             
             let sampleQuery = HKSampleQuery(sampleType: self.weight, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
                 DispatchQueue.main.async {
+                    if let err = error {
+                        print("Failed to receive new weight: \(err)")
+                        return
+                    }
+                    
                     guard let results = samples else { return }
                     let weights: [Double] = results.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
                         .filter({$0 != nil}).map({$0!})
+                    let mean = weights.reduce(0, +) / Double(weights.count)
+
+                    #if DEBUG
+                    print("New mean weight: \(mean)")
+                    #endif
                     
-                    let weightCall = [
-                        [
-                            "method": "events.create",
-                            "params": [
-                                "streamId": "weight",
-                                "type": "mass/kg",
-                                "content": weights.reduce(0, +) / Double(weights.count)
-                            ]
-                        ]
-                    ]
-                    self.connection?.api(APICalls: weightCall).then { json in
-                        print("Api calls: " + String(describing: json))
-                    }.catch { error in
-                        print("Api calls failed: \(error.localizedDescription)")
-                    }
+//                    let weightCall = [
+//                        [
+//                            "method": "events.create",
+//                            "params": [
+//                                "streamId": "weight",
+//                                "type": "mass/kg",
+//                                "content": mean
+//                            ]
+//                        ]
+//                    ]
+//                    self.connection?.api(APICalls: weightCall).then { json in
+//                        print("Api calls: " + String(describing: json))
+//                    }.catch { error in
+//                        print("Api calls failed: \(error.localizedDescription)")
+//                    }
                 }
             }
             self.healthStore.execute(sampleQuery)
