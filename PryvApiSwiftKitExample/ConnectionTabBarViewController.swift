@@ -55,7 +55,6 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
             return
         }
-        monitorHealthData(streams: healthKitStreams)
         
         for (type, freq) in HKStreamsAndFreq {
             healthStore.enableBackgroundDelivery(for: type, frequency: freq, withCompletion: { succeeded, error in
@@ -64,6 +63,8 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 }
             })
         }
+        
+        monitorHealthData(streams: healthKitStreams)
     }
     
     /// Monitor healthkit data and send it to Pryv
@@ -135,23 +136,23 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                     let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
-                    let newSamplesValues: [(value: Double, uuid: UUID)]? = newSamples?.map { newSample in
+                    var newSamplesValues = [UUID: Double]()
+                    for newSample in newSamples ?? [HKSample]() {
                         let uuid = newSample.uuid
                         let value = (newSample as? HKQuantitySample)!.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
-                        return (value: value, uuid: uuid)
-                    }.filter({$0 != nil}).map({$0!})
+                        newSamplesValues[uuid] = value
+                    }
                     
-                    if let newWeights = newSamplesValues, newWeights.count > 0 {
+                    if newSamplesValues.count > 0 {
                         var apiCalls = [APICall]()
-                        
-                        for newWeight in newWeights {
+                        for (uuid, value) in newSamplesValues {
                             let apiCall: APICall = [
                                 "method": "events.create",
                                 "params": [
                                     "streamId": "weight",
                                     "type": "mass/kg",
-                                    "tags": [String(describing: newWeight.uuid)],
-                                    "content": newWeight.value
+                                    "tags": [String(describing: uuid)],
+                                    "content": value
                                 ]
                             ]
                             apiCalls.append(apiCall)
