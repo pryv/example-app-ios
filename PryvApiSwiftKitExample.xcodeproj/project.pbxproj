@@ -71,7 +71,7 @@
 		B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+errorAlert.swift"; sourceTree = "<group>"; };
 		B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+newEventAlert.swift"; sourceTree = "<group>"; };
 		B3D6FC9724925EB000DB90D3 /* ConnectionListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionListUITests.swift; sourceTree = "<group>"; };
-		B3D70D33248A2FE900A1A247 /* PryvApiSwiftKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PryvApiSwiftKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3D70D33248A2FE900A1A247 /* Pryv Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pryv Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D36248A2FE900A1A247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B3D70D3A248A2FE900A1A247 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		B3D70D34248A2FE900A1A247 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B3D70D33248A2FE900A1A247 /* PryvApiSwiftKitExample.app */,
+				B3D70D33248A2FE900A1A247 /* Pryv Lab.app */,
 				B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */,
 				B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */,
 			);
@@ -236,7 +236,7 @@
 			);
 			name = PryvApiSwiftKitExample;
 			productName = PryvApiSwiftKitExample;
-			productReference = B3D70D33248A2FE900A1A247 /* PryvApiSwiftKitExample.app */;
+			productReference = B3D70D33248A2FE900A1A247 /* Pryv Lab.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B3D70D48248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests */ = {
@@ -656,7 +656,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pryv Lab";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -675,7 +675,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pryv Lab";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
