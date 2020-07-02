@@ -18,7 +18,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     private let locationManager = CLLocationManager()
     
-    private let healthStore = HKHealthStore()
+    private let healthStore = HKHealthStore() // TODO: custom streams?
     private let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
     private let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
     
@@ -52,6 +52,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         let healthKitStreams = Set([dateOfBirth, weight])
         healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in return }
         monitorHealthData()
+        
         healthStore.enableBackgroundDelivery(for: self.weight, frequency: .immediate, withCompletion: { succeeded, error in
             if succeeded{
                 print("Enabled background delivery of weight changes")
@@ -59,19 +60,20 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 print("Failed to enable background delivery of weight changes: \(err)")
             }
         })
-        // TODO: enableBackgroundDelivery(dateofbirth)
     }
     
     /// Monitor healthkit data and send it to Pryv
     private func monitorHealthData() {
-        let birthdayComponents = try? self.healthStore.dateOfBirthComponents() // TODO: observer query
+        monitorDayOfBirth()
+        monitorWeight()
+    }
+    
+    /// Monitor static data such as date of birth, once per app launch
+    private func monitorDayOfBirth() {
+        guard let birthdayComponents = try? self.healthStore.dateOfBirthComponents() else { return }
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        let newBirthday = formatter.string(from: birthdayComponents!.date!)
-        
-        #if DEBUG
-        print("Born on the \(formatter.string(from: birthdayComponents!.date!))")
-        #endif
+        let newBirthday = formatter.string(from: birthdayComponents.date!) // TODO: check for change ?
         
         connection?.api(APICalls: [
             [
@@ -93,58 +95,62 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                             "content": newBirthday
                         ]
                     ]
-                ]).then { json in
-                    #if DEBUG
-                    print("Api calls: " + String(describing: json))
-                    #endif
-                }.catch { error in
+                ]).catch { error in
                     print("Api calls failed: \(error.localizedDescription)")
                 }
             }
         }
-        
+    }
+    
+    /// Monitor dynamic data such as weight, immediately after change
+    private func monitorWeight() {
         let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
-            defer {  completionHandler() }
+            defer { completionHandler() }
             if let err = error {
                 print("Failed to receive background notification of weight change: \(err)")
                 return
             }
-
-            #if DEBUG
-            print("Received background notification of weight change")
-            #endif
             
-            let sampleQuery = HKSampleQuery(sampleType: self.weight, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+            var anchor = HKQueryAnchor.init(fromValue: 0)
+            
+            if UserDefaults.standard.object(forKey: "Anchor") != nil {
+                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
+            }
+            
+            let sampleQuery = HKAnchoredObjectQuery(type: self.weight, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
                         print("Failed to receive new weight: \(err)")
                         return
                     }
                     
-                    guard let results = samples else { return }
-                    let weights: [Double] = results.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
-                        .filter({$0 != nil}).map({$0!})
-                    let mean = weights.reduce(0, +) / Double(weights.count)
-
-                    #if DEBUG
-                    print("New mean weight: \(mean)")
-                    #endif
+                    anchor = newAnchor!
+                    let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
+                    UserDefaults.standard.set(data, forKey: "Anchor")
                     
-//                    let weightCall = [
-//                        [
-//                            "method": "events.create",
-//                            "params": [
-//                                "streamId": "weight",
-//                                "type": "mass/kg",
-//                                "content": mean
-//                            ]
-//                        ]
-//                    ]
-//                    self.connection?.api(APICalls: weightCall).then { json in
-//                        print("Api calls: " + String(describing: json))
-//                    }.catch { error in
-//                        print("Api calls failed: \(error.localizedDescription)")
-//                    }
+                    guard let newWeights: [Double] = newSamples?.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
+                        .filter({$0 != nil}).map({$0!}), newWeights.count > 0 else { return }
+                    
+                    var apiCalls = [APICall]()
+                    
+                    for newWeight in newWeights {
+                        let apiCall: APICall = [
+                            "method": "events.create",
+                            "params": [
+                                "streamId": "weight",
+                                "type": "mass/kg",
+                                "content": newWeight
+                            ]
+                        ]
+                        apiCalls.append(apiCall)
+                    }
+                    
+                    self.connection?.api(APICalls: apiCalls).catch { error in
+                        print("Api calls failed: \(error.localizedDescription)")
+                    }
+                    
+                    // TODO: delete ?
                 }
             }
             self.healthStore.execute(sampleQuery)
@@ -203,11 +209,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
             /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
-                Let this line uncommented to have frequent location notifications */
+             Let this line uncommented to have frequent location notifications */
             locationManager.startUpdatingLocation()
             
             /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
-                Uncomment this line and comment the line below to avoid using too much power */
+             Uncomment this line and comment the line below to avoid using too much power */
             // locationManager.startMonitoringSignificantLocationChanges()
         }
     }
