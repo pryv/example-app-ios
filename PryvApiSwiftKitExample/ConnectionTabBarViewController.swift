@@ -18,9 +18,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     private let locationManager = CLLocationManager()
     
-    private let healthStore = HKHealthStore() // TODO: custom streams?
-    private let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
-    private let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+    private let healthStore = HKHealthStore()
+    private let HKStreamsAndFreq: [HKObjectType: HKUpdateFrequency] = [
+        HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!: .weekly,
+        HKObjectType.quantityType(forIdentifier: .bodyMass)!: .immediate
+    ]
     
     var service: Service?
     var connection: Connection?
@@ -42,38 +44,42 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         
         configureUI()
         configureLocation()
-        configureHealthKit()
+        configureHealthKit() // TODO: every time the view is shown, checks whether the characteristic health data changed
     }
     
     /// Configures the health kit data sync. with the app
     private func configureHealthKit() {
         guard HKHealthStore.isHealthDataAvailable() else { return }
         
-        let healthKitStreams = Set([dateOfBirth, weight])
-        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in return }
-        monitorHealthData()
+        let healthKitStreams = Set(HKStreamsAndFreq.keys)
+        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
+            return
+        }
+        monitorHealthData(streams: healthKitStreams)
         
-        healthStore.enableBackgroundDelivery(for: self.weight, frequency: .immediate, withCompletion: { succeeded, error in
-            if succeeded{
-                print("Enabled background delivery of weight changes")
-            } else if let err = error {
-                print("Failed to enable background delivery of weight changes: \(err)")
-            }
-        })
+        for (type, freq) in HKStreamsAndFreq {
+            healthStore.enableBackgroundDelivery(for: type, frequency: freq, withCompletion: { succeeded, error in
+                if let err = error, !succeeded {
+                    print("Failed to enable background delivery of \(type.identifier) changes: \(err)")
+                }
+            })
+        }
     }
     
     /// Monitor healthkit data and send it to Pryv
-    private func monitorHealthData() {
-        monitorDayOfBirth()
+    /// - Parameter streams: the streams of data to monitor
+    private func monitorHealthData(streams: Set<HKObjectType>) {
+        // TODO: depend on streams
+        monitorDateOfBirth()
         monitorWeight()
     }
     
     /// Monitor static data such as date of birth, once per app launch
-    private func monitorDayOfBirth() {
-        guard let birthdayComponents = try? self.healthStore.dateOfBirthComponents() else { return }
+    private func monitorDateOfBirth() {
+        guard let birthdayComponents = try? healthStore.dateOfBirthComponents() else { return }
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        let newBirthday = formatter.string(from: birthdayComponents.date!) // TODO: check for change ?
+        let newBirthday = formatter.string(from: birthdayComponents.date!)
         
         connection?.api(APICalls: [
             [
@@ -104,6 +110,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     /// Monitor dynamic data such as weight, immediately after change
     private func monitorWeight() {
+        let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
         let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
             defer { completionHandler() }
             if let err = error {
@@ -111,23 +118,15 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 return
             }
             
-            var anchor = HKQueryAnchor.init(fromValue: 0)
-            
-            if UserDefaults.standard.object(forKey: "Anchor") != nil {
-                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
-                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
-            }
-            
-            let sampleQuery = HKAnchoredObjectQuery(type: self.weight, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
+            var anchor = HKQueryAnchor.setUp() 
+            let sampleQuery = HKAnchoredObjectQuery(type: weight, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
                         print("Failed to receive new weight: \(err)")
                         return
                     }
                     
-                    anchor = newAnchor!
-                    let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
-                    UserDefaults.standard.set(data, forKey: "Anchor")
+                    anchor = HKQueryAnchor.changeValue(newAnchor)
                     
                     guard let newWeights: [Double] = newSamples?.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
                         .filter({$0 != nil}).map({$0!}), newWeights.count > 0 else { return }
@@ -260,3 +259,4 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     }
     
 }
+
