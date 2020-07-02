@@ -67,35 +67,41 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         let birthdayComponents = try? self.healthStore.dateOfBirthComponents() // TODO: observer query
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
+        let newBirthday = formatter.string(from: birthdayComponents!.date!)
         
         #if DEBUG
         print("Born on the \(formatter.string(from: birthdayComponents!.date!))")
         #endif
         
-        // TODO: check if any change before sending birthday
-        
-//        let birthdayCall = [
-//            [
-//                "method": "streams.create",
-//                "params": [
-//                    "id": "birthday",
-//                    "name": "birthday"
-//                ]
-//            ],
-//            [
-//                "method": "events.create",
-//                "params": [
-//                    "streamId": "birthday",
-//                    "type": "date/iso-8601",
-//                    "content": formatter.string(from: birthdayComponents!.date!)
-//                ]
-//            ]
-//        ]
-//        connection?.api(APICalls: birthdayCall).then { json in
-//            print("Api calls: " + String(describing: json))
-//        }.catch { error in
-//            print("Api calls failed: \(error.localizedDescription)")
-//        }
+        connection?.api(APICalls: [
+            [
+                "method": "events.get",
+                "params": [
+                    "streams": ["birthday"]
+                ]
+            ]
+        ]).then { json in
+            let events = json.first?["events"] as? [Event]
+            let storedBirthday = events?.first?["content"] as? String
+            if storedBirthday != newBirthday {
+                self.connection?.api(APICalls: [
+                    [
+                        "method": "events.create",
+                        "params": [
+                            "streamId": "birthday",
+                            "type": "date/iso-8601",
+                            "content": newBirthday
+                        ]
+                    ]
+                ]).then { json in
+                    #if DEBUG
+                    print("Api calls: " + String(describing: json))
+                    #endif
+                }.catch { error in
+                    print("Api calls failed: \(error.localizedDescription)")
+                }
+            }
+        }
         
         let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
             defer {  completionHandler() }
