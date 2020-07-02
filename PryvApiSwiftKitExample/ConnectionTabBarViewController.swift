@@ -118,7 +118,13 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 return
             }
             
-            var anchor = HKQueryAnchor.setUp() 
+            var anchor = HKQueryAnchor.init(fromValue: 0)
+            
+            if UserDefaults.standard.object(forKey: "Anchor") != nil {
+                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
+            }
+            
             let sampleQuery = HKAnchoredObjectQuery(type: weight, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
@@ -126,10 +132,17 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                         return
                     }
                     
-                    anchor = HKQueryAnchor.changeValue(newAnchor)
+                    anchor = newAnchor!
+                    let data = try! NSKeyedArchiver.archivedData(withRootObject: anchor as Any, requiringSecureCoding: true)
+                    UserDefaults.standard.set(data, forKey: "Anchor")
                     
-                    guard let newWeights: [Double] = newSamples?.map({($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))})
-                        .filter({$0 != nil}).map({$0!}), newWeights.count > 0 else { return }
+                    let newSamplesValues: [(value: Double, uuid: UUID)]? = newSamples?.map { newSample in
+                        let uuid = newSample.uuid
+                        let value = (newSample as? HKQuantitySample)!.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+                        return (value: value, uuid: uuid)
+                    }.filter({$0 != nil}).map({$0!})
+                    
+                    guard let newWeights = newSamplesValues, newWeights.count > 0 else { return }
                     
                     var apiCalls = [APICall]()
                     
@@ -139,17 +152,45 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                             "params": [
                                 "streamId": "weight",
                                 "type": "mass/kg",
-                                "content": newWeight
+                                "tags": [String(describing: newWeight.uuid)],
+                                "content": newWeight.value
                             ]
                         ]
                         apiCalls.append(apiCall)
                     }
                     
                     self.connection?.api(APICalls: apiCalls).catch { error in
-                        print("Api calls failed: \(error.localizedDescription)")
+                        print("Api calls for addition failed: \(error.localizedDescription)")
                     }
                     
-                    // TODO: delete ?
+                    if let deletions = deletedSamples, deletions.count > 0 { // FIXME: always empty and duplicated addition
+                        let tags = deletions.map { $0.uuid }
+                        self.connection?.api(APICalls: [
+                            [
+                                "method": "events.get",
+                                "params": [
+                                    "tags": [tags]
+                                ]
+                            ]
+                        ]).then { json in
+                            guard let events = json.first?["events"] as? [Event] else { return }
+                            let ids = events.map { $0["id"] as? String }.filter { $0 != nil }.map { $0! }
+                            var apiCalls = [APICall]()
+                            
+                            for id in ids {
+                                apiCalls.append([
+                                    "method": "events.delete",
+                                    "params": [
+                                        "id": id
+                                    ]
+                                ])
+                            }
+                            
+                            self.connection?.api(APICalls: apiCalls).catch { error in
+                                print("Api calls for deletion failed: \(error.localizedDescription)")
+                            }
+                        }
+                    }
                 }
             }
             self.healthStore.execute(sampleQuery)
