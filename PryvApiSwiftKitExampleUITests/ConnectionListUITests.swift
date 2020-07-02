@@ -47,7 +47,7 @@ class ConnectionListUITests: XCTestCase {
         XCTAssert(app.tables["eventsTableView"].exists)
     }
     
-    func testCreateSimpleEvent() {
+    func testCreateAndDeleteSimpleEvent() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Simple event"].tap()
         sleep(1)
@@ -72,6 +72,13 @@ class ConnectionListUITests: XCTestCase {
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
         XCTAssertFalse(cell.staticTexts["attachmentLabel"].exists)
         XCTAssertFalse(cell.images["attachmentImageView"].exists)
+        
+        cell.swipeLeft()
+        cell.buttons["Delete"].tap()
+        
+        XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, "weight")
+        XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
+        XCTAssertNotEqual(cell.staticTexts["contentLabel"].label, "90")
     }
     
     func testCreateBadEvent() {

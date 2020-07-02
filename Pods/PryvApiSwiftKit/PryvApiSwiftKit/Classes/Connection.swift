@@ -81,7 +81,7 @@ public class Connection {
                         return
                     }
                     
-                    guard let results = response.object(forKey: "results"), let json = results as? [Json] else {
+                    guard let results = response.object(forKey: "results"), let json = results as? [Json], json.count > 0 else {
                         reject(PryvError.decodingError)
                         return
                     }
