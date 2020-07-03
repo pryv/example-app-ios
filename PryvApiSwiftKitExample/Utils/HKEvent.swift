@@ -10,17 +10,23 @@ import Foundation
 import HealthKit
 import PryvApiSwiftKit
 
+/// Bridge between the date received from HealthKit and the creation of events in Pryv
 class HKEvent {
-    private let type: HKObjectType!
-    private let unit: HKUnit?
-    private let updateFrequency: HKUpdateFrequency!
+    public let type: HKObjectType!
+    public var unit: HKUnit?
+    public let updateFrequency: HKUpdateFrequency!
     
-    public init(type: HKObjectType?, unit: HKUnit?, updateFrequency: HKUpdateFrequency?) {
+    /// Create a bridge from the data in HealthKit
+    /// - Parameters:
+    ///   - type: the type of object received from HK
+    ///   - updateFrequency
+    public init(type: HKObjectType?, updateFrequency: HKUpdateFrequency?) {
         self.type = type
-        self.unit = unit
         self.updateFrequency = updateFrequency
     }
     
+    /// Construct the Pryv event `streamId`
+    /// - Returns: the `streamId`
     public func eventStreamId() -> String {
         if let _ = type as? HKCharacteristicType {
             return "characteristic"
@@ -60,6 +66,8 @@ class HKEvent {
         return "diary"
     }
     
+    /// Translate HK data type to Pryv data type
+    /// - Returns: the String corresponding to the Pryv data type of the event
     public func eventType() -> String {
         if let _ = type as? HKCharacteristicType {
             return "note/txt"
@@ -68,45 +76,62 @@ class HKEvent {
         if let quantityType = type as? HKQuantityType {
             switch quantityType.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
             case "StepCount":
+                unit = HKUnit.count()
                 return "count/steps"
             case "PushCount", "SwimmingStrokeCount", "FlightsClimbed", " NikeFuel", "InhalerUsage", "NumberOfTimesFallen", "UvExposure":
+                unit = HKUnit.count()
                 return "count/generic"
             case "BasalEnergyBurned", "ActiveEnergyBurned", "DietaryEnergyConsumed":
-                return "energy/cal"
+                unit = HKUnit.kilocalorie()
+                return "energy/kcal"
             case "DistanceWalkingRunning", "DistanceCycling", "DistanceWheelchair", "DistanceSwimming", "DistanceDownhillSnowSports":
+                unit = HKUnit.meter()
                 return "length/m"
             case "AppleExerciseTime", "AppleStandTime":
+                unit = HKUnit.minute()
                 return "time/min"
             case "Height", "WaistCircumference":
+                unit = HKUnit.meterUnit(with: .centi)
                 return "length/cm"
             case "BodyMass", "LeanBodyMass":
+                unit = HKUnit.gramUnit(with: .kilo)
                 return "mass/kg"
             case "BodyMassIndex":
+                unit = HKUnit.count()
                 return "pressure/kg-m2"
             case "BodyFatPercentage", "OxygenSaturation", "BloodAlcoholContent", "PeripheralPerfusionIndex":
+                unit = HKUnit.percent()
                 return "ratio/percent"
             case "BasalBodyTemperature", "BodyTemperature":
+                unit = HKUnit.degreeCelsius()
                 return "temperature/c"
             case "EnvironmentalAudioExposure", "HeadphoneAudioExposure":
+                unit = HKUnit.pascal()
                 return "pressure/pa"
             case "HeartRate", "RestingHeartRate", "WalkingHeartRateAverage":
-                return "rate"
+                unit = HKUnit.count()
+                return "frequency/bpm"
             case "HeartRateVariabilitySDNN":
+                unit = HKUnit.secondUnit(with: .milli)
                 return "time/ms"
-            case "BloodPressureSystolic":
-                return "systolic"
-            case "BloodPressureDiastolic":
-                return "diastolic"
+            case "BloodPressureSystolic", "BloodPressureDiastolic":
+                unit = HKUnit.millimeterOfMercury()
+                return "pressure/mmhg"
             case "RespiratoryRate":
-                return "frequency/hz"
+                unit = HKUnit.count()
+                return "frequency/bpm"
             case "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
+                unit = HKUnit.gram()
                 return "mass/g"
             case "BloodGlucose":
-                return "density/mg-dl"
+                unit = HKUnit.gramUnit(with: .milli)
+                return "mass/mg"
             case "ElectrodermalActivity":
+                unit = HKUnit.siemen()
                 return "electrical-conductivity/s"
             case "ForcedExpiratoryVolume1", "ForcedVitalCapacity":
-                return "volume/cm3"
+                unit = HKUnit.liter()
+                return "volume/l"
             default:
                 return "note/txt"
             }
@@ -124,6 +149,13 @@ class HKEvent {
         return "note/txt"
     }
     
+    /// Translate the content of a HK sample or store to a Pryv event content
+    /// - Parameters:
+    ///   - sample: the HK sample
+    ///   - store: the HK store
+    /// - Returns: the Pryv event content corresponding to the content of the sample or store
+    /// # Note
+    ///     At least one of the two attributes needs to be not `nil`
     public func eventContent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> Any? {
         
         if let characteristicType = type as? HKCharacteristicType, let healthStore = store {
@@ -185,7 +217,7 @@ class HKEvent {
         }
         
         if let _ = type as? HKQuantityType, let quantitySample = sample as? HKQuantitySample {
-            return quantitySample.quantity.doubleValue(for: unit!) // TODO: set unit from another function
+            return quantitySample.quantity.doubleValue(for: unit!)
         }
         
         if let _ = type as? HKCorrelationType, let correlationQuery = sample as? HKCorrelation {
@@ -210,10 +242,16 @@ class HKEvent {
         return nil
     }
     
+    /// Return whether background delivery is needed, i.e. if data is dynamic or static
+    /// If the data is static, one needs to submit the data to Pryv only if a change happened.
+    /// - Returns: true if dynamic, false if static
     public func needsBackgroundDelivery() -> Bool {
         (type as? HKCharacteristicType) != nil
     }
     
+    /// Create an API call from the given HealthKit sample
+    /// - Parameter sample
+    /// - Returns: the API call to create an event with the data from HealthKit
     public func event(from sample: HKSample) -> APICall {
         return [
             "method": "events.create",
