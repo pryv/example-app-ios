@@ -81,6 +81,7 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
+    private let params = ["fromTime": Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!.timeIntervalSince1970, "limit": 50] // last 7 days, but max 50 events
     private var events = [Event]()
     private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
@@ -122,12 +123,12 @@ class ConnectionListTableViewController: UITableViewController {
     
     /// Updates the list of events shown (only if an event was added)
     /// # Note
-    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
+    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 7 days, which does not require streaming.
     private func getEvents() {
         let request = [
             [
                 "method": "events.get",
-                "params": Json()
+                "params": params
             ]
         ]
         
@@ -135,7 +136,7 @@ class ConnectionListTableViewController: UITableViewController {
         connection!.api(APICalls: request).then { results in
             for result in results {
                 if let json = result as? [String: [Event]] {
-                    self.events.append(contentsOf: json["events"] ?? [Event]())
+                    self.events.append(contentsOf: json["events"]?.filter({!(($0["type"] as? String)?.contains("position") ?? true)}) ?? [Event]())
                 }
             }
             
@@ -152,10 +153,10 @@ class ConnectionListTableViewController: UITableViewController {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.events.removeAll()
-            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
+            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: self.params) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
-                self.events = dictionary["events"] as! [Event]
+                self.events = (dictionary["events"] as! [Event]).filter({!(($0["type"] as? String)?.contains("position") ?? true)})
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
                 if self.created {

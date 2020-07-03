@@ -24,7 +24,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HKEvent(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
 //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyTemperature)!, frequency: .immediate)
+        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate)
     ]
     
     var service: Service?

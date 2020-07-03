@@ -72,6 +72,9 @@ public class HKEvent {
     /// - Returns: the String corresponding to the Pryv data type of the event
     public func eventType() -> String {
         if let _ = type as? HKCharacteristicType {
+            if type.identifier == "HKCharacteristicTypeIdentifierDateOfBirth" {
+                return "date/iso-8601"
+            }
             return "note/txt"
         }
         
