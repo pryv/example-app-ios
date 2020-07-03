@@ -11,18 +11,20 @@ import HealthKit
 import PryvApiSwiftKit
 
 /// Bridge between the date received from HealthKit and the creation of events in Pryv
-class HKEvent {
-    public let type: HKObjectType!
+public class HKEvent {
+    public let type: HKObjectType
     public var unit: HKUnit?
-    public let updateFrequency: HKUpdateFrequency!
+    public let frequency: HKUpdateFrequency?
     
     /// Create a bridge from the data in HealthKit
     /// - Parameters:
     ///   - type: the type of object received from HK
     ///   - updateFrequency
-    public init(type: HKObjectType?, updateFrequency: HKUpdateFrequency?) {
+    /// # Note
+    ///     `updateFrequency` is mandatory for every dynamic data HK stream
+    public init(type: HKObjectType, frequency: HKUpdateFrequency? = nil) {
         self.type = type
-        self.updateFrequency = updateFrequency
+        self.frequency = frequency
     }
     
     /// Construct the Pryv event `streamId`
@@ -246,7 +248,7 @@ class HKEvent {
     /// If the data is static, one needs to submit the data to Pryv only if a change happened.
     /// - Returns: true if dynamic, false if static
     public func needsBackgroundDelivery() -> Bool {
-        (type as? HKCharacteristicType) != nil
+        (type as? HKCharacteristicType) == nil
     }
     
     /// Create an API call from the given HealthKit sample

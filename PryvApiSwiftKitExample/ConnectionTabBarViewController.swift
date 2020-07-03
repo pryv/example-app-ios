@@ -19,9 +19,9 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private let locationManager = CLLocationManager()
     
     private let healthStore = HKHealthStore()
-    private let HKStreamsAndFreq: [HKObjectType: HKUpdateFrequency] = [
-        HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!: .weekly,
-        HKObjectType.quantityType(forIdentifier: .bodyMass)!: .immediate
+    private let streams: [HKEvent] = [
+        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
+        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate)
     ]
     
     var service: Service?
@@ -51,20 +51,23 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private func configureHealthKit() {
         guard HKHealthStore.isHealthDataAvailable() else { return }
         
-        let healthKitStreams = Set(HKStreamsAndFreq.keys)
-        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { success, error in
-            return
-        }
+        let healthKitStreams = Set(streams.map{$0.type})
+        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { _, _ in return }
         
-        for (type, freq) in HKStreamsAndFreq {
-            healthStore.enableBackgroundDelivery(for: type, frequency: freq, withCompletion: { succeeded, error in
+        let dynamicStreams = streams.filter({ $0.needsBackgroundDelivery() })
+        
+        var staticStreams = streams
+        staticStreams.removeAll(where: { $0.needsBackgroundDelivery() })
+        
+        for stream in dynamicStreams {
+            healthStore.enableBackgroundDelivery(for: stream.type, frequency: stream.frequency!, withCompletion: { succeeded, error in
                 if let err = error, !succeeded {
-                    print("Failed to enable background delivery of \(type.identifier) changes: \(err)")
+                    print("Failed to enable background delivery of \(stream.type.identifier) changes: \(err)")
                 }
             })
         }
         
-        monitorHealthData(streams: healthKitStreams)
+        monitorHealthData(streams: healthKitStreams) // TODO: modify monitoring for static and dynamic data => uniform 
     }
     
     /// Monitor healthkit data and send it to Pryv
