@@ -251,18 +251,20 @@ public class HKEvent {
         (type as? HKCharacteristicType) == nil
     }
     
-    /// Create an API call from the given HealthKit sample
-    /// - Parameter sample
+    /// Create an API call from the given HealthKit sample or store
+    /// - Parameters:
+    ///   - sample: the HK sample
+    ///   - store: the HK store
     /// - Returns: the API call to create an event with the data from HealthKit
-    public func event(from sample: HKSample) -> APICall {
+    /// # Note
+    ///     At least one of the two attributes needs to be not `nil` 
+    public func event(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> APICall {
+        var params = ["streamId": eventStreamId(), "type": eventType(), "content": eventContent(from: sample, of: store)]
+        if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
+        
         return [
             "method": "events.create",
-            "params": [
-                "streamId": eventStreamId(),
-                "type": eventType(),
-                "tags": [String(describing: sample.uuid)],
-                "content": eventContent(from: sample)
-            ]
+            "params": params
         ]
     }
 }

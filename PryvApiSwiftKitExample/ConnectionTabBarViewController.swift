@@ -20,8 +20,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     private let healthStore = HKHealthStore()
     private let streams: [HKEvent] = [
-        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate)
+//        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
+        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
+        HKEvent(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
+//        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
+        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyTemperature)!, frequency: .immediate)
     ]
     
     var service: Service?
@@ -63,62 +66,71 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
             healthStore.enableBackgroundDelivery(for: stream.type, frequency: stream.frequency!, withCompletion: { succeeded, error in
                 if let err = error, !succeeded {
                     print("Failed to enable background delivery of \(stream.type.identifier) changes: \(err)")
+                } else {
+                    #if DEBUG
+                    print("Enabled background delivery of \(stream.type.identifier) changes")
+                    #endif
                 }
             })
         }
         
-        monitorHealthData(streams: healthKitStreams) // TODO: modify monitoring for static and dynamic data => uniform 
+        let streamIds = streams.map({ $0.eventStreamId() })
+        createStreams(with: streamIds)
+        monitorHealthData(staticStreams: staticStreams, dynamicStreams: dynamicStreams)
+    }
+    
+    private func createStreams(with ids: [String]) {
+        var apiCalls = [APICall]()
+        ids.forEach { id in
+            let apiCall: APICall = [
+                "method": "streams.create",
+                "params": ["name": id, "id": id]
+            ]
+            apiCalls.append(apiCall)
+        }
+        connection?.api(APICalls: apiCalls).catch { error in
+            print("problem encountered when creating HK streams: \(error.localizedDescription)")
+        }
     }
     
     /// Monitor healthkit data and send it to Pryv
-    /// - Parameter streams: the streams of data to monitor
-    private func monitorHealthData(streams: Set<HKObjectType>) {
-        // TODO: depend on streams
-        monitorDateOfBirth()
-        monitorWeight()
+    /// - Parameter staticStreams: the streams of data to monitor statically, i.e. only once per app install
+    /// - Parameter dynamicStreams: the streams of data to monitor dynamically, i.e. periodically in background
+    private func monitorHealthData(staticStreams: [HKEvent], dynamicStreams: [HKEvent]) {
+        staticStreams.forEach({ staticMonitor(stream: $0) })
+        dynamicStreams.forEach({ dynamicMonitor(stream: $0) })
     }
     
     /// Monitor static data such as date of birth, once per app launch
-    private func monitorDateOfBirth() {
-        guard let birthdayComponents = try? healthStore.dateOfBirthComponents() else { return }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let newBirthday = formatter.string(from: birthdayComponents.date!)
+    /// Submit the value to Pryv only if any change detected
+    private func staticMonitor(stream: HKEvent) {
+        let newContent = stream.eventContent(of: healthStore)
         
         connection?.api(APICalls: [
             [
                 "method": "events.get",
                 "params": [
-                    "streams": ["birthday"]
+                    "streams": [stream.eventStreamId()]
                 ]
             ]
         ]).then { json in
             let events = json.first?["events"] as? [Event]
-            let storedBirthday = events?.first?["content"] as? String
-            if storedBirthday != newBirthday {
-                self.connection?.api(APICalls: [
-                    [
-                        "method": "events.create",
-                        "params": [
-                            "streamId": "birthday",
-                            "type": "date/iso-8601",
-                            "content": newBirthday
-                        ]
-                    ]
-                ]).catch { error in
+            let storedContent = events?.first?["content"]
+            if String(describing: storedContent) != String(describing: newContent) {
+                self.connection?.api(APICalls: [stream.event(of: self.healthStore)]).catch { error in
                     print("Api calls failed: \(error.localizedDescription)")
                 }
             }
         }
     }
     
-    /// Monitor dynamic data such as weight, immediately after change
-    private func monitorWeight() {
-        let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)!
-        let weightQuery = HKObserverQuery(sampleType: weight, predicate: nil) { query, completionHandler, error in
+    /// Monitor dynamic data such as weight periodically
+    /// Submit the value to Pryv periodically
+    private func dynamicMonitor(stream: HKEvent) { 
+        let observerQuery = HKObserverQuery(sampleType: stream.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
             defer { completionHandler() }
             if let err = error {
-                print("Failed to receive background notification of weight change: \(err)")
+                print("Failed to receive background notification of \(stream.type.identifier) change: \(err)")
                 return
             }
             
@@ -128,10 +140,10 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                 anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
             }
             
-            let sampleQuery = HKAnchoredObjectQuery(type: weight, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
+            let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
-                        print("Failed to receive new weight: \(err)")
+                        print("Failed to receive new \(stream.type.identifier): \(err)")
                         return
                     }
                     
@@ -139,25 +151,10 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                     let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
-                    var newSamplesValues = [UUID: Double]()
-                    for newSample in newSamples ?? [HKSample]() {
-                        let uuid = newSample.uuid
-                        let value = (newSample as? HKQuantitySample)!.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
-                        newSamplesValues[uuid] = value
-                    }
-                    
-                    if newSamplesValues.count > 0 {
+                    if let additions = newSamples, additions.count > 0 {
                         var apiCalls = [APICall]()
-                        for (uuid, value) in newSamplesValues {
-                            let apiCall: APICall = [
-                                "method": "events.create",
-                                "params": [
-                                    "streamId": "weight",
-                                    "type": "mass/kg",
-                                    "tags": [String(describing: uuid)],
-                                    "content": value
-                                ]
-                            ]
+                        for sample in additions {
+                            let apiCall = stream.event(from: sample)
                             apiCalls.append(apiCall)
                         }
                         
@@ -167,42 +164,48 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                     }
                     
                     if let deletions = deletedSamples, deletions.count > 0 {
-                        let tags = deletions.map { String(describing: $0.uuid) }
-                        self.connection?.api(APICalls: [
-                            [
-                                "method": "events.get",
-                                "params": [
-                                    "tags": tags
-                                ]
-                            ]
-                        ]).then { json in
-                            guard let events = json.first?["events"] as? [Event] else { return }
-                            let ids = events.map { $0["id"] as? String }.filter { $0 != nil }.map { $0! }
-                            var apiCalls = [APICall]()
-                            
-                            for id in ids {
-                                apiCalls.append([
-                                    "method": "events.delete",
-                                    "params": [
-                                        "id": id
-                                    ]
-                                ])
-                            }
-                            
-                            self.connection?.api(APICalls: apiCalls).catch { error in
-                                print("Api calls for deletion failed: \(error.localizedDescription)")
-                            }
-                        }.catch { error in
-                            print("Api calls to get deleted uuid failed: \(error.localizedDescription)")
-                        }
+                        self.deleteHKDeletions(deletions)
                     }
                 }
             }
             
-            self.healthStore.execute(sampleQuery)
+            self.healthStore.execute(anchoredQuery)
         }
         
-        healthStore.execute(weightQuery)
+        healthStore.execute(observerQuery)
+    }
+    
+    /// Delete Pryv events if deleted in HK
+    /// - Parameter deletions: the deleted streams from HK
+    private func deleteHKDeletions(_ deletions: [HKDeletedObject]) {
+        let tags = deletions.map { String(describing: $0.uuid) }
+        self.connection?.api(APICalls: [
+            [
+                "method": "events.get",
+                "params": [
+                    "tags": tags
+                ]
+            ]
+        ]).then { json in
+            guard let events = json.first?["events"] as? [Event] else { return }
+            let ids = events.map { $0["id"] as? String }.filter { $0 != nil }.map { $0! }
+            var apiCalls = [APICall]()
+            
+            for id in ids {
+                apiCalls.append([
+                    "method": "events.delete",
+                    "params": [
+                        "id": id
+                    ]
+                ])
+            }
+            
+            self.connection?.api(APICalls: apiCalls).catch { error in
+                print("Api calls for deletion failed: \(error.localizedDescription)")
+            }
+        }.catch { error in
+            print("Api calls to get deleted uuid failed: \(error.localizedDescription)")
+        }
     }
     
     /// Configures the location tracking parameters
