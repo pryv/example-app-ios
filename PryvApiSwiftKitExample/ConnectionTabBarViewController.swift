@@ -44,7 +44,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         
         configureUI()
         configureLocation()
-        configureHealthKit() // TODO: every time the view is shown, checks whether the characteristic health data changed
+        configureHealthKit()
     }
     
     /// Configures the health kit data sync. with the app
@@ -253,11 +253,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         if status == .authorizedAlways {
             /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
              Let this line uncommented to have frequent location notifications */
-            locationManager.startUpdatingLocation()
+//            locationManager.startUpdatingLocation()
             
             /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
              Uncomment this line and comment the line below to avoid using too much power */
-            // locationManager.startMonitoringSignificantLocationChanges()
+             locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     
