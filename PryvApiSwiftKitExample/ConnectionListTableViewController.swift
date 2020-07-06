@@ -40,7 +40,7 @@ class EventTableViewCell: UITableViewCell {
                 let contentString = String(describing: content)
                 if !contentString.contains("null") {
                     contentStackView.isHidden = false
-                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // formatting the json string to make it readable
+                    contentLabel.text = contentString.replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // formatting the json string to make it readable
                 }
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {

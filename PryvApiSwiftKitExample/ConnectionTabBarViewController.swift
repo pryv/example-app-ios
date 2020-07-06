@@ -126,53 +126,46 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     /// Monitor dynamic data such as weight periodically
     /// Submit the value to Pryv periodically
-    private func dynamicMonitor(stream: HKEvent) { 
-        let observerQuery = HKObserverQuery(sampleType: stream.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
-            defer { completionHandler() }
-            if let err = error {
-                print("Failed to receive background notification of \(stream.type.identifier) change: \(err)")
-                return
-            }
-            
-            var anchor = HKQueryAnchor.init(fromValue: 0)
-            if UserDefaults.standard.object(forKey: "Anchor") != nil {
-                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
-                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
-            }
-            
-            let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
-                DispatchQueue.main.async {
-                    if let err = error {
-                        print("Failed to receive new \(stream.type.identifier): \(err)")
-                        return
-                    }
-                    
-                    anchor = newAnchor!
-                    let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
-                    UserDefaults.standard.set(data, forKey: "Anchor")
-                    
-                    if let additions = newSamples, additions.count > 0 {
-                        var apiCalls = [APICall]()
-                        for sample in additions {
-                            let apiCall = stream.event(from: sample)
-                            apiCalls.append(apiCall)
-                        }
-                        
-                        self.connection?.api(APICalls: apiCalls).catch { error in
-                            print("Api calls for addition failed: \(error.localizedDescription)")
-                        }
-                    }
-                    
-                    if let deletions = deletedSamples, deletions.count > 0 {
-                        self.deleteHKDeletions(deletions)
-                    }
-                }
-            }
-            
-            self.healthStore.execute(anchoredQuery)
+    private func dynamicMonitor(stream: HKEvent) {
+        var anchor = HKQueryAnchor.init(fromValue: 0)
+        if UserDefaults.standard.object(forKey: "Anchor") != nil {
+            let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+            anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
         }
         
-        healthStore.execute(observerQuery)
+        let updateHandler: ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) = { (_, newSamples, deletedSamples, newAnchor, error) in
+            DispatchQueue.main.async {
+                if let err = error {
+                    print("Failed to receive new \(stream.type.identifier): \(err)")
+                    return
+                }
+                
+                anchor = newAnchor!
+                let data : Data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
+                UserDefaults.standard.set(data, forKey: "Anchor")
+                
+                if let additions = newSamples, additions.count > 0 {
+                    var apiCalls = [APICall]()
+                    for sample in additions {
+                        let apiCall = stream.event(from: sample)
+                        apiCalls.append(apiCall)
+                    }
+                    
+                    self.connection?.api(APICalls: apiCalls).catch { error in
+                        print("Api calls for addition failed: \(error.localizedDescription)")
+                    }
+                }
+                
+                if let deletions = deletedSamples, deletions.count > 0 {
+                    self.deleteHKDeletions(deletions)
+                }
+            }
+        }
+        
+        let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
+        anchoredQuery.updateHandler = updateHandler
+        
+        healthStore.execute(anchoredQuery)
     }
     
     /// Delete Pryv events if deleted in HK
