@@ -33,7 +33,6 @@ public class HKEvent {
         if let _ = type as? HKCharacteristicType {
             return "characteristic"
         }
-        
         if let quantityType = type as? HKQuantityType {
             switch quantityType.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
             case "StepCount", "DistanceWalkingRunning", "DistanceCycling", "PushCount", "DistanceWheelchair", "SwimmingStrokeCount", "DistanceSwimming", "DistanceDownhillSnowSports", "BasalEnergyBurned", "ActiveEnergyBurned", "FlightsClimbed", "NikeFuel", "AppleExerciseTime", "AppleStandTime":
@@ -64,10 +63,6 @@ public class HKEvent {
             default:
                 return "diary"
             }
-        }
-        
-        if type.identifier.contains("HKClinicalTypeIdentifier") {
-            return "clinical-records"
         }
         
         return "diary"
@@ -156,10 +151,6 @@ public class HKEvent {
             }
         }
         
-        if type.identifier.contains("HKClinicalTypeIdentifier") {
-            return "file/attached"
-        }
-        
         return "note/txt"
     }
     
@@ -171,9 +162,6 @@ public class HKEvent {
     /// # Note
     ///     At least one of the two attributes needs to be not `nil`
     public func eventContent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> Any? {
-        if let _ = sample as? HKClinicalRecord {
-            return nil
-        }
         
         if let characteristicType = type as? HKCharacteristicType, let healthStore = store {
             switch characteristicType.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
@@ -259,26 +247,6 @@ public class HKEvent {
         return nil
     }
     
-    /// Return whether the event needs an attachment, i.e. whether the event is a clinical record
-    /// - Returns: true if the event is a clinical record, false otherwise
-    public func needsAttachment() -> Bool {
-        return type.identifier.contains("HKClinicalTypeIdentifier")
-    }
-    
-    /// Create the parameters and file for an event from the given HealthKit clinical record
-    /// - Parameters:
-    ///   - sample: the HK sample
-    /// - Returns: the event params and the file formdata to add it as an attachment to the event
-    /// # Note
-    ///     Use this function only if `needsAttachment()` returns `true`. Otherwise, it will throw an error.
-    public func eventWithAttachment(from sample: HKSample, with token: String) -> (params: Json, media: [Media]) {
-        let clinicalRecord = sample as! HKClinicalRecord
-        let data = clinicalRecord.fhirResource?.data
-        let params = ["streamId": eventStreamId(), "type": eventType()]
-        let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: clinicalRecord.clinicalType.identifier, data: data!, mimeType: "application/json")
-        return (params: params, media: [media])
-    }
-    
     /// Return whether background delivery is needed, i.e. if data is dynamic or static
     /// If the data is static, one needs to submit the data to Pryv only if a change happened.
     /// - Returns: true if dynamic, false if static
@@ -293,7 +261,7 @@ public class HKEvent {
     /// - Returns: the API call to create an event with the data from HealthKit
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
-    public func eventWithoutAttachment(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> APICall {
+    public func event(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> APICall {
         var params = ["streamId": eventStreamId(), "type": eventType(), "content": eventContent(from: sample, of: store)]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         

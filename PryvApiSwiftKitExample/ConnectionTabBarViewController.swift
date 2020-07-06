@@ -24,19 +24,12 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HKEvent(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
 //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
-//        HKEvent(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .immediate), // TODO
         HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate)
     ]
     
     var service: Service?
-    var connection: Connection? {
-        didSet {
-            let (_, t) = utils.extractTokenAndEndpoint(from: connection!.getApiEndpoint())!
-            self.token = t
-        }
-    }
+    var connection: Connection?
     var appId: String?
-    private var token: String?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
@@ -124,7 +117,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
             let events = json.first?["events"] as? [Event]
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
-                self.connection?.api(APICalls: [stream.eventWithoutAttachment(of: self.healthStore)]).catch { error in
+                self.connection?.api(APICalls: [stream.event(of: self.healthStore)]).catch { error in
                     print("Api calls failed: \(error.localizedDescription)")
                 }
             }
@@ -159,23 +152,14 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
                     if let additions = newSamples, additions.count > 0 {
-                        if stream.needsAttachment() {
-                            for sample in additions {
-                                let (params, medias) = stream.eventWithAttachment(from: sample, with: self.token ?? "")
-                                self.connection?.createEventWithFormData(event: params, parameters: nil, files: medias).catch { error in
-                                    print("createEventWithFormData for addition failed: \(error.localizedDescription)")
-                                }
-                            }
-                        } else {
-                            var apiCalls = [APICall]()
-                            for sample in additions {
-                                let apiCall = stream.eventWithoutAttachment(from: sample)
-                                apiCalls.append(apiCall)
-                            }
-                            
-                            self.connection?.api(APICalls: apiCalls).catch { error in
-                                print("Api calls for addition failed: \(error.localizedDescription)")
-                            }
+                        var apiCalls = [APICall]()
+                        for sample in additions {
+                            let apiCall = stream.event(from: sample)
+                            apiCalls.append(apiCall)
+                        }
+                        
+                        self.connection?.api(APICalls: apiCalls).catch { error in
+                            print("Api calls for addition failed: \(error.localizedDescription)")
                         }
                     }
                     
