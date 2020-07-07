@@ -16,9 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let appId = "app-swift-example"
     private let keychain = KeychainSwift()
     private let healthStore = HKHealthStore()
+    private var anchor = HKQueryAnchor.init(fromValue: 0)
     var connection: Connection? {
         didSet {
             if connection != nil {
+                if UserDefaults.standard.object(forKey: "Anchor") != nil {
+                    let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+                    anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
+                }
+                
                 configureHealthKit()
             }
         }
@@ -51,10 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
-        if let apiEndpoint = keychain.get(appId) {
-            connection = Connection(apiEndpoint: apiEndpoint)
-        }
-        
         return true
     }
     
@@ -79,8 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let streamIds = streams.map({ $0.eventStreamId() })
         createStreams(with: streamIds, in: connection)
         
-        
-        
         var staticStreams = streams
         staticStreams.removeAll(where: { $0.needsBackgroundDelivery() })
         let dynamicStreams = streams.filter({ $0.needsBackgroundDelivery() })
@@ -98,8 +98,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
             apiCalls.append(apiCall)
         }
-        connection?.api(APICalls: apiCalls).catch { error in
-            print("problem encountered when creating HK streams: \(error.localizedDescription)")
+        apiCalls.forEach { apiCall in
+            connection?.api(APICalls: [apiCall]).catch { error in
+                print("problem encountered when creating HK streams: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -132,24 +134,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let observerQuery = HKObserverQuery(sampleType: stream.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
             defer { completionHandler() }
             if let err = error {
-                print("Failed to receive background notification of \(stream.type.identifier) change: \(err)")
+                print("Failed to receive background notification of \(stream.type.identifier) change: \(err.localizedDescription)")
                 return
             }
             
-            var anchor = HKQueryAnchor.init(fromValue: 0)
-            if UserDefaults.standard.object(forKey: "Anchor") != nil {
-                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
-                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
-            }
+            #if DEBUG
+            print("Received background notification of \(stream.type.identifier) change.")
+            #endif
             
-            let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
+            let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
-                        print("Failed to receive new \(stream.type.identifier): \(err)")
+                        print("Failed to receive new \(stream.type.identifier): \(err.localizedDescription)")
                         return
                     }
                     
-                    anchor = newAnchor!
+                    self.anchor = newAnchor!
                     let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
