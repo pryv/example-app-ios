@@ -12,6 +12,7 @@
 		B300ECC924ACAF1C00AA7387 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B300ECC824ACAF1C00AA7387 /* HealthKit.framework */; };
 		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
 		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
+		B36058FF24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36058FE24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift */; };
 		B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */; };
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
@@ -62,6 +63,7 @@
 		B300ECC824ACAF1C00AA7387 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
 		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
+		B36058FE24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+condenseWhitespaces.swift"; sourceTree = "<group>"; };
 		B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionListTableViewController.swift; sourceTree = "<group>"; };
 		B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTabBarViewController.swift; sourceTree = "<group>"; };
 		B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionMapViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
+				B36058FE24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift */,
 				B3A957A124AF17ED009713B1 /* HKEvent.swift */,
 			);
 			path = Utils;
@@ -462,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B36058FF24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift in Sources */,
 				B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */,
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */,

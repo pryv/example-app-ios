@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
             return
             
         case .accepted: // show the token and go back to the main view if successfully logged in
-            if let endpoint = authResult.endpoint {
+            if let endpoint = authResult.apiEndpoint {
                 let token = utils.extractTokenAndEndpoint(from: endpoint)?.token ?? ""
                 if !self.isClientValid(endpoint: endpoint, token: token) { return }
                 openConnection(apiEndpoint: endpoint)
