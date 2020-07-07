@@ -13,7 +13,7 @@ import PryvApiSwiftKit
 public typealias PryvSample = [String: Any?]
 
 /// Bridge between the date received from HealthKit and the creation of events in Pryv
-public class HKToPryv {
+public class HealthKitStream {
     public let type: HKObjectType
     public var unit: HKUnit?
     public let frequency: HKUpdateFrequency?
@@ -38,25 +38,23 @@ public class HKToPryv {
         (type as? HKCharacteristicType) == nil
     }
     
-    /// Create an API call from the given HealthKit sample or store
+    /// Create Pryv event's parameters from the given HealthKit sample or store
     /// - Parameters:
     ///   - sample: the HK sample
     ///   - store: the HK store
-    /// - Returns: the API call to create an event with the data from HealthKit
+    /// - Returns: the json formatted event's parameters
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
-    public func event(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
-        var params = ["streamId": eventStreamId(), "type": eventType(), "content": eventContent(from: sample, of: store)]
+    public func toPryvSample(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
+        var params = ["streamId": pryvStreamId(), "type": eventType(), "content": pryvContent(from: sample, of: store)]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
         return params
     }
     
-    // MARK: - private helpers functions for the library
-    
     /// Construct the Pryv event `streamId`
     /// - Returns: the `streamId`
-    private func eventStreamId() -> String {
+    public func pryvStreamId() -> String {
         if let _ = type as? HKCharacteristicType {
             return "characteristic"
         }
@@ -94,6 +92,101 @@ public class HKToPryv {
         
         return "diary"
     }
+    
+    /// Translate the content of a HK sample or store to a Pryv event content
+    /// - Parameters:
+    ///   - sample: the HK sample
+    ///   - store: the HK store
+    /// - Returns: the Pryv event content corresponding to the content of the sample or store
+    /// # Note
+    ///     At least one of the two attributes needs to be not `nil`
+    public func pryvContent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> Any? {
+        
+        if let characteristicType = type as? HKCharacteristicType, let healthStore = store {
+            switch characteristicType.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
+            case "BiologicalSex":
+                guard let biologicalSex = try? healthStore.biologicalSex().biologicalSex else { return nil }
+                switch biologicalSex {
+                case .female: return "female"
+                case .male: return "male"
+                case .notSet: return nil
+                case .other: return "other"
+                @unknown default: fatalError()
+                }
+            case "BloodType":
+                guard let bloodType = try? healthStore.bloodType().bloodType else { return nil }
+                switch bloodType {
+                case .notSet: return nil
+                case .abNegative: return "AB-"
+                case .abPositive: return "AB+"
+                case .aNegative: return "A-"
+                case .aPositive: return "A+"
+                case .bNegative: return "B-"
+                case .bPositive: return "B+"
+                case .oNegative: return "O-"
+                case .oPositive: return "O+"
+                @unknown default:
+                    fatalError()
+                }
+            case "DateOfBirth":
+                guard let birthdayComponents = try? healthStore.dateOfBirthComponents() else { return nil }
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyyMMdd"
+                return formatter.string(from: birthdayComponents.date!)
+            case "FitzpatrickSkinType":
+                guard let skinType = try? healthStore.fitzpatrickSkinType().skinType else { return nil }
+                switch skinType {
+                case .notSet: return nil
+                case .I: return "Pale white skin"
+                case .II: return "White skin"
+                case .III: return "White to light brown skin"
+                case .IV: return "Beige-olive skin"
+                case .V: return "Brown skin"
+                case .VI: return "Dark brown to black skin"
+                @unknown default:
+                    fatalError()
+                }
+            case "WheelchairUse":
+                guard let wheelchairUse = try? healthStore.wheelchairUse().wheelchairUse else { return nil }
+                switch wheelchairUse {
+                case .no: return "no wheelchair"
+                case .yes: return "wheelchair"
+                case .notSet: return nil
+                @unknown default:
+                    fatalError()
+                }
+            default:
+                return nil
+            }
+        }
+        
+        if let _ = type as? HKQuantityType, let quantitySample = sample as? HKQuantitySample {
+            return quantitySample.quantity.doubleValue(for: unit!)
+        }
+        
+        if let _ = type as? HKCorrelationType, let correlationQuery = sample as? HKCorrelation {
+            let systolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!
+            let diastolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!
+            
+            let systolic = (correlationQuery.objects(for: systolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+            let diastolic = (correlationQuery.objects(for: diastolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+            
+            if let _ = systolic, let _ = diastolic {
+                let content: Json = [
+                    "systolic": systolic!,
+                    "diastolic": diastolic!
+                ]
+                
+                return content
+            }
+            
+            return nil
+        }
+        
+        return nil
+    }
+    
+    // MARK: - private helpers functions for the library
     
     /// Translate HK data type to Pryv data type
     /// - Returns: the String corresponding to the Pryv data type of the event
@@ -181,96 +274,4 @@ public class HKToPryv {
         return "note/txt"
     }
     
-    /// Translate the content of a HK sample or store to a Pryv event content
-    /// - Parameters:
-    ///   - sample: the HK sample
-    ///   - store: the HK store
-    /// - Returns: the Pryv event content corresponding to the content of the sample or store
-    /// # Note
-    ///     At least one of the two attributes needs to be not `nil`
-    private func eventContent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> Any? {
-        
-        if let characteristicType = type as? HKCharacteristicType, let healthStore = store {
-            switch characteristicType.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
-            case "BiologicalSex":
-                guard let biologicalSex = try? healthStore.biologicalSex().biologicalSex else { return nil }
-                switch biologicalSex {
-                case .female: return "female"
-                case .male: return "male"
-                case .notSet: return nil
-                case .other: return "other"
-                @unknown default: fatalError()
-                }
-            case "BloodType":
-                guard let bloodType = try? healthStore.bloodType().bloodType else { return nil }
-                switch bloodType {
-                case .notSet: return nil
-                case .abNegative: return "AB-"
-                case .abPositive: return "AB+"
-                case .aNegative: return "A-"
-                case .aPositive: return "A+"
-                case .bNegative: return "B-"
-                case .bPositive: return "B+"
-                case .oNegative: return "O-"
-                case .oPositive: return "O+"
-                @unknown default:
-                    fatalError()
-                }
-            case "DateOfBirth":
-                guard let birthdayComponents = try? healthStore.dateOfBirthComponents() else { return nil }
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyyMMdd"
-                return formatter.string(from: birthdayComponents.date!)
-            case "FitzpatrickSkinType":
-                guard let skinType = try? healthStore.fitzpatrickSkinType().skinType else { return nil }
-                switch skinType {
-                case .notSet: return nil
-                case .I: return "Pale white skin"
-                case .II: return "White skin"
-                case .III: return "White to light brown skin"
-                case .IV: return "Beige-olive skin"
-                case .V: return "Brown skin"
-                case .VI: return "Dark brown to black skin"
-                @unknown default:
-                    fatalError()
-                }
-            case "WheelchairUse":
-                guard let wheelchairUse = try? healthStore.wheelchairUse().wheelchairUse else { return nil }
-                switch wheelchairUse {
-                case .no: return "no wheelchair"
-                case .yes: return "wheelchair"
-                case .notSet: return nil
-                @unknown default:
-                    fatalError()
-                }
-            default:
-                return nil
-            }
-        }
-        
-        if let _ = type as? HKQuantityType, let quantitySample = sample as? HKQuantitySample {
-            return quantitySample.quantity.doubleValue(for: unit!)
-        }
-        
-        if let _ = type as? HKCorrelationType, let correlationQuery = sample as? HKCorrelation {
-            let systolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!
-            let diastolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!
-            
-            let systolic = (correlationQuery.objects(for: systolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-            let diastolic = (correlationQuery.objects(for: diastolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-            
-            if let _ = systolic, let _ = diastolic {
-                let content: Json = [
-                    "systolic": systolic!,
-                    "diastolic": diastolic!
-                ]
-                
-                return content
-            }
-            
-            return nil
-        }
-        
-        return nil
-    }
 }

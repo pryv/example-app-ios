@@ -21,13 +21,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>"Pryv Lab" would like to access your Health data in order to send it to Pryv backend.</string>
+	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>"Pryv Lab" would like to access your Health data in order to send it to Pryv backend.</string>
+	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>"Pryv Lab" would like to access your location in order to send it to Pryv backend.</string>
+	<string>We would like to access your location in order to send it to Pryv backend.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>"Pryv Lab" would like to access your location in order to send it to Pryv backend.</string>
+	<string>We would like to access your location in order to send it to Pryv backend.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

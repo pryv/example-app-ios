@@ -29,22 +29,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    private let streams: [HKEvent] = [
+    
+    private let healthKitStreams: [HealthKitStream] = [
         //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
+        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
+        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
         //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
-        HKEvent(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate)
+        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
+        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate)
     ]
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         guard HKHealthStore.isHealthDataAvailable() else { return true }
         
-        let healthKitStreams = Set(streams.map{$0.type})
-        healthStore.requestAuthorization(toShare: .none, read: healthKitStreams) { _, _ in return }
+        let read = Set(healthKitStreams.map{$0.type})
+        let write = PryvStream(streamId: "weight", type: "mass/kg").hkSampleType()!
+        healthStore.requestAuthorization(toShare: [write], read: read) { success, error in
+            if !success {
+                print("Error when requesting authorization for HK data: \(error?.localizedDescription)")
+            }
+        }
         
-        let dynamicStreams = streams.filter({ $0.needsBackgroundDelivery() })
+        let dynamicStreams = healthKitStreams.filter({ $0.needsBackgroundDelivery() })
         for stream in dynamicStreams {
             healthStore.enableBackgroundDelivery(for: stream.type, frequency: stream.frequency!, withCompletion: { succeeded, error in
                 if let err = error, !succeeded {
@@ -78,15 +84,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Configures the health kit data sync. with Pryv
     private func configureHealthKit() {
-        let streamIds = streams.map({ $0.eventStreamId() })
+        let streamIds = healthKitStreams.map({ $0.pryvStreamId() })
         createStreams(with: streamIds, in: connection)
         
-        var staticStreams = streams
+        var staticStreams = healthKitStreams
         staticStreams.removeAll(where: { $0.needsBackgroundDelivery() })
-        let dynamicStreams = streams.filter({ $0.needsBackgroundDelivery() })
+        let dynamicStreams = healthKitStreams.filter({ $0.needsBackgroundDelivery() })
         
-        staticStreams.forEach({ staticMonitor(stream: $0) })
-        dynamicStreams.forEach({ dynamicMonitor(stream: $0) })
+        staticStreams.forEach({ staticMonitor(hkDS: $0) })
+        dynamicStreams.forEach({ dynamicMonitor(hkDS: $0) })
     }
     
     private func createStreams(with ids: [String], in connection: Connection?) {
@@ -107,21 +113,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Monitor static data such as date of birth, once per app launch
     /// Submit the value to Pryv only if any change detected
-    private func staticMonitor(stream: HKEvent) {
-        let newContent = stream.eventContent(of: healthStore)
+    private func staticMonitor(hkDS: HealthKitStream) {
+        let newContent = hkDS.pryvContent(of: healthStore)
         
         connection?.api(APICalls: [
             [
                 "method": "events.get",
                 "params": [
-                    "streams": [stream.eventStreamId()]
+                    "streams": [hkDS.pryvStreamId()]
                 ]
             ]
         ]).then { json in
             let events = json.first?["events"] as? [Event]
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
-                self.connection?.api(APICalls: [stream.event(of: self.healthStore)]).catch { error in
+                let apiCall: APICall = [
+                    "method": "events.create",
+                    "params": hkDS.pryvEvent(of: self.healthStore)
+                ]
+                self.connection?.api(APICalls: [apiCall]).catch { error in
                     print("Api calls failed: \(error.localizedDescription)")
                 }
             }
@@ -130,22 +140,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Monitor dynamic data such as weight periodically
     /// Submit the value to Pryv periodically
-    private func dynamicMonitor(stream: HKEvent) {
-        let observerQuery = HKObserverQuery(sampleType: stream.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
+    private func dynamicMonitor(hkDS: HealthKitStream) {
+        let observerQuery = HKObserverQuery(sampleType: hkDS.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
             defer { completionHandler() }
             if let err = error {
-                print("Failed to receive background notification of \(stream.type.identifier) change: \(err.localizedDescription)")
+                print("Failed to receive background notification of \(hkDS.type.identifier) change: \(err.localizedDescription)")
                 return
             }
             
             #if DEBUG
-            print("Received background notification of \(stream.type.identifier) change.")
+            print("Received background notification of \(hkDS.type.identifier) change.")
             #endif
             
-            let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
+            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
                 DispatchQueue.main.async {
                     if let err = error {
-                        print("Failed to receive new \(stream.type.identifier): \(err.localizedDescription)")
+                        print("Failed to receive new \(hkDS.type.identifier): \(err.localizedDescription)")
                         return
                     }
                     
@@ -156,7 +166,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if let additions = newSamples, additions.count > 0 {
                         var apiCalls = [APICall]()
                         for sample in additions {
-                            let apiCall = stream.event(from: sample)
+                            let apiCall: APICall = [
+                                "method": "events.create",
+                                "params": hkDS.pryvEvent(from: sample)
+                            ]
                             apiCalls.append(apiCall)
                         }
                         

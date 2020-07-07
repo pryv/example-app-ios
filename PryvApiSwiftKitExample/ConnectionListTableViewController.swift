@@ -9,6 +9,7 @@ import UIKit
 import KeychainSwift
 import PryvApiSwiftKit
 import FileBrowser
+import HealthKit
 
 /// A custom cell to show the details of an event
 class EventTableViewCell: UITableViewCell {
@@ -85,6 +86,8 @@ class ConnectionListTableViewController: UITableViewController {
     private var events = [Event]()
     private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
+    private var healthStore = HKHealthStore()
+    private let pryvStream = PryvStream(streamId: "weight", type: "mass/kg")
     
     var appId: String?
     var connection: Connection? {
@@ -225,8 +228,16 @@ class ConnectionListTableViewController: UITableViewController {
                     print("new event: \(String(describing: event))")
                     }]
                 
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { _ in
+                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { results in
                     self.created = true
+                    if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
+                        if let json = results.first as? [String: Event], let event = json["event"] {
+                            if self.pryvStream.streamId == event["streamId"] as? String {
+                                let sample = self.pryvStream.healthKitSample(from: event["content"] as! Double)!
+                                self.healthStore.save(sample) { (success, error) in return }
+                            }
+                        }
+                    }
                 }.catch { error in
                     let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))

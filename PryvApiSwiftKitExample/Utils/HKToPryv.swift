@@ -13,7 +13,7 @@ import PryvApiSwiftKit
 public typealias PryvSample = [String: Any?]
 
 /// Bridge between the date received from HealthKit and the creation of events in Pryv
-public class HKToPryv {
+public class HKDataStructure {
     public let type: HKObjectType
     public var unit: HKUnit?
     public let frequency: HKUpdateFrequency?
@@ -45,7 +45,7 @@ public class HKToPryv {
     /// - Returns: the API call to create an event with the data from HealthKit
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
-    public func event(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
+    public func (from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
         var params = ["streamId": eventStreamId(), "type": eventType(), "content": eventContent(from: sample, of: store)]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
