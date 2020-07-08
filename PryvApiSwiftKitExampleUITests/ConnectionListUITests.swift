@@ -9,7 +9,7 @@
 import XCTest
 import KeychainSwift
 import Mocker
-import PryvApiSwiftKit
+import PryvSwiftKit
 @testable import PryvApiSwiftKitExample
 
 class ConnectionListUITests: XCTestCase {
@@ -25,7 +25,7 @@ class ConnectionListUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        if (!app.buttons["logoutButton"].exists) {
+        if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
@@ -40,9 +40,9 @@ class ConnectionListUITests: XCTestCase {
     }
 
     func testConnectionViewBasicUI() {
-        XCTAssert(app.staticTexts["Pryv Lab-Testuser"].exists)
+        XCTAssert(app.staticTexts["Pryv Lab"].exists)
         XCTAssert(app.navigationBars["connectionNavBar"].exists)
-        XCTAssert(app.navigationBars["connectionNavBar"].buttons["logoutButton"].isHittable)
+        XCTAssert(app.navigationBars["connectionNavBar"].buttons["userButton"].isHittable)
         XCTAssert(app.navigationBars["connectionNavBar"].buttons["addEventButton"].isHittable)
         XCTAssert(app.tables["eventsTableView"].exists)
     }
@@ -62,7 +62,7 @@ class ConnectionListUITests: XCTestCase {
         app.textFields["contentField"].typeText("90")
 
         app.alerts.buttons["OK"].tap()
-        XCTAssert(app.staticTexts["Pryv Lab-Testuser"].exists)
+        XCTAssert(app.staticTexts["Pryv Lab"].exists)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
@@ -95,7 +95,7 @@ class ConnectionListUITests: XCTestCase {
         XCTAssert(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
         
         app.alerts.buttons["OK"].tap()
-        XCTAssert(app.staticTexts["Pryv Lab-Testuser"].exists)
+        XCTAssert(app.staticTexts["Pryv Lab"].exists)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]

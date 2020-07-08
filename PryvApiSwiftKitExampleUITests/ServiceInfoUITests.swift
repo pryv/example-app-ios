@@ -22,8 +22,10 @@ class ServiceInfoUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        if (app.navigationBars["connectionNavBar"].buttons["logoutButton"].exists) {
-            app.navigationBars["connectionNavBar"].buttons["logoutButton"].tap()
+        if (app.navigationBars["connectionNavBar"].buttons["userButton"].exists) {
+            app.navigationBars["connectionNavBar"].buttons["userButton"].tap()
+            app.sheets.element.buttons["Log out"].tap()
+            sleep(1)
             app.alerts.element.buttons["Log out"].tap()
         }
     }

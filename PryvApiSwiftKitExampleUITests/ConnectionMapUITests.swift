@@ -21,14 +21,16 @@ class ConnectionMapUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        if (!app.buttons["logoutButton"].exists) {
+        if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
             app.staticTexts["Password"].tap()
             app.typeText("testuser")
             app.buttons["SIGN IN"].tap()
-            app.buttons["ACCEPT"].tap()
+            if app.buttons["ACCEPT"].exists {
+                app.buttons["ACCEPT"].tap()
+            }
             sleep(2)
         }
         
@@ -42,6 +44,7 @@ class ConnectionMapUITests: XCTestCase {
     
     func testMarkers() {
         changeDate(day: "24")
+        sleep(1)
         XCTAssert(app.otherElements["24.06.2020"].exists)
         
         app.segmentedControls["filterController"].buttons["Day"].tap()
