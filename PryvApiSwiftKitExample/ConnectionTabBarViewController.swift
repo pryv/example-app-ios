@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 import KeychainSwift
 import CoreLocation
 

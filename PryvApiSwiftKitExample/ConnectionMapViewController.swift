@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 import RLBAlertsPickers
 
 /// Filter for the events timeslot to show on the map
