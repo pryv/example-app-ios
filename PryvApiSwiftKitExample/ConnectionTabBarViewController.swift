@@ -49,21 +49,22 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     /// Configures the UI for the view with the log out button and the title
     private func configureUI() {
-        let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
-        logoutButton.accessibilityIdentifier = "logoutButton"
-        navigationItem.leftBarButtonItem = logoutButton
-        navigationItem.hidesBackButton = true
-        
-        service?.info().then { serviceInfo in
-            self.navigationItem.title = serviceInfo.name
-            self.connection?.username().then { username in
-                self.navigationItem.title! += "-"
-                self.navigationItem.title! += username
-            }
-        }.catch { _ in
-            self.navigationItem.title = "Last events"
-        }
+        service?.info().then { serviceInfo in self.navigationItem.title = serviceInfo.name }
+            .catch { _ in self.navigationItem.title = "Last events" }
         navigationItem.largeTitleDisplayMode = .automatic
+        
+        self.connection?.username()
+        .then { username in
+            let logoutButton = UIBarButtonItem(title: username, style: .plain, target: self, action: #selector(self.logout))
+            logoutButton.accessibilityIdentifier = "logoutButton"
+            self.navigationItem.rightBarButtonItem = logoutButton
+            self.navigationItem.hidesBackButton = true
+        }.catch { _ in
+            let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout))
+            logoutButton.accessibilityIdentifier = "logoutButton"
+            self.navigationItem.rightBarButtonItem = logoutButton
+            self.navigationItem.hidesBackButton = true
+        }
     }
     
     /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain

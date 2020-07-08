@@ -104,7 +104,7 @@ class ConnectionListTableViewController: UITableViewController {
         
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
-        tabBarController?.navigationItem.rightBarButtonItem = addEventButton
+        tabBarController?.navigationItem.leftBarButtonItem = addEventButton
         
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 100;
@@ -113,11 +113,11 @@ class ConnectionListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
     }
     
     /// Updates the list of events shown (only if an event was added)
