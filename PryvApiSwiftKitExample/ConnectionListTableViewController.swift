@@ -7,7 +7,7 @@
 //
 import UIKit
 import KeychainSwift
-import PryvApiSwiftKit
+import PryvSwiftKit
 import FileBrowser
 
 /// A custom cell to show the details of an event
@@ -82,7 +82,6 @@ class EventTableViewCell: UITableViewCell {
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
     private var events = [Event]()
-    private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
     
     var appId: String?
@@ -104,7 +103,12 @@ class ConnectionListTableViewController: UITableViewController {
         
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
-        tabBarController?.navigationItem.rightBarButtonItem = addEventButton
+        tabBarController?.navigationItem.leftBarButtonItem = addEventButton
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching last events")
+        refreshControl.addTarget(self, action: #selector(getEvents), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 100;
@@ -113,17 +117,17 @@ class ConnectionListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
     }
     
     /// Updates the list of events shown (only if an event was added)
     /// # Note
     ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
-    private func getEvents() {
+    @objc private func getEvents() {
         let request = [
             [
                 "method": "events.get",
@@ -131,18 +135,21 @@ class ConnectionListTableViewController: UITableViewController {
             ]
         ]
         
-        events.removeAll()
         connection!.api(APICalls: request).then { results in
-            for result in results {
+            var events = [Event]()
+            results.forEach { result in
                 if let json = result as? [String: [Event]] {
-                    self.events.append(contentsOf: json["events"] ?? [Event]())
+                    events.append(contentsOf: json["events"] ?? [Event]())
                 }
             }
             
+            self.events = events
+            self.refreshControl?.endRefreshing()
             self.loadViewIfNeeded()
             self.tableView.reloadData()
         }.catch { error in
             print("problem encountered when getting the events: \(error.localizedDescription)")
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -152,16 +159,13 @@ class ConnectionListTableViewController: UITableViewController {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.events.removeAll()
-            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
+            self.connectionSocketIO!.emit(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
                 self.events = dictionary["events"] as! [Event]
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
-                if self.created {
-                    self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-                }
-                self.created = false
+                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
             }
         }
         connectionSocketIO!.connect()
@@ -189,6 +193,26 @@ class ConnectionListTableViewController: UITableViewController {
     
     // MARK: - Table view interactions
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            guard let eventId = events[indexPath.row]["id"] as? String else { return }
+            let deleteCall: APICall = [
+                "method": "events.delete",
+                "params": [
+                    "id": eventId
+                ]
+            ]
+            
+            self.connection?.api(APICalls: [deleteCall]).catch { error in
+                print("Deletion failed: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -204,9 +228,7 @@ class ConnectionListTableViewController: UITableViewController {
                     print("new event: \(String(describing: event))")
                     }]
                 
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { _ in
-                    self.created = true
-                }.catch { error in
+                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
                     let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                     self.present(innerAlert, animated: true, completion: nil)
@@ -223,9 +245,7 @@ class ConnectionListTableViewController: UITableViewController {
                 self.present(fileBrowser, animated: true, completion: nil)
                 
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).then { _ in
-                        self.created = true
-                    }.catch { error in
+                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
                         let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                         self.present(innerAlert, animated: true, completion: nil)
