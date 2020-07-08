@@ -6,7 +6,7 @@ PODS:
   - PromisesObjC (1.2.9)
   - PromisesSwift (1.2.9):
     - PromisesObjC (= 1.2.9)
-  - PryvApiSwiftKit (0.1.2):
+  - PryvApiSwiftKit (2.1.0):
     - Alamofire
     - Mocker
     - PromisesSwift
@@ -41,7 +41,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvApiSwiftKit:
-    :commit: 41782cb9ca8d1c00e6b32d598737d416a7838a20
+    :commit: 4f428567497bb82748e041b328abb2de6770855a
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -51,11 +51,11 @@ SPEC CHECKSUMS:
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
-  PryvApiSwiftKit: 9b8a32a60e30d760bd433076f93a1bb3ed236953
+  PryvApiSwiftKit: 87f1a560dd49e83ada7a3f47a61eae0b96cf03fb
   RLBAlertsPickers: 2548943b0cb16620904cbd926a645362d1b43963
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 68d9a5e0d05d491690cc517b72d66fa44b1a61ab
+PODFILE CHECKSUM: b77b00d0b476e496bbbf62740c2e58a126cd4c7f
 
 COCOAPODS: 1.8.4

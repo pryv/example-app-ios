@@ -1,4 +1,4 @@
-source 'https://github.com/alemannosara/PryvApiSwiftKitSpecs.git'
+source 'https://github.com/pryv/lib-swift.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Uncomment the next line to define a global platform for your project

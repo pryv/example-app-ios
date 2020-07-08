@@ -152,7 +152,7 @@ class ConnectionListTableViewController: UITableViewController {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.events.removeAll()
-            self.connectionSocketIO!.emitWithData(methodId: "events.get", params: Json()) { any in
+            self.connectionSocketIO!.emit(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
                 self.events = dictionary["events"] as! [Event]
