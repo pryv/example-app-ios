@@ -7,7 +7,7 @@
 //
 import UIKit
 import KeychainSwift
-import PryvApiSwiftKit
+import PryvSwiftKit
 import FileBrowser
 import HealthKit
 
@@ -84,7 +84,6 @@ class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
     private let params = ["fromTime": Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!.timeIntervalSince1970, "limit": 50] // last 7 days, but max 50 events
     private var events = [Event]()
-    private var created = false
     private var connectionSocketIO: ConnectionWebSocket?
     private var healthStore = HKHealthStore()
     private let pryvStream = PryvStream(streamId: "weight", type: "mass/kg")
@@ -108,7 +107,12 @@ class ConnectionListTableViewController: UITableViewController {
         
         let addEventButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
         addEventButton.accessibilityIdentifier = "addEventButton"
-        tabBarController?.navigationItem.rightBarButtonItem = addEventButton
+        tabBarController?.navigationItem.leftBarButtonItem = addEventButton
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching last events")
+        refreshControl.addTarget(self, action: #selector(getEvents), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 100;
@@ -117,17 +121,17 @@ class ConnectionListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = false
+        tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
     }
     
     /// Updates the list of events shown (only if an event was added)
     /// # Note
-    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 7 days, which does not require streaming.
-    private func getEvents() {
+    ///     Here, we use a batch call, not the streamed version. Indeed, we are only taking the last 20 events, which does not require streaming.
+    @objc private func getEvents() {
         let request = [
             [
                 "method": "events.get",
@@ -135,18 +139,21 @@ class ConnectionListTableViewController: UITableViewController {
             ]
         ]
         
-        events.removeAll()
         connection!.api(APICalls: request).then { results in
-            for result in results {
+            var events = [Event]()
+            results.forEach { result in
                 if let json = result as? [String: [Event]] {
-                    self.events.append(contentsOf: json["events"]?.filter({!(($0["type"] as? String)?.contains("position") ?? true)}) ?? [Event]())
+                    events.append(contentsOf: json["events"] ?? [Event]())
                 }
             }
             
+            self.events = events
+            self.refreshControl?.endRefreshing()
             self.loadViewIfNeeded()
             self.tableView.reloadData()
         }.catch { error in
             print("problem encountered when getting the events: \(error.localizedDescription)")
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -156,16 +163,13 @@ class ConnectionListTableViewController: UITableViewController {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.events.removeAll()
-            self.connectionSocketIO!.emit(methodId: "events.get", params: self.params) { any in
+            self.connectionSocketIO!.emit(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
                 self.events = (dictionary["events"] as! [Event]).filter({!(($0["type"] as? String)?.contains("position") ?? true)})
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
-                if self.created {
-                    self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-                }
-                self.created = false
+                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
             }
         }
         connectionSocketIO!.connect()
@@ -255,9 +259,7 @@ class ConnectionListTableViewController: UITableViewController {
                 self.present(fileBrowser, animated: true, completion: nil)
                 
                 fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).then { _ in
-                        self.created = true
-                    }.catch { error in
+                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
                         let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                         self.present(innerAlert, animated: true, completion: nil)

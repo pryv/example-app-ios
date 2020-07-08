@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 
 /// A simple view controller with a web view for the auth request 
 class AuthViewController: UIViewController {

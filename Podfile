@@ -1,4 +1,4 @@
-source 'https://github.com/alemannosara/PryvApiSwiftKitSpecs.git'
+source 'https://github.com/pryv/lib-swift.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Uncomment the next line to define a global platform for your project
@@ -9,7 +9,7 @@ target 'PryvApiSwiftKitExample' do
   use_frameworks!
 
   # Pods for PryvApiSwiftKitExample
-  pod 'PryvApiSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
+  pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
   pod 'KeychainSwift'
   pod 'FileBrowser', '~> 1.0'
   pod 'RLBAlertsPickers', '~> 1.1.1'

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 import KeychainSwift
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
