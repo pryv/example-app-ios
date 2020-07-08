@@ -10,4 +10,3 @@ build
 *.xcworkspace/xcuserdata/*.xcuserdatad/*
 */xcuserdata/*.xcuserdatad/xcdebugger/*
 Pods/
-*.xcworkspace/xcshareddata/*
