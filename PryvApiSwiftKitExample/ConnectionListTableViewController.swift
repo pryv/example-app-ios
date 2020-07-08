@@ -193,6 +193,26 @@ class ConnectionListTableViewController: UITableViewController {
     
     // MARK: - Table view interactions
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            guard let eventId = events[indexPath.row]["id"] as? String else { return }
+            let deleteCall: APICall = [
+                "method": "events.delete",
+                "params": [
+                    "id": eventId
+                ]
+            ]
+            
+            self.connection?.api(APICalls: [deleteCall]).catch { error in
+                print("Deletion failed: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     /// Creates a new event from the fields in a `UIAlertController` and sends a `event.create` request within a callbatch
     @objc private func addEvent() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
