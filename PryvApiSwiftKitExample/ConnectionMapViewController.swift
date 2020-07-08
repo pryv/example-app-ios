@@ -117,7 +117,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     /// The last position will have a marker, the others will be drawn using a path between them
     /// # Note
     ///     This path does not follow any route, it is a simple straight line
-    /// - Parameter events
+    /// - Parameter time of the events mapped to their 2D location
     private func show(coordinates: [Double: CLLocationCoordinate2D]) {
         if let mostRecentTime = coordinates.keys.max(), let mostRecentCoord = coordinates[mostRecentTime] {
             let point = MKPointAnnotation()

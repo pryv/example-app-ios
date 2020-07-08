@@ -15,6 +15,7 @@
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
 		B3907DAD24A0FDEA009FCE28 /* ConnectionMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */; };
+		B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3946F1D24B60DC7000DFDA3 /* Settings.bundle */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
 		B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* AuthViewController.swift */; };
 		B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */; };
@@ -63,6 +64,7 @@
 		B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTabBarViewController.swift; sourceTree = "<group>"; };
 		B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionMapViewController.swift; sourceTree = "<group>"; };
 		B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionMapUITests.swift; path = PryvApiSwiftKitExampleUITests/ConnectionMapUITests.swift; sourceTree = SOURCE_ROOT; };
+		B3946F1D24B60DC7000DFDA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PryvApiSwiftKitExampleDebug.entitlements; sourceTree = "<group>"; };
 		B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B3C51E7B248A36B700F1D398 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */,
+				B3946F1D24B60DC7000DFDA3 /* Settings.bundle */,
 				B3D6FC8C2492366700DB90D3 /* Utils */,
 				B3D70D36248A2FE900A1A247 /* AppDelegate.swift */,
 				B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */,
@@ -325,6 +328,7 @@
 			files = (
 				B3E03997249355E000B9DE6C /* sample.pdf in Resources */,
 				B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */,
+				B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */,
 				B3D70D40248A2FEA00A1A247 /* Assets.xcassets in Resources */,
 				B3D70D3E248A2FE900A1A247 /* Main.storyboard in Resources */,
 			);

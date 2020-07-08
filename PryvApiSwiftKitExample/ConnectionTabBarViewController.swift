@@ -55,28 +55,41 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         
         self.connection?.username()
         .then { username in
-            let logoutButton = UIBarButtonItem(title: username, style: .plain, target: self, action: #selector(self.logout))
-            logoutButton.accessibilityIdentifier = "logoutButton"
-            self.navigationItem.rightBarButtonItem = logoutButton
-            self.navigationItem.hidesBackButton = true
-        }.catch { _ in
-            let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout))
-            logoutButton.accessibilityIdentifier = "logoutButton"
-            self.navigationItem.rightBarButtonItem = logoutButton
+            let userButton = UIBarButtonItem(title: username, style: .plain, target: self, action: #selector(self.openUserMenu))
+            userButton.accessibilityIdentifier = "userButton"
+            self.navigationItem.rightBarButtonItem = userButton
             self.navigationItem.hidesBackButton = true
         }
     }
     
-    /// If confirmed, logs the current user out by deleting the saved endpoint in the keychain
-    @objc private func logout() {
-        let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
-            if let key = self.appId {
-                self.keychain.delete(key)
+    /// Opens a user menu to go to the settings or log out
+    @objc private func openUserMenu() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Privacy settings", style: .default) { _ in
+            if let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    #if DEBUG
+                    print("Settings opened: \(success)")
+                    #endif
+                })
             }
-            self.navigationController?.popToRootViewController(animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+        })
+        
+        alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
+            let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
+                if let key = self.appId {
+                    self.keychain.delete(key)
+                }
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -89,12 +102,12 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
             /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
-                Let this line uncommented to have frequent location notifications */
-            locationManager.startUpdatingLocation()
+                Uncomment this line and comment the line above to have frequent location notifications */
+//            locationManager.startUpdatingLocation()
             
             /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
                 Uncomment this line and comment the line below to avoid using too much power */
-            // locationManager.startMonitoringSignificantLocationChanges()
+             locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     

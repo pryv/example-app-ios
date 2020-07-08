@@ -65,8 +65,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We would like to access your location to store it on Pryv.io</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We would like to access your location to store it on Pryv.io</string>
 </dict>
 </plist>
