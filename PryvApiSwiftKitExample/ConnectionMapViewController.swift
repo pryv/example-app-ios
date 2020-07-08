@@ -99,9 +99,17 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         var events = [Event]()
         connection?.getEventsStreamed(queryParams: params, forEachEvent: { events.append($0) }).then { _ in
             self.cleanMapView()
-            self.show(events: events.filter{ event in
-                (event["type"] as? String)?.contains("position") ?? false
-            })
+            var coordinates = [Double: CLLocationCoordinate2D]()
+            events.forEach { event in
+                if let position = (event["type"] as? String)?.contains("position"), position,
+                    let content = event["content"] as? [String: Any],
+                    let latitude = content["latitude"] as? Double,
+                    let longitude = content["longitude"] as? Double, let time = event["time"] as? Double {
+                    coordinates[time] = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                }
+            }
+            
+            self.show(coordinates: coordinates)
         }
     }
     
@@ -110,31 +118,19 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
     /// # Note
     ///     This path does not follow any route, it is a simple straight line
     /// - Parameter events
-    private func show(events: [Event]) {
-        var coordinates = [CLLocationCoordinate2D]()
-        for i in 0..<events.count {
-            let event = events[i]
-            if let content = event["content"] as? [String: Any], let latitude = content["latitude"] as? Double, let longitude = content["longitude"] as? Double {
-                let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                coordinates.append(coordinate)
-                
-                if i == 0 {
-                    let time = event["time"] as? Double
-                    let point = MKPointAnnotation()
-                    point.coordinate = coordinate
-                    if let _ = time {
-                        point.title = formatter.string(from: Date(timeIntervalSince1970: time!))
-                    }
-                    mapView.addAnnotation(point)
-                    
-                    let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
-                    mapView.setRegion(coordinateRegion, animated: true)
-                }
-            }
+    private func show(coordinates: [Double: CLLocationCoordinate2D]) {
+        if let mostRecentTime = coordinates.keys.max(), let mostRecentCoord = coordinates[mostRecentTime] {
+            let point = MKPointAnnotation()
+            point.coordinate = mostRecentCoord
+            point.title = formatter.string(from: Date(timeIntervalSince1970: mostRecentTime))
+            mapView.addAnnotation(point)
+            
+            let coordinateRegion = MKCoordinateRegion(center: mostRecentCoord, latitudinalMeters: 5000, longitudinalMeters: 5000)
+            mapView.setRegion(coordinateRegion, animated: true)
         }
         
         if coordinates.count > 0 {
-            showRoute(coordinates: coordinates)
+            showRoute(coordinates: coordinates.sorted(by: { $0.key < $1.key }).map({ $0.value }))
         }
     }
     
