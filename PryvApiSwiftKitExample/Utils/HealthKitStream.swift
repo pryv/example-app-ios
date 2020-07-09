@@ -54,43 +54,67 @@ public class HealthKitStream {
     
     /// Construct the Pryv event `streamId`
     /// - Returns: the `streamId`
-    public func pryvStreamId() -> String {
-        if let _ = type as? HKCharacteristicType {
-            return "characteristic"
-        }
-        if let quantityType = type as? HKQuantityType {
-            switch quantityType.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
-            case "StepCount", "DistanceWalkingRunning", "DistanceCycling", "PushCount", "DistanceWheelchair", "SwimmingStrokeCount", "DistanceSwimming", "DistanceDownhillSnowSports", "BasalEnergyBurned", "ActiveEnergyBurned", "FlightsClimbed", "NikeFuel", "AppleExerciseTime", "AppleStandTime":
-                return "activity"
-            case "Height", "BodyMass", "BodyMassIndex", "LeanBodyMass", "BodyFatPercentage", "WaistCircumference":
-                return "measurements"
-            case "BasalBodyTemperature":
-                return "reproductive-health"
-            case "EnvironmentalAudioExposure", "HeadphoneAudioExposure":
-                return "hearing"
-            case "HeartRate", "RestingHeartRate", "HeartRateVariabilitySDNN", "WalkingHeartRateAverage", "OxygenSaturation", "BodyTemperature", "BloodPressireSystolic", "BloodPressureDiastolic", "RespiratoryRate":
-                return "vital"
-            case "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
-                return "nutrition"
-            case "BloodAlcoholContent", "BloodGlucose", "ElectrodermalActivity", "ForcedExpiratoryVolume1", "ForcedVitalCapacity", "InhalerUsage", "NumberOfTimesFallen", "PeakExpiratoryFlowRate", "Peripheral£PerfusionIndex":
-                return "lab-results"
-            case "UvExposure":
-                return "UV-exposure"
-            default:
-                return "diary"
-            }
-        }
+    public func pryvStreamId() -> (parentId: String?, streamId: String) {
+        var parentId: String? = nil
         
-        if let correlationType = type as? HKCorrelationType {
-            switch correlationType.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "") {
+        switch type {
+        case is HKCharacteristicType:
+            return (parentId: "characteristic", streamId: type.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "").lowercased())
+        case is HKQuantityType:
+            let streamId = type.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "")
+            switch streamId {
+                case "StepCount", "DistanceWalkingRunning", "DistanceCycling", "PushCount", "DistanceWheelchair", "SwimmingStrokeCount", "DistanceSwimming", "DistanceDownhillSnowSports", "BasalEnergyBurned", "ActiveEnergyBurned", "FlightsClimbed", "NikeFuel", "AppleExerciseTime", "AppleStandTime":
+                    parentId = "activity"
+                case "Height", "BodyMass", "BodyMassIndex", "LeanBodyMass", "BodyFatPercentage", "WaistCircumference":
+                    parentId = "measurements"
+                case "BasalBodyTemperature":
+                    parentId = "reproductive-health"
+                case "EnvironmentalAudioExposure", "HeadphoneAudioExposure":
+                    parentId = "hearing"
+                case "HeartRate", "RestingHeartRate", "HeartRateVariabilitySDNN", "WalkingHeartRateAverage", "OxygenSaturation", "BodyTemperature", "BloodPressireSystolic", "BloodPressureDiastolic", "RespiratoryRate", "Vo2Max":
+                    parentId = "vital"
+                case "DietaryEnergyConsumed", "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietaryFiber", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietarySodium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
+                    parentId = "nutrition"
+                case "BloodAlcoholContent", "BloodGlucose", "ElectrodermalActivity", "ForcedExpiratoryVolume1", "ForcedVitalCapacity", "InhalerUsage", "InsulinDelivery", "NumberOfTimesFallen", "PeakExpiratoryFlowRate", "Peripheral£PerfusionIndex":
+                    parentId = "lab-results"
+                default: break
+            }
+            return (parentId: parentId, streamId: streamId.lowercased())
+        case is HKCorrelationType:
+            let streamId = type.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "")
+            switch streamId {
             case "BloodPressure":
-                return "vital"
-            default:
-                return "diary"
+                parentId = "vital"
+            default: break
             }
+            return (parentId: parentId, streamId: streamId)
+        case is HKActivitySummaryType:
+            return (parentId: parentId, streamId: "activity")
+        case is HKAudiogramSampleType:
+            return (parentId: "hearing", streamId: "audiogram")
+        case is HKWorkoutType:
+            return (parentId: parentId, streamId: "workouts")
+        case is HKCategoryType:
+            let streamId = type.identifier.replacingOccurrences(of: "HKCategoryTypeIdentifier", with: "")
+            switch type.identifier.replacingOccurrences(of: "HKCategoryTypeIdentifier", with: "") {
+            case "AppleStandHour":
+                parentId = "activity"
+            case "SexualActivity", "IntermenstrualBleeding", "MenstrualFlow", "CervicalMucusQuality", "OvulationTestResult":
+                parentId = "reproductive-health"
+            case "LowHeartRateEvent", "HighHeartRateEvent", "IrregularHeartRhythmEvent":
+                parentId = "vital"
+            case "ToothBrushingEvent":
+                parentId = "self-care"
+            case "AbdominalCramps", "Bloating", "Constipation", "Diarrhea", "Heartburn", "Nausea", "Vomiting", "AppetiteChanges", "Chills", "Dizziness", "Fainting", "Fatigue", "Fever", "GeneralizedBodyAche", "HotFlashes", "ChestTightnessOrPain", "Coughing", "RapidPoundingOrFlutteringHeartBeat", "ShortnessOfBreath", "SkippedHeartbeat", "Wheezing", "LowerBackPain", "Headache", "MoodChanges", "LossOfSmell", "LossOfTaste", "RunnyNose", "SoreThroat", "SinusCongestion", "BreastPain", "PelvicPain", "Acne", "SleepChanges":
+                parentId = "symptoms"
+            default: break
+            }
+            return (parentId: parentId, streamId: streamId.lowercased())
+        case is HKClinicalType:
+            return (parentId: parentId, streamId: "clinical")
+        default:
+            return (parentId: parentId, streamId: "diary")
         }
-        
-        return "diary"
     }
     
     /// Translate the content of a HK sample or store to a Pryv event content

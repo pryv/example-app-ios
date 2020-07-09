@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B3D70D32248A2FE900A1A247"
-               BuildableName = "Pryv Lab.app"
+               BuildableName = "Pryv.app"
                BlueprintName = "PryvApiSwiftKitExample"
                ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
             </BuildableReference>
@@ -71,7 +71,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3D70D32248A2FE900A1A247"
-            BuildableName = "Pryv Lab.app"
+            BuildableName = "Pryv.app"
             BlueprintName = "PryvApiSwiftKitExample"
             ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
          </BuildableReference>
@@ -88,7 +88,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3D70D32248A2FE900A1A247"
-            BuildableName = "Pryv Lab.app"
+            BuildableName = "Pryv.app"
             BlueprintName = "PryvApiSwiftKitExample"
             ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
          </BuildableReference>
