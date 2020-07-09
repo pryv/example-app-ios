@@ -67,9 +67,19 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     @objc private func openUserMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Privacy settings", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Manage privacy settings", style: .default) { _ in
             if let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    #if DEBUG
+                    print("Settings opened: \(success)")
+                    #endif
+                })
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Manage health data", style: .default) { _ in
+            if let healthUrl = URL(string: "x-apple-health://"), UIApplication.shared.canOpenURL(healthUrl) {
+                UIApplication.shared.open(healthUrl, completionHandler: { (success) in
                     #if DEBUG
                     print("Settings opened: \(success)")
                     #endif
