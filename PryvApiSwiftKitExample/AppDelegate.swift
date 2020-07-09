@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let write = PryvStream(streamId: "weight", type: "mass/kg").hkSampleType()!
         healthStore.requestAuthorization(toShare: [write], read: read) { success, error in
             if !success {
-                print("Error when requesting authorization for HK data: \(error?.localizedDescription)")
+                print("Error when requesting authorization for HK data: \(String(describing: error?.localizedDescription))")
             }
         }
         
@@ -95,16 +95,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dynamicStreams.forEach({ dynamicMonitor(hkDS: $0) })
     }
     
-    private func createStreams(with ids: [String], in connection: Connection?) {
+    private func createStreams(with ids: [(parentId: String?, streamId: String)], in connection: Connection?) {
         var apiCalls = [APICall]()
-        ids.forEach { id in
-            let apiCall: APICall = [
+        
+        ids.forEach { (parentId, streamId) in
+            let parentIdCall: APICall = [
                 "method": "streams.create",
-                "params": ["name": id, "id": id]
+                "params": ["name": parentId, "id": parentId]
             ]
-            apiCalls.append(apiCall)
+            let streamIdCall: APICall = [
+                "method": "streams.create",
+                "params": ["parentId": parentId, "name": streamId, "id": streamId]
+            ]
+            
+            apiCalls.append(parentIdCall)
+            apiCalls.append(streamIdCall)
         }
-        apiCalls.forEach { apiCall in
+        
+        apiCalls.forEach { apiCall in // do each call separately to avoid any error blocking the other streams creation
             connection?.api(APICalls: [apiCall]).catch { error in
                 print("problem encountered when creating HK streams: \(error.localizedDescription)")
             }
@@ -120,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [
                 "method": "events.get",
                 "params": [
-                    "streams": [hkDS.pryvStreamId()]
+                    "streams": [hkDS.pryvStreamId().streamId]
                 ]
             ]
         ]).then { json in

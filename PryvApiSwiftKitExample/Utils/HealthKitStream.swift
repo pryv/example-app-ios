@@ -46,7 +46,7 @@ public class HealthKitStream {
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
     public func pryvEvent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
-        var params = ["streamId": pryvStreamId(), "type": eventType(), "content": pryvContent(from: sample, of: store)]
+        var params = ["streamId": pryvStreamId().streamId, "type": eventType(), "content": pryvContent(from: sample, of: store)]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
         return params
