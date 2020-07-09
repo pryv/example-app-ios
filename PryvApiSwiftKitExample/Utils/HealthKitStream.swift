@@ -8,7 +8,7 @@
 
 import Foundation
 import HealthKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 
 public typealias PryvSample = [String: Any?]
 

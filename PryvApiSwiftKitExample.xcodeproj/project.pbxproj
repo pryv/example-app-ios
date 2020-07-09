@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */; };
-		62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
+		49437C849E1D48732294DA68 /* Pods_PryvApiSwiftKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20EBBB931E2E0F373C3137C9 /* Pods_PryvApiSwiftKitExample.framework */; };
+		4A816DF957D8ED778BB4BC7F /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F69D5B2441DD75AC2A4726 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */; };
 		B300ECC924ACAF1C00AA7387 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B300ECC824ACAF1C00AA7387 /* HealthKit.framework */; };
 		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
-		B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */; };
 		B36058FF24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36058FE24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift */; };
 		B360590124B4AE0A00C1B1BE /* PryvStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B360590024B4AE0A00C1B1BE /* PryvStream.swift */; };
 		B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */; };
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
 		B3907DAD24A0FDEA009FCE28 /* ConnectionMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */; };
-		B3A957A224AF17ED009713B1 /* HealthKitStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A957A124AF17ED009713B1 /* HealthKitStream.swift */; };
 		B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3946F1D24B60DC7000DFDA3 /* Settings.bundle */; };
+		B3A957A224AF17ED009713B1 /* HealthKitStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A957A124AF17ED009713B1 /* HealthKitStream.swift */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
 		B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* AuthViewController.swift */; };
 		B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */; };
@@ -34,17 +33,9 @@
 		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E03998249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E0399F24936AED00B9DE6C /* ConnectionListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9724925EB000DB90D3 /* ConnectionListUITests.swift */; };
-		E92BFF5B5266B3F8D08AEB7C /* Pods_PryvApiSwiftKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B3D70D4A248A2FEA00A1A247 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B3D70D2B248A2FE900A1A247 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B3D70D32248A2FE900A1A247;
-			remoteInfo = PryvApiSwiftKitExample;
-		};
 		B3D70D55248A2FEA00A1A247 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B3D70D2B248A2FE900A1A247 /* Project object */;
@@ -55,13 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CCA3B259C26C8309E6D4E8B /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExampleTests/Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62F0DCAE726DE2BAF3D5D49C /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExampleTests/Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
-		984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		01EE5351FDA77F20D0EC701C /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
+		04AE59B790779672D82F89FC /* Pods-PryvApiSwiftKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.release.xcconfig"; sourceTree = "<group>"; };
+		20EBBB931E2E0F373C3137C9 /* Pods_PryvApiSwiftKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2518E8B1FC3DF1C32CB9531B /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2D86F15FD01D759E02549747 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B300ECC824ACAF1C00AA7387 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
 		B30F7D9F2498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryvApiSwiftKitExampleTests.swift; sourceTree = "<group>"; };
@@ -87,14 +76,15 @@
 		B3D70D3F248A2FEA00A1A247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3D70D42248A2FEA00A1A247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3D70D44248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D4F248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PryvApiSwiftKitExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
 		B3D70D5A248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E03996249355E000B9DE6C /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
-		C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
-		C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF251D0149D70AFE20C8E62A /* Pods_PryvApiSwiftKitExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D680B15260E214D5DDB1D52A /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExampleTests/Pods-PryvApiSwiftKitExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF632DCB04C896E863D901B9 /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExampleTests/Pods-PryvApiSwiftKitExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F1F69D5B2441DD75AC2A4726 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,15 +94,7 @@
 			files = (
 				B300ECC924ACAF1C00AA7387 /* HealthKit.framework in Frameworks */,
 				B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */,
-				E92BFF5B5266B3F8D08AEB7C /* Pods_PryvApiSwiftKitExample.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3D70D46248A2FEA00A1A247 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				50E437EF67BCA6E67796267B /* Pods_PryvApiSwiftKitExampleTests.framework in Frameworks */,
+				49437C849E1D48732294DA68 /* Pods_PryvApiSwiftKitExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62154DDB5CF82E74AA7A6EBA /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */,
+				4A816DF957D8ED778BB4BC7F /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				B3D70D33248A2FE900A1A247 /* Pryv Lab.app */,
-				B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */,
 				B3D70D54248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests.xctest */,
 			);
 			name = Products;
@@ -209,9 +190,9 @@
 			children = (
 				B300ECC824ACAF1C00AA7387 /* HealthKit.framework */,
 				B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */,
-				80FC4D399936A23F40FEBA87 /* Pods_PryvApiSwiftKitExample.framework */,
-				26F952A7FE25BB799E62E502 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
-				4454A9532A8D49A8DD920BFA /* Pods_PryvApiSwiftKitExampleTests.framework */,
+				20EBBB931E2E0F373C3137C9 /* Pods_PryvApiSwiftKitExample.framework */,
+				F1F69D5B2441DD75AC2A4726 /* Pods_PryvApiSwiftKitExample_PryvApiSwiftKitExampleUITests.framework */,
+				BF251D0149D70AFE20C8E62A /* Pods_PryvApiSwiftKitExampleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,12 +200,12 @@
 		E05F403CBE4B2B4059166F4D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */,
-				8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */,
-				C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */,
-				984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */,
-				3CCA3B259C26C8309E6D4E8B /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */,
-				62F0DCAE726DE2BAF3D5D49C /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */,
+				01EE5351FDA77F20D0EC701C /* Pods-PryvApiSwiftKitExample.debug.xcconfig */,
+				04AE59B790779672D82F89FC /* Pods-PryvApiSwiftKitExample.release.xcconfig */,
+				2D86F15FD01D759E02549747 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */,
+				2518E8B1FC3DF1C32CB9531B /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */,
+				DF632DCB04C896E863D901B9 /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */,
+				D680B15260E214D5DDB1D52A /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -236,11 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3D70D5D248A2FEA00A1A247 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKitExample" */;
 			buildPhases = (
-				1346EBE9EB43DB8AAFC11F10 /* [CP] Check Pods Manifest.lock */,
+				4A822366EC0F13874959866A /* [CP] Check Pods Manifest.lock */,
 				B3D70D2F248A2FE900A1A247 /* Sources */,
 				B3D70D30248A2FE900A1A247 /* Frameworks */,
 				B3D70D31248A2FE900A1A247 /* Resources */,
-				2FDDF345D2BBC6456F6CCAAB /* [CP] Embed Pods Frameworks */,
+				ACE4A504095347754F96DEE7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,34 +232,15 @@
 			productReference = B3D70D33248A2FE900A1A247 /* Pryv Lab.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B3D70D48248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3D70D60248A2FEA00A1A247 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKitExampleTests" */;
-			buildPhases = (
-				0729FA27B4992280C57DDE39 /* [CP] Check Pods Manifest.lock */,
-				B3D70D45248A2FEA00A1A247 /* Sources */,
-				B3D70D46248A2FEA00A1A247 /* Frameworks */,
-				B3D70D47248A2FEA00A1A247 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B3D70D4B248A2FEA00A1A247 /* PBXTargetDependency */,
-			);
-			name = PryvApiSwiftKitExampleTests;
-			productName = PryvApiSwiftKitExampleTests;
-			productReference = B3D70D49248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		B3D70D53248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3D70D63248A2FEA00A1A247 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKitExampleUITests" */;
 			buildPhases = (
-				F1069C58082A0857AF0E9E23 /* [CP] Check Pods Manifest.lock */,
+				E0258AC3829154716822E527 /* [CP] Check Pods Manifest.lock */,
 				B3D70D50248A2FEA00A1A247 /* Sources */,
 				B3D70D51248A2FEA00A1A247 /* Frameworks */,
 				B3D70D52248A2FEA00A1A247 /* Resources */,
-				4CFF1CA3BFA67BE6AD5B372B /* [CP] Embed Pods Frameworks */,
+				2B34C2D219FD10E22E6AB8E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,11 +265,6 @@
 					B3D70D32248A2FE900A1A247 = {
 						CreatedOnToolsVersion = 11.5;
 					};
-					B3D70D48248A2FEA00A1A247 = {
-						CreatedOnToolsVersion = 11.5;
-						LastSwiftMigration = 1150;
-						TestTargetID = B3D70D32248A2FE900A1A247;
-					};
 					B3D70D53248A2FEA00A1A247 = {
 						CreatedOnToolsVersion = 11.5;
 						TestTargetID = B3D70D32248A2FE900A1A247;
@@ -328,7 +285,6 @@
 			projectRoot = "";
 			targets = (
 				B3D70D32248A2FE900A1A247 /* PryvApiSwiftKitExample */,
-				B3D70D48248A2FEA00A1A247 /* PryvApiSwiftKitExampleTests */,
 				B3D70D53248A2FEA00A1A247 /* PryvApiSwiftKitExampleUITests */,
 			);
 		};
@@ -347,13 +303,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3D70D47248A2FEA00A1A247 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B3D70D52248A2FEA00A1A247 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,29 +314,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0729FA27B4992280C57DDE39 /* [CP] Check Pods Manifest.lock */ = {
+		2B34C2D219FD10E22E6AB8E5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PryvApiSwiftKitExampleTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1346EBE9EB43DB8AAFC11F10 /* [CP] Check Pods Manifest.lock */ = {
+		4A822366EC0F13874959866A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -409,7 +353,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2FDDF345D2BBC6456F6CCAAB /* [CP] Embed Pods Frameworks */ = {
+		ACE4A504095347754F96DEE7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,24 +370,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4CFF1CA3BFA67BE6AD5B372B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F1069C58082A0857AF0E9E23 /* [CP] Check Pods Manifest.lock */ = {
+		E0258AC3829154716822E527 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -488,14 +415,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3D70D45248A2FEA00A1A247 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B30F7DA02498FC70005C6182 /* PryvApiSwiftKitExampleTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B3D70D50248A2FEA00A1A247 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -509,11 +428,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B3D70D4B248A2FEA00A1A247 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B3D70D32248A2FE900A1A247 /* PryvApiSwiftKitExample */;
-			targetProxy = B3D70D4A248A2FEA00A1A247 /* PBXContainerItemProxy */;
-		};
 		B3D70D56248A2FEA00A1A247 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B3D70D32248A2FE900A1A247 /* PryvApiSwiftKitExample */;
@@ -659,7 +573,7 @@
 		};
 		B3D70D5E248A2FEA00A1A247 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
+			baseConfigurationReference = 01EE5351FDA77F20D0EC701C /* Pods-PryvApiSwiftKitExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PryvApiSwiftKitExample/PryvApiSwiftKitExampleDebug.entitlements;
@@ -680,7 +594,7 @@
 		};
 		B3D70D5F248A2FEA00A1A247 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B06FB9299D02EEA48F6525C /* Pods-PryvApiSwiftKitExample.release.xcconfig */;
+			baseConfigurationReference = 04AE59B790779672D82F89FC /* Pods-PryvApiSwiftKitExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -698,59 +612,10 @@
 			};
 			name = Release;
 		};
-		B3D70D61248A2FEA00A1A247 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CCA3B259C26C8309E6D4E8B /* Pods-PryvApiSwiftKitExampleTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PryvApiSwiftKitExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PryvApiSwiftKitExample.app/PryvApiSwiftKitExample";
-			};
-			name = Debug;
-		};
-		B3D70D62248A2FEA00A1A247 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62F0DCAE726DE2BAF3D5D49C /* Pods-PryvApiSwiftKitExampleTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PryvApiSwiftKitExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = pryv.PryvApiSwiftKitExampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PryvApiSwiftKitExample.app/PryvApiSwiftKitExample";
-			};
-			name = Release;
-		};
 		B3D70D64248A2FEA00A1A247 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */;
+			baseConfigurationReference = 2D86F15FD01D759E02549747 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PryvApiSwiftKitExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -768,9 +633,8 @@
 		};
 		B3D70D65248A2FEA00A1A247 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 984F657322C54AF158D2A458 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */;
+			baseConfigurationReference = 2518E8B1FC3DF1C32CB9531B /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PryvApiSwiftKitExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -803,15 +667,6 @@
 			buildConfigurations = (
 				B3D70D5E248A2FEA00A1A247 /* Debug */,
 				B3D70D5F248A2FEA00A1A247 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B3D70D60248A2FEA00A1A247 /* Build configuration list for PBXNativeTarget "PryvApiSwiftKitExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3D70D61248A2FEA00A1A247 /* Debug */,
-				B3D70D62248A2FEA00A1A247 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

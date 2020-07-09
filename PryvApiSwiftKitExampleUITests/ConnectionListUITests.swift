@@ -10,7 +10,6 @@ import XCTest
 import KeychainSwift
 import Mocker
 import PryvSwiftKit
-@testable import PryvApiSwiftKitExample
 
 class ConnectionListUITests: XCTestCase {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"

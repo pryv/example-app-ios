@@ -8,7 +8,7 @@
 
 import Foundation
 import HealthKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 
 class PryvStream {
     public var streamId: String

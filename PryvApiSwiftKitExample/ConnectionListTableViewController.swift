@@ -233,7 +233,6 @@ class ConnectionListTableViewController: UITableViewController {
                     }]
                 
                 self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { results in
-                    self.created = true
                     if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
                         if let json = results.first as? [String: Event], let event = json["event"] {
                             if self.pryvStream.streamId == event["streamId"] as? String {

@@ -9,7 +9,7 @@
 import UIKit
 import KeychainSwift
 import HealthKit
-import PryvApiSwiftKit
+import PryvSwiftKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

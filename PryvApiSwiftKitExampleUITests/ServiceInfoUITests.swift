@@ -9,7 +9,6 @@
 import XCTest
 import Mocker
 import KeychainSwift
-@testable import PryvApiSwiftKitExample
 
 class ServiceInfoUITests: XCTestCase {
     
