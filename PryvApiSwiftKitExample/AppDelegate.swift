@@ -10,11 +10,13 @@ import UIKit
 import KeychainSwift
 import HealthKit
 import PryvSwiftKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     private let appId = "app-swift-example"
     private let keychain = KeychainSwift()
+    private let locationManager = CLLocationManager()
     private let healthStore = HKHealthStore()
     private var anchor = HKQueryAnchor.init(fromValue: 0)
     var connection: Connection? {
@@ -40,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ]
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        configureLocation()
+        
         guard HKHealthStore.isHealthDataAvailable() else { return true }
         
         let read = Set(healthKitStreams.map{$0.type})
@@ -78,6 +82,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    // MARK: - location manager
+    
+    /// Configures the location tracking parameters
+    private func configureLocation() {
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    /// Checks the result of asking for location authorization
+    /// - Parameters:
+    ///   - manager: location managaer
+    ///   - status: the status of the authorization request
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
+             Uncomment this line and comment the line above to have frequent location notifications */
+            //            locationManager.startUpdatingLocation()
+            
+            /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
+             Uncomment this line and comment the line below to avoid using too much power */
+            locationManager.startMonitoringSignificantLocationChanges()
+        }
+    }
+    
+    /// Manage newly received location updates
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array with the latest location(s)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var apiCalls = [APICall]()
+        for location in locations {
+            let params: Json = [
+                "streamId": "diary",
+                "type": "position/wgs84",
+                "content": [
+                    "latitude": location.coordinate.latitude,
+                    "longitude": location.coordinate.longitude,
+                    "altitude": location.altitude,
+                    "horizontalAccuracy": location.horizontalAccuracy,
+                    "verticalAccuracy": location.verticalAccuracy,
+                    "speed": location.speed
+                ]
+            ]
+            
+            let apiCall: APICall = [
+                "method": "events.create",
+                "params": params
+            ]
+            apiCalls.append(apiCall)
+        }
+        
+        print("Sending location...")
+        connection?.api(APICalls: apiCalls).catch { error in
+            print("Problem encountered when sending position to the server: \(error.localizedDescription)")
+        }
+    }
+    
+    /// Manage newly received location updates in case of an error
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array with the latest location(s)
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Problem encountered when tracking position: \(error)")
     }
     
     // MARK: - HealthKit synchronization
