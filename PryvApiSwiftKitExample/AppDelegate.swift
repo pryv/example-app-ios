@@ -207,12 +207,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             let events = json.first?["events"] as? [Event]
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
-                let apiCall: APICall = [
-                    "method": "events.create",
-                    "params": hkDS.pryvEvent(of: self.healthStore)
-                ]
-                self.connection?.api(APICalls: [apiCall]).catch { error in
-                    print("Api calls failed: \(error.localizedDescription)")
+                let pryvEvent = hkDS.pryvEvent(of: self.healthStore)
+
+                if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
+                    let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
+                    let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
+                    self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
+                        print("Create event with file failed: \(error.localizedDescription)")
+                    }
+                } else {
+                    let apiCall: APICall = [
+                        "method": "events.create",
+                        "params": pryvEvent.params
+                    ]
+                    self.connection?.api(APICalls: [apiCall]).catch { error in
+                        print("Api calls failed: \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -246,11 +256,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     if let additions = newSamples, additions.count > 0 {
                         var apiCalls = [APICall]()
                         for sample in additions {
-                            let apiCall: APICall = [
-                                "method": "events.create",
-                                "params": hkDS.pryvEvent(from: sample)
-                            ]
-                            apiCalls.append(apiCall)
+                            let pryvEvent = hkDS.pryvEvent(from: sample)
+
+                            if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
+                                let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
+                                let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
+                                self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
+                                    print("Create event with file failed: \(error.localizedDescription)")
+                                }
+                            } else {
+                                let apiCall: APICall = [
+                                    "method": "events.create",
+                                    "params": pryvEvent.params
+                                ]
+                                apiCalls.append(apiCall)
+                            }
                         }
                         
                         self.connection?.api(APICalls: apiCalls).catch { error in

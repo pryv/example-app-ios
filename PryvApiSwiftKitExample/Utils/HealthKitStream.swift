@@ -42,15 +42,15 @@ public class HealthKitStream {
     /// - Parameters:
     ///   - sample: the HK sample
     ///   - store: the HK store
-    /// - Returns: the json formatted event's parameters
+    /// - Returns: the json formatted event's parameters and the data for the corresponding attachment, if needed
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
-    public func pryvEvent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
+    public func pryvEvent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> (params: PryvSample, attachmentData: Data?) {
         let (type, content, attachmentData) = pryvContentAndType(from: sample, of: store) // TODO: return attachment data as well
         var params = ["streamId": pryvStreamId().streamId, "type": type, "content": content]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
-        return params
+        return (params: params, attachmentData: attachmentData)
     }
     
     /// Construct the Pryv event `streamId` and `parentId`, if needed
