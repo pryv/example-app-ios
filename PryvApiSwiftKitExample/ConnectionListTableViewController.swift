@@ -82,11 +82,10 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController {
     private let keychain = KeychainSwift()
-    private let params = ["fromTime": Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!.timeIntervalSince1970, "limit": 50] // last 7 days, but max 50 events
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
     private var healthStore = HKHealthStore()
-    private let pryvStream = PryvStream(streamId: "weight", type: "mass/kg")
+    private let pryvStream = PryvStream(streamId: "bodyMass", type: "mass/kg")
     
     var appId: String?
     var connection: Connection? {
@@ -135,7 +134,7 @@ class ConnectionListTableViewController: UITableViewController {
         let request = [
             [
                 "method": "events.get",
-                "params": params
+                "params": Json()
             ]
         ]
         
@@ -237,7 +236,11 @@ class ConnectionListTableViewController: UITableViewController {
                         if let json = results.first as? [String: Event], let event = json["event"] {
                             if self.pryvStream.streamId == event["streamId"] as? String {
                                 let sample = self.pryvStream.healthKitSample(from: event["content"] as! Double)!
-                                self.healthStore.save(sample) { (success, error) in return }
+                                self.healthStore.save(sample) { (success, error) in
+                                    if !success || error != nil {
+                                        print("problem occurred when sending event to Health")
+                                    }
+                                }
                             }
                         }
                     }

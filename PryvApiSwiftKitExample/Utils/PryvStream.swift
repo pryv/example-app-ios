@@ -30,7 +30,7 @@ class PryvStream {
     /// - Returns: an `HKSample` containing the same data as in the Pryv event
     public func healthKitSample(from content: Double) -> HKSample? {
         switch streamId {
-        case "weight", "height":
+        case "bodyMass", "height":
             let quantityAmount = HKQuantity(unit: hkUnit()!, doubleValue: content)
             return HKQuantitySample(type: hkSampleType() as! HKQuantityType, quantity: quantityAmount, start: Date(), end: Date())
         default: // You can add as many stream as you want to better match your pryv lab
@@ -42,7 +42,7 @@ class PryvStream {
     /// - Returns: an `HKSampleType` corresponding to `event["streamId"]`
     public func hkSampleType() -> HKSampleType? {
         switch streamId {
-        case "weight":
+        case "bodyMass":
             return HKQuantityType.quantityType(forIdentifier: .bodyMass)
         case "height":
             return HKQuantityType.quantityType(forIdentifier: .height)
@@ -57,7 +57,7 @@ class PryvStream {
     /// - Returns: an `HKUnit` corresponding to `event["type"]` unit
     private func hkUnit() -> HKUnit? {
         switch streamId {
-        case "weight":
+        case "bodyMass":
             return HKUnit.gramUnit(with: .kilo)
         case "height":
             return HKUnit.meterUnit(with: .centi)

@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     private let healthKitStreams: [HealthKitStream] = [
-        //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
+        //        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
-        //        HKEvent(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
+//        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         guard HKHealthStore.isHealthDataAvailable() else { return true }
         
         let read = Set(healthKitStreams.map{$0.type})
-        let write = PryvStream(streamId: "weight", type: "mass/kg").hkSampleType()!
+        let write = PryvStream(streamId: "bodyMass", type: "mass/kg").hkSampleType()!
         healthStore.requestAuthorization(toShare: [write], read: read) { success, error in
             if !success {
                 print("Error when requesting authorization for HK data: \(String(describing: error?.localizedDescription))")
