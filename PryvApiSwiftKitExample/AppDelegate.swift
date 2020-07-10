@@ -194,7 +194,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Monitor static data such as date of birth, once per app launch
     /// Submit the value to Pryv only if any change detected
     private func staticMonitor(hkDS: HealthKitStream) {
-        let newContent = hkDS.pryvContent(of: healthStore)
+        let newContent = hkDS.pryvContentAndType(of: healthStore)
         
         connection?.api(APICalls: [
             [

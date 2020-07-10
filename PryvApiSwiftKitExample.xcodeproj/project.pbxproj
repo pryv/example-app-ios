@@ -17,6 +17,8 @@
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
 		B3907DAD24A0FDEA009FCE28 /* ConnectionMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */; };
+		B3943BFE24B86CCC00FF1FAC /* HKWorkoutActivityType+name.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3943BFD24B86CCC00FF1FAC /* HKWorkoutActivityType+name.swift */; };
+		B3943C0024B86E6E00FF1FAC /* HKWorkoutEventType+name.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3943BFF24B86E6E00FF1FAC /* HKWorkoutEventType+name.swift */; };
 		B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3946F1D24B60DC7000DFDA3 /* Settings.bundle */; };
 		B3A957A224AF17ED009713B1 /* HealthKitStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A957A124AF17ED009713B1 /* HealthKitStream.swift */; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
@@ -60,6 +62,8 @@
 		B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTabBarViewController.swift; sourceTree = "<group>"; };
 		B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionMapViewController.swift; sourceTree = "<group>"; };
 		B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionMapUITests.swift; path = PryvApiSwiftKitExampleUITests/ConnectionMapUITests.swift; sourceTree = SOURCE_ROOT; };
+		B3943BFD24B86CCC00FF1FAC /* HKWorkoutActivityType+name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+name.swift"; sourceTree = "<group>"; };
+		B3943BFF24B86E6E00FF1FAC /* HKWorkoutEventType+name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutEventType+name.swift"; sourceTree = "<group>"; };
 		B3946F1D24B60DC7000DFDA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B3A756C624938A18009A6958 /* PryvApiSwiftKitExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PryvApiSwiftKitExampleDebug.entitlements; sourceTree = "<group>"; };
 		B3A957A124AF17ED009713B1 /* HealthKitStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitStream.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
 				B36058FE24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift */,
+				B3943BFD24B86CCC00FF1FAC /* HKWorkoutActivityType+name.swift */,
+				B3943BFF24B86E6E00FF1FAC /* HKWorkoutEventType+name.swift */,
 				B3A957A124AF17ED009713B1 /* HealthKitStream.swift */,
 				B360590024B4AE0A00C1B1BE /* PryvStream.swift */,
 			);
@@ -401,11 +407,13 @@
 			files = (
 				B36058FF24B4A7AB00C1B1BE /* String+condenseWhitespaces.swift in Sources */,
 				B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */,
+				B3943BFE24B86CCC00FF1FAC /* HKWorkoutActivityType+name.swift in Sources */,
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */,
 				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,
 				B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
+				B3943C0024B86E6E00FF1FAC /* HKWorkoutEventType+name.swift in Sources */,
 				B3A957A224AF17ED009713B1 /* HealthKitStream.swift in Sources */,
 				B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */,
 				B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */,

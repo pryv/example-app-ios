@@ -46,7 +46,8 @@ public class HealthKitStream {
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
     public func pryvEvent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
-        var params = ["streamId": pryvStreamId().streamId, "type": eventType(), "content": pryvContent(from: sample, of: store)]
+        let (type, content) = pryvContentAndType(from: sample, of: store)
+        var params = ["streamId": pryvStreamId().streamId, "type": type, "content": content]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
         return params
@@ -117,232 +118,313 @@ public class HealthKitStream {
         }
     }
     
-    /// Translate the content of a HK sample or store to a Pryv event content
+    /// Translate the content of a HK sample or store to a Pryv event content with its corresponding type
     /// - Parameters:
     ///   - sample: the HK sample
     ///   - store: the HK store
-    /// - Returns: the Pryv event content corresponding to the content of the sample or store
+    ///   - summary: the `HKActivitySummary` in case of an `HKActivitySummaryQuery`
+    /// - Returns: a tuple containing the Pryv event content corresponding to the content of the sample or store and its type
     /// # Note
-    ///     At least one of the two attributes needs to be not `nil`
-    public func pryvContent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> Any? {
-        
-        if let characteristicType = type as? HKCharacteristicType, let healthStore = store {
-            switch characteristicType.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
-            case "BiologicalSex":
-                guard let biologicalSex = try? healthStore.biologicalSex().biologicalSex else { return nil }
-                switch biologicalSex {
-                case .female: return "female"
-                case .male: return "male"
-                case .notSet: return nil
-                case .other: return "other"
-                @unknown default: fatalError()
-                }
-            case "BloodType":
-                guard let bloodType = try? healthStore.bloodType().bloodType else { return nil }
-                switch bloodType {
-                case .notSet: return nil
-                case .abNegative: return "AB-"
-                case .abPositive: return "AB+"
-                case .aNegative: return "A-"
-                case .aPositive: return "A+"
-                case .bNegative: return "B-"
-                case .bPositive: return "B+"
-                case .oNegative: return "O-"
-                case .oPositive: return "O+"
-                @unknown default:
-                    fatalError()
-                }
-            case "DateOfBirth":
-                guard let birthdayComponents = try? healthStore.dateOfBirthComponents() else { return nil }
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyyMMdd"
-                return formatter.string(from: birthdayComponents.date!)
-            case "FitzpatrickSkinType":
-                guard let skinType = try? healthStore.fitzpatrickSkinType().skinType else { return nil }
-                switch skinType {
-                case .notSet: return nil
-                case .I: return "Pale white skin"
-                case .II: return "White skin"
-                case .III: return "White to light brown skin"
-                case .IV: return "Beige-olive skin"
-                case .V: return "Brown skin"
-                case .VI: return "Dark brown to black skin"
-                @unknown default:
-                    fatalError()
-                }
-            case "WheelchairUse":
-                guard let wheelchairUse = try? healthStore.wheelchairUse().wheelchairUse else { return nil }
-                switch wheelchairUse {
-                case .no: return "no wheelchair"
-                case .yes: return "wheelchair"
-                case .notSet: return nil
-                @unknown default:
-                    fatalError()
-                }
-            default:
-                return nil
-            }
-        }
-        
-        if let _ = type as? HKQuantityType, let quantitySample = sample as? HKQuantitySample {
-            return quantitySample.quantity.doubleValue(for: unit!)
-        }
-        
-        if let _ = type as? HKCorrelationType, let correlationQuery = sample as? HKCorrelation {
-            let systolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!
-            let diastolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!
-            
-            let systolic = (correlationQuery.objects(for: systolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-            let diastolic = (correlationQuery.objects(for: diastolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-            
-            if let _ = systolic, let _ = diastolic {
-                let content: Json = [
-                    "systolic": systolic!,
-                    "diastolic": diastolic!
-                ]
-                
-                return content
-            }
-            
-            return nil
-        }
-        
-        return nil
-    }
-    
-    // MARK: - private helpers functions for the library
-    
-    /// Translate HK data type to Pryv data type
-    /// - Returns: the String corresponding to the Pryv data type of the event
-    private func eventType() -> String {
-        var result = "note/txt"
+    ///     At least one of the two parameters needs to be not `nil`
+    public func pryvContentAndType(from sample: HKSample? = nil, of store: HKHealthStore? = nil, activity summary: HKActivitySummary? = nil) -> (type: String, content: Any?) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
         
         switch type {
         case is HKCharacteristicType:
             switch type.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
             case "BiologicalSex":
-                result = "attributes/biologicalSex"
+                var content: Any? = nil
+                if let biologicalSex = try? store?.biologicalSex().biologicalSex {
+                    switch biologicalSex {
+                    case .female: content = "female"
+                    case .male: content = "male"
+                    case .other: content = "other"
+                    default: break
+                    }
+                }
+                return (type: "attributes/biologicalSex", content: content)
+                
             case "BloodType":
-                result = "attributes/bloodType"
+                var content: Any? = nil
+                if let bloodType = try? store?.bloodType().bloodType {
+                    switch bloodType {
+                    case .abNegative: content = "AB-"
+                    case .abPositive: content = "AB+"
+                    case .aNegative: content = "A-"
+                    case .aPositive: content = "A+"
+                    case .bNegative: content = "B-"
+                    case .bPositive: content = "B+"
+                    case .oNegative: content = "O-"
+                    case .oPositive: content = "O+"
+                    default: break
+                    }
+                }
+                return (type: "attributes/bloodType", content: content)
+                    
             case "DateOfBirth":
-                result = "date/iso-8601"
+                var content: Any? = nil
+                if let birthdayComponents = try? store?.dateOfBirthComponents() {
+                    content = formatter.string(from: birthdayComponents.date!)
+                }
+                return (type: "date/iso-8601", content: content)
+                    
             case "FitzpatrickSkinType":
-                result = "attributes/skinType"
+                var content: Any? = nil
+                if let skinType = try? store?.fitzpatrickSkinType().skinType {
+                    switch skinType {
+                    case .I: content = "Pale white skin"
+                    case .II: content = "White skin"
+                    case .III: content = "White to light brown skin"
+                    case .IV: content = "Beige-olive skin"
+                    case .V: content = "Brown skin"
+                    case .VI: content = "Dark brown to black skin"
+                    default: break
+                    }
+                }
+                return (type: "attributes/skinType", content: content)
             case "WheelchairUse":
-                result = "boolean/bool"
+                var content: Any? = nil
+                if let wheelchairUse = try? store?.wheelchairUse().wheelchairUse {
+                    switch wheelchairUse {
+                    case .no: content = false
+                    case .yes: content = true
+                    default: break
+                    }
+                }
+                return (type: "boolean/bool", content: content)
             default: break
             }
         case is HKQuantityType:
+            var pryvType = "note/txt"
+            var unit: HKUnit? = nil
             switch type.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
             case "StepCount":
                 unit = HKUnit.count()
-                result = "count/steps"
+                pryvType = "count/steps"
             case "PushCount", "SwimmingStrokeCount", "FlightsClimbed", "NikeFuel", "InhalerUsage", "NumberOfTimesFallen", "UvExposure", "BodyMassIndex":
                 unit = HKUnit.count()
-                result = "count/generic"
+                pryvType = "count/generic"
             case "BasalEnergyBurned", "ActiveEnergyBurned", "DietaryEnergyConsumed":
                 unit = HKUnit.kilocalorie()
-                result = "energy/kcal"
+                pryvType = "energy/kcal"
             case "DistanceWalkingRunning", "DistanceCycling", "DistanceWheelchair", "DistanceSwimming", "DistanceDownhillSnowSports":
                 unit = HKUnit.meter()
-                result = "length/m"
+                pryvType = "length/m"
             case "AppleExerciseTime", "AppleStandTime":
                 unit = HKUnit.minute()
-                result = "time/min"
+                pryvType = "time/min"
             case "Height", "WaistCircumference":
                 unit = HKUnit.meterUnit(with: .centi)
-                result = "length/cm"
+                pryvType = "length/cm"
             case "BodyMass", "LeanBodyMass":
                 unit = HKUnit.gramUnit(with: .kilo)
-                result = "mass/kg"
+                pryvType = "mass/kg"
             case "BodyFatPercentage", "OxygenSaturation", "BloodAlcoholContent", "PeripheralPerfusionIndex":
                 unit = HKUnit.percent()
-                result = "ratio/percent"
+                pryvType = "ratio/percent"
             case "BasalBodyTemperature", "BodyTemperature":
                 unit = HKUnit.degreeCelsius()
-                result = "temperature/c"
+                pryvType = "temperature/c"
             case "EnvironmentalAudioExposure", "HeadphoneAudioExposure":
                 unit = HKUnit.decibelAWeightedSoundPressureLevel()
-                result = "pressure/db"
+                pryvType = "pressure/db"
             case "HeartRate", "RestingHeartRate", "WalkingHeartRateAverage":
                 unit = HKUnit.count().unitDivided(by: HKUnit.minute())
-                result = "frequency/bpm"
+                pryvType = "frequency/bpm"
             case "HeartRateVariabilitySDNN":
                 unit = HKUnit.secondUnit(with: .milli)
-                result = "time/ms"
+                pryvType = "time/ms"
             case "BloodPressureSystolic", "BloodPressureDiastolic":
                 unit = HKUnit.millimeterOfMercury()
-                result = "pressure/mmhg"
+                pryvType = "pressure/mmhg"
             case "RespiratoryRate":
                 unit = HKUnit.count()
-                result = "frequency/brpm"
+                pryvType = "frequency/brpm"
             case "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietaryFiber", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietarySodium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
                 unit = HKUnit.count().unitDivided(by: HKUnit.minute())
-                result = "mass/g"
+                pryvType = "mass/g"
             case "BloodGlucose":
                 unit = HKUnit.moleUnit(withMolarMass: HKUnitMolarMassBloodGlucose).unitDivided(by: HKUnit.liter())
-                result = "density/mmol-l"
+                pryvType = "density/mmol-l"
             case "ElectrodermalActivity":
                 unit = HKUnit.siemenUnit(with: .micro)
-                result = "electrical-conductivity/us"
+                pryvType = "electrical-conductivity/us"
             case "ForcedExpiratoryVolume1", "ForcedVitalCapacity":
                 unit = HKUnit.liter()
-                result = "volume/l"
+                pryvType = "volume/l"
             case "Vo2Max":
                 unit = HKUnit.literUnit(with: .milli).unitDivided(by: HKUnit.gramUnit(with: .kilo).unitMultiplied(by: HKUnit.minute()))
-                result = "gas-consumption/mlpkgmin"
+                pryvType = "gas-consumption/mlpkgmin"
             case "InsulinDelivery":
                 unit = HKUnit.internationalUnit()
-                result = "volume/iu"
+                pryvType = "volume/iu"
             case "PeakExpiratoryFlowRate":
                 unit = HKUnit.liter().unitDivided(by: HKUnit.minute())
-                result = "speed/lpm"
+                pryvType = "speed/lpm"
             default: break
             }
+            return (type: pryvType, content: (sample as! HKQuantitySample).quantity.doubleValue(for: unit!))
         case is HKCorrelationType:
             switch type.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "") {
             case "BloodPressure":
-                return "blood-pressure/mmhg-bpm"
+                var content: Any? = nil
+                
+                let systolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!
+                let diastolicType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!
+                let correlation = sample as? HKCorrelation
+                let systolic = (correlation?.objects(for: systolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                let diastolic = (correlation?.objects(for: diastolicType).first as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                
+                if let _ = systolic, let _ = diastolic {
+                    content = [
+                        "systolic": systolic!,
+                        "diastolic": diastolic!
+                    ]
+                }
+                
+                return (type: "blood-pressure/mmhg-bpm", content: content)
             default: break
             }
         case is HKActivitySummaryType:
-            result = "activity/summary"
+            let content = [
+                "activeEnergyBurned": summary?.activeEnergyBurned,
+                "activeEnergyBurnedGoal": summary?.activeEnergyBurnedGoal,
+                "appleExerciseTime": summary?.appleExerciseTime,
+                "appleExerciseTimeGoal": summary?.appleExerciseTimeGoal,
+                "appleStandHours": summary?.appleStandHours,
+                "appleStandHoursGoal": summary?.appleStandHoursGoal
+            ]
+            return (type: "activity/summary", content: content)
         case is HKAudiogramSampleType:
-            result = "audiogram/data"
+            let audiogramSample = sample as! HKAudiogramSample
+            
+            var sensitivityPoints = [[String: Any?]]()
+            for sensitivityPoint in audiogramSample.sensitivityPoints {
+                var newPoint = [String: Any?]()
+                newPoint["frequency"] = sensitivityPoint.frequency
+                newPoint["leftEarSensitivity"] = sensitivityPoint.leftEarSensitivity
+                newPoint["rightEarSensitivity"] = sensitivityPoint.rightEarSensitivity
+                
+                sensitivityPoints.append(newPoint)
+            }
+            
+            let content: [String: Any?] = [
+                "sensitivityPoints": sensitivityPoints,
+                "start": formatter.string(from: audiogramSample.startDate),
+                "end": formatter.string(from: audiogramSample.endDate),
+                "metadata": audiogramSample.metadata,
+            ]
+            return (type: "audiogram/data", content: content)
         case is HKWorkoutType:
-            return "activity/workout"
+            let workoutSample = sample as! HKWorkout
+            
+            var events = [[String: Any?]]()
+            workoutSample.workoutEvents?.forEach { workoutEvent in
+                var event = [String: Any?]()
+                event["dateInterval"] = [
+                    "start": formatter.string(from: workoutEvent.dateInterval.start),
+                    "end": formatter.string(from: workoutEvent.dateInterval.end),
+                    "duration": workoutEvent.dateInterval.duration
+                ]
+                event["type"] = workoutEvent.type.name
+                
+                events.append(event)
+            }
+            
+            let content: [String: Any?] = [
+                "duration": workoutSample.duration,
+                "totalDistance": workoutSample.totalDistance?.doubleValue(for: HKUnit.meter()),
+                "totalEnergyBurned": workoutSample.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()),
+                "activityType": workoutSample.workoutActivityType.name,
+                "events": events,
+                "totalFlightsClimbed": workoutSample.totalFlightsClimbed?.doubleValue(for: HKUnit.count()),
+                "totalSwimmingStokeCount": workoutSample.totalSwimmingStrokeCount?.doubleValue(for: HKUnit.count())
+            ]
+            return (type: "activity/workout", content: content)
         case is HKCategoryType:
+            var pryvType = "note/txt"
+            let categorySample = sample as! HKCategorySample
+            var content: Any? = nil // TODO: write
             switch type.identifier.replacingOccurrences(of: "HKCategoryTypeIdentifier", with: "") {
             case "SexualActivity":
-                result = "reproductive-health/sexualActivity"
+                pryvType = "reproductive-health/sexualActivity"
+                if let protectionUsed = categorySample.value(forKey: HKMetadataKeySexualActivityProtectionUsed) as? Bool {
+                    content = protectionUsed ? "protectionUsed" : "protectionNotUsed"
+                } else {
+                    content = "notSet"
+                }
             case "IntermenstrualBleeding", "LowHeartRateEvent", "HighHeartRateEvent", "IrregularHeartRhythmEvent", "SleepChanges",
-                "MoodChanges", "AppleStandHour", "ToothBrushingEvent":
-                result = "boolean/bool"
+                "MoodChanges", "AppleStandHour", "ToothBrushingEvent", "MindfulSession":
+                return (type: "boolean/bool", content: true)
             case "MenstrualFlow":
-                result = "reproductive-health/menstrualFlow"
+                pryvType = "reproductive-health/menstrualFlow"
+                switch categorySample.value {
+                case HKCategoryValueMenstrualFlow.none.rawValue: return (type: pryvType, content: "none")
+                case HKCategoryValueMenstrualFlow.light.rawValue: return (type: pryvType, content: "light")
+                case HKCategoryValueMenstrualFlow.medium.rawValue: return (type: pryvType, content: "medium")
+                case HKCategoryValueMenstrualFlow.heavy.rawValue: return (type: pryvType, content: "heavy")
+                default: return (type: pryvType, content: "unspecified")
+                }
             case "CervicalMucusQuality":
-                result = "reproductive-health/mucusQuality"
+                pryvType = "reproductive-health/mucusQuality"
+                switch categorySample.value {
+                case HKCategoryValueCervicalMucusQuality.dry.rawValue: return (type: pryvType, content: "dry")
+                case HKCategoryValueCervicalMucusQuality.sticky.rawValue: return (type: pryvType, content: "sticky")
+                case HKCategoryValueCervicalMucusQuality.creamy.rawValue: return (type: pryvType, content: "creamy")
+                case HKCategoryValueCervicalMucusQuality.watery.rawValue: return (type: pryvType, content: "watery")
+                case HKCategoryValueCervicalMucusQuality.eggWhite.rawValue: return (type: pryvType, content: "eggWhite")
+                default: return (type: pryvType, content: nil)
+                }
             case "OvulationTestResult":
-                result = "reproductive-health/ovulation"
+                pryvType = "reproductive-health/ovulation"
+                switch categorySample.value {
+                case HKCategoryValueOvulationTestResult.negative.rawValue: return (type: pryvType, content: "negative")
+                case HKCategoryValueOvulationTestResult.luteinizingHormoneSurge.rawValue: return (type: pryvType, content: "luteinizingHormoneSurge")
+                case HKCategoryValueOvulationTestResult.indeterminate.rawValue: return (type: pryvType, content: "indeterminate")
+                case HKCategoryValueOvulationTestResult.estrogenSurge.rawValue: return (type: pryvType, content: "estrogenSurge")
+                default: return (type: pryvType, content: nil)
+                }
             case "AbdominalCramps", "Acne", "PelvicPain", "BreastPain", "SinusCongestion", "SoreThroat", "LossOfTaste", "LossOfSmell",
                  "Headache", "LowerBackPain", "Wheezing", "SkippedHeartbeat", "ShortnessOfBreath", "RapidPoundingOrFlutteringHeartbeat",
                  "Coughing", "ChestTightnessOrPain", "HotFlashes", "GeneralizedBodyAche", "Fever", "Fatigue", "Fainting", "Dizziness",
                  "Chills", "Vomiting", "Nausea", "Heartburn", "Diarrhea", "Constipation", "Bloating":
-                result = "symptoms/severity"
+                pryvType = "symptoms/severity"
+                switch categorySample.value {
+                case HKCategoryValueSeverity.notPresent.rawValue: return (type: pryvType, content: "notPresent")
+                case HKCategoryValueSeverity.mild.rawValue: return (type: pryvType, content: "mild")
+                case HKCategoryValueSeverity.moderate.rawValue: return (type: pryvType, content: "moderate")
+                case HKCategoryValueSeverity.severe.rawValue: return (type: pryvType, content: "severe")
+                case HKCategoryValueSeverity.unspecified.rawValue: return (type: pryvType, content: "unspecified")
+                default: return (type: pryvType, content: nil)
+                }
             case "AppetiteChanges":
-                result = "symptoms/appetiteChanges"
-            case "MindfulSession":
-                result = "time/min"
+                pryvType = "symptoms/appetiteChanges"
+                switch categorySample.value {
+                case HKCategoryValueAppetiteChanges.decreased.rawValue: return (type: pryvType, content: "decreased")
+                case HKCategoryValueAppetiteChanges.increased.rawValue: return (type: pryvType, content: "increased")
+                case HKCategoryValueAppetiteChanges.noChange.rawValue: return (type: pryvType, content: "noChange")
+                case HKCategoryValueAppetiteChanges.unspecified.rawValue: return (type: pryvType, content: "unspecified")
+                default: return (type: pryvType, content: nil)
+                }
             case "SleepAnalysis":
-                result = "sleep/analysis"
+                pryvType = "sleep/analysis"
+                var content: Any? = nil
+                switch categorySample.value {
+                case HKCategoryValueSleepAnalysis.inBed.rawValue: return (type: pryvType, content: "inBed")
+                case HKCategoryValueSleepAnalysis.asleep.rawValue: return (type: pryvType, content: "asleep")
+                case HKCategoryValueSleepAnalysis.awake.rawValue: return (type: pryvType, content: "awake")
+                default: return (type: pryvType, content: nil)
+                }
             default: break
             }
+            return (type: pryvType, content: content)
         case is HKClinicalType:
-            result = "clinical/fhir"
+            return (type: "clinical/fhir", content: nil) // TODO: content
         default: break
         }
         
-        return result
+        return (type: "note/txt", content: nil)
     }
     
 }
