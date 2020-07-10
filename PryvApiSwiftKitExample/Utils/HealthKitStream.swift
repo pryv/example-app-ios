@@ -52,8 +52,8 @@ public class HealthKitStream {
         return params
     }
     
-    /// Construct the Pryv event `streamId`
-    /// - Returns: the `streamId`
+    /// Construct the Pryv event `streamId` and `parentId`, if needed
+    /// - Returns: a tuple containing the `parentId` (optional) and the `streamId`
     public func pryvStreamId() -> (parentId: String?, streamId: String) {
         var parentId: String? = nil
         
@@ -215,87 +215,134 @@ public class HealthKitStream {
     /// Translate HK data type to Pryv data type
     /// - Returns: the String corresponding to the Pryv data type of the event
     private func eventType() -> String {
-        if let _ = type as? HKCharacteristicType {
-            if type.identifier == "HKCharacteristicTypeIdentifierDateOfBirth" {
-                return "date/iso-8601"
-            }
-            return "note/txt"
-        }
+        var result = "note/txt"
         
-        if let quantityType = type as? HKQuantityType {
-            switch quantityType.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
+        switch type {
+        case is HKCharacteristicType:
+            switch type.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "") {
+            case "BiologicalSex":
+                result = "attributes/biologicalSex"
+            case "BloodType":
+                result = "attributes/bloodType"
+            case "DateOfBirth":
+                result = "date/iso-8601"
+            case "FitzpatrickSkinType":
+                result = "attributes/skinType"
+            case "WheelchairUse":
+                result = "boolean/bool"
+            default: break
+            }
+        case is HKQuantityType:
+            switch type.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "") {
             case "StepCount":
                 unit = HKUnit.count()
-                return "count/steps"
-            case "PushCount", "SwimmingStrokeCount", "FlightsClimbed", " NikeFuel", "InhalerUsage", "NumberOfTimesFallen", "UvExposure":
+                result = "count/steps"
+            case "PushCount", "SwimmingStrokeCount", "FlightsClimbed", "NikeFuel", "InhalerUsage", "NumberOfTimesFallen", "UvExposure", "BodyMassIndex":
                 unit = HKUnit.count()
-                return "count/generic"
+                result = "count/generic"
             case "BasalEnergyBurned", "ActiveEnergyBurned", "DietaryEnergyConsumed":
                 unit = HKUnit.kilocalorie()
-                return "energy/kcal"
+                result = "energy/kcal"
             case "DistanceWalkingRunning", "DistanceCycling", "DistanceWheelchair", "DistanceSwimming", "DistanceDownhillSnowSports":
                 unit = HKUnit.meter()
-                return "length/m"
+                result = "length/m"
             case "AppleExerciseTime", "AppleStandTime":
                 unit = HKUnit.minute()
-                return "time/min"
+                result = "time/min"
             case "Height", "WaistCircumference":
                 unit = HKUnit.meterUnit(with: .centi)
-                return "length/cm"
+                result = "length/cm"
             case "BodyMass", "LeanBodyMass":
                 unit = HKUnit.gramUnit(with: .kilo)
-                return "mass/kg"
-            case "BodyMassIndex":
-                unit = HKUnit.count()
-                return "pressure/kg-m2"
+                result = "mass/kg"
             case "BodyFatPercentage", "OxygenSaturation", "BloodAlcoholContent", "PeripheralPerfusionIndex":
                 unit = HKUnit.percent()
-                return "ratio/percent"
+                result = "ratio/percent"
             case "BasalBodyTemperature", "BodyTemperature":
                 unit = HKUnit.degreeCelsius()
-                return "temperature/c"
+                result = "temperature/c"
             case "EnvironmentalAudioExposure", "HeadphoneAudioExposure":
-                unit = HKUnit.pascal()
-                return "pressure/pa"
+                unit = HKUnit.decibelAWeightedSoundPressureLevel()
+                result = "pressure/db"
             case "HeartRate", "RestingHeartRate", "WalkingHeartRateAverage":
-                unit = HKUnit.count()
-                return "frequency/bpm"
+                unit = HKUnit.count().unitDivided(by: HKUnit.minute())
+                result = "frequency/bpm"
             case "HeartRateVariabilitySDNN":
                 unit = HKUnit.secondUnit(with: .milli)
-                return "time/ms"
+                result = "time/ms"
             case "BloodPressureSystolic", "BloodPressureDiastolic":
                 unit = HKUnit.millimeterOfMercury()
-                return "pressure/mmhg"
+                result = "pressure/mmhg"
             case "RespiratoryRate":
                 unit = HKUnit.count()
-                return "frequency/bpm"
-            case "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
-                unit = HKUnit.gram()
-                return "mass/g"
+                result = "frequency/brpm"
+            case "DietaryFatTotal", "DietaryFatSaturated", "DietaryCholesterol", "DietaryCarbohydrates", "DietaryFiber", "DietarySugar", "DietaryProtein", "DietaryCalcium", "DietaryIron", "DietaryPotassium", "DietarySodium", "DietaryVitaminA", "DietaryVitaminC", "DietaryVitaminD":
+                unit = HKUnit.count().unitDivided(by: HKUnit.minute())
+                result = "mass/g"
             case "BloodGlucose":
-                unit = HKUnit.gramUnit(with: .milli)
-                return "mass/mg"
+                unit = HKUnit.moleUnit(withMolarMass: HKUnitMolarMassBloodGlucose).unitDivided(by: HKUnit.liter())
+                result = "density/mmol-l"
             case "ElectrodermalActivity":
-                unit = HKUnit.siemen()
-                return "electrical-conductivity/s"
+                unit = HKUnit.siemenUnit(with: .micro)
+                result = "electrical-conductivity/us"
             case "ForcedExpiratoryVolume1", "ForcedVitalCapacity":
                 unit = HKUnit.liter()
-                return "volume/l"
-            default:
-                return "note/txt"
+                result = "volume/l"
+            case "Vo2Max":
+                unit = HKUnit.literUnit(with: .milli).unitDivided(by: HKUnit.gramUnit(with: .kilo).unitMultiplied(by: HKUnit.minute()))
+                result = "gas-consumption/mlpkgmin"
+            case "InsulinDelivery":
+                unit = HKUnit.internationalUnit()
+                result = "volume/iu"
+            case "PeakExpiratoryFlowRate":
+                unit = HKUnit.liter().unitDivided(by: HKUnit.minute())
+                result = "speed/lpm"
+            default: break
             }
-        }
-        
-        if let correlationType = type as? HKCorrelationType {
-            switch correlationType.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "") {
+        case is HKCorrelationType:
+            switch type.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "") {
             case "BloodPressure":
                 return "blood-pressure/mmhg-bpm"
-            default:
-                return "note/txt"
+            default: break
             }
+        case is HKActivitySummaryType:
+            result = "activity/summary"
+        case is HKAudiogramSampleType:
+            result = "audiogram/data"
+        case is HKWorkoutType:
+            return "activity/workout"
+        case is HKCategoryType:
+            switch type.identifier.replacingOccurrences(of: "HKCategoryTypeIdentifier", with: "") {
+            case "SexualActivity":
+                result = "reproductive-health/sexualActivity"
+            case "IntermenstrualBleeding", "LowHeartRateEvent", "HighHeartRateEvent", "IrregularHeartRhythmEvent", "SleepChanges",
+                "MoodChanges", "AppleStandHour", "ToothBrushingEvent":
+                result = "boolean/bool"
+            case "MenstrualFlow":
+                result = "reproductive-health/menstrualFlow"
+            case "CervicalMucusQuality":
+                result = "reproductive-health/mucusQuality"
+            case "OvulationTestResult":
+                result = "reproductive-health/ovulation"
+            case "AbdominalCramps", "Acne", "PelvicPain", "BreastPain", "SinusCongestion", "SoreThroat", "LossOfTaste", "LossOfSmell",
+                 "Headache", "LowerBackPain", "Wheezing", "SkippedHeartbeat", "ShortnessOfBreath", "RapidPoundingOrFlutteringHeartbeat",
+                 "Coughing", "ChestTightnessOrPain", "HotFlashes", "GeneralizedBodyAche", "Fever", "Fatigue", "Fainting", "Dizziness",
+                 "Chills", "Vomiting", "Nausea", "Heartburn", "Diarrhea", "Constipation", "Bloating":
+                result = "symptoms/severity"
+            case "AppetiteChanges":
+                result = "symptoms/appetiteChanges"
+            case "MindfulSession":
+                result = "time/min"
+            case "SleepAnalysis":
+                result = "sleep/analysis"
+            default: break
+            }
+        case is HKClinicalType:
+            result = "clinical/fhir"
+        default: break
         }
         
-        return "note/txt"
+        return result
     }
     
 }
