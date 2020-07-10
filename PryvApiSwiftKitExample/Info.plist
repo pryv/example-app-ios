@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
 	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>We would like to access your Health records in order to send them to Pryv.io.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
