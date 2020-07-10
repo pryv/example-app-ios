@@ -46,7 +46,7 @@ public class HealthKitStream {
     /// # Note
     ///     At least one of the two attributes needs to be not `nil` 
     public func pryvEvent(from sample: HKSample? = nil, of store: HKHealthStore? = nil) -> PryvSample {
-        let (type, content) = pryvContentAndType(from: sample, of: store)
+        let (type, content, attachmentData) = pryvContentAndType(from: sample, of: store) // TODO: return attachment data as well
         var params = ["streamId": pryvStreamId().streamId, "type": type, "content": content]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
@@ -60,7 +60,7 @@ public class HealthKitStream {
         
         switch type {
         case is HKCharacteristicType:
-            return (parentId: "characteristic", streamId: type.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "").lowercased())
+            return (parentId: "characteristic", streamId: type.identifier.replacingOccurrences(of: "HKCharacteristicTypeIdentifier", with: "").lowercasedFirstLetter())
         case is HKQuantityType:
             let streamId = type.identifier.replacingOccurrences(of: "HKQuantityTypeIdentifier", with: "")
             switch streamId {
@@ -80,7 +80,7 @@ public class HealthKitStream {
                     parentId = "lab-results"
                 default: break
             }
-            return (parentId: parentId, streamId: streamId.lowercased())
+            return (parentId: parentId, streamId: streamId.lowercasedFirstLetter())
         case is HKCorrelationType:
             let streamId = type.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "")
             switch streamId {
@@ -110,7 +110,7 @@ public class HealthKitStream {
                 parentId = "symptoms"
             default: break
             }
-            return (parentId: parentId, streamId: streamId.lowercased())
+            return (parentId: parentId, streamId: streamId.lowercasedFirstLetter())
         case is HKClinicalType:
             return (parentId: parentId, streamId: "clinical")
         default:
@@ -118,17 +118,18 @@ public class HealthKitStream {
         }
     }
     
-    /// Translate the content of a HK sample or store to a Pryv event content with its corresponding type
+    /// Translate the content of a HK sample or store to a Pryv event content with its corresponding type and potential attachment
     /// - Parameters:
     ///   - sample: the HK sample
     ///   - store: the HK store
     ///   - summary: the `HKActivitySummary` in case of an `HKActivitySummaryQuery`
-    /// - Returns: a tuple containing the Pryv event content corresponding to the content of the sample or store and its type
+    /// - Returns: a tuple containing the Pryv event content corresponding to the content of the sample or store, its type and potential attachment
     /// # Note
     ///     At least one of the two parameters needs to be not `nil`
-    public func pryvContentAndType(from sample: HKSample? = nil, of store: HKHealthStore? = nil, activity summary: HKActivitySummary? = nil) -> (type: String, content: Any?) {
+    public func pryvContentAndType(from sample: HKSample? = nil, of store: HKHealthStore? = nil, activity summary: HKActivitySummary? = nil) -> (type: String, content: Any?, attachmentData: Data?) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
+        var attachmentData: Data? = nil
         
         switch type {
         case is HKCharacteristicType:
@@ -143,7 +144,7 @@ public class HealthKitStream {
                     default: break
                     }
                 }
-                return (type: "attributes/biologicalSex", content: content)
+                return (type: "attributes/biologicalSex", content: content, attachmentData: attachmentData)
                 
             case "BloodType":
                 var content: Any? = nil
@@ -160,14 +161,14 @@ public class HealthKitStream {
                     default: break
                     }
                 }
-                return (type: "attributes/bloodType", content: content)
+                return (type: "attributes/bloodType", content: content, attachmentData: attachmentData)
                     
             case "DateOfBirth":
                 var content: Any? = nil
                 if let birthdayComponents = try? store?.dateOfBirthComponents() {
                     content = formatter.string(from: birthdayComponents.date!)
                 }
-                return (type: "date/iso-8601", content: content)
+                return (type: "date/iso-8601", content: content, attachmentData: attachmentData)
                     
             case "FitzpatrickSkinType":
                 var content: Any? = nil
@@ -182,7 +183,7 @@ public class HealthKitStream {
                     default: break
                     }
                 }
-                return (type: "attributes/skinType", content: content)
+                return (type: "attributes/skinType", content: content, attachmentData: attachmentData)
             case "WheelchairUse":
                 var content: Any? = nil
                 if let wheelchairUse = try? store?.wheelchairUse().wheelchairUse {
@@ -192,7 +193,7 @@ public class HealthKitStream {
                     default: break
                     }
                 }
-                return (type: "boolean/bool", content: content)
+                return (type: "boolean/bool", content: content, attachmentData: attachmentData)
             default: break
             }
         case is HKQuantityType:
@@ -264,7 +265,7 @@ public class HealthKitStream {
                 pryvType = "speed/lpm"
             default: break
             }
-            return (type: pryvType, content: (sample as! HKQuantitySample).quantity.doubleValue(for: unit!))
+            return (type: pryvType, content: (sample as! HKQuantitySample).quantity.doubleValue(for: unit!), attachmentData: attachmentData)
         case is HKCorrelationType:
             switch type.identifier.replacingOccurrences(of: "HKCorrelationTypeIdentifier", with: "") {
             case "BloodPressure":
@@ -283,7 +284,7 @@ public class HealthKitStream {
                     ]
                 }
                 
-                return (type: "blood-pressure/mmhg-bpm", content: content)
+                return (type: "blood-pressure/mmhg-bpm", content: content, attachmentData: attachmentData)
             default: break
             }
         case is HKActivitySummaryType:
@@ -295,7 +296,7 @@ public class HealthKitStream {
                 "appleStandHours": summary?.appleStandHours,
                 "appleStandHoursGoal": summary?.appleStandHoursGoal
             ]
-            return (type: "activity/summary", content: content)
+            return (type: "activity/summary", content: content, attachmentData: attachmentData)
         case is HKAudiogramSampleType:
             let audiogramSample = sample as! HKAudiogramSample
             
@@ -315,7 +316,7 @@ public class HealthKitStream {
                 "end": formatter.string(from: audiogramSample.endDate),
                 "metadata": audiogramSample.metadata,
             ]
-            return (type: "audiogram/data", content: content)
+            return (type: "audiogram/data", content: content, attachmentData: attachmentData)
         case is HKWorkoutType:
             let workoutSample = sample as! HKWorkout
             
@@ -341,11 +342,11 @@ public class HealthKitStream {
                 "totalFlightsClimbed": workoutSample.totalFlightsClimbed?.doubleValue(for: HKUnit.count()),
                 "totalSwimmingStokeCount": workoutSample.totalSwimmingStrokeCount?.doubleValue(for: HKUnit.count())
             ]
-            return (type: "activity/workout", content: content)
+            return (type: "activity/workout", content: content, attachmentData: attachmentData)
         case is HKCategoryType:
             var pryvType = "note/txt"
             let categorySample = sample as! HKCategorySample
-            var content: Any? = nil // TODO: write
+            var content: Any? = nil
             switch type.identifier.replacingOccurrences(of: "HKCategoryTypeIdentifier", with: "") {
             case "SexualActivity":
                 pryvType = "reproductive-health/sexualActivity"
@@ -356,75 +357,88 @@ public class HealthKitStream {
                 }
             case "IntermenstrualBleeding", "LowHeartRateEvent", "HighHeartRateEvent", "IrregularHeartRhythmEvent", "SleepChanges",
                 "MoodChanges", "AppleStandHour", "ToothBrushingEvent", "MindfulSession":
-                return (type: "boolean/bool", content: true)
+                pryvType = "boolean/bool"
+                content = true
             case "MenstrualFlow":
                 pryvType = "reproductive-health/menstrualFlow"
                 switch categorySample.value {
-                case HKCategoryValueMenstrualFlow.none.rawValue: return (type: pryvType, content: "none")
-                case HKCategoryValueMenstrualFlow.light.rawValue: return (type: pryvType, content: "light")
-                case HKCategoryValueMenstrualFlow.medium.rawValue: return (type: pryvType, content: "medium")
-                case HKCategoryValueMenstrualFlow.heavy.rawValue: return (type: pryvType, content: "heavy")
-                default: return (type: pryvType, content: "unspecified")
+                case HKCategoryValueMenstrualFlow.none.rawValue: content = "none"
+                case HKCategoryValueMenstrualFlow.light.rawValue: content = "light"
+                case HKCategoryValueMenstrualFlow.medium.rawValue: content = "medium"
+                case HKCategoryValueMenstrualFlow.heavy.rawValue: content = "heavy"
+                default: content = "unspecified"
                 }
             case "CervicalMucusQuality":
                 pryvType = "reproductive-health/mucusQuality"
                 switch categorySample.value {
-                case HKCategoryValueCervicalMucusQuality.dry.rawValue: return (type: pryvType, content: "dry")
-                case HKCategoryValueCervicalMucusQuality.sticky.rawValue: return (type: pryvType, content: "sticky")
-                case HKCategoryValueCervicalMucusQuality.creamy.rawValue: return (type: pryvType, content: "creamy")
-                case HKCategoryValueCervicalMucusQuality.watery.rawValue: return (type: pryvType, content: "watery")
-                case HKCategoryValueCervicalMucusQuality.eggWhite.rawValue: return (type: pryvType, content: "eggWhite")
-                default: return (type: pryvType, content: nil)
+                case HKCategoryValueCervicalMucusQuality.dry.rawValue: content = "dry"
+                case HKCategoryValueCervicalMucusQuality.sticky.rawValue: content = "sticky"
+                case HKCategoryValueCervicalMucusQuality.creamy.rawValue: content = "creamy"
+                case HKCategoryValueCervicalMucusQuality.watery.rawValue: content = "watery"
+                case HKCategoryValueCervicalMucusQuality.eggWhite.rawValue: content = "eggWhite"
+                default: break
                 }
             case "OvulationTestResult":
                 pryvType = "reproductive-health/ovulation"
                 switch categorySample.value {
-                case HKCategoryValueOvulationTestResult.negative.rawValue: return (type: pryvType, content: "negative")
-                case HKCategoryValueOvulationTestResult.luteinizingHormoneSurge.rawValue: return (type: pryvType, content: "luteinizingHormoneSurge")
-                case HKCategoryValueOvulationTestResult.indeterminate.rawValue: return (type: pryvType, content: "indeterminate")
-                case HKCategoryValueOvulationTestResult.estrogenSurge.rawValue: return (type: pryvType, content: "estrogenSurge")
-                default: return (type: pryvType, content: nil)
+                case HKCategoryValueOvulationTestResult.negative.rawValue: content = "negative"
+                case HKCategoryValueOvulationTestResult.luteinizingHormoneSurge.rawValue: content = "luteinizingHormoneSurge"
+                case HKCategoryValueOvulationTestResult.indeterminate.rawValue: content = "indeterminate"
+                case HKCategoryValueOvulationTestResult.estrogenSurge.rawValue: content = "estrogenSurge"
+                default: break
                 }
-            case "AbdominalCramps", "Acne", "PelvicPain", "BreastPain", "SinusCongestion", "SoreThroat", "LossOfTaste", "LossOfSmell",
-                 "Headache", "LowerBackPain", "Wheezing", "SkippedHeartbeat", "ShortnessOfBreath", "RapidPoundingOrFlutteringHeartbeat",
-                 "Coughing", "ChestTightnessOrPain", "HotFlashes", "GeneralizedBodyAche", "Fever", "Fatigue", "Fainting", "Dizziness",
-                 "Chills", "Vomiting", "Nausea", "Heartburn", "Diarrhea", "Constipation", "Bloating":
-                pryvType = "symptoms/severity"
-                switch categorySample.value {
-                case HKCategoryValueSeverity.notPresent.rawValue: return (type: pryvType, content: "notPresent")
-                case HKCategoryValueSeverity.mild.rawValue: return (type: pryvType, content: "mild")
-                case HKCategoryValueSeverity.moderate.rawValue: return (type: pryvType, content: "moderate")
-                case HKCategoryValueSeverity.severe.rawValue: return (type: pryvType, content: "severe")
-                case HKCategoryValueSeverity.unspecified.rawValue: return (type: pryvType, content: "unspecified")
-                default: return (type: pryvType, content: nil)
-                }
-            case "AppetiteChanges":
-                pryvType = "symptoms/appetiteChanges"
-                switch categorySample.value {
-                case HKCategoryValueAppetiteChanges.decreased.rawValue: return (type: pryvType, content: "decreased")
-                case HKCategoryValueAppetiteChanges.increased.rawValue: return (type: pryvType, content: "increased")
-                case HKCategoryValueAppetiteChanges.noChange.rawValue: return (type: pryvType, content: "noChange")
-                case HKCategoryValueAppetiteChanges.unspecified.rawValue: return (type: pryvType, content: "unspecified")
-                default: return (type: pryvType, content: nil)
-                }
+//            These cases are in Apple Symptom types, which is only available from iOS 13.6+ on.
+//            case "AbdominalCramps", "Acne", "PelvicPain", "BreastPain", "SinusCongestion", "SoreThroat", "LossOfTaste", "LossOfSmell",
+//                 "Headache", "LowerBackPain", "Wheezing", "SkippedHeartbeat", "ShortnessOfBreath", "RapidPoundingOrFlutteringHeartbeat",
+//                 "Coughing", "ChestTightnessOrPain", "HotFlashes", "GeneralizedBodyAche", "Fever", "Fatigue", "Fainting", "Dizziness",
+//                 "Chills", "Vomiting", "Nausea", "Heartburn", "Diarrhea", "Constipation", "Bloating":
+//                pryvType = "symptoms/severity"
+//                switch categorySample.value {
+//                case HKCategoryValueSeverityNotPresent: content = "notPresent"
+//                case HKCategoryValueSeverity.mild.rawValue: content = "mild"
+//                case HKCategoryValueSeverity.moderate.rawValue: content = "moderate"
+//                case HKCategoryValueSeverity.severe.rawValue: content = "severe"
+//                case HKCategoryValueSeverity.unspecified.rawValue: content = "unspecified"
+//                default: break
+//                }
+//            case "AppetiteChanges":
+//                pryvType = "symptoms/appetiteChanges"
+//                switch categorySample.value {
+//                case HKCategoryValueAppetiteChanges.decreased.rawValue: content = "decreased"
+//                case HKCategoryValueAppetiteChanges.increased.rawValue: content = "increased"
+//                case HKCategoryValueAppetiteChanges.noChange.rawValue: content = "noChange"
+//                case HKCategoryValueAppetiteChanges.unspecified.rawValue: content = "unspecified"
+//                default: break
+//                }
             case "SleepAnalysis":
                 pryvType = "sleep/analysis"
-                var content: Any? = nil
                 switch categorySample.value {
-                case HKCategoryValueSleepAnalysis.inBed.rawValue: return (type: pryvType, content: "inBed")
-                case HKCategoryValueSleepAnalysis.asleep.rawValue: return (type: pryvType, content: "asleep")
-                case HKCategoryValueSleepAnalysis.awake.rawValue: return (type: pryvType, content: "awake")
-                default: return (type: pryvType, content: nil)
+                case HKCategoryValueSleepAnalysis.inBed.rawValue: content = "inBed"
+                case HKCategoryValueSleepAnalysis.asleep.rawValue: content = "asleep"
+                case HKCategoryValueSleepAnalysis.awake.rawValue: content = "awake"
+                default: break
                 }
             default: break
             }
-            return (type: pryvType, content: content)
+            return (type: pryvType, content: content, attachmentData: attachmentData)
         case is HKClinicalType:
-            return (type: "clinical/fhir", content: nil) // TODO: content
+            let clinicalSample = sample as! HKClinicalRecord
+            var content: [String: Any?] = [
+                "displayName": clinicalSample.displayName,
+                "clinicalType": clinicalSample.clinicalType.identifier.replacingOccurrences(of: "HKClinicalTypeIdentifier", with: "").lowercasedFirstLetter()
+            ]
+            if let fhir = clinicalSample.fhirResource {
+                content["fhir"] = [
+                    "identifier": fhir.identifier,
+                    "resourceType": fhir.resourceType
+                ]
+                attachmentData = fhir.data
+            }
+            return (type: "clinical/fhir", content: content, attachmentData: attachmentData)
         default: break
         }
         
-        return (type: "note/txt", content: nil)
+        return (type: "note/txt", content: nil, attachmentData: attachmentData)
     }
     
 }
