@@ -51,13 +51,17 @@ extension UIAlertController {
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
             textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "typeField"
-
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Content"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
             textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "contentField"
+        }
+        
+        alert.textFields?.forEach {
+            $0.superview?.backgroundColor = .clear
+            $0.superview?.superview?.subviews[0].removeFromSuperview()
         }
         
         return alert

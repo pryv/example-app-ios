@@ -42,6 +42,7 @@ class MainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = loginButton
         
         serviceInfoUrlField.text = defaultServiceInfoUrl
+        serviceInfoUrlField.clearButtonMode = .whileEditing
     }
     
     /// Asks for auth url and load it in the web view to allow the user to login
