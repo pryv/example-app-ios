@@ -1,37 +1,51 @@
-# app-swift-example
-Pryv Sample Swift App for iOS based on lib-swift
+# Pryv iOS example app
 
-|         |                       |
-| ------- | --------------------- |
-| Authors | Pierre-Mikael Legris, Ilia Kebets |
-| Reviewers | Ilia Kebets |
-| Date    | June 2nd 2020 |
-| Version | 1                  |
+Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) usage
 
-## Motivation
+You will get:
 
-Provide a use case example for the [lib-swift](https://github.com/pryv/lib-swift) framework.
-
-## Proposition
-
-We propose **an app** that shows how to :  
-* load the package   
-* create an event  
-* show the last 20 events  
-* save the credentials in Apple keychain
+* **MainViewController** a simple view to sign in using a customizable service info  
+* **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
+* **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
+* **ConnectionMapViewController** a map view to show the position events for a single connection
   
-## Deliverables
+## Install
 
-### API
+* install cocoa pods [cocoapods.org](https://cocoapods.org)
+From `Project` folder
+* run `pod install`
+* if needed run `pod update`
+* open Example.xcworkspace (not Example.xcodeproj)
 
-- Button to connect to the user's Pryv account
-- Example application
+## Screenshots
 
-### Docs
+<figure>
+  <figcaption>MainViewController: </figcaption>
+  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/MainViewController.png" title="MainViewController" height="700">
+</figure>
 
-- API reference
 
-  - authorizing the app 
-  - callBatch
-  - events.get
-  - hfs.create
+<figure>
+  <figcaption>AuthViewController: </figcaption>
+  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/AuthViewController.png" title="MainViewController" height="700">
+</figure>
+
+
+<figure>
+  <figcaption>ConnectionListTableViewController: </figcaption>
+  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionListTableViewController.png" title="MainViewController" height="700">
+</figure>
+
+
+<figure>
+  <figcaption>ConnectionMapViewController: </figcaption>
+  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionMapViewController.png" title="ConnectionMapViewController" height="700">
+</figure>
+
+## Support and warranty
+
+Pryv provides this software for educational and demonstration purposes with no support or warranty.
+
+## License
+
+Revised BSD license

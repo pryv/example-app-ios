@@ -17,10 +17,9 @@ extension UIAlertController {
     ///   - title: title of the `UIAlertController`
     ///   - message: message of the `UIAlertController`
     ///   - name: name of the event (only if editing)
-    ///   - params: params of the event (only if editing)
     ///   - callback: function to execute when the button `Save` is hit
     /// - Returns: the `UIAlertController` with a title and a message and four text fields: name, streamId, type and content and a `Save` and `Cancel` button
-    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, params: Json? = nil, callback: @escaping (Json) -> ()) -> UIAlertController {
+    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, callback: @escaping (Json) -> ()) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -41,22 +40,28 @@ extension UIAlertController {
         
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Stream id"
-            textField.text = params?["streamId"] as? String ?? ""
+            textField.text = "diary"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "streamIdField"
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Type"
-            textField.text = params?["type"] as? String ?? ""
+            textField.text = "note/txt"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "typeField"
-
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Content"
-            textField.text = String(describing: params?["content"] ?? "")
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "contentField"
+        }
+        
+        alert.textFields?.forEach {
+            $0.superview?.backgroundColor = .clear
+            $0.superview?.superview?.subviews[0].removeFromSuperview()
         }
         
         return alert

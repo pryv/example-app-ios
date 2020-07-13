@@ -34,7 +34,7 @@ class ConnectionListUITests: XCTestCase {
             if app.buttons["ACCEPT"].exists {
                 app.buttons["ACCEPT"].tap()
             }
-            sleep(2)
+            sleep(3)
         }
     }
 
@@ -52,9 +52,11 @@ class ConnectionListUITests: XCTestCase {
         sleep(1)
 
         app.textFields["streamIdField"].tap()
+        app.textFields["streamIdField"].buttons["Clear text"].tap()
         app.textFields["streamIdField"].typeText("measurements")
 
         app.textFields["typeField"].tap()
+        app.textFields["typeField"].buttons["Clear text"].tap()
         app.textFields["typeField"].typeText("length/cm")
 
         app.textFields["contentField"].tap()
@@ -68,9 +70,11 @@ class ConnectionListUITests: XCTestCase {
         sleep(1)
 
         app.textFields["streamIdField"].tap()
+        app.textFields["streamIdField"].buttons["Clear text"].tap()
         app.textFields["streamIdField"].typeText("weight")
 
         app.textFields["typeField"].tap()
+        app.textFields["typeField"].buttons["Clear text"].tap()
         app.textFields["typeField"].typeText("mass/kg")
 
         app.textFields["contentField"].tap()
@@ -108,9 +112,11 @@ class ConnectionListUITests: XCTestCase {
         sleep(1)
 
         app.textFields["streamIdField"].tap()
+        app.textFields["streamIdField"].buttons["Clear text"].tap()
         app.textFields["streamIdField"].typeText(wrongField)
 
         app.textFields["typeField"].tap()
+        app.textFields["typeField"].buttons["Clear text"].tap()
         app.textFields["typeField"].typeText(wrongField)
 
         app.textFields["contentField"].tap()
@@ -136,30 +142,39 @@ class ConnectionListUITests: XCTestCase {
         app.sheets.element.buttons["Event with attachment"].tap()
         sleep(1)
         
-        app.textFields["streamIdField"].tap()
-        app.textFields["streamIdField"].typeText("weight")
-
-        app.textFields["typeField"].tap()
-        app.textFields["typeField"].typeText("mass/kg")
-
-        app.textFields["contentField"].tap()
-        app.textFields["contentField"].typeText("80")
-
-        app.alerts.buttons["OK"].tap()
+        app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
-        app.otherElements["fileBrowserCreate"].staticTexts["sample.pdf"].tap()
+        app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
+        sleep(3)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
-        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
-        XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
-        XCTAssertEqual(cell.staticTexts["contentLabel"].label, "80")
-        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
+        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "diary")
+        XCTAssertFalse(cell.staticTexts["typeLabel"].exists)
+        XCTAssertFalse(cell.staticTexts["contentLabel"].exists)
+        XCTAssertFalse(cell.staticTexts["attachmentLabel"].exists)
         XCTAssertFalse(cell.images["attachmentImageView"].exists)
     }
     
     func testAddFileToEvent() {
+        app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
+        app.sheets.element.buttons["Simple event"].tap()
+        sleep(1)
+
+        app.textFields["streamIdField"].tap()
+        app.textFields["streamIdField"].buttons["Clear text"].tap()
+        app.textFields["streamIdField"].typeText("measurements")
+
+        app.textFields["typeField"].tap()
+        app.textFields["typeField"].buttons["Clear text"].tap()
+        app.textFields["typeField"].typeText("length/cm")
+
+        app.textFields["contentField"].tap()
+        app.textFields["contentField"].typeText("180")
+
+        app.alerts.buttons["OK"].tap()
+        
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
@@ -169,12 +184,16 @@ class ConnectionListUITests: XCTestCase {
         
         cell.buttons["addAttachmentButton"].tap()
         sleep(1)
-        app.otherElements["fileBrowserAdd"].staticTexts["sample.pdf"].tap()
+        
+        app.otherElements.tables.cells["Moments"].tap()
+        sleep(1)
+        app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
+        sleep(3)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, content)
-        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "sample.pdf")
+        XCTAssertEqual(cell.staticTexts["attachmentLabel"].label, "image.png")
         XCTAssertFalse(cell.images["attachmentImageView"].exists)
     }
 }

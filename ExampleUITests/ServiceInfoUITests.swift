@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Mocker
 import KeychainSwift
 
 class ServiceInfoUITests: XCTestCase {
@@ -31,8 +30,7 @@ class ServiceInfoUITests: XCTestCase {
     
     func testBadServiceInfoUrl() {
         app.textFields["serviceInfoUrlField"].tap()
-        app.textFields["serviceInfoUrlField"].doubleTap()
-        app.textFields["serviceInfoUrlField"].typeText(XCUIKeyboardKey.delete.rawValue)
+        app.textFields["serviceInfoUrlField"].buttons["Clear text"].tap()
         app.textFields["serviceInfoUrlField"].typeText("hello")
         app.buttons["loginButton"].tap()
         
