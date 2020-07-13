@@ -5,10 +5,17 @@ Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swif
 You will get:
 
 * **MainViewController** a simple view to sign in using a customizable service info
+![](Screenshots/MainViewController.png)
+  
 * **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
+![](Screenshots/AuthViewController.png)
+  
 * **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
+![](Screenshots/ConnectionListTableViewController.png)
+  
 * **ConnectionMapViewController** a map view to show the position events for a single connection
-
+![](Screenshots/ConnectionMapViewController.png)
+  
 ## Install
 
 * install cocoa pods [cocoapods.org](https://cocoapods.org)
