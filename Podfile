@@ -13,11 +13,6 @@ target 'Example' do
   pod 'KeychainSwift'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 
-  target 'ExampleTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
   target 'ExampleUITests' do
     # Pods for testing
   end
