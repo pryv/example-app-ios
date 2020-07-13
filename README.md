@@ -39,7 +39,7 @@ From `Project` folder
 
 <figure>
   <figcaption>ConnectionMapViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/AuthViewController.png" title="ConnectionMapViewController" height="700">
+  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionMapViewController.png" title="ConnectionMapViewController" height="700">
 </figure>
 
 ## Support and warranty
