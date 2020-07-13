@@ -9,6 +9,6 @@
 		<string>health-records</string>
 	</array>
 	<key>keychain-access-groups</key>
-	<array/>
+	<string></string>
 </dict>
 </plist>

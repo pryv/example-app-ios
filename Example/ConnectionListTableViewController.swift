@@ -222,32 +222,38 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         
         alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
             let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil) { params in
-                let apiCall: APICall = [
+                var apiCall: APICall = [
                     "method": "events.create",
                     "params": params
                 ]
                 
                 let handleResults: [Int: (Event) -> ()] = [0: { event in
                     print("new event: \(String(describing: event))")
-                    }]
+                }]
                 
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).then { results in
-                    if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
-                        if let json = results.first as? [String: Event], let event = json["event"] {
-                            if self.pryvStream.streamId == event["streamId"] as? String {
-                                let sample = self.pryvStream.healthKitSample(from: event["content"] as! Double)!
-                                self.healthStore.save(sample) { (success, error) in
-                                    if !success || error != nil {
-                                        print("problem occurred when sending event to Health")
-                                    }
-                                }
+                
+                if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
+                    let sample = self.pryvStream.healthKitSample(from: Double(params["content"] as! String)!)!
+                    self.healthStore.save(sample) { (success, error) in
+                        if !success || error != nil {
+                            print("problem occurred when sending event to Health")
+                        } else {
+                            var paramsWithTag = params
+                            paramsWithTag["tags"] = [String(describing: sample.uuid)]
+                            apiCall["params"] = paramsWithTag
+                            self.connection?.api(APICalls: [apiCall]).catch { error in
+                                let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                                innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                                self.present(innerAlert, animated: true, completion: nil)
                             }
                         }
                     }
-                }.catch { error in
-                    let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                    self.present(innerAlert, animated: true, completion: nil)
+                } else {
+                    self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
+                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+                        self.present(innerAlert, animated: true, completion: nil)
+                    }
                 }
             }
             self.present(alert, animated: true)

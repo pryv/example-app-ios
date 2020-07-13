@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
-//        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
+        //        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)
@@ -209,7 +209,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
                 let pryvEvent = hkDS.pryvEvent(of: self.healthStore)
-
+                
                 if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
                     let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                     let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
@@ -255,27 +255,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
                     if let additions = newSamples, additions.count > 0 {
-                        var apiCalls = [APICall]()
                         for sample in additions {
                             let pryvEvent = hkDS.pryvEvent(from: sample)
-
-                            if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
-                                let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
-                                let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
-                                self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
-                                    print("Create event with file failed: \(error.localizedDescription)")
-                                }
-                            } else {
-                                let apiCall: APICall = [
-                                    "method": "events.create",
-                                    "params": pryvEvent.params
+                            // avoid to create an event twice, as already created from the Pryv app
+                            let getEventsWithTagCall: APICall = [
+                                "method": "events.get",
+                                "params": [
+                                    "tags": [String(describing: sample.uuid)]
                                 ]
-                                apiCalls.append(apiCall)
+                            ]
+                            self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
+                                if let events = results.first?["events"] as? [Event], events.isEmpty {
+                                    if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
+                                        let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
+                                        let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
+                                        self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
+                                            print("Create event with file failed: \(error.localizedDescription)")
+                                        }
+                                    } else {
+                                        let apiCall: APICall = [
+                                            "method": "events.create",
+                                            "params": pryvEvent.params
+                                        ]
+                                        self.connection?.api(APICalls: [apiCall]).catch { error in
+                                            print("Api calls for creation of event failed: \(error.localizedDescription)")
+                                        }
+                                    }
+                                }
+                            }.catch { error in
+                                print("Api call for sample.uuid failed: \(error.localizedDescription)")
                             }
-                        }
-                        
-                        self.connection?.api(APICalls: apiCalls).catch { error in
-                            print("Api calls for addition failed: \(error.localizedDescription)")
                         }
                     }
                     
