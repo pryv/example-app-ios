@@ -1,12 +1,13 @@
 # Pryv iOS example app
 
-Minimalistic app to discover Pryv [`lib-swift`(https://github.com/pryv/lib-swift) usage
+Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) usage
 
 You will get:
 
 * **MainViewController** a simple view to sign in using a customizable service info
 * **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
-* **ConnectionTabBarViewController** a collection of two views for a single connection, including **ConnectionListTableViewController** that shows the last 20 events and allows to create new ones and **ConnectionMapViewController** that shows the position events on a map view
+- **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
+- **ConnectionMapViewController** a map view to show the position events for a single connection
 
 ## Install
 
