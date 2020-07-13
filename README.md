@@ -6,8 +6,8 @@ You will get:
 
 * **MainViewController** a simple view to sign in using a customizable service info
 * **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
-- **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
-- **ConnectionMapViewController** a map view to show the position events for a single connection
+* **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
+* **ConnectionMapViewController** a map view to show the position events for a single connection
 
 ## Install
 
