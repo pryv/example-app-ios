@@ -1,37 +1,25 @@
-# app-swift-example
-Pryv Sample Swift App for iOS based on lib-swift
+# Pryv iOS example app
 
-|         |                       |
-| ------- | --------------------- |
-| Authors | Pierre-Mikael Legris, Ilia Kebets |
-| Reviewers | Ilia Kebets |
-| Date    | June 2nd 2020 |
-| Version | 1                  |
+Minimalistic app to discover Pryv [`lib-swift`(https://github.com/pryv/lib-swift) usage
 
-## Motivation
+You will get:
 
-Provide a use case example for the [lib-swift](https://github.com/pryv/lib-swift) framework.
+* **MainViewController** a simple view to sign in using a customizable service info
+* **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
+* **ConnectionTabBarViewController** a collection of two views for a single connection, including **ConnectionListTableViewController** that shows the last 20 events and allows to create new ones and **ConnectionMapViewController** that shows the position events on a map view
 
-## Proposition
+## Install
 
-We propose **an app** that shows how to :  
-* load the package   
-* create an event  
-* show the last 20 events  
-* save the credentials in Apple keychain
-  
-## Deliverables
+* install cocoa pods [cocoapods.org](https://cocoapods.org)
+From `Project` folder
+* run `pod install`
+* if needed run `pod update`
+* open Example.xcworkspace (not Example.xcodeproj)
 
-### API
+## Support and warranty
 
-- Button to connect to the user's Pryv account
-- Example application
+Pryv provides this software for educational and demonstration purposes with no support or warranty.
 
-### Docs
+## License
 
-- API reference
-
-  - authorizing the app 
-  - callBatch
-  - events.get
-  - hfs.create
+Revised BSD license
