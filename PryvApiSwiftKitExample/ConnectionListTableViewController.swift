@@ -264,7 +264,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        let pickedImage = info[.editedImage] as! UIImage
+        let pickedImage = info[.originalImage] as! UIImage
         guard let pickedPngData = pickedImage.pngData() else { return }
         let (_, token) = Utils().extractTokenAndEndpoint(from: connection?.getApiEndpoint() ?? "") ?? ("", "")
         let params: Json = [
@@ -292,18 +292,31 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         }
     }
     
-    /// Opens the `UIImagePickerController` with the camera, if it is available
+    /// Opens the `UIImagePickerController` with the camera or the photo library, depending on the user's choice and camera availability
     private func selectAttachment() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true)
+            }))
+
+            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true)
+            }))
+
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
+        } else {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.sourceType = .camera;
-            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true)
-        } else {
-            let noCameraAlert = UIAlertController(title: "Can't find a camera", message: "You must have a camera to create an event with an attachment.", preferredStyle: .alert)
-            noCameraAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(noCameraAlert, animated: true, completion: nil)
         }
     }
 }
