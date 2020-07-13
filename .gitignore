@@ -10,3 +10,6 @@ build
 *.xcworkspace/xcuserdata/*.xcuserdatad/*
 */xcuserdata/*.xcuserdatad/xcdebugger/*
 Pods/
+
+### Build38 ###
+Example/TAK.framework/TAK
