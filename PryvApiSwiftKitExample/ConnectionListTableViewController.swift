@@ -11,7 +11,7 @@ import PryvSwiftKit
 import FileBrowser
 
 /// A custom cell to show the details of an event
-class EventTableViewCell: UITableViewCell {
+class EventTableViewCell: UITableViewCell, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet private weak var attachmentImageView: UIImageView!
     @IBOutlet private weak var streamIdLabel: UILabel!
@@ -30,9 +30,9 @@ class EventTableViewCell: UITableViewCell {
             guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return }
             streamIdLabel.text = streamId
             
-            if type.contains("picture") { // If the event has a picture attached, show it.
+            if let data = connection?.getImagePreview(eventId: eventId), !data.isEmpty { // If the event has a picture attached, show it.
                 attachmentImageView.isHidden = false
-                attachmentImageView.image = UIImage(data: (connection?.getImagePreview(eventId: eventId))!)
+                attachmentImageView.image = UIImage(data: data)
             } else { // Otherwise, show the type of content, the actual content and the name of the file attached
                 typeStackView.isHidden = false
                 typeLabel.text = type
@@ -79,10 +79,11 @@ class EventTableViewCell: UITableViewCell {
     
 }
 
-class ConnectionListTableViewController: UITableViewController {
+class ConnectionListTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     private let keychain = KeychainSwift()
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
+    private var eventId: String? = nil
     
     var appId: String?
     var connection: Connection? {
@@ -236,26 +237,10 @@ class ConnectionListTableViewController: UITableViewController {
             }
             self.present(alert, animated: true)
         })
-        
         alert.addAction(UIAlertAction(title: "Event with attachment", style: .default) { _ in
-            let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil) { params in
-                let path = Bundle.main.resourceURL!
-                let fileBrowser = FileBrowser(initialPath: path)
-                fileBrowser.view.accessibilityIdentifier = "fileBrowserCreate"
-                self.present(fileBrowser, animated: true, completion: nil)
-                
-                fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-                    self.connection?.createEventWithFile(event: params, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
-                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                        self.present(innerAlert, animated: true, completion: nil)
-                    }
-                }
-            }
-            
-            self.present(alert, animated: true, completion: nil)
+            self.eventId = nil
+            self.selectAttachment()
         })
-        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
@@ -265,20 +250,60 @@ class ConnectionListTableViewController: UITableViewController {
     /// - Parameter sender: the button that trigger this action
     @objc private func addAttachment(_ sender: UIButton) {
         let event = events[sender.tag]
-        guard let eventId = event["id"] as? String else { return }
+        guard let id = event["id"] as? String else { return }
+        eventId = id
+        selectAttachment()
+    }
+    
+    // MARK: - image picker
+    
+    /// Create an event with attachment or add attachment to event once an image is selected from the `UIImagePickerController`
+    /// - Parameters:
+    ///   - picker
+    ///   - info
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
         
-        let path = Bundle.main.resourceURL!
-        let fileBrowser = FileBrowser(initialPath: path)
-        fileBrowser.view.accessibilityIdentifier = "fileBrowserAdd"
-        self.present(fileBrowser, animated: true, completion: nil)
+        let pickedImage = info[.editedImage] as! UIImage
+        guard let pickedPngData = pickedImage.pngData() else { return }
+        let (_, token) = Utils().extractTokenAndEndpoint(from: connection?.getApiEndpoint() ?? "") ?? ("", "")
+        let params: Json = [
+            "streamId": "diary",
+            "type": "picture/attached"
+        ]
         
-        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-            self.connection?.addFileToEvent(eventId: eventId, filePath: file.filePath.absoluteString, mimeType: file.type.rawValue).catch { error in
+        if let id = eventId {
+            let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "image.png", data: pickedPngData, mimeType: "image/png")
+            let boundary = "Boundary-\(UUID().uuidString)"
+            guard let httpBody = connection?.createData(with: boundary, from: nil, and: [media]) else { return }
+            connection?.addFormDataToEvent(eventId: id, boundary: boundary, httpBody: httpBody).catch { error in
                 let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(innerAlert, animated: true, completion: nil)
+            }
+        } else {
+            let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "image.png", data: pickedPngData, mimeType: "image/png")
+            
+            connection?.createEventWithFormData(event: params, parameters: nil, files: [media]).catch { error in
+                let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
                 self.present(innerAlert, animated: true, completion: nil)
             }
         }
     }
     
+    /// Opens the `UIImagePickerController` with the camera, if it is available
+    private func selectAttachment() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true)
+        } else {
+            let noCameraAlert = UIAlertController(title: "Can't find a camera", message: "You must have a camera to create an event with an attachment.", preferredStyle: .alert)
+            noCameraAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(noCameraAlert, animated: true, completion: nil)
+        }
+    }
 }

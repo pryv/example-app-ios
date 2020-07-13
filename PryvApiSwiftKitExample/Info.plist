@@ -68,5 +68,7 @@
 	<string>We would like to access your location to store it on Pryv.io</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We would like to access your location to store it on Pryv.io</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We would like to access your camera to create an attachement for your event</string>
 </dict>
 </plist>

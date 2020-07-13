@@ -109,6 +109,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Xik-ue-23H" secondAttribute="height" multiplier="1:1" id="NE1-i7-exo"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alz-VK-dTQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="10" height="87"/>
