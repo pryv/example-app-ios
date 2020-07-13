@@ -313,8 +313,6 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
 
             self.present(alert, animated: true, completion: nil)
         } else {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true)
         }

@@ -42,18 +42,21 @@ extension UIAlertController {
             textField.placeholder = "Stream id"
             textField.text = "diary"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "streamIdField"
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Type"
             textField.text = "note/txt"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "typeField"
 
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Content"
             textField.addTarget(alert, action: #selector(alert.textDidChangeInEventEditor), for: .editingChanged)
+            textField.clearButtonMode = .whileEditing
             textField.accessibilityIdentifier = "contentField"
         }
         
