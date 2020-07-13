@@ -8,7 +8,6 @@
 import UIKit
 import KeychainSwift
 import PryvSwiftKit
-import FileBrowser
 
 /// A custom cell to show the details of an event
 class EventTableViewCell: UITableViewCell, UINavigationControllerDelegate, UIImagePickerControllerDelegate {

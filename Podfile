@@ -4,22 +4,21 @@ source 'https://github.com/CocoaPods/Specs.git'
 # Uncomment the next line to define a global platform for your project
 platform :ios, '10.0'
 
-target 'PryvApiSwiftKitExample' do
+target 'Example' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for PryvApiSwiftKitExample
+  # Pods for Example
   pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
   pod 'KeychainSwift'
-  pod 'FileBrowser', '~> 1.0'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 
-  target 'PryvApiSwiftKitExampleTests' do
+  target 'ExampleTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'PryvApiSwiftKitExampleUITests' do
+  target 'ExampleUITests' do
     # Pods for testing
   end
 

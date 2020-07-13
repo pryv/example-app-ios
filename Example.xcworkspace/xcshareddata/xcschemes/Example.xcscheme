@@ -32,25 +32,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3D70D48248A2FEA00A1A247"
-               BuildableName = "PryvApiSwiftKitExampleTests.xctest"
-               BlueprintName = "PryvApiSwiftKitExampleTests"
-               ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "PryvApiSwiftKitExampleTests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "B3D70D53248A2FEA00A1A247"
-               BuildableName = "PryvApiSwiftKitExampleUITests.xctest"
-               BlueprintName = "PryvApiSwiftKitExampleUITests"
-               ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
+               BuildableName = "ExampleUITests.xctest"
+               BlueprintName = "ExampleUITests"
+               ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -70,11 +55,20 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3D70D32248A2FE900A1A247"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
+            ReferencedContainer = "container:Example.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B3D70D32248A2FE900A1A247"
             BuildableName = "PryvApiSwiftKitExample.app"
             BlueprintName = "PryvApiSwiftKitExample"
             ReferencedContainer = "container:PryvApiSwiftKitExample.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
