@@ -12,7 +12,25 @@ For the client DSK integration, I followed the steps listed in [TAK doc](file:TA
 
 Before using any feature provided by T.A.K., one needs to set up the SDK. 
 
-// TODO !
+In the `AppDelegate.swift` file, I added the code snippet given in the documentation for the initialization. I have tested it when launching the application and it works, i.e. the first time I opened the application, it successfully registered and the second time, it successfully checked the integrity, as expected. 
+
+To use the TAK feature, the `tak` object needs to be passed to every view controller in the application from the `AppDelegate.swift`.
+
+#### Remarks
+
+Some points which require attention for the app-ios-swift-example (notified by a `// TODO` in the code): 
+
+- Upon registration or re-registration, 
+
+> It is recommended (but not required) to send the T.A.K ID to your server's backend and bind it to the current user. It will allow you to use the verification interface of the T.A.K cloud.
+
+- As the app will continuously send and receive data from the server, the tak cannot be `released`.
+
+Some points which require attention in the code snippet for the T.A.P. SDK:
+
+- The constant `isRegistered` is an optionnal, which cannot be used directly in an `if` clause. 
+- The constants `tak`, `registrationResponse` and `checkIntegrityResponse` are created with a `try` clause, which is not within a `do {} catch {}` clause.
+- The documentation concerning the `register` function suggests to provide `NULL` for the `userHash` parameter, but `NULL` does not exist in Swift.
 
 ### Features used
 

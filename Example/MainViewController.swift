@@ -9,6 +9,7 @@
 import UIKit
 import PryvSwiftKit
 import KeychainSwift
+import TAK
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController {
@@ -23,6 +24,7 @@ class MainViewController: UIViewController {
     ]]
     private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
+    private var tak: TAK?
     
     @IBOutlet private weak var authButton: UIButton!
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
@@ -43,6 +45,13 @@ class MainViewController: UIViewController {
         
         serviceInfoUrlField.text = defaultServiceInfoUrl
         serviceInfoUrlField.clearButtonMode = .whileEditing
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // The registration of the client in the T.A.K cloud needs to be done only once after app installation
+        if let isFirstLaunch = UserDefaults.standard.value(forKey: "isFirstLaunch") as? Bool, isFirstLaunch {
+            
+        }
     }
     
     /// Asks for auth url and load it in the web view to allow the user to login
@@ -145,6 +154,15 @@ class MainViewController: UIViewController {
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
+    }
+    
+    // MARK: - TAK functions
+    
+    /// Get the tak object from the AppDelegate and store it as attribute
+    /// - Parameter tak
+    func passData(tak: TAK?) {
+        self.tak = tak
+        print("hello")
     }
     
 }

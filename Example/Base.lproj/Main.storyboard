@@ -10,7 +10,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainVC" id="BYZ-38-t0r" customClass="MainViewController" customModule="Pryv" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +51,7 @@
         <!--Auth View Controller-->
         <scene sceneID="efo-1D-QMh">
             <objects>
-                <viewController storyboardIdentifier="webVC" id="G8M-C4-GKs" customClass="AuthViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="webVC" id="G8M-C4-GKs" customClass="AuthViewController" customModule="Pryv" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Qg-0L-LmY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,13 +88,13 @@
         <!--List-->
         <scene sceneID="xl3-yT-MHR">
             <objects>
-                <tableViewController storyboardIdentifier="connectionListVC" id="1Qp-o2-F3A" customClass="ConnectionListTableViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="connectionListVC" id="1Qp-o2-F3A" customClass="ConnectionListTableViewController" customModule="Pryv" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="s8v-9o-IsV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="107" id="xkD-RN-ceo" customClass="EventTableViewCell" customModule="PryvApiSwiftKitExample" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="107" id="xkD-RN-ceo" customClass="EventTableViewCell" customModule="Pryv" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="107"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xkD-RN-ceo" id="Maw-zh-oUk">
@@ -285,7 +285,7 @@
         <!--Connection Tab Bar View Controller-->
         <scene sceneID="fPV-Zu-o4I">
             <objects>
-                <tabBarController storyboardIdentifier="connectionTBC" automaticallyAdjustsScrollViewInsets="NO" id="IWS-qQ-P0V" customClass="ConnectionTabBarViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="connectionTBC" automaticallyAdjustsScrollViewInsets="NO" id="IWS-qQ-P0V" customClass="ConnectionTabBarViewController" customModule="Pryv" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="j7i-Nx-CXn">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -307,7 +307,7 @@
         <!--Map-->
         <scene sceneID="kkh-3z-TlW">
             <objects>
-                <viewController storyboardIdentifier="connectionMapVC" id="eMd-Q3-6DR" customClass="ConnectionMapViewController" customModule="PryvApiSwiftKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="connectionMapVC" id="eMd-Q3-6DR" customClass="ConnectionMapViewController" customModule="Pryv" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lb6-Ps-sWj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
