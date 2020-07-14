@@ -17,7 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - KeychainSwift
-  - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
+  - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `build38-integrated`)
   - RLBAlertsPickers (~> 1.1.1)
 
 SPEC REPOS:
@@ -33,12 +33,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvSwiftKit:
-    :branch: master
+    :branch: build38-integrated
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   PryvSwiftKit:
-    :commit: 81bc98c7e510cd05c8dda738751d9b120cad30d6
+    :commit: 4daf19005fb5775809c8fd79b7925743a3c61e48
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 4a45953818c1f6eb1c8bd3f0aa456074c52d83ce
+PODFILE CHECKSUM: bdf344e165e55bcaf2986631f7cd9c3f74467364
 
 COCOAPODS: 1.8.4

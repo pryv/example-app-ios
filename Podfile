@@ -9,7 +9,7 @@ target 'Example' do
   use_frameworks!
 
   # Pods for Example
-  pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
+  pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'build38-integrated'
   pod 'KeychainSwift'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 
