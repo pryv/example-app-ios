@@ -1,5 +1,9 @@
 # Integration of BUILD38 into app-ios-swift-example
 
+## Table of contents
+
+[TOC]
+
 ## T.A.K Client SDK Integration
 
 For the client DSK integration, I followed the steps listed in [TAK doc](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#xcode_integration2). 
@@ -42,11 +46,10 @@ According to the "Non-Functional features" part in the documentation, the idea i
 
 Consequently, the following features will be used: 
 
-1. [Secure Storage](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage) to store 
-   - The events created and retrieved by the user;
-   - The user's authentication token and API endpoint.
+1. [Secure Storage](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage) to store the user's authentication token and API endpoint.
 2. [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) to protect
    - The API endpoint;
+   - The events shown to the user;
    - The application identifier.
 3. [Secure Channel](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#tak_tls) to connect when
    - Requesting events;
@@ -66,5 +69,10 @@ App re-packaging protection is not used as it is not yet available in iOS.
 
 ### Implementation of the features
 
-// TODO !
+#### Secure storage
 
+There are three view controllers that require using secure storage, as they interact with the API endpoint and its token: 
+
+- `MainViewController`: as it is responsible for launching the authentication request and passing the result to the `ConnectionTabViewController`, it needs to store the API endpoint got from the connection in a secure storage and pass this storage to `ConnectionTabViewController`.
+- `ConnectionTabViewController`: instead of getting the raw value of the API endpoint, it will get the storage that contains it. It is the one responsible for passing the objects to `ConnectionListTableViewController` and `ConnectionMapViewController`. As `ConnectionTabViewController` and `ConnectionMapViewController` do not handle any API endpoint nor token directly, `ConnectionTabViewController` simply passes this storage to `ConnectionListTableViewController`. 
+- `ConnectionListTableViewController`: it deals directly with API endpoint, from which is extracts the token. The token is used to create socket.io URL. Consequently, it needs to use the secure storage to retrieve the API endpoint and to store the URL.

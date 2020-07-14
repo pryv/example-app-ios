@@ -25,13 +25,15 @@ class MainViewController: UIViewController {
     private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     private var tak: TAK?
+    private var storage: SecureStorage?
     
     @IBOutlet private weak var authButton: UIButton!
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        if let endpoint = keychain.get(appId) {
-            openConnection(apiEndpoint: endpoint, animated: false)
+        if let apiEndpoint = keychain.get(appId) {
+            try? storage?.write(key: "apiEndpoint", value: apiEndpoint)
+            openConnection(animated: false)
         }
     }
     
@@ -85,9 +87,12 @@ class MainViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.apiEndpoint {
-                let token = utils.extractTokenAndEndpoint(from: endpoint)?.token ?? ""
-                if !self.isClientValid(endpoint: endpoint, token: token) { return }
-                openConnection(apiEndpoint: endpoint)
+                do {
+                    try storage?.write(key: "apiEndpoint", value: endpoint)
+                    openConnection()
+                } catch {
+                    print("Problem occurred when storing the API endpoint in TAK secure storage: \(error.localizedDescription)")
+                }
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login
@@ -106,53 +111,19 @@ class MainViewController: UIViewController {
         }
     }
     
-    /// Checks whether the client is valid once the user has logged in and accepted the auth request
-    /// - Parameters:
-    ///   - endpoint: the api endpoint received from the auth request
-    ///   - token: the token received from the auth request
-    /// - Returns: `true` if valid, i.e. if a connection can be done. `false` otherwise
-    private func isClientValid(endpoint: String, token: String) -> Bool {
-        var result = false
-        
-        let string = endpoint.hasSuffix("/") ? (endpoint + "access-info") : (endpoint + "/access-info")
-        let url = URL(string: string)
-        var request = URLRequest(url: url!)
-        request.addValue(token, forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
-        
-        let group = DispatchGroup()
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let loginResponse = data, let jsonResponse = try? JSONSerialization.jsonObject(with: loginResponse), let dictionary = jsonResponse as? [String: Any] else { print("problem encountered when parsing the response") ; group.leave() ; return }
-            
-            if let _ = dictionary["token"] as? String {
-                print("Client is valid")
-                result = true
-                group.leave()
-            } else {
-                print("Client error")
-                group.leave()
-            }
-        }
-        
-        
-        group.enter()
-        task.resume()
-        group.wait()
-        
-        return result
-    }
-    
     /// Opens a `ConnectionViewController`
     /// - Parameters:
     ///   - apiEndpoint: the api endpoint received from the auth request
     ///   - animated: whether the change of view controller is animated or not (`true` by default)
-    private func openConnection(apiEndpoint: String, animated: Bool = true) {
+    private func openConnection(animated: Bool = true) {
+        guard let apiEndpoint: String = try? storage?.read(key: "apiEndpoint") else { return }
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.service = service
         vc.connection = Connection(apiEndpoint: apiEndpoint)
         vc.appId = appId
+        vc.storage = storage
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     
@@ -162,7 +133,7 @@ class MainViewController: UIViewController {
     /// - Parameter tak
     func passData(tak: TAK?) {
         self.tak = tak
-        print("hello")
+        self.storage = try? tak?.getSecureStorage(storageName: "app-ios-swift-example-secure-storage")
     }
     
 }

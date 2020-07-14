@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC") as! MainViewController
-        mainVC.passData(tak: tak)
+        mainVC.passData(tak: tak) // FIXME: needs to be rootview
         
         return true
     }

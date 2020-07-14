@@ -10,6 +10,7 @@ import UIKit
 import PryvSwiftKit
 import KeychainSwift
 import CoreLocation
+import TAK
 
 class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
     private let keychain = KeychainSwift()
@@ -19,11 +20,13 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     var service: Service?
     var connection: Connection?
     var appId: String?
+    var storage: SecureStorage?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
         listVC?.connection = connection
         listVC?.appId = appId
+        listVC?.storage = storage
         
         let mapVC = viewControllers?[1] as? ConnectionMapViewController
         mapVC?.connection = connection
