@@ -15,27 +15,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="https://access.{domain}/service/info" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aX2-xK-RGq">
-                                <rect key="frame" x="76.5" y="418" width="261" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="url"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="serviceInfoUrlField"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the service info URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43a-YC-i8m">
-                                <rect key="frame" x="118" y="383" width="178" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="N8b-ac-tQ8">
+                                <rect key="frame" x="76.5" y="423.5" width="261" height="59"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the service info URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43a-YC-i8m">
+                                        <rect key="frame" x="0.0" y="0.0" width="261" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="https://access.{domain}/service/info" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aX2-xK-RGq">
+                                        <rect key="frame" x="0.0" y="25" width="261" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="url"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="serviceInfoUrlField"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="43a-YC-i8m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3wM-ex-Ein"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aX2-xK-RGq" secondAttribute="bottom" constant="410" id="QgO-m9-JBL"/>
-                            <constraint firstItem="aX2-xK-RGq" firstAttribute="top" secondItem="43a-YC-i8m" secondAttribute="bottom" constant="17" id="rDh-wY-cjQ"/>
-                            <constraint firstItem="aX2-xK-RGq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zvT-XP-Mdq"/>
+                            <constraint firstItem="N8b-ac-tQ8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="iWA-pW-DIb"/>
+                            <constraint firstItem="N8b-ac-tQ8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="s1w-BF-pY6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

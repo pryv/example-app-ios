@@ -61,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
         
-//        TODO: uncomment when using on real device ≠ simulator
+//      uncomment when using on real device ≠ simulator
 //        if tak!.isJailbroken() {
 //            let alert = UIAlertController(title: "Your device seems jailbroken", message: "For security reasons, you cannot use this application as your device seems to be jailbroken.", preferredStyle: .alert)
 //            let activeVC = initialViewController.visibleViewController
