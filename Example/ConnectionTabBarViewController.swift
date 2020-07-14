@@ -16,15 +16,19 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     private let keychain = KeychainSwift()
     private let utils = Utils()
     private let locationManager = CLLocationManager()
+    private var connection: Connection?
     
     var service: Service?
-    var connection: Connection?
     var appId: String?
-    var storage: SecureStorage?
+    var storage: SecureStorage? {
+        didSet {
+            guard let apiEndpoint: String = try? storage!.read(key: "apiEndpoint") else { return }
+            self.connection = Connection(apiEndpoint: apiEndpoint)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
-        listVC?.connection = connection
         listVC?.appId = appId
         listVC?.storage = storage
         

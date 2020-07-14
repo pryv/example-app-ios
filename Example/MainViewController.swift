@@ -120,10 +120,9 @@ class MainViewController: UIViewController {
         keychain.set(apiEndpoint, forKey: appId)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
-        vc.service = service
-        vc.connection = Connection(apiEndpoint: apiEndpoint)
-        vc.appId = appId
         vc.storage = storage
+        vc.service = service
+        vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }
     

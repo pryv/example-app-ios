@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import PryvSwiftKit
 import RLBAlertsPickers
+import TAK
 
 /// Filter for the events timeslot to show on the map
 private enum TimeFilter {

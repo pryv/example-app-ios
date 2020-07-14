@@ -81,16 +81,18 @@ class EventTableViewCell: UITableViewCell {
 
 class ConnectionListTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     private let keychain = KeychainSwift()
+    private let utils = Utils()
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
     private var eventId: String? = nil
     
     var appId: String?
-    var storage: SecureStorage?
-    var connection: Connection? {
+    var connection: Connection?
+    var storage: SecureStorage? {
         didSet {
-            let utils = Utils()
-            let apiEndpoint: String = (try? storage?.read(key: "apiEndpoint")) ?? ""
+            guard let apiEndpoint: String = try? storage!.read(key: "apiEndpoint") else { return }
+            self.connection = Connection(apiEndpoint: apiEndpoint)
+            
             guard let username = utils.extractUsername(from: apiEndpoint), let (endpoint, token) = utils.extractTokenAndEndpoint(from: apiEndpoint) else { return }
             let url = "\(endpoint)\(username)?auth=\(token ?? "")"
             
