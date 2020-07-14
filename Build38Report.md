@@ -52,10 +52,7 @@ Consequently, the following features will be used:
    - Creating events;
    - Any other HTTP request in the application.
 
-Jailbreak detection and HealthCheck API will be used in the T.A.K. initialization part, respectively to: 
-
-- Query the jailbreak status of the current device;
-- Get visibility into the state of the T.A.K resources, services, and account.
+Jailbreak detection will be used in the T.A.K. initialization part, respectively to query the jailbreak status of the current device.
 
 Signature Generation could be a nice feature to add, especially for the connection requests. This will need support from the server.
 
@@ -63,7 +60,11 @@ The [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK
 
 > T.A.K will not, by default, react to rooted/jailbroken devices. Instead, it will forward this information to the T.A.K cloud during registration and validation operations, making this information available as well to the service provider through the [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify). 
 
-App re-packaging protection is not used as it is not yet available in iOS. [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) is not used either as no huge storage (>1MB) is stored on the device, nor any asset.
+The following features were not integrated in the app: 
+
+- App re-packaging protection is not used as it is not yet available in iOS. 
+- [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) is not used either as no huge storage (>1MB) is stored on the device, nor any asset. 
+- HealthCheck API would allow us to get visibility into the state of the T.A.K resources, services, and account. As we do not yet support TAK in the server, I would suggest to keep this part for later. 
 
 ### Implementation of the features
 
