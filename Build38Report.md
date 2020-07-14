@@ -61,7 +61,9 @@ Jailbreak detection and HealthCheck API will be used in the T.A.K. initializatio
 - Query the jailbreak status of the current device;
 - Get visibility into the state of the T.A.K resources, services, and account.
 
-The [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify) feature will need to be implemented in the server to deal with any jailbroken device: 
+Signature Generation could be a nice feature to add, especially for the connection requests. This will need support from the server.
+
+The [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify) feature will also need to be implemented in the server to deal with any jailbroken device: 
 
 > T.A.K will not, by default, react to rooted/jailbroken devices. Instead, it will forward this information to the T.A.K cloud during registration and validation operations, making this information available as well to the service provider through the [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify). 
 
@@ -76,3 +78,5 @@ There are three view controllers that require using secure storage, as they inte
 - `MainViewController`: as it is responsible for launching the authentication request and passing the result to the `ConnectionTabViewController`, it needs to store the API endpoint got from the connection in a secure storage and pass this storage to `ConnectionTabViewController`.
 - `ConnectionTabViewController`: instead of getting the raw value of the API endpoint, it will get the storage that contains it. It is the one responsible for passing the objects to `ConnectionListTableViewController` and `ConnectionMapViewController`. As `ConnectionTabViewController` and `ConnectionMapViewController` do not handle any API endpoint nor token directly, `ConnectionTabViewController` simply passes this storage to `ConnectionListTableViewController`. 
 - `ConnectionListTableViewController`: it deals directly with API endpoint, from which is extracts the token. The token is used to create socket.io URL. Consequently, it needs to use the secure storage to retrieve the API endpoint and to store the URL.
+
+To implement securely write and read the user's credentials, I followed the code snippets given in the [documentation](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage).
