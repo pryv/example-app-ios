@@ -47,11 +47,7 @@ According to the "Non-Functional features" part in the documentation, the idea i
 Consequently, the following features will be used: 
 
 1. [Secure Storage](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage) to store the user's authentication token and API endpoint.
-2. [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) to protect
-   - The API endpoint;
-   - The events shown to the user;
-   - The application identifier.
-3. [Secure Channel](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#tak_tls) to connect when
+2. [Secure Channel](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#tak_tls) to connect when
    - Requesting events;
    - Creating events;
    - Any other HTTP request in the application.
@@ -67,7 +63,7 @@ The [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK
 
 > T.A.K will not, by default, react to rooted/jailbroken devices. Instead, it will forward this information to the T.A.K cloud during registration and validation operations, making this information available as well to the service provider through the [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify). 
 
-App re-packaging protection is not used as it is not yet available in iOS. 
+App re-packaging protection is not used as it is not yet available in iOS. [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) is not used either as no huge storage (>1MB) is stored on the device, nor any asset.
 
 ### Implementation of the features
 
@@ -80,3 +76,12 @@ There are three view controllers that require using secure storage, as they inte
 - `ConnectionListTableViewController`: it deals directly with API endpoint, from which is extracts the token. The token is used to create socket.io URL. Consequently, it needs to use the secure storage to retrieve the API endpoint and to store the URL.
 
 To implement securely write and read the user's credentials, I followed the code snippets given in the [documentation](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage).
+
+#### Secure channel
+
+To integrate secure channel, 
+
+- I generated the encrypted `*.pryv.me` certificate, as suggested in the documentation, and added it to the application files. 
+  - Note that, in order to authenticate the connecting clients, the server will need to configure Build38’s trust chain (request it on the [Service Desk](https://build38service.atlassian.net/servicedesk/customer/portal/)) in the reverse proxy (such as Apache or Nginx). 
+- As `lib-swift` is using `Alamofire` for the HTTP requests, we could use the code snippet provided in the documentation section "Integration with Alamofire". As this snippet does not use the same version of Alamofire as we do in `lib-swift`, I had to downgrade the version of Alamofire in the library. Moreover, to keep the library external from Build38's SDK, I only changed the requests within the library in the `Pods/` files of the application.
+
