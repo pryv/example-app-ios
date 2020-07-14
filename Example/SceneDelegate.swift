@@ -53,14 +53,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("Error: Problem occurred when checking integrity of T.A.K: \(error.localizedDescription)")
             }
         }
-        
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "mainVC") as! MainViewController
-        initialViewController.passData(tak: tak)
-        
-        let navigationController = UINavigationController(rootViewController: initialViewController)
-        window?.rootViewController = navigationController
+        let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC") as! MainViewController
+        mainVC.passData(tak: tak)
+        let initialViewController = UINavigationController(rootViewController: mainVC)
+        window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
+        
+//        TODO: uncomment when using on real device ≠ simulator
+//        if tak!.isJailbroken() {
+//            let alert = UIAlertController(title: "Your device seems jailbroken", message: "For security reasons, you cannot use this application as your device seems to be jailbroken.", preferredStyle: .alert)
+//            let activeVC = initialViewController.visibleViewController
+//            activeVC?.present(alert, animated: true, completion: nil)
+//        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

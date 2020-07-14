@@ -85,3 +85,10 @@ To integrate secure channel,
   - Note that, in order to authenticate the connecting clients, the server will need to configure Build38’s trust chain (request it on the [Service Desk](https://build38service.atlassian.net/servicedesk/customer/portal/)) in the reverse proxy (such as Apache or Nginx). 
 - As `lib-swift` is using `Alamofire` for the HTTP requests, we could use the code snippet provided in the documentation section "Integration with Alamofire". As this snippet uses an older version of Alamofire than `lib-swift`, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate ``TakTlsSessionManager.swift` requests in the library. The app will install the pod from this branch, whereas a user that does not have a TAK license could still use the `master` version. *Note that to be able to build the application, the user will need to add his own license and frameworks.*
 
+*Note: this part still does not work*
+
+#### Jailbreak detection
+
+As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user open the application. 
+
+*As a note for the T.A.K. developpers, it seems that the code snippet are not correctly sorted for C, Kotlin and Swift.* 
