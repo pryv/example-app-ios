@@ -34,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     private let healthKitStreams: [HealthKitStream] = [
-                HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
+        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
-                HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
+        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)
@@ -173,16 +173,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         var apiCalls = [APICall]()
         
         ids.forEach { (parentId, streamId) in
-            let parentIdCall: APICall = [
-                "method": "streams.create",
-                "params": ["name": parentId, "id": parentId]
-            ]
+            if let _ = parentId {
+                let parentIdCall: APICall = [
+                    "method": "streams.create",
+                    "params": ["name": parentId!, "id": parentId!]
+                ]
+                apiCalls.append(parentIdCall)
+            }
+            
             let streamIdCall: APICall = [
                 "method": "streams.create",
                 "params": ["parentId": parentId, "name": streamId, "id": streamId]
             ]
-            
-            apiCalls.append(parentIdCall)
             apiCalls.append(streamIdCall)
         }
         

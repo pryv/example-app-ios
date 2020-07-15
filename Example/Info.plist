@@ -20,16 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSHealthShareUsageDescription</key>
-	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We would like to access your camera to create an attachement for your event</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>We would like to access your Health records in order to send them to Pryv.io.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>We would like to access your Health data in order to send it to Pryv.io and to store your Pryv.io data to Health.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We would like to access your location in order to send it to Pryv backend.</string>
+	<string>We would like to access your location to store it on Pryv.io</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We would like to access your location in order to send it to Pryv backend.</string>
+	<string>We would like to access your location to store it on Pryv.io</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -75,11 +77,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We would like to access your location to store it on Pryv.io</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We would like to access your location to store it on Pryv.io</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We would like to access your camera to create an attachement for your event</string>
 </dict>
 </plist>
