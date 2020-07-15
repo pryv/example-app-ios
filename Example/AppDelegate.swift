@@ -33,14 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+    /* From iOS14+, we will be able to read Health Record as well by adding for example
+    `HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)`
+    to this list */
     private let healthKitStreams: [HealthKitStream] = [
         HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
-        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate),
-        HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)
+        HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate)
     ]
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
