@@ -290,7 +290,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         guard let pickedPngData = pickedImage.pngData() else { return }
         let (_, token) = Utils().extractTokenAndEndpoint(from: connection?.getApiEndpoint() ?? "") ?? ("", "")
         let params: Json = [
-            "streamId": "diary",
+            "streamIds": ["diary"],
             "type": "picture/attached"
         ]
         

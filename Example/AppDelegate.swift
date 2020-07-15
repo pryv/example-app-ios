@@ -19,15 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let keychain = KeychainSwift()
     private let locationManager = CLLocationManager()
     private let healthStore = HKHealthStore()
-    private var anchor = HKQueryAnchor.init(fromValue: 0)
     var connection: Connection? {
         didSet {
             if connection != nil {
-                if UserDefaults.standard.object(forKey: "Anchor") != nil {
-                    let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
-                    anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
-                }
-                
                 configureHealthKit()
             }
         }
@@ -53,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let read = Set(healthKitStreams.map{$0.type})
         let write = PryvStream(streamId: "bodyMass", type: "mass/kg").hkSampleType()!
         healthStore.requestAuthorization(toShare: [write], read: read) { success, error in
-            if !success {
+            if !success || error != nil {
                 print("Error when requesting authorization for HK data: \(String(describing: error?.localizedDescription))")
             }
         }
@@ -123,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         var apiCalls = [APICall]()
         for location in locations {
             let params: Json = [
-                "streamId": "diary",
+                "streamIds": ["diary"],
                 "type": "position/wgs84",
                 "content": [
                     "latitude": location.coordinate.latitude,
@@ -252,7 +246,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("Received background notification of \(hkDS.type.identifier) change.")
             #endif
             
-            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
+            var anchor = HKQueryAnchor.init(fromValue: 0)
+            if UserDefaults.standard.object(forKey: "Anchor") != nil {
+                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
+            }
+            
+            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
             anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
             self.healthStore.execute(anchoredQuery)
         }
@@ -273,7 +273,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 return
             }
             
-            self.anchor = newAnchor!
             let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
             UserDefaults.standard.set(data, forKey: "Anchor")
             
@@ -366,7 +365,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("Api calls to get deleted uuid failed: \(error.localizedDescription)")
         }
     }
-    
     
 }
 

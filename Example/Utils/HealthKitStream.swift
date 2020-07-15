@@ -51,7 +51,7 @@ public class HealthKitStream {
             return (params: nil, attachmentData: nil)
         }
         
-        var params = ["streamId": pryvStreamId().streamId, "type": type, "content": content]
+        var params = ["streamIds": [pryvStreamId().streamId], "type": type, "content": content]
         if let _ = sample { params["tags"] = [String(describing: sample!.uuid)] }
         
         return (params: params, attachmentData: attachmentData)
