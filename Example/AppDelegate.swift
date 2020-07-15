@@ -244,76 +244,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("Received background notification of \(hkDS.type.identifier) change.")
             #endif
             
-            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit) { (_, newSamples, deletedSamples, newAnchor, error) in
-                DispatchQueue.main.async {
-                    if let err = error {
-                        print("Failed to receive new \(hkDS.type.identifier): \(err.localizedDescription)")
-                        return
-                    }
-                    
-                    self.anchor = newAnchor!
-                    let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
-                    UserDefaults.standard.set(data, forKey: "Anchor")
-                    
-                    if let additions = newSamples {
-                        let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
-                            let getEventsWithTagCall: APICall = [
-                                "method": "events.get",
-                                "params": [
-                                    "tags": additions.map { sample in String(describing: sample.uuid) }
-                                ]
-                            ]
-                            self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
-                                if let events = results.first?["events"] as? [Event] {
-                                    let existingSampleIds: [String] = events.flatMap { event in event["tags"] as! [String] }
-                                    let uniqueAdditions = additions.filter { sample in !existingSampleIds.contains(String(describing: sample.uuid)) }
-                                    fullfill(uniqueAdditions)
-                                }
-                            }.catch { error in
-                                print("Api call for duplicates failed: \(error.localizedDescription)")
-                                reject(error)
-                            }
-                        })
-                        
-                        removeDuplicates.then { uniqueAdditions in
-                            var apiCalls = [APICall]()
-                            
-                            for sample in uniqueAdditions {
-                                let pryvEvent = hkDS.pryvEvent(from: sample)
-                                if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
-                                        let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
-                                        let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
-                                        self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
-                                            print("Create event with file failed: \(error.localizedDescription)")
-                                        }
-                                } else {
-                                    let apiCall: APICall = [
-                                        "method": "events.create",
-                                        "params": pryvEvent.params
-                                    ]
-                                    apiCalls.append(apiCall)
-                                }
-                            }
-
-                            self.connection?.api(APICalls: apiCalls).catch { error in
-                                print("Api calls for creation of event failed: \(error.localizedDescription)")
-                            }
-                        }
-                        
-                        // FIXME
-                        // Promises are not executed before a new notification is received => duplicated !
-                    }
-                    
-                    if let deletions = deletedSamples, deletions.count > 0 {
-                        self.deleteHKDeletions(deletions)
-                    }
-                }
-            }
-            
+            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: self.anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
+            anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
             self.healthStore.execute(anchoredQuery)
         }
         
         healthStore.execute(observerQuery)
+    }
+    
+    private func anchoredQueryResultHandler(hkDS: HealthKitStream) -> ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) {
+        return { query, newSamples, deletedSamples, newAnchor, error in
+            self.anchoredQueryCompletionHandler(hkDS: hkDS, query: query, newSamples: newSamples, deletedSamples: deletedSamples, newAnchor: newAnchor, error: error)
+        }
+    }
+    
+    private func anchoredQueryCompletionHandler(hkDS: HealthKitStream, query: HKAnchoredObjectQuery, newSamples: [HKSample]?, deletedSamples: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
+        DispatchQueue.main.async {
+            if let err = error {
+                print("Failed to receive new \(hkDS.type.identifier): \(err.localizedDescription)")
+                return
+            }
+            
+            self.anchor = newAnchor!
+            let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
+            UserDefaults.standard.set(data, forKey: "Anchor")
+            
+            if let additions = newSamples {
+                let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
+                    let getEventsWithTagCall: APICall = [
+                        "method": "events.get",
+                        "params": [
+                            "tags": additions.map { sample in String(describing: sample.uuid) }
+                        ]
+                    ]
+                    self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
+                        if let events = results.first?["events"] as? [Event] {
+                            let existingSampleIds: [String] = events.flatMap { event in event["tags"] as! [String] }
+                            let uniqueAdditions = additions.filter { sample in !existingSampleIds.contains(String(describing: sample.uuid)) }
+                            fullfill(uniqueAdditions)
+                        }
+                    }.catch { error in
+                        print("Api call for duplicates failed: \(error.localizedDescription)")
+                        reject(error)
+                    }
+                })
+                
+                removeDuplicates.then { uniqueAdditions in
+                    var apiCalls = [APICall]()
+                    
+                    for sample in uniqueAdditions {
+                        let pryvEvent = hkDS.pryvEvent(from: sample)
+                        if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
+                                let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
+                                let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
+                                self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
+                                    print("Create event with file failed: \(error.localizedDescription)")
+                                }
+                        } else {
+                            let apiCall: APICall = [
+                                "method": "events.create",
+                                "params": pryvEvent.params
+                            ]
+                            apiCalls.append(apiCall)
+                        }
+                    }
+
+                    self.connection?.api(APICalls: apiCalls).catch { error in
+                        print("Api calls for creation of event failed: \(error.localizedDescription)")
+                    }
+                }
+                
+                // FIXME
+                // Promises are not executed before a new notification is received => duplicated !
+            }
+            
+            if let deletions = deletedSamples, deletions.count > 0 {
+                self.deleteHKDeletions(deletions)
+            }
+        }
     }
     
     /// Delete Pryv events if deleted in HK
