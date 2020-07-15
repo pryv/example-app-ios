@@ -8,7 +8,7 @@
 
 For the client DSK integration, I followed the steps listed in [TAK doc](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#xcode_integration2). 
 
-*As a note for the T.A.K. developpers, the "[Quick Start](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#quickstart-section)" link in the description is not working.* 
+*As a note for T.A.K. developpers, the "[Quick Start](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#quickstart-section)" link in the description is not working.* 
 
 ## T.A.K Client SDK Usage
 
@@ -76,7 +76,7 @@ There are three view controllers that require using secure storage, as they inte
 - `ConnectionTabViewController`: instead of getting the raw value of the API endpoint, it will get the storage that contains it. It is the one responsible for passing the objects to `ConnectionListTableViewController` and `ConnectionMapViewController`. As `ConnectionTabViewController` and `ConnectionMapViewController` do not handle any API endpoint nor token directly, `ConnectionTabViewController` simply passes this storage to `ConnectionListTableViewController`. 
 - `ConnectionListTableViewController`: it deals directly with API endpoint, from which is extracts the token. The token is used to create socket.io URL. Consequently, it needs to use the secure storage to retrieve the API endpoint and to store the URL.
 
-To implement securely write and read the user's credentials, I followed the code snippets given in the [documentation](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage).
+To securely implement writes and reads for the user's credentials, I followed the code snippets given in the [documentation](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage).
 
 #### Secure channel
 
@@ -84,12 +84,31 @@ To integrate secure channel,
 
 - I generated the encrypted `*.pryv.me` certificate, as suggested in the documentation, and added it to the application files. 
   - Note that, in order to authenticate the connecting clients, the server will need to configure Build38’s trust chain (request it on the [Service Desk](https://build38service.atlassian.net/servicedesk/customer/portal/)) in the reverse proxy (such as Apache or Nginx). 
-- As `lib-swift` is using `Alamofire` for the HTTP requests, we could use the code snippet provided in the documentation section "Integration with Alamofire". As this snippet uses an older version of Alamofire than `lib-swift`, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate ``TakTlsSessionManager.swift` requests in the library. The app will install the pod from this branch, whereas a user that does not have a TAK license could still use the `master` version. *Note that to be able to build the application, the user will need to add his own license and frameworks.*
+- As `lib-swift` uses `Alamofire` for the HTTP requests, I could use the code snippet provided in the documentation section "Integration with Alamofire". However, this snippet uses an older version of Alamofire than `lib-swift`. Therefore, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate ``TakTlsSessionManager.swift` requests in the library. Every call to `AF.request(...)` was replaced by `TakTlsSessionManager.sharedInstance.request`, except for the `getEventsStreamed` method that might fail when using TAK SDK, as suggested in "Limitations when using Alamofire with T.A.K".
+  The app will install the pod from this branch, whereas a user that does not have a TAK license could still use the `master` version. *Note that to be able to build the application, the user will need to add his own license and frameworks to the Pod/PryvSwiftKit project.*
 
-*!!! Note: this part still does not work !!!*
+*!!! Note: this part does not work yet !!! See "Encountered problems" for more details*
+
+##### Encountered problems
+
+When running the application, I cannot create nor see the events, except for the `getEventsStreamed` method that uses `AF.request` instead of `TakTlsSessionManager.sharedInstance.request`. These are the logs I get: 
+
+```swift
+Success: T.A.K check integrity was successful
+T.A.K library has been already initialized, it is recommended to destroy TAK object after use of it has been finished
+2020-07-15 08:50:04.277177+0200 Pryv[2928:56161] Task <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1> finished with error [0] Error Domain=TAK.TakError Code=0 "(null)" UserInfo={_NSURLErrorRelatedURLSessionTaskErrorKey=(
+  "LocalDataTask <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1>}
+```
+
+Even when using a single TAK object, as suggested on line 2, the problem persists. I think that this may be a problem of certificate. Indeed, the documentation "Pinning certificates" claims: 
+
+> Make sure that the name of the certificate has the form **<host>.crt**. For instance, if you are connecting to https://httpbin.org/get you should name your certificate file “httpbin.org.crt”. It is very important that the file name is exactly as explained above. Otherwise, T.A.K Client will not be able to find the certificate at run time.
+
+The certificate I created has the name "*.pryv.me.crt". As every query has a different path and may have a different domain, even different from `pryv.me`, this may be a problem in the application that trigger the error above.
 
 #### Jailbreak detection
 
-As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user open the application. 
+As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user interact with the application. 
 
-*As a note for the T.A.K. developpers, it seems that the code snippet are not correctly sorted for C, Kotlin and Swift.* 
+*As a note for T.A.K. developpers, it seems that the code snippet are not correctly sorted for C, Kotlin and Swift.* 
