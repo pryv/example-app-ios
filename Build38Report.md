@@ -83,8 +83,13 @@ To securely implement writes and reads for the user's credentials, I followed th
 To integrate secure channel, 
 
 - I generated the encrypted `*.pryv.me` certificate, as suggested in the documentation, and added it to the application files. 
+  
   - Note that, in order to authenticate the connecting clients, the server will need to configure Build38’s trust chain (request it on the [Service Desk](https://build38service.atlassian.net/servicedesk/customer/portal/)) in the reverse proxy (such as Apache or Nginx). 
-- As `lib-swift` uses `Alamofire` for the HTTP requests, I could use the code snippet provided in the documentation section "Integration with Alamofire". However, this snippet uses an older version of Alamofire than `lib-swift`. Therefore, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate ``TakTlsSessionManager.swift` requests in the library. Every call to `AF.request(...)` was replaced by `TakTlsSessionManager.sharedInstance.request`, except for the `getEventsStreamed` method that might fail when using TAK SDK, as suggested in "Limitations when using Alamofire with T.A.K".
+  
+- As `lib-swift` uses `Alamofire` for the HTTP requests, I could use the code snippet provided in the documentation section "Integration with Alamofire". However, this snippet uses an older version of Alamofire than `lib-swift`. Therefore, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate `TakTlsSessionManager.swift` requests in the library. Every call to `AF.request(...)` was replaced by `TakTlsSessionManager.sharedInstance.request`, except for the `getEventsStreamed` method that might fail when using TAK SDK, as suggested in "Limitations when using Alamofire with T.A.K".
+
+    
+
   The app will install the pod from this branch, whereas a user that does not have a TAK license could still use the `master` version. *Note that to be able to build the application, the user will need to add his own license and frameworks to the Pod/PryvSwiftKit project.*
 
 *!!! Note: this part does not work yet !!! See "Encountered problems" for more details*
@@ -93,7 +98,7 @@ To integrate secure channel,
 
 When running the application, I cannot create nor see the events, except for the `getEventsStreamed` method that uses `AF.request` instead of `TakTlsSessionManager.sharedInstance.request`. These are the logs I get: 
 
-```swift
+```
 Success: T.A.K check integrity was successful
 T.A.K library has been already initialized, it is recommended to destroy TAK object after use of it has been finished
 2020-07-15 08:50:04.277177+0200 Pryv[2928:56161] Task <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1> finished with error [0] Error Domain=TAK.TakError Code=0 "(null)" UserInfo={_NSURLErrorRelatedURLSessionTaskErrorKey=(
