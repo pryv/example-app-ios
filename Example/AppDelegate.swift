@@ -34,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     private let healthKitStreams: [HealthKitStream] = [
-        //        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
+                HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .height)!, frequency: .immediate),
-        //        HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
+                HealthKitStream(type: HKObjectType.characteristicType(forIdentifier: .wheelchairUse)!),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!, frequency: .immediate),
         HealthKitStream(type: HKObjectType.clinicalType(forIdentifier: .allergyRecord)!, frequency: .weekly)
@@ -214,16 +214,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
                     let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                     let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
-                    self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
-                        print("Create event with file failed: \(error.localizedDescription)")
+                    if let event = pryvEvent.params {
+                        self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
+                            print("Create event with file failed: \(error.localizedDescription)")
+                        }
                     }
                 } else {
-                    let apiCall: APICall = [
-                        "method": "events.create",
-                        "params": pryvEvent.params
-                    ]
-                    self.connection?.api(APICalls: [apiCall]).catch { error in
-                        print("Api calls failed: \(error.localizedDescription)")
+                    if let event = pryvEvent.params {
+                        let apiCall: APICall = [
+                            "method": "events.create",
+                            "params": event
+                        ]
+                        self.connection?.api(APICalls: [apiCall]).catch { error in
+                            print("Api calls failed: \(error.localizedDescription)")
+                        }
                     }
                 }
             }
@@ -294,18 +298,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     
                     for sample in uniqueAdditions {
                         let pryvEvent = hkDS.pryvEvent(from: sample)
-                        if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
+                        if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(), let event = pryvEvent.params {
                                 let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                                 let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
-                                self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
+                                self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
                                     print("Create event with file failed: \(error.localizedDescription)")
                                 }
                         } else {
-                            let apiCall: APICall = [
-                                "method": "events.create",
-                                "params": pryvEvent.params
-                            ]
-                            apiCalls.append(apiCall)
+                            if let event = pryvEvent.params {
+                                let apiCall: APICall = [
+                                    "method": "events.create",
+                                    "params": event
+                                ]
+                                apiCalls.append(apiCall)
+                            }
                         }
                     }
 
