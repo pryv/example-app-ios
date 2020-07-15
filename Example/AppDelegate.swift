@@ -235,16 +235,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Monitor dynamic data such as weight periodically
     /// Submit the value to Pryv periodically
     private func dynamicMonitor(hkDS: HealthKitStream) {
-        let observerQuery = HKObserverQuery(sampleType: hkDS.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
-            defer { completionHandler() }
-            if let err = error {
-                print("Failed to receive background notification of \(hkDS.type.identifier) change: \(err.localizedDescription)")
-                return
-            }
-            
-            #if DEBUG
-            print("Received background notification of \(hkDS.type.identifier) change.")
-            #endif
+//        let observerQuery = HKObserverQuery(sampleType: hkDS.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
+//            defer { completionHandler() }
+//            if let err = error {
+//                print("Failed to receive background notification of \(hkDS.type.identifier) change: \(err.localizedDescription)")
+//                return
+//            }
+//
+//            #if DEBUG
+//            print("Received background notification of \(hkDS.type.identifier) change.")
+//            #endif
             
             var anchor = HKQueryAnchor.init(fromValue: 0)
             if UserDefaults.standard.object(forKey: "Anchor") != nil {
@@ -255,9 +255,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
             anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
             self.healthStore.execute(anchoredQuery)
-        }
-        
-        healthStore.execute(observerQuery)
+//        }
+//        
+//        healthStore.execute(observerQuery)
     }
     
     private func anchoredQueryResultHandler(hkDS: HealthKitStream) -> ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) {
