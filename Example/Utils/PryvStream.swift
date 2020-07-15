@@ -58,11 +58,29 @@ class PryvStream {
     private func hkUnit() -> HKUnit? {
         switch streamId {
         case "bodyMass":
-            return HKUnit.gramUnit(with: .kilo)
+            switch type {
+            case "mass/kg": return HKUnit.gramUnit(with: .kilo)
+            case "mass/g": return HKUnit.gram()
+            case "mass/mg": return HKUnit.gramUnit(with: .milli)
+            case "mass/lb": return HKUnit.pound()
+            case "mass/oz": return HKUnit.ounce()
+            case "mass/st": return HKUnit.stone()
+            default: break
+            }
         case "height":
-            return HKUnit.meterUnit(with: .centi)
-        default: // You can add as many stream as you want to better match your pryv lab
-            return nil
+            switch type {
+            case "length/cm": return HKUnit.meterUnit(with: .centi)
+            case "length/m": return HKUnit.meter()
+            case "length/mm": return HKUnit.meterUnit(with: .milli)
+            case "length/km": return HKUnit.meterUnit(with: .kilo)
+            case "length/ft": return HKUnit.foot()
+            case "length/in": return HKUnit.inch()
+            case "length/mi": return HKUnit.mile()
+            case "length/yd": return HKUnit.yard()
+            default: break
+            }
+        default: break // You can add as many stream as you want to better match your pryv lab
         }
+        return nil
     }
 }
