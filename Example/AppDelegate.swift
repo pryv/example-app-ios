@@ -299,6 +299,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                 print("Api calls for creation of event failed: \(error.localizedDescription)")
                             }
                         }
+                        
+                        // FIXME
+                        // Promises are not executed before a new notification is received => duplicated !
                     }
                     
                     if let deletions = deletedSamples, deletions.count > 0 {
