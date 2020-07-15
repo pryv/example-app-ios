@@ -181,7 +181,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell, indexPath.row < events.count else { return UITableViewCell() }
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
@@ -234,19 +234,20 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 
                 if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
                     let sample = self.pryvStream.healthKitSample(from: Double(params["content"] as! String)!)!
-                    self.healthStore.save(sample) { (success, error) in
-                        if !success || error != nil {
-                            print("problem occurred when sending event to Health")
-                        } else {
-                            var paramsWithTag = params
-                            paramsWithTag["tags"] = [String(describing: sample.uuid)]
-                            apiCall["params"] = paramsWithTag
-                            self.connection?.api(APICalls: [apiCall]).catch { error in
-                                let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                                innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                                self.present(innerAlert, animated: true, completion: nil)
+
+                    var paramsWithTag = params
+                    paramsWithTag["tags"] = [String(describing: sample.uuid)]
+                    apiCall["params"] = paramsWithTag
+                    self.connection?.api(APICalls: [apiCall]).then { _ in
+                        self.healthStore.save(sample) { (success, error) in
+                            if !success || error != nil {
+                                print("problem occurred when sending event to Health")
                             }
                         }
+                    }.catch { error in
+                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(innerAlert, animated: true, completion: nil)
                     }
                 } else {
                     self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in

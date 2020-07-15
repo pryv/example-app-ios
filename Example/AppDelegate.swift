@@ -11,6 +11,7 @@ import KeychainSwift
 import HealthKit
 import PryvSwiftKit
 import CoreLocation
+import Promises
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -254,36 +255,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
                     UserDefaults.standard.set(data, forKey: "Anchor")
                     
-                    if let additions = newSamples, additions.count > 0 {
-                        for sample in additions {
-                            let pryvEvent = hkDS.pryvEvent(from: sample)
-                            // avoid to create an event twice, as already created from the Pryv app
+                    if let additions = newSamples {
+                        let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
                             let getEventsWithTagCall: APICall = [
                                 "method": "events.get",
                                 "params": [
-                                    "tags": [String(describing: sample.uuid)]
+                                    "tags": additions.map { sample in String(describing: sample.uuid) }
                                 ]
                             ]
                             self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
-                                if let events = results.first?["events"] as? [Event], events.isEmpty {
-                                    if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
+                                if let events = results.first?["events"] as? [Event] {
+                                    let existingSampleIds: [String] = events.flatMap { event in event["tags"] as! [String] }
+                                    let uniqueAdditions = additions.filter { sample in !existingSampleIds.contains(String(describing: sample.uuid)) }
+                                    fullfill(uniqueAdditions)
+                                }
+                            }.catch { error in
+                                print("Api call for duplicates failed: \(error.localizedDescription)")
+                                reject(error)
+                            }
+                        })
+                        
+                        removeDuplicates.then { uniqueAdditions in
+                            var apiCalls = [APICall]()
+                            
+                            for sample in uniqueAdditions {
+                                let pryvEvent = hkDS.pryvEvent(from: sample)
+                                if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint() {
                                         let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                                         let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
                                         self.connection?.createEventWithFormData(event: pryvEvent.params as Json, parameters: nil, files: [media]).catch { error in
                                             print("Create event with file failed: \(error.localizedDescription)")
                                         }
-                                    } else {
-                                        let apiCall: APICall = [
-                                            "method": "events.create",
-                                            "params": pryvEvent.params
-                                        ]
-                                        self.connection?.api(APICalls: [apiCall]).catch { error in
-                                            print("Api calls for creation of event failed: \(error.localizedDescription)")
-                                        }
-                                    }
+                                } else {
+                                    let apiCall: APICall = [
+                                        "method": "events.create",
+                                        "params": pryvEvent.params
+                                    ]
+                                    apiCalls.append(apiCall)
                                 }
-                            }.catch { error in
-                                print("Api call for sample.uuid failed: \(error.localizedDescription)")
+                            }
+
+                            self.connection?.api(APICalls: apiCalls).catch { error in
+                                print("Api calls for creation of event failed: \(error.localizedDescription)")
                             }
                         }
                     }
