@@ -235,37 +235,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Monitor dynamic data such as weight periodically
     /// Submit the value to Pryv periodically
     private func dynamicMonitor(hkDS: HealthKitStream) {
-//        let observerQuery = HKObserverQuery(sampleType: hkDS.type as! HKSampleType, predicate: nil) { _, completionHandler, error in
-//            defer { completionHandler() }
-//            if let err = error {
-//                print("Failed to receive background notification of \(hkDS.type.identifier) change: \(err.localizedDescription)")
-//                return
-//            }
-//
-//            #if DEBUG
-//            print("Received background notification of \(hkDS.type.identifier) change.")
-//            #endif
-            
-            var anchor = HKQueryAnchor.init(fromValue: 0)
-            if UserDefaults.standard.object(forKey: "Anchor") != nil {
-                let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
-                anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
-            }
-            
-            let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
-            anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
-            self.healthStore.execute(anchoredQuery)
-//        }
-//        
-//        healthStore.execute(observerQuery)
+        var anchor = HKQueryAnchor.init(fromValue: 0)
+        if UserDefaults.standard.object(forKey: "Anchor") != nil {
+            let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+            anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
+        }
+        
+        let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
+        anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
+        self.healthStore.execute(anchoredQuery)
     }
     
+    /// Return a results handler compatible with `HKAnchoredQuery.resultsHandler` and `HKAnchoredQuery.updateHandler` for a given HealthKit stream
+    /// - Parameter hkDS: HealthKit stream
+    /// - Returns: the results handler for an `HKAnchoredQuery` that adds the new samples from HealthKit and deletes the deleted samples from HealthKit in Pryv
     private func anchoredQueryResultHandler(hkDS: HealthKitStream) -> ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) {
         return { query, newSamples, deletedSamples, newAnchor, error in
+            #if DEBUG
+            print("!! Anchored query update !!")
+            #endif
             self.anchoredQueryCompletionHandler(hkDS: hkDS, query: query, newSamples: newSamples, deletedSamples: deletedSamples, newAnchor: newAnchor, error: error)
         }
     }
     
+    /// Create a results handler for an `HKAnchoredQuery` that adds the new samples from HealthKit and deletes the deleted samples from HealthKit in Pryv
+    /// - Parameters:
+    ///   - hkDS: HealthKit stream corresponding to the sample type of the `HKAnchoredQuery`
+    ///   - query: the reference to the `HKAnchoredQuery`
+    ///   - newSamples: the newly created samples in HealthKit
+    ///   - deletedSamples: the deleted samples from HealthKit
+    ///   - newAnchor: the new anchor corresponding to the `HKAnchoredQuery`
+    ///   - error: the error, if there is one
     private func anchoredQueryCompletionHandler(hkDS: HealthKitStream, query: HKAnchoredObjectQuery, newSamples: [HKSample]?, deletedSamples: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
         DispatchQueue.main.async {
             if let err = error {
@@ -322,9 +322,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                         print("Api calls for creation of event failed: \(error.localizedDescription)")
                     }
                 }
-                
-                // FIXME
-                // Promises are not executed before a new notification is received => duplicated !
             }
             
             if let deletions = deletedSamples, deletions.count > 0 {

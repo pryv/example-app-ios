@@ -9,8 +9,12 @@
 import Foundation
 
 extension String {
+    
+    /// Condense multiple whitespaces into a single whitespace
+    /// - Returns: the current string with its whitespaces condensed
     func condenseWhitespaces() -> String {
         let components = self.components(separatedBy: .whitespacesAndNewlines)
         return components.filter({ !$0.isEmpty }).joined(separator: " ")
     }
+    
 }

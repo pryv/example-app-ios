@@ -344,7 +344,7 @@ public class HealthKitStream {
                 "activityType": workoutSample.workoutActivityType.name,
                 "events": events,
                 "totalFlightsClimbed": workoutSample.totalFlightsClimbed?.doubleValue(for: HKUnit.count()),
-                "totalSwimmingStokeCount": workoutSample.totalSwimmingStrokeCount?.doubleValue(for: HKUnit.count())
+                "totalSwimmingStrokeCount": workoutSample.totalSwimmingStrokeCount?.doubleValue(for: HKUnit.count())
             ]
             return (type: "activity/workout", content: content, attachmentData: attachmentData)
         case is HKCategoryType:

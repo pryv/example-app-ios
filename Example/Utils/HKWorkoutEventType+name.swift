@@ -10,6 +10,8 @@ import Foundation
 import HealthKit
 
 public extension HKWorkoutEventType {
+    
+    /// Mapping from the workout event type to its human readable name
     var name: String {
         switch self {
         case .motionPaused: return "motionPaused"

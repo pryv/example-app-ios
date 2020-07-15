@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
             
             self.navigationController?.pushViewController(vc, animated: false)
         }.catch { _ in
-            self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
+            self.present(UIAlertController().ephemereAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
     
