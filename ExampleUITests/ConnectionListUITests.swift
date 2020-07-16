@@ -23,6 +23,7 @@ class ConnectionListUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
         
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()

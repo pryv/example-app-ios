@@ -7,10 +7,13 @@
 //
 
 import XCTest
+import PryvSwiftKit
+@testable import Promises
 
 class ConnectionMapUITests: XCTestCase {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
-    private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
+    private let endpoint = "https://ckclwj7m504fo1od3fkt6ptqb@Testuser.pryv.me/"
+    private var connection: Connection!
     
     var app: XCUIApplication!
 
@@ -20,6 +23,9 @@ class ConnectionMapUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
+        
+        connection = Connection(apiEndpoint: endpoint)
         
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
@@ -86,6 +92,50 @@ class ConnectionMapUITests: XCTestCase {
         
         changeDate(day: "10", month: "July", year: "2019")
         XCTAssertEqual(app.staticTexts["selectedTimeValue"].label, "10.07.2019")
+    }
+    
+    func testCurrentDayPosition() {
+        let params: Json = [
+            "streamIds": ["diary"],
+            "type": "position/wgs84",
+            "content": [
+                "latitude": 10.0,
+                "longitude": 10.0
+            ]
+        ]
+        
+        let apiCall: APICall = [
+            "method": "events.create",
+            "params": params
+        ]
+        
+        let promise = connection.api(APICalls: [apiCall])
+        
+        XCTAssert(waitForPromises(timeout: 5.0))
+        XCTAssertNil(promise.error)
+        XCTAssertNotNil(promise.value)
+        
+        app.segmentedControls["filterController"].buttons["Day"].tap()
+        sleep(1)
+        
+        changeDate(day: "10", month: "July", year: "2019")
+        
+        let dayFormatter = DateFormatter()
+        dayFormatter.dateFormat = "dd"
+        
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MMMM"
+        
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        
+        let today = Date()
+        changeDate(day: dayFormatter.string(from: today), month: monthFormatter.string(from: today), year: yearFormatter.string(from: today))
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        
+        XCTAssert(app.otherElements[formatter.string(from: today)].exists)
     }
     
     private func changeDate(day: String? = nil, month: String? = nil, year: String? = nil) {
