@@ -12,6 +12,12 @@ You will get:
 If authorized, the application will get the updates from HealthKit for date of birth, wheelchair use, body mass, height, body mass index and active energy burned. These updates will trigger the creation of a new event in Pryv.io backend with the content of the sample received from HealthKit.
 
 The application will also create a HealthKit sample for body mass upon the creation of a simple event with stream id `bodyMass` in the application.
+  
+These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.
+
+| Service info                                                 | Authentication and authorization                             | Connection list                                              | Connection map                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="Screenshots/MainViewController.png" title="MainViewController" style="zoom:33%;"> | <img src="Screenshots/AuthViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionListTableViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionMapViewController.png" style="zoom:33%;" /> |
 
 ## Install
 
@@ -21,30 +27,6 @@ From `Project` folder
 * if needed run `pod update`
 * open Example.xcworkspace (not Example.xcodeproj)
 
-## Screenshots
-
-<figure>
-  <figcaption>MainViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/MainViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>AuthViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/AuthViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>ConnectionListTableViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionListTableViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>ConnectionMapViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionMapViewController.png" title="ConnectionMapViewController" height="700">
-</figure>
 
 ## Support and warranty
 
