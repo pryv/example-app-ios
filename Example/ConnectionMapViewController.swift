@@ -87,7 +87,7 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         switch during {
         case .day:
             params["fromTime"] = selectedDate.startOfDay.timeIntervalSince1970
-            params["toTime"] = selectedDate.endOfDay.timeIntervalSince1970
+            params["toTime"] = selectedDate.isInToday ? Date().timeIntervalSince1970 : selectedDate.endOfDay.timeIntervalSince1970
         case .week:
             params["fromTime"] = selectedDate.startOfWeek.timeIntervalSince1970
             params["toTime"] = selectedDate.endOfWeek.timeIntervalSince1970
