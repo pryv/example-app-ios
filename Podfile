@@ -1,4 +1,5 @@
 source 'https://github.com/pryv/lib-swift.git'
+source 'https://github.com/alemannosara/ios-healthkit-bridge.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Uncomment the next line to define a global platform for your project
@@ -10,6 +11,7 @@ target 'Example' do
 
   # Pods for Example
   pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
+  pod 'HealthKitBridge', :git => 'https://github.com/alemannosara/ios-healthkit-bridge', :branch => 'master'
   pod 'KeychainSwift'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 

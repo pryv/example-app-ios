@@ -8,6 +8,7 @@
 import UIKit
 import KeychainSwift
 import PryvSwiftKit
+import HealthKitBridge
 import HealthKit
 
 /// A custom cell to show the details of an event

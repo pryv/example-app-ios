@@ -10,6 +10,7 @@ import UIKit
 import KeychainSwift
 import HealthKit
 import PryvSwiftKit
+import HealthKitBridge
 import CoreLocation
 import Promises
 

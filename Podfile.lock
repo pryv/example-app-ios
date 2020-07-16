@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (5.2.1)
+  - HealthKitBridge (0.1.0):
+    - PryvSwiftKit
   - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
   - PromisesObjC (1.2.9)
@@ -16,6 +18,7 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
+  - HealthKitBridge (from `https://github.com/alemannosara/ios-healthkit-bridge`, branch `master`)
   - KeychainSwift
   - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
   - RLBAlertsPickers (~> 1.1.1)
@@ -32,17 +35,24 @@ SPEC REPOS:
     - Starscream
 
 EXTERNAL SOURCES:
+  HealthKitBridge:
+    :branch: master
+    :git: https://github.com/alemannosara/ios-healthkit-bridge
   PryvSwiftKit:
     :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
+  HealthKitBridge:
+    :commit: 0273e00ccdfaaa28f1296bce67f472cf44de5b25
+    :git: https://github.com/alemannosara/ios-healthkit-bridge
   PryvSwiftKit:
     :commit: 73c7f66c5405367af72f0e5469bdd726a3d9fa79
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  HealthKitBridge: f379cb32aec59d0fec28acab905318615b2685cf
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
@@ -52,6 +62,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 4a45953818c1f6eb1c8bd3f0aa456074c52d83ce
+PODFILE CHECKSUM: 5ac35e5a65ff1622a273d829eb5d4cf1af2d3e98
 
 COCOAPODS: 1.8.4
