@@ -8,7 +8,13 @@ You will get:
 * **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
 * **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
 * **ConnectionMapViewController** a map view to show the position events for a single connection
-  
+
+These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.
+
+| Service info                                                 | Authentication and authorization                             | Connection list                                              | Connection map                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="Screenshots/MainViewController.png" title="MainViewController" style="zoom:33%;"> | <img src="Screenshots/AuthViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionListTableViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionMapViewController.png" style="zoom:33%;" /> |
+
 ## Install
 
 * install cocoa pods [cocoapods.org](https://cocoapods.org)
@@ -17,30 +23,6 @@ From `Project` folder
 * if needed run `pod update`
 * open Example.xcworkspace (not Example.xcodeproj)
 
-## Screenshots
-
-<figure>
-  <figcaption>MainViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/MainViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>AuthViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/AuthViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>ConnectionListTableViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionListTableViewController.png" title="MainViewController" height="700">
-</figure>
-
-
-<figure>
-  <figcaption>ConnectionMapViewController: </figcaption>
-  <img src="https://github.com/pryv/app-swift-example/blob/master/Screenshots/ConnectionMapViewController.png" title="ConnectionMapViewController" height="700">
-</figure>
 
 ## Support and warranty
 
