@@ -56,20 +56,20 @@ class ConnectionTabBarViewController: UITabBarController {
         
         alert.addAction(UIAlertAction(title: "Manage privacy settings", style: .default) { _ in
             if let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    #if DEBUG
-                    print("Settings opened: \(success)")
-                    #endif
+                UIApplication.shared.open(settingsUrl, completionHandler: { success in
+                    if !success {
+                        print("Error when opening the settings bundle")
+                    }
                 })
             }
         })
         
         alert.addAction(UIAlertAction(title: "Manage health data", style: .default) { _ in
             if let healthUrl = URL(string: "x-apple-health://"), UIApplication.shared.canOpenURL(healthUrl) {
-                UIApplication.shared.open(healthUrl, completionHandler: { (success) in
-                    #if DEBUG
-                    print("Settings opened: \(success)")
-                    #endif
+                UIApplication.shared.open(healthUrl, completionHandler: { success in
+                    if !success {
+                        print("Error when opening the Health app")
+                    }
                 })
             }
         })

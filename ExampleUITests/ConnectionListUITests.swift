@@ -123,10 +123,8 @@ class ConnectionListUITests: XCTestCase {
         app.textFields["contentField"].typeText(wrongField)
 
         app.alerts.buttons["OK"].tap()
-        sleep(1)
-        XCTAssert(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
-        
-        app.alerts.buttons["OK"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Error: The parameters' format is invalid."].exists)
+        sleep(2)
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")

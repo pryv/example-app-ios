@@ -85,7 +85,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
     private var healthStore = HKHealthStore()
-    private let pryvStream = PryvStream(streamId: "bodyMass", type: "mass/kg")
+    private let pryvStream = PryvStream(streamId: "bodyMass", type: "mass/kg") // the newly created events from this Pryv stream will be written to HealthKit as well
     private var eventId: String? = nil
     
     var appId: String?
@@ -166,7 +166,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
             self.connectionSocketIO!.emit(methodId: "events.get", params: Json()) { any in
                 let dataArray = any as NSArray
                 let dictionary = dataArray[1] as! Json
-                self.events = (dictionary["events"] as! [Event]).filter({!(($0["type"] as? String)?.contains("position") ?? true)})
+                self.events = dictionary["events"] as! [Event]
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
                 self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
@@ -253,9 +253,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                     }
                 } else {
                     self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
-                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                        self.present(innerAlert, animated: true, completion: nil)
+                        self.present(UIAlertController().ephemereAlert(title: "Error: \(error.localizedDescription)", delay: 2), animated: true, completion: nil)
                     }
                 }
             }
