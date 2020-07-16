@@ -58,10 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             healthStore.enableBackgroundDelivery(for: stream.type, frequency: stream.frequency!, withCompletion: { succeeded, error in
                 if let err = error, !succeeded {
                     print("Failed to enable background delivery of \(stream.type.identifier) changes: \(err)")
-                } else {
-                    #if DEBUG
-                    print("Enabled background delivery of \(stream.type.identifier) changes")
-                    #endif
                 }
             })
         }
@@ -146,14 +142,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Manage newly received location updates in case of an error
     /// - Parameters:
     ///   - manager: location manager
-    ///   - locations: array with the latest location(s)
+    ///   - error: error to handle
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Problem encountered when tracking position: \(error)")
+        print("Problem encountered when tracking position: \(error.localizedDescription)")
     }
     
     // MARK: - HealthKit synchronization
     
-    /// Configures the health kit data sync. with Pryv
+    /// Configure the health kit data sync. with Pryv
     private func configureHealthKit() {
         let streamIds = healthKitStreams.map({ $0.pryvStreamId() })
         createStreams(with: streamIds, in: connection)
@@ -162,10 +158,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         staticStreams.removeAll(where: { $0.needsBackgroundDelivery() })
         let dynamicStreams = healthKitStreams.filter({ $0.needsBackgroundDelivery() })
         
-        staticStreams.forEach({ staticMonitor(hkDS: $0) })
-        dynamicStreams.forEach({ dynamicMonitor(hkDS: $0) })
+        staticStreams.forEach({ staticMonitor(stream: $0) })
+        dynamicStreams.forEach({ dynamicMonitor(stream: $0) })
     }
     
+    /// Create the streams in Pryv for the given HealthKit sample types
+    /// - Parameters:
+    ///   - ids: the pairs of parent ids and their respective stream id
+    ///   - connection: Pryv connection object where to create the streams
     private func createStreams(with ids: [(parentId: String?, streamId: String)], in connection: Connection?) {
         var apiCalls = [APICall]()
         
@@ -194,21 +194,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     /// Monitor static data such as date of birth, once per app launch
     /// Submit the value to Pryv only if any change detected
-    private func staticMonitor(hkDS: HealthKitStream) {
-        let newContent = hkDS.pryvContentAndType(of: healthStore)
+    /// - Parameter stream: the HealthKit stream to monitor
+    private func staticMonitor(stream: HealthKitStream) {
+        let newContent = stream.pryvContentAndType(of: healthStore)
         
         connection?.api(APICalls: [
             [
                 "method": "events.get",
                 "params": [
-                    "streams": [hkDS.pryvStreamId().streamId]
+                    "streams": [stream.pryvStreamId().streamId]
                 ]
             ]
         ]).then { json in
             let events = json.first?["events"] as? [Event]
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
-                let pryvEvent = hkDS.pryvEvent(of: self.healthStore)
+                let pryvEvent = stream.pryvEvent(of: self.healthStore)
                 
                 if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){
                     let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
@@ -235,42 +236,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     /// Monitor dynamic data such as weight periodically
     /// Submit the value to Pryv periodically
-    private func dynamicMonitor(hkDS: HealthKitStream) {
+    /// - Parameter stream: the HealthKit stream to monitor
+    private func dynamicMonitor(stream: HealthKitStream) {
         var anchor = HKQueryAnchor.init(fromValue: 0)
         if UserDefaults.standard.object(forKey: "Anchor") != nil {
             let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
             anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
         }
         
-        let anchoredQuery = HKAnchoredObjectQuery(type: hkDS.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(hkDS: hkDS))
-        anchoredQuery.updateHandler = self.anchoredQueryResultHandler(hkDS: hkDS)
+        let anchoredQuery = HKAnchoredObjectQuery(type: stream.type as! HKSampleType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit, resultsHandler: self.anchoredQueryResultHandler(stream: stream))
+        anchoredQuery.updateHandler = self.anchoredQueryResultHandler(stream: stream)
         self.healthStore.execute(anchoredQuery)
     }
     
     /// Return a results handler compatible with `HKAnchoredQuery.resultsHandler` and `HKAnchoredQuery.updateHandler` for a given HealthKit stream
-    /// - Parameter hkDS: HealthKit stream
+    /// - Parameter stream: HealthKit stream
     /// - Returns: the results handler for an `HKAnchoredQuery` that adds the new samples from HealthKit and deletes the deleted samples from HealthKit in Pryv
-    private func anchoredQueryResultHandler(hkDS: HealthKitStream) -> ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) {
+    private func anchoredQueryResultHandler(stream: HealthKitStream) -> ((HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void) {
         return { query, newSamples, deletedSamples, newAnchor, error in
             #if DEBUG
             print("!! Anchored query update !!")
             #endif
-            self.anchoredQueryCompletionHandler(hkDS: hkDS, query: query, newSamples: newSamples, deletedSamples: deletedSamples, newAnchor: newAnchor, error: error)
+            self.anchoredQueryCompletionHandler(stream: stream, query: query, newSamples: newSamples, deletedSamples: deletedSamples, newAnchor: newAnchor, error: error)
         }
     }
     
     /// Create a results handler for an `HKAnchoredQuery` that adds the new samples from HealthKit and deletes the deleted samples from HealthKit in Pryv
     /// - Parameters:
-    ///   - hkDS: HealthKit stream corresponding to the sample type of the `HKAnchoredQuery`
+    ///   - stream: HealthKit stream corresponding to the sample type of the `HKAnchoredQuery`
     ///   - query: the reference to the `HKAnchoredQuery`
     ///   - newSamples: the newly created samples in HealthKit
     ///   - deletedSamples: the deleted samples from HealthKit
     ///   - newAnchor: the new anchor corresponding to the `HKAnchoredQuery`
     ///   - error: the error, if there is one
-    private func anchoredQueryCompletionHandler(hkDS: HealthKitStream, query: HKAnchoredObjectQuery, newSamples: [HKSample]?, deletedSamples: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
+    private func anchoredQueryCompletionHandler(stream: HealthKitStream, query: HKAnchoredObjectQuery, newSamples: [HKSample]?, deletedSamples: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
         DispatchQueue.main.async {
             if let err = error {
-                print("Failed to receive new \(hkDS.type.identifier): \(err.localizedDescription)")
+                print("Failed to receive new \(stream.type.identifier): \(err.localizedDescription)")
                 return
             }
             
@@ -301,7 +303,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     var apiCalls = [APICall]()
                     
                     for sample in uniqueAdditions {
-                        let pryvEvent = hkDS.pryvEvent(from: sample)
+                        let pryvEvent = stream.pryvEvent(from: sample)
                         if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(), let event = pryvEvent.params {
                                 let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                                 let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
