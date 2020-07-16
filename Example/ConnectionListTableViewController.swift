@@ -233,8 +233,9 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 }]
                 
                 
-                if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized {
-                    let sample = self.pryvStream.healthKitSample(from: Double(params["content"] as! String)!)!
+                if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized,
+                    let stringContent = params["content"] as? String, let content = Double(stringContent) {
+                    let sample = self.pryvStream.healthKitSample(from: content)!
 
                     var paramsWithTag = params
                     paramsWithTag["tags"] = [String(describing: sample.uuid)]
