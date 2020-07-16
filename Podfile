@@ -11,7 +11,7 @@ target 'Example' do
 
   # Pods for Example
   pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
-  pod 'HealthKitBridge', :git => 'https://github.com/pryv/bridge-ios-healthkit', :branch => 'review'
+  pod 'HealthKitBridge', :git => 'https://github.com/pryv/bridge-ios-healthkit', :branch => 'master'
   pod 'KeychainSwift'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 
