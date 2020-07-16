@@ -1,6 +1,6 @@
 # Pryv iOS example app
 
-Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) and [`ios-healthkit-bridge`](https://github.com/pryv/ios-healthkit-bridge) usage
+Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) and [`bridge-ios-healthkit`](https://github.com/pryv/bridge-ios-healthkit) usage
 
 You will get:
 
@@ -12,7 +12,7 @@ You will get:
 If authorized, the application will get the updates from HealthKit for date of birth, wheelchair use, body mass, height, body mass index and active energy burned. These updates will trigger the creation of a new event in Pryv.io backend with the content of the sample received from HealthKit.
 
 The application will also create a HealthKit sample for body mass upon the creation of a simple event with stream id `bodyMass` in the application.
-  
+
 These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.
 
 | Service info                                                 | Authentication and authorization                             | Connection list                                              | Connection map                                               |

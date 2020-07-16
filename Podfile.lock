@@ -18,7 +18,7 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
-  - HealthKitBridge (from `https://github.com/alemannosara/ios-healthkit-bridge`, branch `master`)
+  - HealthKitBridge (from `https://github.com/pryv/bridge-ios-healthkit`, branch `review`)
   - KeychainSwift
   - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
   - RLBAlertsPickers (~> 1.1.1)
@@ -36,16 +36,16 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   HealthKitBridge:
-    :branch: master
-    :git: https://github.com/alemannosara/ios-healthkit-bridge
+    :branch: review
+    :git: https://github.com/pryv/bridge-ios-healthkit
   PryvSwiftKit:
     :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
   HealthKitBridge:
-    :commit: 0273e00ccdfaaa28f1296bce67f472cf44de5b25
-    :git: https://github.com/alemannosara/ios-healthkit-bridge
+    :commit: f6aecaafb72bb2b6aea4f2063b3642e440a22d31
+    :git: https://github.com/pryv/bridge-ios-healthkit
   PryvSwiftKit:
     :commit: 73c7f66c5405367af72f0e5469bdd726a3d9fa79
     :git: https://github.com/pryv/lib-swift.git
@@ -62,6 +62,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 5ac35e5a65ff1622a273d829eb5d4cf1af2d3e98
+PODFILE CHECKSUM: fad19708cea9fb052a7613edca6bfce4a339f9c2
 
 COCOAPODS: 1.8.4
