@@ -38,11 +38,12 @@ class EventTableViewCell: UITableViewCell, UINavigationControllerDelegate, UIIma
                 typeStackView.isHidden = false
                 typeLabel.text = type
                 
-                let contentString = String(describing: content)
-                if !contentString.contains("null") {
-                    contentStackView.isHidden = false
-                    contentLabel.text = contentString.replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "").condenseWhitespaces() // formatting the json string to make it readable
-                }
+                // formatting the json string to make it readable
+                var contentString = String(describing: content)
+                contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
+                
+                contentStackView.isHidden = false
+                contentLabel.text = contentString
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
                     attachmentStackView.isHidden = false

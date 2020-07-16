@@ -9,7 +9,7 @@ You will get:
 * **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
 * **ConnectionMapViewController** a map view to show the position events for a single connection
 
-If authorized, the application will get the updates from HealthKit for date of birth, wheelchair use, body mass, height, body mass index and active energy burned. These updates will trigger the creation of a new event in Pryv.io backend with the content of the sample received from HealthKit.
+If authorized, the application will get the updates from HealthKit for date of birth, wheelchair use, body mass, height, body mass index, active energy burned and workout. These updates will trigger the creation of a new event in Pryv.io backend with the content of the sample received from HealthKit.
 
 The application will also create a HealthKit sample for body mass upon the creation of a simple event with stream id `bodyMass` in the application.
 
