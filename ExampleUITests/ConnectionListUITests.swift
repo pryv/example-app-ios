@@ -150,6 +150,8 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
+        while (cell.staticTexts["typeLabel"].exists) { }
+        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "diary")
         XCTAssertFalse(cell.staticTexts["typeLabel"].exists)
         XCTAssertFalse(cell.staticTexts["contentLabel"].exists)
@@ -188,7 +190,8 @@ class ConnectionListUITests: XCTestCase {
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
         app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
-        sleep(5)
+        
+        while (!cell.staticTexts["attachmentLabel"].exists) { }
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
