@@ -11,3 +11,7 @@ build
 *.xcworkspace/xcuserdata/*.xcuserdatad/*
 */xcuserdata/*.xcuserdatad/xcdebugger/*
 Pods/
+
+### Build 38 ###
+TAK.framework/*
+TakTls.framework/*
