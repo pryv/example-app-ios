@@ -83,37 +83,37 @@ To securely implement writes and reads for the user's credentials, I followed th
 
 #### Secure channel
 
-To integrate secure channel, 
+To integrate secure channel, as `lib-swift` uses `Alamofire` for the HTTP requests, I could use the code snippet provided in the documentation section "Integration with Alamofire". However, this snippet uses an older version of Alamofire than `lib-swift`. Therefore, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). 
 
-- I generated the encrypted `*.pryv.me` certificate, as suggested in the documentation, and added it to the application files. 
-  
-  - Note that, in order to authenticate the connecting clients, the server will need to configure Build38’s trust chain (request it on the [Service Desk](https://build38service.atlassian.net/servicedesk/customer/portal/)) in the reverse proxy (such as Apache or Nginx). 
-  
-- As `lib-swift` uses `Alamofire` for the HTTP requests, I could use the code snippet provided in the documentation section "Integration with Alamofire". However, this snippet uses an older version of Alamofire than `lib-swift`. Therefore, I had to modify it a bit to match the new classes in Alamofire (see `TakTlsSessionManager.swift`). As every request to the server is done through the library, I chose to make a new branch, called `build38-integrated` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated) to integrate `TakTlsSessionManager.swift` requests in the library. Every call to `AF.request(...)` was replaced by `TakTlsSessionManager.sharedInstance.request`, except for the `getEventsStreamed` method that might fail when using TAK SDK, as suggested in "Limitations when using Alamofire with T.A.K".
+As every request to the server is done through the library, I added a `session: Session` attribute to `Connection` and `Service` in [`lib-swift`](https://github.com/pryv/lib-swift/tree/build38-integrated), with a default value of `AF`, corresponding to the default session for Alamofire. This way, in the app, I could set this parameter to `TakTlsSessionManager.sharedInstance` in the application and integrate Build38's secure channel requests. Every call to `AF.request(...)` is replaced by `TakTlsSessionManager.sharedInstance.request`, except for the `getEventsStreamed` method that might fail when using TAK SDK, as suggested in "Limitations when using Alamofire with T.A.K".
 
-    
+##### Secure Certificate Pinning
 
-  The app will install the pod from this branch, whereas a user that does not have a TAK license could still use the `master` version. *Note that to be able to build the application, the user will need to add his own license and frameworks to the Pod/PryvSwiftKit project.*
+Following the documentation on "Pinning certificates", we should generate a certificate for each host we send an HTTP request to. For now, the use of wildcards in the name of the certificate such as `*.pryv.me` is not accepted. Consequently, the app user needs to add a host certificate for each service info and user: 
 
-*!!! Note: this part does not work yet !!! See "Encountered problems" for more details*
+- one for the endpoint URL;
+- one for the service info URL;
+- one for the authentication URL (`authUrl` field from [auth request](https://api.pryv.com/reference/#auth-request));
+- one for the polling URL (`poll` field from [auth request](https://api.pryv.com/reference/#auth-request)).
 
-##### Encountered problems
+For each of these host, one needs to follow the guideline in "Pinning certificate" to generate the `.crt` certificate, encrypt it and add it to the XCode project. The app currently supports
 
-When running the application, I cannot create nor see the events, except for the `getEventsStreamed` method that uses `AF.request` instead of `TakTlsSessionManager.sharedInstance.request`. These are the logs I get: 
+- the endpoint for `testuser`: `testuser.pryv.me.crt`;
+- the default `pryv.me` service info: `reg.pryv.me.crt`;
+- the authentication: `sw.pryv.me.crt`;
+- the polling: `access.pryv.me`.
+
+As claims the documentation "Pinning certificates": 
+
+> Make sure that the name of the certificate has the form **<host>.crt**. For instance, if you are connecting to https://httpbin.org/get you should name your certificate file “httpbin.org.crt”. It is very important that the file name is exactly as explained above. Otherwise, T.A.K Client will not be able to find the certificate at run time.
+
+It is crucial for the correct behavior of the app to add a certificate for every different host we may query. Otherwise, TAK will ignore the request and we will receive no data, except for this error: 
 
 ```
-Success: T.A.K check integrity was successful
-T.A.K library has been already initialized, it is recommended to destroy TAK object after use of it has been finished
 2020-07-15 08:50:04.277177+0200 Pryv[2928:56161] Task <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1> finished with error [0] Error Domain=TAK.TakError Code=0 "(null)" UserInfo={_NSURLErrorRelatedURLSessionTaskErrorKey=(
   "LocalDataTask <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1>"
 ), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1>}
 ```
-
-Even when using a single TAK object, as suggested on line 2, the problem persists. I think that this may be a problem of certificate. Indeed, the documentation "Pinning certificates" claims: 
-
-> Make sure that the name of the certificate has the form **<host>.crt**. For instance, if you are connecting to https://httpbin.org/get you should name your certificate file “httpbin.org.crt”. It is very important that the file name is exactly as explained above. Otherwise, T.A.K Client will not be able to find the certificate at run time.
-
-The certificate I created has the name "*.pryv.me.crt". As every query has a different path and may have a different domain, even different from `pryv.me`, this may be a problem in the application that trigger the error above.
 
 #### Jailbreak detection
 

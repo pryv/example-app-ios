@@ -12,7 +12,7 @@ import PryvSwiftKit
 
 class ConnectionListUITests: XCTestCase {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
-    private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
+    private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@testuser.pryv.me/"
     
     var app: XCUIApplication!
 
@@ -27,14 +27,14 @@ class ConnectionListUITests: XCTestCase {
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
-            app.typeText("Testuser")
+            app.typeText("testuser")
             app.staticTexts["Password"].tap()
             app.typeText("testuser")
             app.buttons["SIGN IN"].tap()
             if app.buttons["ACCEPT"].exists {
                 app.buttons["ACCEPT"].tap()
             }
-            sleep(3)
+            sleep(5)
         }
     }
 
@@ -188,7 +188,7 @@ class ConnectionListUITests: XCTestCase {
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
         app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
-        sleep(3)
+        sleep(5)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)

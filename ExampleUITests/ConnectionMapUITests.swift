@@ -12,7 +12,7 @@ import PryvSwiftKit
 
 class ConnectionMapUITests: XCTestCase {
     private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
-    private let endpoint = "https://ckclwj7m504fo1od3fkt6ptqb@Testuser.pryv.me/"
+    private let endpoint = "https://ckclwj7m504fo1od3fkt6ptqb@testuser.pryv.me/"
     private var connection: Connection!
     
     var app: XCUIApplication!
@@ -30,14 +30,14 @@ class ConnectionMapUITests: XCTestCase {
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
-            app.typeText("Testuser")
+            app.typeText("testuser")
             app.staticTexts["Password"].tap()
             app.typeText("testuser")
             app.buttons["SIGN IN"].tap()
             if app.buttons["ACCEPT"].exists {
                 app.buttons["ACCEPT"].tap()
             }
-            sleep(2)
+            sleep(5)
         }
         
         app.tabBars["connectionTabBar"].buttons["mapButtonItem"].tap()
