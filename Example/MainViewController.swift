@@ -11,9 +11,9 @@ import PryvSwiftKit
 import TAK
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    private let defaultServiceInfoUrl = "https://reg.pryv.me/service/info"
+    private let serviceInfoUrls = ["https://reg.pryv.me/service/info"] // Add more urls, but take care to add its corresponding SSL certificate to the project
     private let utils = Utils()
     private let appId = "app-swift-example"
     // master token permissions
@@ -21,12 +21,13 @@ class MainViewController: UIViewController {
         "streamId": "*",
         "level": "manage"
     ]]
-    private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info", session: TakTlsSessionManager.sharedInstance)
+    private var service: Service!
     private var tak: TAK?
     private var storage: SecureStorage?
+    private var pryvServiceInfoUrl: String?
     
     @IBOutlet private weak var authButton: UIButton!
-    @IBOutlet private weak var serviceInfoUrlField: UITextField!
+    @IBOutlet private weak var serviceInfoUrlPicker: UIPickerView!
     
     override func viewWillAppear(_ animated: Bool) {
         if let apiEndpoint: String = try? storage?.read(key: "apiEndpoint") {
@@ -42,22 +43,17 @@ class MainViewController: UIViewController {
         loginButton.accessibilityIdentifier = "loginButton"
         self.navigationItem.rightBarButtonItem = loginButton
         
-        serviceInfoUrlField.text = defaultServiceInfoUrl
-        serviceInfoUrlField.clearButtonMode = .whileEditing
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // The registration of the client in the T.A.K cloud needs to be done only once after app installation
-        if let isFirstLaunch = UserDefaults.standard.value(forKey: "isFirstLaunch") as? Bool, isFirstLaunch {
-            
-        }
+        serviceInfoUrlPicker.delegate = self
+        serviceInfoUrlPicker.dataSource = self
     }
     
     /// Asks for auth url and load it in the web view to allow the user to login
     /// - Parameter sender: the button to clic on to trigger this action
     @objc func authenticate() {
-        let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
-        service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!, session: TakTlsSessionManager.sharedInstance)
+        let row = serviceInfoUrlPicker.selectedRow(inComponent: 0)
+        let pryvServiceInfoUrl = serviceInfoUrls[row]
+        
+        service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl, session: TakTlsSessionManager.sharedInstance)
         let authPayload: Json = [
             "requestingAppId": appId,
             "requestedPermissions": permissions,
@@ -71,7 +67,7 @@ class MainViewController: UIViewController {
             
             self.navigationController?.pushViewController(vc, animated: false)
         }.catch { _ in
-            self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
+            self.present(UIAlertController().errorAlert(title: "Please, select a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
     
@@ -115,7 +111,6 @@ class MainViewController: UIViewController {
             
             let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
             vc.connection = connection
-            vc.service = self.service
             vc.appId = self.appId
             vc.storage = self.storage
             self.navigationController?.pushViewController(vc, animated: animated)
@@ -135,6 +130,30 @@ class MainViewController: UIViewController {
         self.storage = try? tak?.getSecureStorage(storageName: "app-ios-swift-example-secure-storage")
     }
     
+    // MARK: - UIPickerViewDelegate
+    
+    /// Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    /// The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) ->Int {
+        return serviceInfoUrls.count
+    }
+    
+    /// The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            pickerLabel?.adjustsFontSizeToFitWidth = true
+            pickerLabel?.textAlignment = .center
+        }
+        pickerLabel?.text = serviceInfoUrls[row]
+
+        return pickerLabel!
+    }
 }
 
 

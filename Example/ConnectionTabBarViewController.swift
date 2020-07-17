@@ -17,7 +17,11 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     
     var service: Service?
     var appId: String?
-    var connection: Connection?
+    var connection: Connection? {
+        didSet {
+            self.service = connection?.getService()
+        }
+    }
     var storage: SecureStorage?
     
     override func viewWillAppear(_ animated: Bool) {

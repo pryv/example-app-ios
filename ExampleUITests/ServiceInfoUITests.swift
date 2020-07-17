@@ -27,18 +27,43 @@ class ServiceInfoUITests: XCTestCase {
         }
     }
     
-    func testBadServiceInfoUrl() {
-        app.textFields["serviceInfoUrlField"].tap()
-        app.textFields["serviceInfoUrlField"].buttons["Clear text"].tap()
-        app.textFields["serviceInfoUrlField"].typeText("hello")
+    func testLogin() {
+        app.pickers["serviceInfoPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "https://reg.pryv.me/service/info")
         app.buttons["loginButton"].tap()
+        XCTAssert(app.webViews["webView"].exists)
         
-        XCTAssertEqual(app.alerts.element.staticTexts.element.label, "Please, type a valid service info URL")
+        app.staticTexts["Username or email"].tap()
+        app.typeText("testuser")
+        app.staticTexts["Password"].tap()
+        app.typeText("testuser")
+        app.buttons["SIGN IN"].tap()
+        if app.buttons["ACCEPT"].exists {
+            app.buttons["ACCEPT"].tap()
+        }
+        
+        sleep(5)
+        XCTAssert(app.staticTexts["Pryv Lab"].exists)
         XCTAssertFalse(app.webViews["webView"].exists)
     }
     
-    func testLogin() {
+    func testLoginWithoutCertificate() {
+        app.pickers["serviceInfoPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "https://reg.pryv.me/service/info")
         app.buttons["loginButton"].tap()
+        
+        sleep(2)
         XCTAssert(app.webViews["webView"].exists)
+        
+        app.staticTexts["Username or email"].tap()
+        app.typeText("Testuser")
+        app.staticTexts["Password"].tap()
+        app.typeText("testuser")
+        app.buttons["SIGN IN"].tap()
+        if app.buttons["ACCEPT"].exists {
+            app.buttons["ACCEPT"].tap()
+        }
+        
+        XCTAssertFalse(app.staticTexts["Pryv Lab"].exists)
+        XCTAssert(app.alerts.element.staticTexts.element.label.contains("No certificate found for "))
+        XCTAssert(app.alerts.element.staticTexts.element.label.contains("Testuser"))
     }
 }
