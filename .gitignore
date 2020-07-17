@@ -1,11 +1,7 @@
 ### .DS_Store ###
 .DS_Store
 */.DS_Store
-<<<<<<< Updated upstream
-
-=======
 */*/.DS_Store
->>>>>>> Stashed changes
 
 ### Xcode ###
 build
@@ -17,4 +13,7 @@ build
 Pods/
 
 ### Build38 ###
-Example/TAK.framework/TAK
+TAK.framework/*
+TAK.framework/*/*
+TakTls.framework/*
+TakTls.framework/*/*

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import KeychainSwift
 import Mocker
 import PryvSwiftKit
 

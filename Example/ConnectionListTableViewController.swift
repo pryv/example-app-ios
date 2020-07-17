@@ -6,7 +6,6 @@
 //  Copyright © 2020 Pryv. All rights reserved.
 //
 import UIKit
-import KeychainSwift
 import PryvSwiftKit
 import TAK
 
@@ -80,28 +79,18 @@ class EventTableViewCell: UITableViewCell {
 }
 
 class ConnectionListTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    private let keychain = KeychainSwift()
     private let utils = Utils()
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
     private var eventId: String? = nil
     
     var appId: String?
-    var connection: Connection?
-    var storage: SecureStorage? {
+    var connection: Connection? {
         didSet {
-            guard let apiEndpoint: String = try? storage!.read(key: "apiEndpoint") else { return }
-            self.connection = Connection(apiEndpoint: apiEndpoint)
-            
+            let apiEndpoint = connection?.getApiEndpoint() ?? ""
             guard let username = utils.extractUsername(from: apiEndpoint), let (endpoint, token) = utils.extractTokenAndEndpoint(from: apiEndpoint) else { return }
             let url = "\(endpoint)\(username)?auth=\(token ?? "")"
-            
-            do {
-                try storage?.write(key: "socket-io-url", value: url)
-                setRealtimeUpdates()
-            } catch {
-                print("Problem occurred when writing the socket.io URL: \(error.localizedDescription)")
-            }
+            setRealtimeUpdates(url: url)
             
             getEvents()
         }
@@ -163,8 +152,8 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     }
     
     /// Sets up the socket io connection for real time updates
-    private func setRealtimeUpdates() {
-        let url: String = (try? storage?.read(key: "socket-io-url")) ?? ""
+    /// - Parameter url: the socket io url for connection
+    private func setRealtimeUpdates(url: String) {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
             self.events.removeAll()

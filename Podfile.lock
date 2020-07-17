@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.2.1)
-  - KeychainSwift (19.0.0)
   - Mocker (2.2.0)
   - PromisesObjC (1.2.9)
   - PromisesSwift (1.2.9):
@@ -16,14 +15,12 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
-  - KeychainSwift
-  - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `build38-integrated`)
+  - PryvSwiftKit (from `https://github.com/pryv/lib-swift.git`, branch `master`)
   - RLBAlertsPickers (~> 1.1.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - KeychainSwift
     - Mocker
     - PromisesObjC
     - PromisesSwift
@@ -33,7 +30,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   PryvSwiftKit:
-    :branch: build38-integrated
+    :branch: master
     :git: https://github.com/pryv/lib-swift.git
 
 CHECKOUT OPTIONS:
@@ -43,7 +40,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
-  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
@@ -52,6 +48,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 6826600ba176c8ef42aae27d31397c663d71433f
+PODFILE CHECKSUM: f1128f779de4d49ed0f995c1358bb9e6c526d77c
 
 COCOAPODS: 1.8.4

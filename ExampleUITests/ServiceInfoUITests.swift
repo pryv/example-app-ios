@@ -7,12 +7,10 @@
 //
 
 import XCTest
-import KeychainSwift
 
 class ServiceInfoUITests: XCTestCase {
     
     var app: XCUIApplication!
-    private let keychain = KeychainSwift()
     private var values = [String]()
     
     override func setUp() {

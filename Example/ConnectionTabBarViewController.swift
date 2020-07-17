@@ -8,12 +8,10 @@
 
 import UIKit
 import PryvSwiftKit
-import KeychainSwift
 import CoreLocation
 import TAK
 
 class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
-    private let keychain = KeychainSwift()
     private let utils = Utils()
     private let locationManager = CLLocationManager()
     private var connection: Connection?
@@ -30,7 +28,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
         listVC?.appId = appId
-        listVC?.storage = storage
+        listVC?.connection = connection
         
         let mapVC = viewControllers?[1] as? ConnectionMapViewController
         mapVC?.connection = connection
@@ -86,9 +84,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
             let alert = UIAlertController(title: nil, message: "Do you want to log out ?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { _ in
-                if let key = self.appId {
-                    self.keychain.delete(key)
-                }
+                try? self.storage?.deleteEntry(key: "apiEndpoint")
                 self.navigationController?.popToRootViewController(animated: true)
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))

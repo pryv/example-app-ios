@@ -8,6 +8,8 @@
 
 For the client DSK integration, I followed the steps listed in [TAK doc](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#xcode_integration2). 
 
+Note that I did not include the two frameworks: TAK.framework nor TakTls.framework on GitHub. To import them, drap and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Project/Frameworks` folder in XCode project. Then, in `Project > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks. 
+
 *As a note for T.A.K. developpers, the "[Quick Start](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#quickstart-section)" link in the description is not working.* 
 
 ## T.A.K Client SDK Usage
@@ -70,11 +72,12 @@ The following features were not integrated in the app:
 
 #### Secure storage
 
-There are three view controllers that require using secure storage, as they interact with the API endpoint and its token: 
+The only object stored on the device is the API endpoint through the use of keychain. Now, instead of using iOS keychain, we can use Build38's secure storage to store the API endpoint and avoid the need for connection at every app launch. 
 
-- `MainViewController`: as it is responsible for launching the authentication request and passing the result to the `ConnectionTabViewController`, it needs to store the API endpoint got from the connection in a secure storage and pass this storage to `ConnectionTabViewController`.
-- `ConnectionTabViewController`: instead of getting the raw value of the API endpoint, it will get the storage that contains it. It is the one responsible for passing the objects to `ConnectionListTableViewController` and `ConnectionMapViewController`. As `ConnectionTabViewController` and `ConnectionMapViewController` do not handle any API endpoint nor token directly, `ConnectionTabViewController` simply passes this storage to `ConnectionListTableViewController`. 
-- `ConnectionListTableViewController`: it deals directly with API endpoint, from which is extracts the token. The token is used to create socket.io URL. Consequently, it needs to use the secure storage to retrieve the API endpoint and to store the URL.
+Therefore, there are two view controllers that require using secure storage: 
+
+- `MainViewController`: as it is responsible for launching the authentication request and passing the result, i.e. the API endpoint, to the `ConnectionTabViewController`, it needs to store the API endpoint got from the connection in a secure storage and pass this storage to `ConnectionTabViewController`.
+- `ConnectionTabViewController`: instead of getting the raw value of the API endpoint, it will get the storage that contains it. From this, it can create a connection bound to the stored API endpoint and pass this object to `ConnectionListTableViewController` and `ConnectionMapViewController`. As `ConnectionListTableViewController` and `ConnectionMapViewController` do not handle any API endpoint nor token directly, they do not need access to the storage. 
 
 To securely implement writes and reads for the user's credentials, I followed the code snippets given in the [documentation](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage).
 

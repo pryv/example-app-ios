@@ -8,7 +8,6 @@
 
 import UIKit
 import PryvSwiftKit
-import KeychainSwift
 import TAK
 
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
@@ -22,7 +21,6 @@ class MainViewController: UIViewController {
         "streamId": "*",
         "level": "manage"
     ]]
-    private let keychain = KeychainSwift()
     private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
     private var tak: TAK?
     private var storage: SecureStorage?
@@ -31,9 +29,8 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var serviceInfoUrlField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        if let apiEndpoint = keychain.get(appId) {
-            try? storage?.write(key: "apiEndpoint", value: apiEndpoint)
-            openConnection(animated: false)
+        if let apiEndpoint: String = try? storage?.read(key: "apiEndpoint") {
+            openConnection(apiEndpoint: apiEndpoint, animated: false)
         }
     }
     
@@ -87,12 +84,7 @@ class MainViewController: UIViewController {
             
         case .accepted: // show the token and go back to the main view if successfully logged in
             if let endpoint = authResult.apiEndpoint {
-                do {
-                    try storage?.write(key: "apiEndpoint", value: endpoint)
-                    openConnection()
-                } catch {
-                    print("Problem occurred when storing the API endpoint in TAK secure storage: \(error.localizedDescription)")
-                }
+                openConnection(apiEndpoint: endpoint)
             }
             
         case .refused: // notify the user that he can still try again if he did not accept to login
@@ -115,9 +107,8 @@ class MainViewController: UIViewController {
     /// - Parameters:
     ///   - apiEndpoint: the api endpoint received from the auth request
     ///   - animated: whether the change of view controller is animated or not (`true` by default)
-    private func openConnection(animated: Bool = true) {
-        guard let apiEndpoint: String = try? storage?.read(key: "apiEndpoint") else { return }
-        keychain.set(apiEndpoint, forKey: appId)
+    private func openConnection(apiEndpoint: String, animated: Bool = true) {
+        try? storage?.write(key: "apiEndpoint", value: apiEndpoint)
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.storage = storage
