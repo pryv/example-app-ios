@@ -19,6 +19,7 @@ class ServiceInfoUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
         
         if (app.navigationBars["connectionNavBar"].buttons["userButton"].exists) {
             app.navigationBars["connectionNavBar"].buttons["userButton"].tap()
