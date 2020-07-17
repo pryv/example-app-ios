@@ -14,16 +14,11 @@ import TAK
 class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
     private let utils = Utils()
     private let locationManager = CLLocationManager()
-    private var connection: Connection?
     
     var service: Service?
     var appId: String?
-    var storage: SecureStorage? {
-        didSet {
-            guard let apiEndpoint: String = try? storage!.read(key: "apiEndpoint") else { return }
-            self.connection = Connection(apiEndpoint: apiEndpoint, session: TakTlsSessionManager.sharedInstance)
-        }
-    }
+    var connection: Connection?
+    var storage: SecureStorage?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController

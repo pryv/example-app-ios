@@ -108,13 +108,22 @@ class MainViewController: UIViewController {
     ///   - apiEndpoint: the api endpoint received from the auth request
     ///   - animated: whether the change of view controller is animated or not (`true` by default)
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
-        try? storage?.write(key: "apiEndpoint", value: apiEndpoint)
+        let connection = Connection(apiEndpoint: apiEndpoint, session: TakTlsSessionManager.sharedInstance)
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
-        vc.storage = storage
-        vc.service = service
-        vc.appId = appId
-        self.navigationController?.pushViewController(vc, animated: animated)
+        connection.api(APICalls: [APICall]()).then { _ in
+            try? self.storage?.write(key: "apiEndpoint", value: apiEndpoint)
+            
+            let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
+            vc.connection = connection
+            vc.service = self.service
+            vc.appId = self.appId
+            vc.storage = self.storage
+            self.navigationController?.pushViewController(vc, animated: animated)
+        }.catch { error in
+            self.navigationController?.popViewController(animated: true)
+            let alert = UIAlertController().errorAlert(title: "No certificate found for \(apiEndpoint)", delay: 5.0)
+            self.present(alert, animated: true)
+        }
     }
     
     // MARK: - TAK functions
