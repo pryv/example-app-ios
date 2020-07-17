@@ -8,7 +8,7 @@
 
 For the client DSK integration, I followed the steps listed in [TAK doc](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#xcode_integration2). 
 
-Note that I did not include the two frameworks: TAK.framework nor TakTls.framework on GitHub. To import them, drap and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Project/Frameworks` folder in XCode project. Then, in `Project > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks. 
+Note that I did not include the two frameworks: TAK.framework nor TakTls.framework on GitHub. To import them, drap and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Project/Frameworks` folder in XCode project. Add them to the Project target and to the ProjectUITests target. Then, in `Project > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks and in `ProjectUITests > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks. 
 
 *As a note for T.A.K. developpers, the "[Quick Start](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#quickstart-section)" link in the description is not working.* 
 
