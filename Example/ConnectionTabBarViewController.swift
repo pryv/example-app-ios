@@ -21,7 +21,7 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     var storage: SecureStorage? {
         didSet {
             guard let apiEndpoint: String = try? storage!.read(key: "apiEndpoint") else { return }
-            self.connection = Connection(apiEndpoint: apiEndpoint)
+            self.connection = Connection(apiEndpoint: apiEndpoint, session: TakTlsSessionManager.sharedInstance)
         }
     }
     

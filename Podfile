@@ -9,9 +9,6 @@ target 'Example' do
   use_frameworks!
 
   # Pods for Example
-  ## integrating TAK Secure Channels:
-  ## pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'build38-integrated'
-  ## without TAK Secure Channels:
   pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
   pod 'RLBAlertsPickers', '~> 1.1.1'
 

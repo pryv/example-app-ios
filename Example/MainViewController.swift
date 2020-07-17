@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         "streamId": "*",
         "level": "manage"
     ]]
-    private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info")
+    private var service = Service(pryvServiceInfoUrl: "https://reg.pryv.me/service/info", session: TakTlsSessionManager.sharedInstance)
     private var tak: TAK?
     private var storage: SecureStorage?
     
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
     /// - Parameter sender: the button to clic on to trigger this action
     @objc func authenticate() {
         let pryvServiceInfoUrl = serviceInfoUrlField.text != nil && serviceInfoUrlField.text != "" ? serviceInfoUrlField.text : defaultServiceInfoUrl
-        service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!)
+        service = Service(pryvServiceInfoUrl: pryvServiceInfoUrl!, session: TakTlsSessionManager.sharedInstance)
         let authPayload: Json = [
             "requestingAppId": appId,
             "requestedPermissions": permissions,
