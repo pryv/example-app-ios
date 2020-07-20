@@ -22,22 +22,6 @@ In the `AppDelegate.swift` file, I added the code snippet given in the documenta
 
 To use the TAK feature, the `tak` object needs to be passed to every view controller in the application from the `AppDelegate.swift`.
 
-#### Remarks
-
-Some points which require attention for the app-ios-swift-example (notified by a `// TODO` in the code): 
-
-- Upon registration or re-registration, 
-
-> It is recommended (but not required) to send the T.A.K ID to your server's backend and bind it to the current user. It will allow you to use the verification interface of the T.A.K cloud.
-
-- As the app will continuously send and receive data from the server, the tak cannot be `released`.
-
-Some points which require attention in the code snippet for the T.A.P. SDK:
-
-- The constant `isRegistered` is an optionnal, which cannot be used directly in an `if` clause. 
-- The constants `tak`, `registrationResponse` and `checkIntegrityResponse` are created with a `try` clause, which is not within a `do {} catch {}` clause.
-- The documentation concerning the `register` function suggests to provide `NULL` for the `userHash` parameter, but `NULL` does not exist in Swift.
-
 ### Features used
 
 According to the "Non-Functional features" part in the documentation, the idea is: 
@@ -48,25 +32,25 @@ According to the "Non-Functional features" part in the documentation, the idea i
 
 Consequently, the following features will be used: 
 
-1. [Secure Storage](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage) to store the user's authentication token and API endpoint.
-2. [Secure Channel](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#tak_tls) to connect when
-   - Requesting events;
-   - Creating events;
-   - Any other HTTP request in the application.
+[Secure Storage](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#secure-storage) to store the user's authentication token and API endpoint.
+
+[Secure Channel](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#tak_tls) to connect when
+
+- Requesting events;
+- Creating events;
+- Any other HTTP request in the application.
+
+[File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) is only used for encrypting the SSL certificates in secure channels. Otherwise, it is not used, as no huge storage (>1MB) is stored on the device, nor any asset. 
 
 Jailbreak detection will be used in the T.A.K. initialization part, respectively to query the jailbreak status of the current device.
 
-Signature Generation could be a nice feature to add, especially for the connection requests. This will need support from the server.
-
-The [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify) feature will also need to be implemented in the server to deal with any jailbroken device: 
-
-> T.A.K will not, by default, react to rooted/jailbroken devices. Instead, it will forward this information to the T.A.K cloud during registration and validation operations, making this information available as well to the service provider through the [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify). 
+Signature Generation will be used to verify the events and streams created by a user via the iOS application. The events created in the application will be displayed with a "verified" tag.
 
 The following features were not integrated in the app: 
 
+- [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify) is not used as we already use jailbreak check in the application. 
 - App re-packaging protection is not used as it is not yet available in iOS. 
-- [File Protector](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#protector) is not used either as no huge storage (>1MB) is stored on the device, nor any asset. 
-- HealthCheck API would allow us to get visibility into the state of the T.A.K resources, services, and account. As we do not yet support TAK in the server, I would suggest to keep this part for later. 
+- HealthCheck API would allow us to get visibility into the state of the T.A.K resources, services, and account. As it is not a DevOps application, we will not use it either. 
 
 ### Implementation of the features
 
@@ -122,3 +106,7 @@ Another solution could be to use [`open2.pryv.io`](https://open2.pryv.io/reg/ser
 As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user interact with the application. 
 
 *As a note for T.A.K. developpers, it seems that the code snippet are not correctly sorted for C, Kotlin and Swift.* 
+
+#### Signature generation
+
+// TODO

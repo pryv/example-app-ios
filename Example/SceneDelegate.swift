@@ -24,12 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let registrationResponse = try tak!.register(userHash: nil)
                 if (registrationResponse.isLicenseAboutToExpire) {
                     print("Warning: TAK license is about to expire.")
-                } else {
-                    // TODO
-                    // It is recommended (but not required) to send the T.A.K ID to your server's backend and bind it to the
-                    // current user. It will allow you to use the verification interface of the T.A.K cloud.
-                    let takIdentifier = registrationResponse.takIdentifier
-                    print("Success: T.A.K register was successful")
                 }
             } catch {
                 print("Error: T.A.K register failed: \(error.localizedDescription)")
@@ -39,13 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let checkIntegrityResponse = try tak!.checkIntegrity()
                 if (checkIntegrityResponse.isLicenseAboutToExpire) {
                     print("Warning: T.A.K checkIntegrity was successful: TAK license is about to expire.")
-                } else if (checkIntegrityResponse.didReregister) {
-                    // TODO
-                    // When re-registration happens, instance certificates and cryptographic keys are renewed.
-                    // This also implies that the T.A.K ID has been updated, so it is recommended to send it to your
-                    // backend (same as after the registration operation).
-                    let takIdentifier = checkIntegrityResponse.takIdentifier
-                    print("Success: T.A.K check integrity was successful: Re-registration happened")
                 } else {
                     print("Success: T.A.K check integrity was successful")
                 }
