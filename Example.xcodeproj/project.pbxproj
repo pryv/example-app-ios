@@ -10,6 +10,7 @@
 		04C884C4EE40B4FF004E8D3C /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C1C1B131FDF3E563E169CD /* Pods_Example.framework */; };
 		263721A3C7775AD20BCDF60C /* Pods_Example_ExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F8A8F8E41E67DCE256CD41 /* Pods_Example_ExampleUITests.framework */; };
 		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
+		B32BE2A824C5CEC2008FE6EC /* String+condenseWhitespaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BE2A724C5CEC1008FE6EC /* String+condenseWhitespaces.swift */; };
 		B346764E24BC7D8800FCD0C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764C24BC7D8800FCD0C6 /* README.md */; };
 		B346764F24BC7D8800FCD0C6 /* DESIGNDOC.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */; };
 		B346765124BC7D9A00FCD0C6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B346765024BC7D9A00FCD0C6 /* LICENSE */; };
@@ -72,6 +73,7 @@
 		9862958BB19AA1D0426B7E0E /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AFEECD92510E0652C61BCBD6 /* Pods_ExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
+		B32BE2A724C5CEC1008FE6EC /* String+condenseWhitespaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+condenseWhitespaces.swift"; sourceTree = "<group>"; };
 		B346764C24BC7D8800FCD0C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = DESIGNDOC.md; sourceTree = "<group>"; };
 		B346765024BC7D9A00FCD0C6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		B3D6FC8C2492366700DB90D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B32BE2A724C5CEC1008FE6EC /* String+condenseWhitespaces.swift */,
 				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
@@ -426,6 +429,7 @@
 				B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */,
 				B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */,
 				B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */,
+				B32BE2A824C5CEC2008FE6EC /* String+condenseWhitespaces.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
