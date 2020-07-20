@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -206,6 +206,27 @@
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
+                                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNK-Lx-KX0">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="20"/>
+                                                                    <subviews>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Verified" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRe-XN-sRv">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="70" id="tHw-if-gUK"/>
+                                                                            </constraints>
+                                                                            <color key="textColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                            <textInputTraits key="textInputTraits"/>
+                                                                        </textField>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC4-TD-apW">
+                                                                            <rect key="frame" x="70" y="0.0" width="254" height="20"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        </view>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="zTF-tp-NUd"/>
+                                                                    </constraints>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="sLh-yr-lGr" firstAttribute="height" secondItem="r6g-hu-4m0" secondAttribute="height" id="9fF-tk-aeH"/>
@@ -254,6 +275,7 @@
                                     <outlet property="streamIdLabel" destination="lUM-SA-m5y" id="Ixw-uG-f3Z"/>
                                     <outlet property="typeLabel" destination="QHh-Oh-BOy" id="THf-B9-Eqj"/>
                                     <outlet property="typeStackView" destination="xMf-gu-VNu" id="VUZ-W1-qZq"/>
+                                    <outlet property="verifiedView" destination="pNK-Lx-KX0" id="F5f-Ai-FSE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
