@@ -38,6 +38,7 @@ class ConnectionMapUITests: XCTestCase {
         
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
+            sleep(2)
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
             app.staticTexts["Password"].tap()
@@ -46,7 +47,7 @@ class ConnectionMapUITests: XCTestCase {
             if app.buttons["ACCEPT"].exists {
                 app.buttons["ACCEPT"].tap()
             }
-            sleep(2)
+            sleep(5)
         }
         
         app.tabBars["connectionTabBar"].buttons["mapButtonItem"].tap()
@@ -120,7 +121,7 @@ class ConnectionMapUITests: XCTestCase {
         
         let promise = connection.api(APICalls: [apiCall])
         
-        XCTAssert(waitForPromises(timeout: 5.0))
+        XCTAssert(waitForPromises(timeout: 10.0))
         XCTAssertNil(promise.error)
         XCTAssertNotNil(promise.value)
         
@@ -140,6 +141,7 @@ class ConnectionMapUITests: XCTestCase {
         
         let today = Date()
         changeDate(day: dayFormatter.string(from: today), month: monthFormatter.string(from: today), year: yearFormatter.string(from: today))
+        sleep(1)
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"

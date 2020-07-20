@@ -35,6 +35,7 @@ class ServiceInfoUITests: XCTestCase {
             app.sheets.element.buttons["Log out"].tap()
             sleep(1)
             app.alerts.element.buttons["Log out"].tap()
+            sleep(1)
         }
     }
     
@@ -50,6 +51,7 @@ class ServiceInfoUITests: XCTestCase {
     
     func testLogin() {
         app.buttons["loginButton"].tap()
+        sleep(2)
         XCTAssert(app.webViews["webView"].exists)
     }
 }

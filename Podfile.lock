@@ -47,7 +47,7 @@ CHECKOUT OPTIONS:
     :commit: 1336ed952adfba3bd2adef2da7bebe60b33b05ef
     :git: https://github.com/pryv/bridge-ios-healthkit
   PryvSwiftKit:
-    :commit: 73c7f66c5405367af72f0e5469bdd726a3d9fa79
+    :commit: ac7ff09e85bce34efa32c292375fb24398587d52
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
