@@ -13,7 +13,7 @@ import TAK
 /// View corresponding to the service info, where the can select the service info he wants to connect to, login and open `ConnectionViewController`
 class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    private let serviceInfoUrls = ["https://reg.pryv.me/service/info"] // Add more urls, but take care to add its corresponding SSL certificate to the project
+    private let serviceInfoUrls = ["https://reg.pryv.me/service/info", "https://open2.pryv.io/reg/service/info"] // Add more urls, but take care to add its corresponding SSL certificate to the project
     private let utils = Utils()
     private let appId = "app-swift-example"
     // master token permissions
