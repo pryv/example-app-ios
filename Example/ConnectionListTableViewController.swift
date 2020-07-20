@@ -19,7 +19,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
     @IBOutlet private weak var verifiedLabel: UITextField!
-    @IBOutlet weak var verifiedView: UIStackView!
+    @IBOutlet private weak var verifiedView: UIStackView!
     
     @IBOutlet private weak var typeStackView: UIStackView!
     @IBOutlet private weak var contentStackView: UIStackView!
@@ -48,6 +48,10 @@ class EventTableViewCell: UITableViewCell {
                     attachmentStackView.isHidden = false
                     attachmentLabel.text = fileName
                 }
+            }
+            
+            if let clientData = event["clientData"] as? Json, let _ = clientData["tak-signature"] {
+                verifiedView.isHidden = false
             }
         }
     }
@@ -186,9 +190,6 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
         
-        if let clientData = event["clientData"] as? Json, let _ = clientData["tak-signature"] {
-            cell.verifiedView.isHidden = false
-        }
         cell.data = (connection, event)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
