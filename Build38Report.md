@@ -115,6 +115,8 @@ It is crucial for the correct behavior of the app to add a certificate for every
 ), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <64CDDE0B-8279-41F7-BB2A-4D88BF08873E>.<1>}
 ```
 
+Another solution could be to use [`open2.pryv.io`](https://open2.pryv.io/reg/service/info), which is DNS-less. Consequently, we just have to use the host `open2.pryv.io.crt` and the app would work.
+
 #### Jailbreak detection
 
 As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user interact with the application. 

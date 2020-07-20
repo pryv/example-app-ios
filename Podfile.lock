@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.2.1)
+  - Alamofire (5.2.2)
   - Mocker (2.2.0)
   - PromisesObjC (1.2.9)
   - PromisesSwift (1.2.9):
@@ -35,11 +35,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvSwiftKit:
-    :commit: f71cc3420f41cbaccfdc9608f7f086e5f2ffed7a
+    :commit: 5d0f1b889d68ab24f9b5ff42be895b1f047cc32f
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
-  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
