@@ -64,7 +64,7 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
-        
+
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Simple event"].tap()
         sleep(1)
@@ -82,6 +82,7 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
+        sleep(2)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
@@ -89,6 +90,7 @@ class ConnectionListUITests: XCTestCase {
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
+        XCTAssert(cell.textFields["verifiedLabel"].isHittable)
         XCTAssertFalse(cell.staticTexts["attachmentLabel"].exists)
         XCTAssertFalse(cell.images["attachmentImageView"].exists)
         

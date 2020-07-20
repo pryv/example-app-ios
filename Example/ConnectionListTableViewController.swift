@@ -18,6 +18,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var contentLabel: UILabel!
     @IBOutlet private weak var attachmentLabel: UILabel!
     @IBOutlet weak var addAttachmentButton: UIButton!
+    @IBOutlet private weak var verifiedLabel: UITextField!
     @IBOutlet weak var verifiedView: UIStackView!
     
     @IBOutlet private weak var typeStackView: UIStackView!
@@ -76,6 +77,7 @@ class EventTableViewCell: UITableViewCell {
         typeLabel.accessibilityIdentifier = "typeLabel"
         contentLabel.accessibilityIdentifier = "contentLabel"
         addAttachmentButton.accessibilityIdentifier = "addAttachmentButton"
+        verifiedLabel.accessibilityIdentifier = "verifiedLabel"
     }
     
 }
