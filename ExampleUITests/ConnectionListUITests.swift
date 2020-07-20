@@ -34,9 +34,9 @@ class ConnectionListUITests: XCTestCase {
             app.alerts.element.buttons["OK"].tap()
         }
         
-        if (!app.buttons["userButton"].exists) {
+        if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
-            sleep(2)
+            sleep(5)
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
             app.staticTexts["Password"].tap()
@@ -75,6 +75,8 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
+        
+        sleep(5)
         
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Simple event"].tap()
@@ -138,8 +140,10 @@ class ConnectionListUITests: XCTestCase {
         app.textFields["contentField"].typeText(wrongField)
 
         app.alerts.buttons["OK"].tap()
+        sleep(5)
         XCTAssert(app.alerts.element.staticTexts["Error: The parameters' format is invalid."].exists)
-        sleep(2)
+        
+        app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
@@ -153,7 +157,7 @@ class ConnectionListUITests: XCTestCase {
     func testCreateEventWithFile() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Event with attachment"].tap()
-        sleep(1)
+        sleep(3)
         
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)

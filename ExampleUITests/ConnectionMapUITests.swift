@@ -38,7 +38,7 @@ class ConnectionMapUITests: XCTestCase {
         
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
-            sleep(2)
+            sleep(5)
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
             app.staticTexts["Password"].tap()
@@ -70,7 +70,7 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["24.06.2020"].exists)
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        sleep(1)
+        sleep(2)
         XCTAssert(app.otherElements["29.06.2020"].exists)
     }
     
@@ -88,6 +88,7 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["29.06.2020"].exists)
         
         changeDate(month: "May")
+        sleep(2)
         XCTAssertFalse(app.otherElements["29.06.2020"].exists)
     }
     
