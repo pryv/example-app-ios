@@ -27,7 +27,7 @@ class ConnectionListUITests: XCTestCase {
         
         if (!app.buttons["userButton"].exists) {
             app.buttons["loginButton"].tap()
-            sleep(1)
+            sleep(2)
             app.staticTexts["Username or email"].tap()
             app.typeText("Testuser")
             app.staticTexts["Password"].tap()
@@ -88,6 +88,8 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
+        sleep(5)
+        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
@@ -96,6 +98,8 @@ class ConnectionListUITests: XCTestCase {
         
         cell.swipeLeft()
         cell.buttons["Delete"].tap()
+        
+        sleep(2)
         
         XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -177,6 +181,8 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         
+        sleep(5)
+        
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
@@ -185,12 +191,12 @@ class ConnectionListUITests: XCTestCase {
         let content = cell.staticTexts["contentLabel"].label
         
         cell.buttons["addAttachmentButton"].tap()
-        sleep(1)
+        sleep(3)
         
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
         app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
-        sleep(3)
+        sleep(5)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
