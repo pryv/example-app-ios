@@ -24,6 +24,8 @@
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
 		B3907DAD24A0FDEA009FCE28 /* ConnectionMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DAC24A0FDEA009FCE28 /* ConnectionMapUITests.swift */; };
 		B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3946F1D24B60DC7000DFDA3 /* Settings.bundle */; };
+		B3A0079F24C5BCCB007BDC1A /* TakTls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3410B0824C5B61F0027DB39 /* TakTls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B3A007A024C5BCD0007BDC1A /* TAK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3410B0724C5B61F0027DB39 /* TAK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */; };
 		B3B9220324BC8F7E002C724F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B9220224BC8F7E002C724F /* HealthKit.framework */; };
 		B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C51E7B248A36B700F1D398 /* AuthViewController.swift */; };
@@ -67,6 +69,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B3A007A024C5BCD0007BDC1A /* TAK.framework in Embed Frameworks */,
+				B3A0079F24C5BCCB007BDC1A /* TakTls.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
