@@ -41,6 +41,7 @@ class ServiceInfoUITests: XCTestCase {
     
     func testLogin() {
         app.buttons["loginButton"].tap()
+        sleep(1)
         XCTAssert(app.webViews["webView"].exists)
     }
 }
