@@ -10,8 +10,6 @@ For the client DSK integration, I followed the steps listed in [TAK doc](file:TA
 
 Note that I did not include the two frameworks: TAK.framework nor TakTls.framework on GitHub. To import them, drap and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Project/Frameworks` folder in XCode project. Add them to the Project target and to the ProjectUITests target. Then, in `Project > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks. In `ProjectUITests > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks and do the same for `Project`. 
 
-*As a note for T.A.K. developpers, the "[Quick Start](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#quickstart-section)" link in the description is not working.* 
-
 ## T.A.K Client SDK Usage
 
 ### T.A.K. Initialization
@@ -104,8 +102,6 @@ Another solution could be to use [`open2.pryv.io`](https://open2.pryv.io/reg/ser
 #### Jailbreak detection
 
 As suggested by the documentation, checking whether the device is jailbroken is very simple. I only added a check `tak.isJailbroken()` at every app launch such that if the device is jailbroken, an alert appears and does not let the user interact with the application. 
-
-*As a note for T.A.K. developpers, it seems that the code snippet are not correctly sorted for C, Kotlin and Swift.* 
 
 #### Signature generation
 
