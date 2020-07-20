@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let keychain = KeychainSwift()
     private let locationManager = CLLocationManager()
     private let healthStore = HKHealthStore()
+    private let limit = 100
     var connection: Connection? {
         didSet {
             if connection != nil {
@@ -284,13 +285,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
                     let getEventsWithTagCall: APICall = [
                         "method": "events.get",
-                        "params": [
-                            "tags": additions.map { sample in String(describing: sample.uuid) }
-                        ]
+                        "params": ["limit": self.limit]
                     ]
                     self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
                         if let events = results.first?["events"] as? [Event] {
-                            let existingSampleIds: [String] = events.flatMap { event in event["tags"] as! [String] }
+                            let existingSampleIds: [String] = events.compactMap { event in
+                                if let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String {
+                                    return sampleId
+                                } else { return nil }
+                            }
                             let uniqueAdditions = additions.filter { sample in !existingSampleIds.contains(String(describing: sample.uuid)) }
                             fullfill(uniqueAdditions)
                         }
@@ -337,17 +340,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Delete Pryv events if deleted in HK
     /// - Parameter deletions: the deleted streams from HK
     private func deleteHKDeletions(_ deletions: [HKDeletedObject]) {
-        let tags = deletions.map { String(describing: $0.uuid) }
         self.connection?.api(APICalls: [
             [
                 "method": "events.get",
-                "params": [
-                    "tags": tags
-                ]
+                "params": ["limit": limit]
             ]
         ]).then { json in
             guard let events = json.first?["events"] as? [Event] else { return }
-            let ids = events.map { $0["id"] as? String }.filter { $0 != nil }.map { $0! }
+            let deletedSampleIds = deletions.map { String(describing: $0.uuid) }
+            let deletedEvents = events.filter { event in
+                if let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String, deletedSampleIds.contains(sampleId) {
+                    return true
+                }
+                return false
+            }
+            let ids = deletedEvents.map { $0["id"] as? String }.filter { $0 != nil }.map { $0! }
             var apiCalls = [APICall]()
             
             for id in ids {
