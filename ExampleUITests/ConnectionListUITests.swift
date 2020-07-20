@@ -25,7 +25,7 @@ class ConnectionListUITests: XCTestCase {
         app.launch()
         sleep(1)
         
-        if (!app.buttons["userButton"].exists) {
+        if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
             sleep(5)
             app.staticTexts["Username or email"].tap()
