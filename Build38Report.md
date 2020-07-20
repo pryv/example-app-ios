@@ -105,4 +105,4 @@ As suggested by the documentation, checking whether the device is jailbroken is 
 
 #### Signature generation
 
-// TODO
+The signature will be useful to verify the events retrieved from Pryv.io. In this case, a verified event is an event which was created in the iOS app, with a signature generated using `tak` object. This signature will be generated as described in the documentation and is added to the event parameters in the `client-data` with key `"tak-signature"`. If any retrieved event has a tak-signature, this event will be displayed with a "verified" badge on the application. 

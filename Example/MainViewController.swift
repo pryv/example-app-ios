@@ -113,6 +113,7 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             vc.connection = connection
             vc.appId = self.appId
             vc.storage = self.storage
+            vc.tak = self.tak
             self.navigationController?.pushViewController(vc, animated: animated)
         }.catch { error in
             self.navigationController?.popViewController(animated: true)

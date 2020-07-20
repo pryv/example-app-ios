@@ -8,6 +8,7 @@
 
 import UIKit
 import PryvSwiftKit
+import TAK
 
 extension UIAlertController {
     
@@ -18,16 +19,24 @@ extension UIAlertController {
     ///   - message: message of the `UIAlertController`
     ///   - name: name of the event (only if editing)
     ///   - callback: function to execute when the button `Save` is hit
+    ///   - tak: the TAK object relative to the application and device
     /// - Returns: the `UIAlertController` with a title and a message and four text fields: name, streamId, type and content and a `Save` and `Cancel` button
-    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, callback: @escaping (Json) -> ()) -> UIAlertController {
+    func newEventAlert(editing: Bool = false, title: String, message: String?, name: String? = nil, tak: TAK? = nil, callback: @escaping (Json) -> ()) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
-            let params: Json = [
+            var params: Json = [
                 "streamId": alert.textFields![0].text ?? "",
                 "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
                 "content": alert.textFields![2].text ?? ""
             ]
+            
+            if let _ = tak {
+                let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
+                let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
+                params["clientData"] = ["tak-signature": String(describing: signature)]
+            }
+            
             callback(params)
         })
         

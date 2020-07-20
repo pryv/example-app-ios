@@ -23,11 +23,13 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         }
     }
     var storage: SecureStorage?
+    var tak: TAK?
     
     override func viewWillAppear(_ animated: Bool) {
         let listVC = viewControllers?[0] as? ConnectionListTableViewController
         listVC?.appId = appId
         listVC?.connection = connection
+        listVC?.tak = tak
         
         let mapVC = viewControllers?[1] as? ConnectionMapViewController
         mapVC?.connection = connection

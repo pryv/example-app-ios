@@ -85,6 +85,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     private var eventId: String? = nil
     
     var appId: String?
+    var tak: TAK?
     var connection: Connection? {
         didSet {
             let apiEndpoint = connection?.getApiEndpoint() ?? ""
@@ -216,7 +217,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
-            let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil) { params in
+            let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil, tak: self.tak) { params in
                 let apiCall: APICall = [
                     "method": "events.create",
                     "params": params
@@ -224,7 +225,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 
                 let handleResults: [Int: (Event) -> ()] = [0: { event in
                     print("new event: \(String(describing: event))")
-                    }]
+                }]
                 
                 self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
                     let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -264,10 +265,16 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         let pickedImage = info[.originalImage] as! UIImage
         guard let pickedPngData = pickedImage.pngData() else { return }
         let (_, token) = Utils().extractTokenAndEndpoint(from: connection?.getApiEndpoint() ?? "") ?? ("", "")
-        let params: Json = [
+        var params: Json = [
             "streamId": "diary",
             "type": "picture/attached"
         ]
+        
+        if let _ = tak {
+            let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
+            let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
+            params["clientData"] = ["tak-signature": String(describing: signature)]
+        }
         
         if let id = eventId {
             let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "image.png", data: pickedPngData, mimeType: "image/png")
