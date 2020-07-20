@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let locationManager = CLLocationManager()
     private let healthStore = HKHealthStore()
     private let limit = 100
+    private let lastFetchedKey = "last-fetched-events"
+    private let modifiedSinceKey = "modified-since"
     var connection: Connection? {
         didSet {
             if connection != nil {
@@ -208,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 ]
             ]
         ]).then { json in
-            let events = json.first?["events"] as? [Event]
+            let events = (json["results"] as? [Json])?.first?["events"] as? [Event]
             let storedContent = events?.first?["content"]
             if String(describing: storedContent) != String(describing: newContent) {
                 let pryvEvent = stream.pryvEvent(of: self.healthStore)
@@ -285,10 +287,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
                     let getEventsWithTagCall: APICall = [
                         "method": "events.get",
-                        "params": ["limit": self.limit]
+                        "params": ["limit": self.limit] // No need to use the last fetch as there may not be more than 100 duplicates
                     ]
                     self.connection?.api(APICalls: [getEventsWithTagCall]).then { results in
-                        if let events = results.first?["events"] as? [Event] {
+                        if let events = (results["results"] as? [Json])?.first?["events"] as? [Event] {
                             let existingSampleIds: [String] = events.compactMap { event in
                                 if let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String {
                                     return sampleId
@@ -340,14 +342,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Delete Pryv events if deleted in HK
     /// - Parameter deletions: the deleted streams from HK
     private func deleteHKDeletions(_ deletions: [HKDeletedObject]) {
+        let deletedSampleIds = deletions.map { String(describing: $0.uuid) }
+        
+        if let eventToSample = UserDefaults.standard.value(forKey: lastFetchedKey) as? [String: String], Set(deletedSampleIds).isSubset(of: eventToSample.keys) {
+            var apiCalls = [APICall]()
+            deletedSampleIds.forEach { sampleId in
+                if let eventId = eventToSample[sampleId] {
+                    apiCalls.append([
+                        "method": "events.delete",
+                        "params": [
+                            "id": eventId
+                        ]
+                    ])
+                }
+            }
+            
+            self.connection?.api(APICalls: apiCalls).catch { error in
+                print("Api calls for deletion failed: \(error.localizedDescription)")
+            }
+            return
+        }
+        
+        var params = Json()
+        if let modifiedSince = UserDefaults.standard.value(forKey: modifiedSinceKey) as? Double {
+            params = ["modifiedSince": modifiedSince]
+        } else {
+            params = ["limit": limit]
+        }
+        
         self.connection?.api(APICalls: [
             [
                 "method": "events.get",
-                "params": ["limit": limit]
+                "params": params
             ]
         ]).then { json in
-            guard let events = json.first?["events"] as? [Event] else { return }
-            let deletedSampleIds = deletions.map { String(describing: $0.uuid) }
+            guard let events = (json["results"] as? [Json])?.first?["events"] as? [Event] else { return }
+            
+            var eventToSample = [String: String]() // Map (sampleId: eventId) where eventId is from Pryv and sampleId from HK
+            events.forEach { event in
+                if let eventId = event["id"] as? String, let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String {
+                    eventToSample[sampleId] = eventId
+                }
+            }
+            UserDefaults.standard.set(eventToSample, forKey: self.lastFetchedKey)
+            
+            if let meta = json["meta"] as? Json, let serverTime = meta["serverTime"] as? Double {
+                UserDefaults.standard.set(serverTime, forKey: self.modifiedSinceKey)
+            }
             let deletedEvents = events.filter { event in
                 if let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String, deletedSampleIds.contains(sampleId) {
                     return true
