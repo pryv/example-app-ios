@@ -35,7 +35,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvSwiftKit:
-    :commit: 5d0f1b889d68ab24f9b5ff42be895b1f047cc32f
+    :commit: ac7ff09e85bce34efa32c292375fb24398587d52
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
@@ -48,6 +48,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 2a17dbfe6ad06860795bcceddcb34fbedbf7a1d5
+PODFILE CHECKSUM: 71ec04f7d4fbcfd18d29b2bf5af8b1f75ae15bf5
 
 COCOAPODS: 1.8.4

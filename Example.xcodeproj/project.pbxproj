@@ -16,6 +16,7 @@
 		B3386FA824C17BED00CC1E78 /* TAK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA124C17BE800CC1E78 /* TAK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3386FA924C17BEF00CC1E78 /* TakTls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA224C17BE800CC1E78 /* TakTls.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B3386FAA24C17BEF00CC1E78 /* TakTls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA224C17BE800CC1E78 /* TakTls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B3410B0624C5A2280027DB39 /* TakTlsSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3410B0524C5A2280027DB39 /* TakTlsSessionManager.swift */; };
 		B342C4EB24BCA89C00AA73E1 /* license.tak in Resources */ = {isa = PBXBuildFile; fileRef = B342C4EA24BCA89C00AA73E1 /* license.tak */; };
 		B346764E24BC7D8800FCD0C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764C24BC7D8800FCD0C6 /* README.md */; };
 		B346764F24BC7D8800FCD0C6 /* DESIGNDOC.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */; };
@@ -92,6 +93,7 @@
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
 		B3386FA124C17BE800CC1E78 /* TAK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TAK.framework; sourceTree = "<group>"; };
 		B3386FA224C17BE800CC1E78 /* TakTls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TakTls.framework; sourceTree = "<group>"; };
+		B3410B0524C5A2280027DB39 /* TakTlsSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakTlsSessionManager.swift; sourceTree = "<group>"; };
 		B342C4EA24BCA89C00AA73E1 /* license.tak */ = {isa = PBXFileReference; lastKnownFileType = file; name = license.tak; path = "../../../Downloads/TAK-Client/licenses/license.tak"; sourceTree = "<group>"; };
 		B346764C24BC7D8800FCD0C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = DESIGNDOC.md; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		B3D6FC8C2492366700DB90D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B3410B0524C5A2280027DB39 /* TakTlsSessionManager.swift */,
 				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
@@ -471,6 +474,7 @@
 				B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
 				B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */,
+				B3410B0624C5A2280027DB39 /* TakTlsSessionManager.swift in Sources */,
 				B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */,
 				B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */,
 				B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */,
