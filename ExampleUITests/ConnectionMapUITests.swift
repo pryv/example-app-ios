@@ -70,7 +70,7 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["24.06.2020"].exists)
         
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        sleep(1)
+        sleep(3)
         XCTAssert(app.otherElements["29.06.2020"].exists)
     }
     
@@ -88,6 +88,7 @@ class ConnectionMapUITests: XCTestCase {
         XCTAssert(app.otherElements["29.06.2020"].exists)
         
         changeDate(month: "May")
+        sleep(1)
         XCTAssertFalse(app.otherElements["29.06.2020"].exists)
     }
     
