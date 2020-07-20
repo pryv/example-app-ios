@@ -40,7 +40,6 @@
 		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E03998249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E0399F24936AED00B9DE6C /* ConnectionListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9724925EB000DB90D3 /* ConnectionListUITests.swift */; };
-		B3F1165D24C18FAC00512165 /* TakTlsSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F1165C24C18FAC00512165 /* TakTlsSessionManager.swift */; };
 		B3F1166224C1960900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */; };
 		B3F1166324C1960B00512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */; };
 		B3F1166624C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */; };
@@ -121,7 +120,6 @@
 		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
 		B3D70D5A248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E03996249355E000B9DE6C /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
-		B3F1165C24C18FAC00512165 /* TakTlsSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakTlsSessionManager.swift; sourceTree = "<group>"; };
 		B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak; sourceTree = "<group>"; };
 		B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak; sourceTree = "<group>"; };
 		B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
-				B3F1165C24C18FAC00512165 /* TakTlsSessionManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -474,7 +471,6 @@
 				B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */,
 				B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */,
 				B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */,
-				B3F1165D24C18FAC00512165 /* TakTlsSessionManager.swift in Sources */,
 				B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */,
 				B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */,
 				B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */,
