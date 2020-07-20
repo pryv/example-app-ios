@@ -10,13 +10,6 @@
 		04C884C4EE40B4FF004E8D3C /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C1C1B131FDF3E563E169CD /* Pods_Example.framework */; };
 		263721A3C7775AD20BCDF60C /* Pods_Example_ExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F8A8F8E41E67DCE256CD41 /* Pods_Example_ExampleUITests.framework */; };
 		B306FCEA24A47642008F23A2 /* Date+startOf+endOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */; };
-		B3386FA424C17BE800CC1E78 /* TAK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA124C17BE800CC1E78 /* TAK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B3386FA624C17BE800CC1E78 /* TakTls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA224C17BE800CC1E78 /* TakTls.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B3386FA724C17BED00CC1E78 /* TAK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA124C17BE800CC1E78 /* TAK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B3386FA824C17BED00CC1E78 /* TAK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA124C17BE800CC1E78 /* TAK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B3386FA924C17BEF00CC1E78 /* TakTls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA224C17BE800CC1E78 /* TakTls.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B3386FAA24C17BEF00CC1E78 /* TakTls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3386FA224C17BE800CC1E78 /* TakTls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B342C4EB24BCA89C00AA73E1 /* license.tak in Resources */ = {isa = PBXBuildFile; fileRef = B342C4EA24BCA89C00AA73E1 /* license.tak */; };
 		B346764E24BC7D8800FCD0C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764C24BC7D8800FCD0C6 /* README.md */; };
 		B346764F24BC7D8800FCD0C6 /* DESIGNDOC.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */; };
 		B346765124BC7D9A00FCD0C6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B346765024BC7D9A00FCD0C6 /* LICENSE */; };
@@ -40,15 +33,6 @@
 		B3E03997249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E03998249355E000B9DE6C /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3E03996249355E000B9DE6C /* sample.pdf */; };
 		B3E0399F24936AED00B9DE6C /* ConnectionListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9724925EB000DB90D3 /* ConnectionListUITests.swift */; };
-		B3F1166224C1960900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */; };
-		B3F1166324C1960B00512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */; };
-		B3F1166624C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */; };
-		B3F1166724C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166524C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak */; };
-		B3F1166A24C1996900512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */; };
-		B3F1166B24C1996900512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166524C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak */; };
-		B3F1166C24C1996900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */; };
-		B3F1166D24C1996900512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */; };
-		B3F9D46424C579A900A89777 /* D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F9D46324C579A800A89777 /* D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B3386FA824C17BED00CC1E78 /* TAK.framework in Embed Frameworks */,
-				B3386FAA24C17BEF00CC1E78 /* TakTls.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,9 +72,6 @@
 		9862958BB19AA1D0426B7E0E /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AFEECD92510E0652C61BCBD6 /* Pods_ExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+startOf+endOf.swift"; sourceTree = "<group>"; };
-		B3386FA124C17BE800CC1E78 /* TAK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TAK.framework; sourceTree = "<group>"; };
-		B3386FA224C17BE800CC1E78 /* TakTls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TakTls.framework; sourceTree = "<group>"; };
-		B342C4EA24BCA89C00AA73E1 /* license.tak */ = {isa = PBXFileReference; lastKnownFileType = file; name = license.tak; path = "../../../Downloads/TAK-Client/licenses/license.tak"; sourceTree = "<group>"; };
 		B346764C24BC7D8800FCD0C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = DESIGNDOC.md; sourceTree = "<group>"; };
 		B346765024BC7D9A00FCD0C6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -120,11 +99,6 @@
 		B3D70D58248A2FEA00A1A247 /* ServiceInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoUITests.swift; sourceTree = "<group>"; };
 		B3D70D5A248A2FEA00A1A247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E03996249355E000B9DE6C /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
-		B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak; sourceTree = "<group>"; };
-		B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak; sourceTree = "<group>"; };
-		B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak; sourceTree = "<group>"; };
-		B3F1166524C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak; sourceTree = "<group>"; };
-		B3F9D46324C579A800A89777 /* D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak */ = {isa = PBXFileReference; lastKnownFileType = file; path = D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak; sourceTree = "<group>"; };
 		C27011E2D62D89BB8FF369DB /* Pods-PryvApiSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample/Pods-PryvApiSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		C6BEE5DD08C30C4669C6F023 /* Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests/Pods-PryvApiSwiftKitExample-PryvApiSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2C1C1B131FDF3E563E169CD /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,11 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3386FA924C17BEF00CC1E78 /* TakTls.framework in Frameworks */,
 				B3B9220324BC8F7E002C724F /* HealthKit.framework in Frameworks */,
 				B3B2FF92248A4A4E00F6D0A2 /* WebKit.framework in Frameworks */,
 				04C884C4EE40B4FF004E8D3C /* Pods_Example.framework in Frameworks */,
-				B3386FA724C17BED00CC1E78 /* TAK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				263721A3C7775AD20BCDF60C /* Pods_Example_ExampleUITests.framework in Frameworks */,
-				B3386FA624C17BE800CC1E78 /* TakTls.framework in Frameworks */,
-				B3386FA424C17BE800CC1E78 /* TAK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,12 +139,6 @@
 		B3D70D2A248A2FE900A1A247 = {
 			isa = PBXGroup;
 			children = (
-				B3F9D46324C579A800A89777 /* D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak */,
-				B3F1166424C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak */,
-				B3F1166524C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak */,
-				B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */,
-				B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */,
-				B342C4EA24BCA89C00AA73E1 /* license.tak */,
 				B346765024BC7D9A00FCD0C6 /* LICENSE */,
 				B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */,
 				B346764C24BC7D8800FCD0C6 /* README.md */,
@@ -231,8 +195,6 @@
 		B88ED49F10945DDBD3BF09CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B3386FA124C17BE800CC1E78 /* TAK.framework */,
-				B3386FA224C17BE800CC1E78 /* TakTls.framework */,
 				B3B9220224BC8F7E002C724F /* HealthKit.framework */,
 				B3B2FF91248A4A4E00F6D0A2 /* WebKit.framework */,
 				F2C1C1B131FDF3E563E169CD /* Pods_Example.framework */,
@@ -347,20 +309,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3F1166224C1960900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */,
 				B346764F24BC7D8800FCD0C6 /* DESIGNDOC.md in Resources */,
 				B346764E24BC7D8800FCD0C6 /* README.md in Resources */,
 				B346765124BC7D9A00FCD0C6 /* LICENSE in Resources */,
 				B3E03997249355E000B9DE6C /* sample.pdf in Resources */,
 				B3D70D43248A2FEA00A1A247 /* LaunchScreen.storyboard in Resources */,
-				B3F1166324C1960B00512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */,
 				B3946F1E24B60DC7000DFDA3 /* Settings.bundle in Resources */,
-				B342C4EB24BCA89C00AA73E1 /* license.tak in Resources */,
 				B3D70D40248A2FEA00A1A247 /* Assets.xcassets in Resources */,
 				B3D70D3E248A2FE900A1A247 /* Main.storyboard in Resources */,
-				B3F1166724C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak in Resources */,
-				B3F1166624C197A700512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */,
-				B3F9D46424C579A900A89777 /* D7B6CFA0CCB46430CBD1995552E096B2DD36021A759899714992C2B5C6548C2C.tak in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,10 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3E03998249355E000B9DE6C /* sample.pdf in Resources */,
-				B3F1166A24C1996900512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */,
-				B3F1166C24C1996900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */,
-				B3F1166B24C1996900512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak in Resources */,
-				B3F1166D24C1996900512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
