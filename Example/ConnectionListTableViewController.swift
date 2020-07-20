@@ -239,7 +239,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                     let sample = self.pryvStream.healthKitSample(from: content)!
 
                     var paramsWithTag = params
-                    paramsWithTag["tags"] = [String(describing: sample.uuid)]
+                    paramsWithTag["clientData"] = [HealthKitStream.hkClientDataId: String(describing: sample.uuid)]
                     apiCall["params"] = paramsWithTag
                     self.connection?.api(APICalls: [apiCall]).then { _ in
                         self.healthStore.save(sample) { (success, error) in
