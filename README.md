@@ -15,7 +15,7 @@ These app views correspond to each of the view controllers described above: Main
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="Screenshots/MainViewController.png" title="MainViewController" style="zoom:33%;"> | <img src="Screenshots/AuthViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionListTableViewController.png" style="zoom:33%;" /> | <img src="Screenshots/ConnectionMapViewController.png" style="zoom:33%;" /> |
 
-The app integrates the Build38 T.A.K (Trusted Application Kit) solution to protect against the most common security threats. For more information about the features used, see the [integration report](https://github.com/pryv/app-ios-swift-example/blob/build38-integration/Build38Report.md). 
+The app integrates the [Build38 T.A.K (Trusted Application Kit)](https://build38.com/solution/) solution to protect against the most common security threats. For more information about the features used, see the [integration report](https://github.com/pryv/app-ios-swift-example/blob/build38-integration/Build38Report.md). 
 
 ## Install
 
