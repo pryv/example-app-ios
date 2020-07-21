@@ -24,7 +24,7 @@ class ConnectionListUITests: XCTestCase {
         app.launch()
         sleep(1)
         
-        if (!app.buttons["userButton"].exists) {
+        if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
             app.typeText("testuser")
@@ -133,6 +133,8 @@ class ConnectionListUITests: XCTestCase {
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
+        
+        sleep(5)
         
         XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, wrongField)
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, wrongField)
