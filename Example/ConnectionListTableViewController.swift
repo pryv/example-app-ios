@@ -225,6 +225,10 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                         "type": event["type"] as? String ?? "",
                         "content": String(describing: event["content"] ?? "")
                     ]
+                    
+                    if let content = event["content"] as? Json {
+                        params["content"] = String(describing: content.sorted(by: { $0.key > $1.key })).replacingOccurrences(of: "<null>", with: "nil")
+                    }
                 }
             }
 

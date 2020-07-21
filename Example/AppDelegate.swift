@@ -240,6 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                     let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
                     if let event = pryvEvent.params {
+                        // TODO: add signature
                         self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
                             print("Create event with file failed: \(error.localizedDescription)")
                         }
@@ -250,13 +251,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                             let params: Event = [
                                 "streamIds": event["streamIds"] as? [String] ?? [String](),
                                 "type": event["type"] as? String ?? "",
-                                "content": String(describing: event["content"] ?? "")
+                                "content": String(describing: (event["content"] ?? "") ?? "")
                             ]
                             
-                            if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                                var clientData = event["clientData"] as? Json
-                                clientData?["tak-signature"] = String(decoding: signature, as: UTF8.self)
-                                event["clientData"] = clientData
+                            if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8) {
+                                if let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                                    var clientData = event["clientData"] as? Json ?? Json()
+                                    clientData["tak-signature"] = String(decoding: signature, as: UTF8.self)
+                                    event["clientData"] = clientData
+                                }
                             }
                         }
                         
@@ -352,6 +355,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                 self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
                                     print("Create event with file failed: \(error.localizedDescription)")
                                 }
+                                // TODO: add signature 
                         } else {
                             if var event = pryvEvent.params {
                                 if let _ = self.tak {
@@ -365,9 +369,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                         params["content"] = content.removeZerosFromEnd()
                                     }
                                     
+                                    if let content = event["content"] as? Json {
+                                        params["content"] = String(describing: content.sorted(by: { $0.key > $1.key }))
+                                    }
+                                    
                                     if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                                        var clientData = event["clientData"] as? Json
-                                        clientData?["tak-signature"] = String(decoding: signature, as: UTF8.self)
+                                        var clientData = event["clientData"] as? Json ?? Json()
+                                        clientData["tak-signature"] = String(decoding: signature, as: UTF8.self)
                                         event["clientData"] = clientData
                                     }
                                 }
