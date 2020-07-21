@@ -19,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let tak = try? TAK(licenseFileName: "license")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.tak = tak
+        
         if let isRegistered = try? tak?.isRegistered(), !isRegistered {
             do {
                 let registrationResponse = try tak!.register(userHash: nil)

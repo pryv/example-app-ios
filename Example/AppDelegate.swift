@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TAK
 import HealthKit
 import PryvSwiftKit
 import HealthKitBridge
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let limit = 100
     private let lastFetchedKey = "last-fetched-events"
     private let modifiedSinceKey = "modified-since"
+    var tak: TAK? = nil
     var connection: Connection? {
         didSet {
             if connection != nil {
@@ -100,11 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if status == .authorizedAlways {
             /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
              Uncomment this line and comment the line above to have frequent location notifications */
-//            locationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
             
             /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
              Uncomment this line and comment the line below to avoid using too much power */
-            locationManager.startMonitoringSignificantLocationChanges()
+//            locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     
@@ -115,18 +117,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         var apiCalls = [APICall]()
         for location in locations {
-            let params: Json = [
+            let content = [
+                "latitude": location.coordinate.latitude,
+                "longitude": location.coordinate.longitude,
+                "altitude": location.altitude,
+                "horizontalAccuracy": location.horizontalAccuracy,
+                "verticalAccuracy": location.verticalAccuracy,
+                "speed": location.speed
+            ]
+            var params: Json = [
                 "streamIds": ["diary"],
                 "type": "position/wgs84",
-                "content": [
-                    "latitude": location.coordinate.latitude,
-                    "longitude": location.coordinate.longitude,
-                    "altitude": location.altitude,
-                    "horizontalAccuracy": location.horizontalAccuracy,
-                    "verticalAccuracy": location.verticalAccuracy,
-                    "speed": location.speed
-                ]
+                "content": String(describing: content)
             ]
+            
+            if let _ = tak {
+                if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                    params["clientData"] = ["tak-signature": String(decoding: signature, as: UTF8.self)]
+                }
+            }
+            
+            params["content"] = content
             
             let apiCall: APICall = [
                 "method": "events.create",
@@ -234,11 +245,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                         }
                     }
                 } else {
-                    if let event = pryvEvent.params {
+                    if var event = pryvEvent.params {
+                        if let _ = self.tak {
+                            let params: Event = [
+                                "streamIds": event["streamIds"] as? [String] ?? [String](),
+                                "type": event["type"] as? String ?? "",
+                                "content": String(describing: event["content"] ?? "")
+                            ]
+                            
+                            if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                                var clientData = event["clientData"] as? Json
+                                clientData?["tak-signature"] = String(decoding: signature, as: UTF8.self)
+                                event["clientData"] = clientData
+                            }
+                        }
+                        
                         let apiCall: APICall = [
                             "method": "events.create",
                             "params": event
                         ]
+                        
                         self.connection?.api(APICalls: [apiCall]).catch { error in
                             print("Api calls failed: \(error.localizedDescription)")
                         }
@@ -327,7 +353,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                     print("Create event with file failed: \(error.localizedDescription)")
                                 }
                         } else {
-                            if let event = pryvEvent.params {
+                            if var event = pryvEvent.params {
+                                if let _ = self.tak {
+                                    var params: Event = [
+                                        "streamIds": event["streamIds"] as? [String] ?? [String](),
+                                        "type": event["type"] as? String ?? "",
+                                        "content": String(describing: (event["content"] ?? "") ?? "")
+                                    ]
+                                    
+                                    if let content = event["content"] as? Double {
+                                        params["content"] = content.removeZerosFromEnd()
+                                    }
+                                    
+                                    if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                                        var clientData = event["clientData"] as? Json
+                                        clientData?["tak-signature"] = String(decoding: signature, as: UTF8.self)
+                                        event["clientData"] = clientData
+                                    }
+                                }
+                                
                                 let apiCall: APICall = [
                                     "method": "events.create",
                                     "params": event
@@ -425,5 +469,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+}
+
+extension Double {
+    func removeZerosFromEnd() -> String {
+        let formatter = NumberFormatter()
+        let number = NSNumber(value: self)
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
+        return String(formatter.string(from: number) ?? "")
+    }
 }
 
