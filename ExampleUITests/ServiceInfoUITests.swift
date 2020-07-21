@@ -60,8 +60,7 @@ class ServiceInfoUITests: XCTestCase {
     func testLoginWithoutCertificate() {
         app.pickers["serviceInfoPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "https://reg.pryv.me/service/info")
         app.buttons["loginButton"].tap()
-        
-        sleep(2)
+        sleep(3)
         XCTAssert(app.webViews["webView"].exists)
         
         app.staticTexts["Username or email"].tap()

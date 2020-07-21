@@ -32,9 +32,9 @@ extension UIAlertController {
             ]
             
             if let _ = tak {
-                let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
-                let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
-                params["clientData"] = ["tak-signature": String(describing: signature)]
+                if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                    params["clientData"] = ["tak-signature": String(decoding: signature, as: UTF8.self)]
+                }
             }
             
             callback(params)

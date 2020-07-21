@@ -213,24 +213,26 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         if let clientData = event["clientData"] as? Json, let serverSignature = clientData["tak-signature"] as? String {
 
             var params = Json()
-            if let _ = event["content"] { // simple event
-                params = [
-                    "streamId": event["streamId"] as? String ?? "",
-                    "type": event["type"] as? String ?? "",
-                    "content": event["content"] as? String ?? ""
-                ]
-            } else { // event with attachment
-                params = [
-                    "streamId": event["streamId"] as? String ?? "",
-                    "type": event["type"] as? String ?? "",
-                ]
+            if let content = event["content"] {
+                if (content as? NSObject)?.isEqual(NSNull()) ?? false {  // event with attachment
+                    params = [
+                        "streamIds": event["streamIds"] as? [String] ?? [""],
+                        "type": event["type"] as? String ?? "",
+                    ]
+                } else { // simple event
+                    params = [
+                        "streamIds": event["streamIds"] as? [String] ?? [""],
+                        "type": event["type"] as? String ?? "",
+                        "content": String(describing: event["content"] ?? "")
+                    ]
+                }
             }
 
             // generate signature
             if let _ = tak {
-                let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
-                let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
-                return serverSignature == String(describing: signature)
+                if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                    return serverSignature == String(decoding: signature, as: UTF8.self)
+                }
             }
 
         }
@@ -277,11 +279,14 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 
                 if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized,
                     let stringContent = params["content"] as? String, let content = Double(stringContent) {
+                    
                     let sample = self.pryvStream.healthKitSample(from: content)!
-
-                    var paramsWithTag = params
-                    paramsWithTag["clientData"] = [HealthKitStream.hkClientDataId: String(describing: sample.uuid)]
-                    apiCall["params"] = paramsWithTag
+                    var clientData = (params["clientData"] as? Json) ?? Json()
+                    clientData[HealthKitStream.hkClientDataId] = String(describing: sample.uuid)
+                    var paramsWithHKId = params
+                    paramsWithHKId["clientData"] = clientData
+                    apiCall["params"] = paramsWithHKId
+                    
                     self.connection?.api(APICalls: [apiCall]).then { _ in
                         self.healthStore.save(sample) { (success, error) in
                             if !success || error != nil {
@@ -337,9 +342,9 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         ]
         
         if let _ = tak {
-            let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
-            let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
-            params["clientData"] = ["tak-signature": String(describing: signature)]
+            if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
+                params["clientData"] = ["tak-signature": String(decoding: signature, as: UTF8.self)]
+            }
         }
         
         if let id = eventId {
