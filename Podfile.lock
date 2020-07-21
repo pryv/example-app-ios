@@ -35,7 +35,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PryvSwiftKit:
-    :commit: ac7ff09e85bce34efa32c292375fb24398587d52
+    :commit: f86d828f0acf11cb77c6b031839c934ec34f19df
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:
