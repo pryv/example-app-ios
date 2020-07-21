@@ -154,21 +154,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// Configure the health kit data sync. with Pryv
     private func configureHealthKit() {
         let streamIds = healthKitStreams.map({ $0.pryvStreamId() })
-        createStreams(with: streamIds, in: connection)
-        
-        var staticStreams = healthKitStreams
+
+        var staticStreams = self.healthKitStreams
         staticStreams.removeAll(where: { $0.needsBackgroundDelivery() })
-        let dynamicStreams = healthKitStreams.filter({ $0.needsBackgroundDelivery() })
+        let dynamicStreams = self.healthKitStreams.filter({ $0.needsBackgroundDelivery() })
         
-        staticStreams.forEach({ staticMonitor(stream: $0) })
-        dynamicStreams.forEach({ dynamicMonitor(stream: $0) })
+        createStreams(with: streamIds, in: connection).then { _ in
+            staticStreams.forEach({ self.staticMonitor(stream: $0) })
+            dynamicStreams.forEach({ self.dynamicMonitor(stream: $0) })
+        }
     }
     
     /// Create the streams in Pryv for the given HealthKit sample types
     /// - Parameters:
     ///   - ids: the pairs of parent ids and their respective stream id
     ///   - connection: Pryv connection object where to create the streams
-    private func createStreams(with ids: [(parentId: String?, streamId: String)], in connection: Connection?) {
+    /// - Returns: a promise with a `Bool` that is always true
+    private func createStreams(with ids: [(parentId: String?, streamId: String)], in connection: Connection?) -> Promise<Bool> {
         var apiCalls = [APICall]()
         
         ids.forEach { (parentId, streamId) in
@@ -187,9 +189,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             apiCalls.append(streamIdCall)
         }
         
-        apiCalls.forEach { apiCall in // do each call separately to avoid any error blocking the other streams creation
-            connection?.api(APICalls: [apiCall]).catch { error in
-                print("problem encountered when creating HK streams: \(error.localizedDescription)")
+        return Promise<Bool> (on: .global(qos: .background)) { (fullfill, reject) in
+            for i in 0..<apiCalls.count {
+                let apiCall = apiCalls[i]
+                connection?.api(APICalls: [apiCall]).then { _ in  // do each call separately to avoid any error blocking the other streams creation
+                    if i == apiCalls.count - 1 {
+                        fullfill(true)
+                    }
+                }.catch { error in
+                    print("problem encountered when creating HK streams: \(error.localizedDescription)")
+                    if i == apiCalls.count - 1 {
+                        fullfill(true)
+                    }
+                }
             }
         }
     }
