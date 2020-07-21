@@ -149,6 +149,8 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
+        sleep(5)
+        
         XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, wrongField)
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, wrongField)
         XCTAssertNotEqual(cell.staticTexts["contentLabel"].label, wrongField)
@@ -166,6 +168,8 @@ class ConnectionListUITests: XCTestCase {
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
+        
+        sleep(5)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "diary")
         XCTAssertFalse(cell.staticTexts["typeLabel"].exists)

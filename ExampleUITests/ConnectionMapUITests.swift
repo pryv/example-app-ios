@@ -36,7 +36,7 @@ class ConnectionMapUITests: XCTestCase {
         
         connection = Connection(apiEndpoint: endpoint)
         
-        if (!app.buttons["userButton"].exists) {
+        if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
             sleep(5)
             app.staticTexts["Username or email"].tap()
