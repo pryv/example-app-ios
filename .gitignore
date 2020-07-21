@@ -13,6 +13,9 @@ build
 *.xcworkspace/xcshareddata/*
 Pods/
 
+### GitHub Actions ###
+.github/workflows/ci.yml
+
 ### Build38 ###
 TAK.framework/*
 TAK.framework/*/*
