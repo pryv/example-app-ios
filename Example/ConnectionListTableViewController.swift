@@ -8,6 +8,8 @@
 import UIKit
 import PryvSwiftKit
 import TAK
+import HealthKitBridge
+import HealthKit
 
 /// A custom cell to show the details of an event
 class EventTableViewCell: UITableViewCell {
@@ -38,11 +40,12 @@ class EventTableViewCell: UITableViewCell {
                 typeStackView.isHidden = false
                 typeLabel.text = type
                 
-                let contentString = String(describing: content)
-                if !contentString.contains("null") {
-                    contentStackView.isHidden = false
-                    contentLabel.text = contentString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "=", with: ": ").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: ";", with: "\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "\n}", with: "") // formatting the json string to make it readable
-                }
+                // formatting the json string to make it readable
+                var contentString = String(describing: content)
+                contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
+                
+                contentStackView.isHidden = false
+                contentLabel.text = contentString
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
                     attachmentStackView.isHidden = false
@@ -90,6 +93,8 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     private let utils = Utils()
     private var events = [Event]()
     private var connectionSocketIO: ConnectionWebSocket?
+    private var healthStore = HKHealthStore()
+    private let pryvStream = PryvStream(streamId: "bodyMass", type: "mass/kg") // the newly created events from this Pryv stream will be written to HealthKit as well
     private var eventId: String? = nil
     
     var appId: String?
@@ -186,7 +191,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell, indexPath.row < events.count else { return UITableViewCell() }
         
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
@@ -260,7 +265,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         
         alert.addAction(UIAlertAction(title: "Simple event", style: .default) { _ in
             let alert = UIAlertController().newEventAlert(title: "Create an event", message: nil, tak: self.tak) { params in
-                let apiCall: APICall = [
+                var apiCall: APICall = [
                     "method": "events.create",
                     "params": params
                 ]
@@ -269,10 +274,29 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                     print("new event: \(String(describing: event))")
                 }]
                 
-                self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
-                    let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
-                    self.present(innerAlert, animated: true, completion: nil)
+                
+                if let write = self.pryvStream.hkSampleType(), self.healthStore.authorizationStatus(for: write) == .sharingAuthorized,
+                    let stringContent = params["content"] as? String, let content = Double(stringContent) {
+                    let sample = self.pryvStream.healthKitSample(from: content)!
+
+                    var paramsWithTag = params
+                    paramsWithTag["clientData"] = [HealthKitStream.hkClientDataId: String(describing: sample.uuid)]
+                    apiCall["params"] = paramsWithTag
+                    self.connection?.api(APICalls: [apiCall]).then { _ in
+                        self.healthStore.save(sample) { (success, error) in
+                            if !success || error != nil {
+                                print("problem occurred when sending event to Health")
+                            }
+                        }
+                    }.catch { error in
+                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(innerAlert, animated: true, completion: nil)
+                    }
+                } else {
+                    self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
+                        self.present(UIAlertController().ephemereAlert(title: "Error: \(error.localizedDescription)", delay: 2), animated: true, completion: nil)
+                    }
                 }
             }
             self.present(alert, animated: true)
@@ -308,7 +332,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         guard let pickedPngData = pickedImage.pngData() else { return }
         let (_, token) = Utils().extractTokenAndEndpoint(from: connection?.getApiEndpoint() ?? "") ?? ("", "")
         var params: Json = [
-            "streamId": "diary",
+            "streamIds": ["diary"],
             "type": "picture/attached"
         ]
         

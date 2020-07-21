@@ -9,7 +9,13 @@
 import UIKit
 
 extension UIAlertController {
-    func errorAlert(title: String, delay: Double) -> UIAlertController {
+    
+    /// Ephemere alert that appears only for a fixed interval of time
+    /// - Parameters:
+    ///   - title: the title of the alert
+    ///   - delay: the time interval in seconds while the alert is visible
+    /// - Returns: the ephemere alert
+    func ephemereAlert(title: String, delay: Double) -> UIAlertController {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         
         let deadline = DispatchTime.now() + delay

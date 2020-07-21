@@ -67,7 +67,7 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             self.navigationController?.pushViewController(vc, animated: false)
         }.catch { _ in
-            self.present(UIAlertController().errorAlert(title: "Please, select a valid service info URL", delay: 2), animated: true, completion: nil)
+            self.present(UIAlertController().ephemereAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
     
@@ -117,7 +117,7 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.navigationController?.pushViewController(vc, animated: animated)
         }.catch { error in
             self.navigationController?.popViewController(animated: true)
-            let alert = UIAlertController().errorAlert(title: "No certificate found for \(apiEndpoint)", delay: 5.0)
+            let alert = UIAlertController().ephemereAlert(title: "No certificate found for \(apiEndpoint)", delay: 5.0)
             self.present(alert, animated: true)
         }
     }

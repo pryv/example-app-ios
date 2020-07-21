@@ -25,6 +25,15 @@ class ConnectionMapUITests: XCTestCase {
         app.launch()
         sleep(1)
         
+        if (app.alerts.element.exists) {
+            app.alerts.element.buttons["Don’t Allow"].tap()
+        }
+        
+        if (app.buttons["Don’t Allow"].exists) {
+            app.buttons["Don’t Allow"].tap()
+            app.alerts.element.buttons["OK"].tap()
+        }
+        
         connection = Connection(apiEndpoint: endpoint)
         
         if (app.buttons["loginButton"].exists) {

@@ -24,6 +24,15 @@ class ConnectionListUITests: XCTestCase {
         app.launch()
         sleep(1)
         
+        if (app.alerts.element.exists) {
+            app.alerts.element.buttons["Don’t Allow"].tap()
+        }
+        
+        if (app.buttons["Don’t Allow"].exists) {
+            app.buttons["Don’t Allow"].tap()
+            app.alerts.element.buttons["OK"].tap()
+        }
+        
         if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
             app.staticTexts["Username or email"].tap()
@@ -126,9 +135,9 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         sleep(1)
-        XCTAssert(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
+        XCTAssert(app.alerts.element.staticTexts["Error: The parameters' format is invalid."].exists)
         
-        app.alerts.buttons["OK"].tap()
+        sleep(5)
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
@@ -149,7 +158,7 @@ class ConnectionListUITests: XCTestCase {
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
         app.otherElements.collectionViews.element.cells.element(boundBy: 1).tap()
-        sleep(3)
+        sleep(10)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
