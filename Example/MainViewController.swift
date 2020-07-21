@@ -106,6 +106,9 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         let connection = Connection(apiEndpoint: apiEndpoint, session: TakTlsSessionManager.sharedInstance)
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.connection = connection
+        
         connection.api(APICalls: [APICall]()).then { _ in
             try? self.storage?.write(key: "apiEndpoint", value: apiEndpoint)
             

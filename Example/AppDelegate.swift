@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if status == .authorizedAlways {
             /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
              Uncomment this line and comment the line above to have frequent location notifications */
-            //            locationManager.startUpdatingLocation()
+//            locationManager.startUpdatingLocation()
             
             /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
              Uncomment this line and comment the line below to avoid using too much power */
