@@ -31,6 +31,6 @@ jobs:
     - name: Build and test
       run: |
         xcodebuild clean test -workspace 'Example.xcworkspace' -scheme 'Example' -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest'
-        bash <(curl -s https://codecov.io/bash)
+        bash <(curl -s https://codecov.io/bash) -J 'Example'
       env:
        destination: ${{ matrix.destination }}
