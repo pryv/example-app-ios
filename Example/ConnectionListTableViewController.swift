@@ -136,8 +136,9 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         ]
         
         connection!.api(APICalls: request).then { results in
+            let values = results["results"] as? [Json]
             var events = [Event]()
-            results.forEach { result in
+            values?.forEach { result in
                 if let json = result as? [String: [Event]] {
                     events.append(contentsOf: json["events"] ?? [Event]())
                 }
