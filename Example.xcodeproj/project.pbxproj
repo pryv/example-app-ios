@@ -19,6 +19,7 @@
 		B346764E24BC7D8800FCD0C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764C24BC7D8800FCD0C6 /* README.md */; };
 		B346764F24BC7D8800FCD0C6 /* DESIGNDOC.md in Resources */ = {isa = PBXBuildFile; fileRef = B346764D24BC7D8800FCD0C6 /* DESIGNDOC.md */; };
 		B346765124BC7D9A00FCD0C6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B346765024BC7D9A00FCD0C6 /* LICENSE */; };
+		B36A555D24C6DFF300D39E13 /* license.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3410B1124C5B8040027DB39 /* license.tak */; };
 		B387CC8C2499F345005878DB /* ConnectionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387CC8B2499F345005878DB /* ConnectionListTableViewController.swift */; };
 		B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA424A0A7BA009FCE28 /* ConnectionTabBarViewController.swift */; };
 		B3907DA724A0B1C0009FCE28 /* ConnectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3907DA624A0B1C0009FCE28 /* ConnectionMapViewController.swift */; };
@@ -371,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B36A555D24C6DFF300D39E13 /* license.tak in Resources */,
 				B3E03998249355E000B9DE6C /* sample.pdf in Resources */,
 				B3F1166A24C1996900512165 /* 1B38658EADC5463BDB18F71C3198FBA3CF7F6A59EE0632CAF965CBAA4AE74260.tak in Resources */,
 				B3F1166C24C1996900512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */,
