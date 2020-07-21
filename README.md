@@ -1,7 +1,7 @@
 # Pryv iOS example app
 ![Pryv iOS Swift app example](https://github.com/pryv/app-ios-swift-example/workflows/Pryv%20iOS%20Swift%20app%20example/badge.svg)
 
-Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) usage
+Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) and [`bridge-ios-healthkit`](https://github.com/pryv/bridge-ios-healthkit) usage
 
 You will get:
 
@@ -9,6 +9,10 @@ You will get:
 * **AuthViewController** a web view to sign in and give permissions to the app from a Pryv account
 * **ConnectionListTableViewController** a table view to show the last 20 events and to create new ones for a single connection
 * **ConnectionMapViewController** a map view to show the position events for a single connection
+
+If authorized, the application will get the updates from HealthKit for date of birth, wheelchair use, body mass, height, body mass index, active energy burned and workout. These updates will trigger the creation of a new event in Pryv.io backend with the content of the sample received from HealthKit.
+
+The application will also create a HealthKit sample for body mass upon the creation of a simple event with stream id `bodyMass` in the application.
 
 These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.
 

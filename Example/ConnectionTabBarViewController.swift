@@ -9,12 +9,10 @@
 import UIKit
 import PryvSwiftKit
 import KeychainSwift
-import CoreLocation
 
-class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDelegate {
+class ConnectionTabBarViewController: UITabBarController {
     private let keychain = KeychainSwift()
     private let utils = Utils()
-    private let locationManager = CLLocationManager()
     
     var service: Service?
     var connection: Connection?
@@ -35,16 +33,6 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         super.viewDidLoad()
         
         configureUI()
-        configureLocation()
-    }
-    
-    /// Configures the location tracking parameters
-    private func configureLocation() {
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.requestAlwaysAuthorization()
     }
     
     /// Configures the UI for the view with the log out button and the title
@@ -66,12 +54,22 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
     @objc private func openUserMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Privacy settings", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Manage privacy settings", style: .default) { _ in
             if let settingsUrl = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    #if DEBUG
-                    print("Settings opened: \(success)")
-                    #endif
+                UIApplication.shared.open(settingsUrl, completionHandler: { success in
+                    if !success {
+                        print("Error when opening the settings bundle")
+                    }
+                })
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Manage health data", style: .default) { _ in
+            if let healthUrl = URL(string: "x-apple-health://"), UIApplication.shared.canOpenURL(healthUrl) {
+                UIApplication.shared.open(healthUrl, completionHandler: { success in
+                    if !success {
+                        print("Error when opening the Health app")
+                    }
                 })
             }
         })
@@ -93,63 +91,5 @@ class ConnectionTabBarViewController: UITabBarController, CLLocationManagerDeleg
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - location manager
-    
-    /// Checks the result of asking for location authorization
-    /// - Parameters:
-    ///   - manager: location managaer
-    ///   - status: the status of the authorization request
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            /* `.startUpdatingLocation()` will track the position with accuracy of `kCLLocationAccuracyKilometer`
-                Uncomment this line and comment the line above to have frequent location notifications */
-//            locationManager.startUpdatingLocation()
-            
-            /* `.startMonitoringSignificantLocationChanges()` will have a precision of 500m, but will not send more than 1 change in 5 minutes.
-                Uncomment this line and comment the line below to avoid using too much power */
-             locationManager.startMonitoringSignificantLocationChanges()
-        }
-    }
-    
-    /// Manage newly received location updates
-    /// - Parameters:
-    ///   - manager: location manager
-    ///   - locations: array with the latest location(s)
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var apiCalls = [APICall]()
-        for location in locations {
-            let params: Json = [
-                "streamId": "diary",
-                "type": "position/wgs84",
-                "content": [
-                    "latitude": location.coordinate.latitude,
-                    "longitude": location.coordinate.longitude,
-                    "altitude": location.altitude,
-                    "horizontalAccuracy": location.horizontalAccuracy,
-                    "verticalAccuracy": location.verticalAccuracy,
-                    "speed": location.speed
-                ]
-            ]
-            
-            let apiCall: APICall = [
-                "method": "events.create",
-                "params": params
-            ]
-            apiCalls.append(apiCall)
-        }
-        
-        print("Sending location...")
-        connection?.api(APICalls: apiCalls).catch { error in
-            print("Problem encountered when sending position to the server: \(error.localizedDescription)")
-        }
-    }
-    
-    /// Manage newly received location updates in case of an error
-    /// - Parameters:
-    ///   - manager: location manager
-    ///   - locations: array with the latest location(s)
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Problem encountered when tracking position: \(error)")
-    }
-    
 }
+

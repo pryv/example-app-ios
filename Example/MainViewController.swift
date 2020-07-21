@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
             
             self.navigationController?.pushViewController(vc, animated: false)
         }.catch { _ in
-            self.present(UIAlertController().errorAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
+            self.present(UIAlertController().ephemereAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
         }
     }
     
@@ -139,10 +139,14 @@ class MainViewController: UIViewController {
     ///   - animated: whether the change of view controller is animated or not (`true` by default)
     private func openConnection(apiEndpoint: String, animated: Bool = true) {
         keychain.set(apiEndpoint, forKey: appId)
+        let connection = Connection(apiEndpoint: apiEndpoint)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.connection = connection
         
         let vc = self.storyboard?.instantiateViewController(identifier: "connectionTBC") as! ConnectionTabBarViewController
         vc.service = service
-        vc.connection = Connection(apiEndpoint: apiEndpoint)
+        vc.connection = connection
         vc.appId = appId
         self.navigationController?.pushViewController(vc, animated: animated)
     }

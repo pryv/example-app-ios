@@ -24,7 +24,7 @@ extension UIAlertController {
 
         let submit = UIAlertAction(title: "OK", style: .default, handler: { _ in
             let params: Json = [
-                "streamId": alert.textFields![0].text ?? "",
+                "streamIds": [alert.textFields![0].text ?? ""],
                 "type": alert.textFields![1].text ?? "", // Note the new events content can only contain simple types (Int, String, Double, ...)
                 "content": alert.textFields![2].text ?? ""
             ]

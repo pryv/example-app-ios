@@ -21,12 +21,21 @@ class ServiceInfoUITests: XCTestCase {
         app.launch()
         sleep(1)
         
+        if (app.alerts.element.exists) {
+            app.alerts.element.buttons["Don’t Allow"].tap()
+        }
+        
+        if (app.buttons["Don’t Allow"].exists) {
+            app.buttons["Don’t Allow"].tap()
+            app.alerts.element.buttons["OK"].tap()
+        }
+        
         if (app.navigationBars["connectionNavBar"].buttons["userButton"].exists) {
             app.navigationBars["connectionNavBar"].buttons["userButton"].tap()
             app.sheets.element.buttons["Log out"].tap()
             sleep(1)
             app.alerts.element.buttons["Log out"].tap()
-            sleep(1)
+            sleep(3)
         }
     }
     
