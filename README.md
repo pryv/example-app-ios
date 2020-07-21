@@ -1,5 +1,4 @@
 # Pryv iOS example app
-![Pryv iOS Swift app example](https://github.com/pryv/app-ios-swift-example/workflows/Pryv%20iOS%20Swift%20app%20example/badge.svg)
 
 Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) usage
 
