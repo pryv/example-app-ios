@@ -24,8 +24,9 @@ class ConnectionListUITests: XCTestCase {
         app.launch()
         sleep(1)
         
-        if (!app.buttons["userButton"].exists) {
+        if (app.buttons["loginButton"].exists) {
             app.buttons["loginButton"].tap()
+            sleep(5)
             app.staticTexts["Username or email"].tap()
             app.typeText("testuser")
             app.staticTexts["Password"].tap()
@@ -64,7 +65,9 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         XCTAssert(app.staticTexts["Pryv Lab"].exists)
-
+        
+        sleep(5)
+        
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Simple event"].tap()
         sleep(1)
@@ -87,6 +90,8 @@ class ConnectionListUITests: XCTestCase {
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
+        sleep(5)
+        
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
         XCTAssertEqual(cell.staticTexts["contentLabel"].label, "90")
@@ -96,6 +101,8 @@ class ConnectionListUITests: XCTestCase {
         
         cell.swipeLeft()
         cell.buttons["Delete"].tap()
+        
+        sleep(2)
         
         XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -125,7 +132,7 @@ class ConnectionListUITests: XCTestCase {
         app.textFields["contentField"].typeText(wrongField)
 
         app.alerts.buttons["OK"].tap()
-        sleep(1)
+        sleep(5)
         XCTAssert(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
         
         app.alerts.buttons["OK"].tap()
@@ -142,7 +149,7 @@ class ConnectionListUITests: XCTestCase {
     func testCreateEventWithFile() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Event with attachment"].tap()
-        sleep(1)
+        sleep(3)
         
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
@@ -179,6 +186,8 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         
+        sleep(5)
+        
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
         
@@ -187,7 +196,7 @@ class ConnectionListUITests: XCTestCase {
         let content = cell.staticTexts["contentLabel"].label
         
         cell.buttons["addAttachmentButton"].tap()
-        sleep(1)
+        sleep(3)
         
         app.otherElements.tables.cells["Moments"].tap()
         sleep(1)
