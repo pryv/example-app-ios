@@ -25,9 +25,9 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var attachmentStackView: UIStackView!
     
-    var data: (Connection?, Event)? {
+    var data: (Connection?, Event, Bool)? {
         didSet {
-            let (connection, event) = data!
+            let (connection, event, verified) = data!
             guard let eventId = event["id"] as? String, let streamId = event["streamId"] as? String, let type = event["type"] as? String, let content = event["content"] else { return }
             streamIdLabel.text = streamId
             
@@ -50,7 +50,7 @@ class EventTableViewCell: UITableViewCell {
                 }
             }
             
-            if let clientData = event["clientData"] as? Json, let _ = clientData["tak-signature"] {
+            if verified {
                 verifiedView.isHidden = false
             }
         }
@@ -191,13 +191,45 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         let event = events[indexPath.row]
         if let error = event["message"] as? String { print("Error for event at row \(indexPath.row): \(error)") ; return UITableViewCell() }
         
-        cell.data = (connection, event)
+        let verified = verify(event: event)
+        cell.data = (connection, event, verified)
         cell.addAttachmentButton.tag = indexPath.row
         cell.addAttachmentButton.addTarget(self, action: #selector(addAttachment), for: .touchUpInside)
         
         cell.accessibilityIdentifier = "eventCell\(indexPath.row)"
         
         return cell
+    }
+    
+    /// Verifies an event by checking if the tak signature in the event `clientData` parameter is correspond to the event
+    /// - Parameter event
+    /// - Returns: true if verified, false otherwise
+    private func verify(event: Event) -> Bool {
+        if let clientData = event["clientData"] as? Json, let serverSignature = clientData["tak-signature"] as? String {
+
+            var params = Json()
+            if let _ = event["content"] { // simple event
+                params = [
+                    "streamId": event["streamId"] as? String ?? "",
+                    "type": event["type"] as? String ?? "",
+                    "content": event["content"] as? String ?? ""
+                ]
+            } else { // event with attachment
+                params = [
+                    "streamId": event["streamId"] as? String ?? "",
+                    "type": event["type"] as? String ?? "",
+                ]
+            }
+
+            // generate signature
+            if let _ = tak {
+                let dataToBeSigned = String(describing: params).data(using: String.Encoding.utf8)!
+                let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048)
+                return serverSignature == String(describing: signature)
+            }
+
+        }
+        return false
     }
     
     // MARK: - Table view interactions
