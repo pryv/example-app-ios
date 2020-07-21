@@ -24,12 +24,14 @@ class ServiceInfoUITests: XCTestCase {
             app.sheets.element.buttons["Log out"].tap()
             sleep(1)
             app.alerts.element.buttons["Log out"].tap()
+            sleep(3)
         }
     }
     
     func testLogin() {
         app.pickers["serviceInfoPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "https://reg.pryv.me/service/info")
         app.buttons["loginButton"].tap()
+        sleep(3)
         XCTAssert(app.webViews["webView"].exists)
         
         app.staticTexts["Username or email"].tap()
