@@ -25,12 +25,14 @@ From `Project` folder
 * if needed run `pod update`
 * open Example.xcworkspace (not Example.xcodeproj)
 * add your Build38 T.A.K. license and frameworks:
-  *  in XCode, `file > Add files to Example ...`, select your tak license and add it to the Project and the ProjectUITests targets
-  *  drag and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Project/Frameworks` folder in XCode project
-  * add the frameworks to the Project and the ProjectUITests targets
-  * in `Project > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks
-  * in `Project > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks
-  * in `ProjectUITests > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks
+  *  in XCode, `file > Add files to Example ...`, select your tak license and add it to the Example and the ExampleUITests targets
+  *  drag and drop the two folders `TAK-Client/iOS/Swift/libs/TAK.framework` and `TAK-Client/iOS/Swift/libs/TakTls.framework` in the `Example/Frameworks` folder in XCode project
+  * add the frameworks to the Example and the ExampleUITests targets
+  * in `Example > General > Frameworks, Libraries, and Embedded Content`,  chose `embed & sign` for both of the frameworks
+  * in `Example > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks
+  * in `ExampleUITests > Build Phases > Link Binary with Libraries`, chose `Optional` status for both of the frameworks
+
+Note that for every HTTP request, one needs to add the host SSL certificate; wildcards are not yet supported. Follow the procedure to generate the certificate `.crt` file and its encrypted `.tak` version, as described in the T.A.K. documentation and add the `.tak` encrypted certificate to the Example and ExampleUITest target. 
 
 
 ## Support and warranty
