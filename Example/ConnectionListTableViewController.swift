@@ -40,10 +40,13 @@ class EventTableViewCell: UITableViewCell, UINavigationControllerDelegate, UIIma
                 
                 // formatting the json string to make it readable
                 var contentString = String(describing: content)
-                contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
                 
-                contentStackView.isHidden = false
-                contentLabel.text = contentString
+                if contentString != "<null>" {
+                    contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
+                    
+                    contentStackView.isHidden = false
+                    contentLabel.text = contentString
+                }
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
                     attachmentStackView.isHidden = false
