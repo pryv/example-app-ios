@@ -133,9 +133,9 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     /// Get the tak object from the AppDelegate and store it as attribute
     /// - Parameter tak
-    func passData(tak: TAK?) {
+    func passData(tak: TAK?, storage: SecureStorage?) {
         self.tak = tak
-        self.storage = try? tak?.getSecureStorage(storageName: "app-ios-swift-example-secure-storage")
+        self.storage = storage
     }
     
     // MARK: - UIPickerViewDelegate

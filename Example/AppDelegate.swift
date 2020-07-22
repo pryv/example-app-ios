@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let lastFetchedKey = "last-fetched-events"
     private let modifiedSinceKey = "modified-since"
     var tak: TAK? = nil
+    var storage: SecureStorage? = nil // TODO: use it for anchor and last events
     var connection: Connection? {
         didSet {
             if connection != nil {
@@ -282,8 +283,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     /// - Parameter stream: the HealthKit stream to monitor
     private func dynamicMonitor(stream: HealthKitStream) {
         var anchor = HKQueryAnchor.init(fromValue: 0)
-        if UserDefaults.standard.object(forKey: "Anchor") != nil {
-            let data = UserDefaults.standard.object(forKey: "Anchor") as! Data
+        if let data: Data = try? storage?.read(key: "Anchor") {
             anchor = try! NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: data)!
         }
         
@@ -320,7 +320,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
             
             let data = try! NSKeyedArchiver.archivedData(withRootObject: newAnchor as Any, requiringSecureCoding: true)
-            UserDefaults.standard.set(data, forKey: "Anchor")
+            try? self.storage?.write(key: "Anchor", value: data)
             
             if let additions = newSamples {
                 let removeDuplicates = Promise<[HKSample]>(on: .global(qos: .background), { (fullfill, reject) in
@@ -406,6 +406,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private func deleteHKDeletions(_ deletions: [HKDeletedObject]) {
         let deletedSampleIds = deletions.map { String(describing: $0.uuid) }
         
+        // data bound to key `lastFetchedKey` is not stored in secure storage as it may be too big
         if let eventToSample = UserDefaults.standard.value(forKey: lastFetchedKey) as? [String: String], Set(deletedSampleIds).isSubset(of: eventToSample.keys) {
             var apiCalls = [APICall]()
             deletedSampleIds.forEach { sampleId in
@@ -426,7 +427,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         var params = Json()
-        if let modifiedSince = UserDefaults.standard.value(forKey: modifiedSinceKey) as? Double {
+        if let modifiedSince: Int = try? storage?.read(key: modifiedSinceKey) {
             params = ["modifiedSince": modifiedSince]
         } else {
             params = ["limit": limit]
@@ -449,7 +450,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             UserDefaults.standard.set(eventToSample, forKey: self.lastFetchedKey)
             
             if let meta = json["meta"] as? Json, let serverTime = meta["serverTime"] as? Double {
-                UserDefaults.standard.set(serverTime, forKey: self.modifiedSinceKey)
+                let modifiedSince = Int(floor(serverTime))
+                try? self.storage?.write(key: self.modifiedSinceKey, value: modifiedSince)
             }
             let deletedEvents = events.filter { event in
                 if let clientData = event["clientData"] as? Json, let sampleId = clientData[HealthKitStream.hkClientDataId] as? String, deletedSampleIds.contains(sampleId) {

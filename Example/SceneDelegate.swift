@@ -19,8 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let tak = try? TAK(licenseFileName: "license")
+        let storage = try? tak?.getSecureStorage(storageName: "app-ios-swift-example-secure-storage")
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.tak = tak
+        appDelegate.storage = storage
         
         if let isRegistered = try? tak?.isRegistered(), !isRegistered {
             do {
@@ -46,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainVC = storyboard.instantiateViewController(withIdentifier: "mainVC") as! MainViewController
-        mainVC.passData(tak: tak)
+        mainVC.passData(tak: tak, storage: storage)
         let initialViewController = UINavigationController(rootViewController: mainVC)
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
