@@ -40,7 +40,7 @@ class ConnectionListUITests: XCTestCase {
             
             let usernameTextfield = app.staticTexts["Username or email"]
             self.expectation(for: existsPredicate, evaluatedWith: usernameTextfield, handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
+            self.waitForExpectations(timeout: 10.0, handler: nil)
             
             usernameTextfield.tap()
             app.typeText("Testuser")
