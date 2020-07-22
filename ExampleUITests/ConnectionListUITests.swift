@@ -141,7 +141,9 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         sleep(1)
-        XCTAssert(app.alerts.element.staticTexts["Error: The parameters' format is invalid."].exists)
+        
+        XCTAssert(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
+        app.alerts.buttons["OK"].tap()
         
         sleep(5)
         XCTAssert(app.staticTexts["Pryv Lab"].exists)

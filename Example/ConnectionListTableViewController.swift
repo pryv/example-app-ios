@@ -255,7 +255,9 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                     }
                 } else {
                     self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
-                        self.present(UIAlertController().ephemereAlert(title: "Error: \(error.localizedDescription)", delay: 2), animated: true, completion: nil)
+                        let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true)
                     }
                 }
             }

@@ -45,7 +45,8 @@ class ServiceInfoUITests: XCTestCase {
         app.textFields["serviceInfoUrlField"].typeText("hello")
         app.buttons["loginButton"].tap()
         
-        XCTAssertEqual(app.alerts.element.staticTexts.element.label, "Please, type a valid service info URL")
+        XCTAssert(app.alerts.element.staticTexts["unsupported URL"].exists)
+        XCTAssertEqual(app.alerts.element.label, "Service info request failed")
         XCTAssertFalse(app.webViews["webView"].exists)
     }
     
