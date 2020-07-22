@@ -1,5 +1,5 @@
 # Pryv iOS example app
-![Pryv iOS Swift app example](https://github.com/pryv/app-ios-swift-example/workflows/Pryv%20iOS%20Swift%20app%20example/badge.svg)
+![Pryv iOS Swift app example](https://github.com/pryv/app-ios-swift-example/workflows/Pryv%20iOS%20Swift%20app%20example/badge.svg) [![codecov](https://codecov.io/gh/pryv/app-ios-swift-example/branch/master/graph/badge.svg)](https://codecov.io/gh/pryv/app-ios-swift-example)
 
 Minimalistic app to discover Pryv [`lib-swift`](https://github.com/pryv/lib-swift) and [`bridge-ios-healthkit`](https://github.com/pryv/bridge-ios-healthkit) usage
 

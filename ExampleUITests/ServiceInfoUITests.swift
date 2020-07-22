@@ -15,11 +15,13 @@ class ServiceInfoUITests: XCTestCase {
     private let keychain = KeychainSwift()
     private var values = [String]()
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
+    private let timeout = 10.0
     
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
         
         if (app.alerts.element.exists) {
             app.alerts.element.buttons["Don’t Allow"].tap()
@@ -35,13 +37,13 @@ class ServiceInfoUITests: XCTestCase {
             app.sheets.element.buttons["Log out"].tap()
             let logout = app.alerts.element.buttons["Log out"]
             self.expectation(for: existsPredicate, evaluatedWith: logout, handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
+            self.waitForExpectations(timeout: timeout, handler: nil)
             
             logout.tap()
-            
-            self.expectation(for: existsPredicate, evaluatedWith: app.buttons["loginButton"], handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
+        
+        self.expectation(for: existsPredicate, evaluatedWith: app.textFields["serviceInfoUrlField"], handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testBadServiceInfoUrl() {
@@ -60,7 +62,7 @@ class ServiceInfoUITests: XCTestCase {
         
         let webView = app.webViews["webView"]
         self.expectation(for: existsPredicate, evaluatedWith: webView, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssert(webView.exists)
     }
 }

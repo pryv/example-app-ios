@@ -15,6 +15,7 @@ class ConnectionMapUITests: XCTestCase {
     private let endpoint = "https://ckclwj7m504fo1od3fkt6ptqb@Testuser.pryv.me/"
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
     private let doesNotExistPredicate = NSPredicate(format: "exists == FALSE")
+    private let timeout = 10.0
     private var connection: Connection!
     
     var app: XCUIApplication!
@@ -25,6 +26,7 @@ class ConnectionMapUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
         
         if (app.alerts.element.exists) {
             app.alerts.element.buttons["Don’t Allow"].tap()
@@ -42,7 +44,7 @@ class ConnectionMapUITests: XCTestCase {
             
             let usernameTextfield = app.staticTexts["Username or email"]
             self.expectation(for: existsPredicate, evaluatedWith: usernameTextfield, handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
+            self.waitForExpectations(timeout: timeout, handler: nil)
             
             usernameTextfield.tap()
             app.typeText("Testuser")
@@ -54,7 +56,7 @@ class ConnectionMapUITests: XCTestCase {
             }
             
             self.expectation(for: existsPredicate, evaluatedWith: app.tabBars["connectionTabBar"], handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
+            self.waitForExpectations(timeout: timeout, handler: nil)
         }
         
         app.tabBars["connectionTabBar"].buttons["mapButtonItem"].tap()
@@ -69,23 +71,23 @@ class ConnectionMapUITests: XCTestCase {
         changeDate(day: "24")
         var marker = app.otherElements["24.06.2020"]
         self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
         XCTAssert(marker.exists)
         
         app.segmentedControls["filterController"].buttons["Day"].tap()
         self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
         XCTAssert(marker.exists)
         
         app.segmentedControls["filterController"].buttons["Week"].tap()
         self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
         XCTAssert(marker.exists)
         
         marker = app.otherElements["29.06.2020"]
         app.segmentedControls["filterController"].buttons["Month"].tap()
         self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
         XCTAssert(marker.exists)
     }
     
@@ -93,23 +95,23 @@ class ConnectionMapUITests: XCTestCase {
         app.segmentedControls["filterController"].buttons["Day"].tap()
         var marker = app.otherElements["22.06.2020"]
         self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssertFalse(marker.exists)
         
         app.segmentedControls["filterController"].buttons["Week"].tap()
         self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssertFalse(marker.exists)
         
         marker = app.otherElements["29.06.2020"]
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
-        XCTAssert(marker.exists)
+        self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
+        XCTAssertFalse(marker.exists)
         
         changeDate(month: "May")
         self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssertFalse(marker.exists)
     }
     
@@ -167,7 +169,7 @@ class ConnectionMapUITests: XCTestCase {
         
         let element = app.otherElements[formatter.string(from: today)]
         self.expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssert(element.exists)
     }
     

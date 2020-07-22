@@ -16,6 +16,7 @@ class ConnectionListUITests: XCTestCase {
     private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
     private let doesNotExistPredicate = NSPredicate(format: "exists == FALSE")
+    private let timeout = 10.0
     
     var app: XCUIApplication!
 
@@ -25,6 +26,7 @@ class ConnectionListUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        sleep(1)
         
         if (app.alerts.element.exists) {
             app.alerts.element.buttons["Don’t Allow"].tap()
@@ -52,15 +54,23 @@ class ConnectionListUITests: XCTestCase {
             }
             
             self.expectation(for: existsPredicate, evaluatedWith: app.tabBars["connectionTabBar"], handler: nil)
-            self.waitForExpectations(timeout: 5.0, handler: nil)
+            self.waitForExpectations(timeout: timeout, handler: nil)
         }
         
     }
 
     func testConnectionViewBasicUI() {
-        XCTAssert(app.staticTexts["Pryv Lab"].exists)
+        let pryvLabLabel = app.staticTexts["Pryv Lab"]
+        self.expectation(for: existsPredicate, evaluatedWith: pryvLabLabel, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
+        XCTAssert(pryvLabLabel.exists)
+        
         XCTAssert(app.navigationBars["connectionNavBar"].exists)
-        XCTAssert(app.navigationBars["connectionNavBar"].buttons["userButton"].isHittable)
+        
+        let userButton = app.navigationBars["connectionNavBar"].buttons["userButton"]
+        self.expectation(for: existsPredicate, evaluatedWith: userButton, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
+        XCTAssert(userButton.isHittable)
         XCTAssert(app.navigationBars["connectionNavBar"].buttons["addEventButton"].isHittable)
         XCTAssert(app.tables["eventsTableView"].exists)
     }
@@ -71,7 +81,7 @@ class ConnectionListUITests: XCTestCase {
 
         let streamIdTextfield = app.textFields["streamIdField"]
         self.expectation(for: existsPredicate, evaluatedWith: streamIdTextfield, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
 
         streamIdTextfield.tap()
         app.textFields["streamIdField"].buttons["Clear text"].tap()
@@ -89,13 +99,13 @@ class ConnectionListUITests: XCTestCase {
         
         let addButton = app.navigationBars["connectionNavBar"].buttons["addEventButton"]
         self.expectation(for: existsPredicate, evaluatedWith: addButton, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         addButton.tap()
         app.sheets.element.buttons["Simple event"].tap()
         
         self.expectation(for: existsPredicate, evaluatedWith: streamIdTextfield, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
 
         streamIdTextfield.tap()
         app.textFields["streamIdField"].buttons["Clear text"].tap()
@@ -117,7 +127,7 @@ class ConnectionListUITests: XCTestCase {
         var streamIdLabel = cell.staticTexts["streamIdLabel"]
         let weightPredicate = NSPredicate(format: "label == %@", "weight")
         self.expectation(for: weightPredicate, evaluatedWith: streamIdLabel, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 15.0, handler: nil)
         
         XCTAssertEqual(streamIdLabel.label, "weight")
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -131,7 +141,7 @@ class ConnectionListUITests: XCTestCase {
         streamIdLabel = cell.staticTexts["streamIdLabel"]
         let measurementsPredicate = NSPredicate(format: "label == %@", "measurements")
         self.expectation(for: measurementsPredicate, evaluatedWith: streamIdLabel, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 15.0, handler: nil)
         
         XCTAssertNotEqual(cell.staticTexts["streamIdLabel"].label, "weight")
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, "mass/kg")
@@ -150,7 +160,7 @@ class ConnectionListUITests: XCTestCase {
 
         let streamIdTextfield = app.textFields["streamIdField"]
         self.expectation(for: existsPredicate, evaluatedWith: streamIdTextfield, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
 
         streamIdTextfield.tap()
         app.textFields["streamIdField"].buttons["Clear text"].tap()
@@ -167,12 +177,12 @@ class ConnectionListUITests: XCTestCase {
         
         let errorAlert = app.alerts.element.staticTexts["The parameters' format is invalid."]
         self.expectation(for: existsPredicate, evaluatedWith: errorAlert, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssert(errorAlert.exists)
         
         app.alerts.buttons["OK"].tap()
         self.expectation(for: existsPredicate, evaluatedWith: app.staticTexts["Pryv Lab"], handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
@@ -180,7 +190,7 @@ class ConnectionListUITests: XCTestCase {
         let streamIdLabel = cell.staticTexts["streamIdLabel"]
         let notWrongPredicate = NSPredicate(format: "label != %@", wrongField)
         self.expectation(for: notWrongPredicate, evaluatedWith: streamIdLabel, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         XCTAssertNotEqual(streamIdLabel.label, wrongField)
         XCTAssertNotEqual(cell.staticTexts["typeLabel"].label, wrongField)
@@ -193,13 +203,13 @@ class ConnectionListUITests: XCTestCase {
 
         let momentsElement = app.otherElements.tables.cells["Moments"]
         self.expectation(for: existsPredicate, evaluatedWith: momentsElement, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         momentsElement.tap()
         
         let collectionView = app.otherElements.collectionViews.element.cells.element(boundBy: 1)
         self.expectation(for: existsPredicate, evaluatedWith: collectionView, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         collectionView.tap()
         
@@ -208,7 +218,7 @@ class ConnectionListUITests: XCTestCase {
         
         let typeLabel = cell.staticTexts["typeLabel"]
         self.expectation(for: doesNotExistPredicate, evaluatedWith: typeLabel, handler: nil)
-        self.waitForExpectations(timeout: 10.0, handler: nil)
+        self.waitForExpectations(timeout: 30.0, handler: nil)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, "diary")
         XCTAssertFalse(typeLabel.exists)
@@ -222,7 +232,7 @@ class ConnectionListUITests: XCTestCase {
 
         let streamIdTextfield = app.textFields["streamIdField"]
         self.expectation(for: existsPredicate, evaluatedWith: streamIdTextfield, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
 
         streamIdTextfield.tap()
         app.textFields["streamIdField"].buttons["Clear text"].tap()
@@ -237,7 +247,7 @@ class ConnectionListUITests: XCTestCase {
 
         app.alerts.buttons["OK"].tap()
         self.expectation(for: existsPredicate, evaluatedWith: app.staticTexts["Pryv Lab"], handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         let myTable = app.tables.matching(identifier: "eventsTableView")
         let cell = myTable.cells["eventCell0"]
@@ -250,20 +260,19 @@ class ConnectionListUITests: XCTestCase {
         
         let momentsElement = app.otherElements.tables.cells["Moments"]
         self.expectation(for: existsPredicate, evaluatedWith: momentsElement, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         momentsElement.tap()
         
         let collectionView = app.otherElements.collectionViews.element.cells.element(boundBy: 1)
         self.expectation(for: existsPredicate, evaluatedWith: collectionView, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         
         collectionView.tap()
-        sleep(8)
         
         let attachmentLabel = cell.staticTexts["attachmentLabel"]
         self.expectation(for: existsPredicate, evaluatedWith: attachmentLabel, handler: nil)
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        self.waitForExpectations(timeout: 20.0, handler: nil)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)
