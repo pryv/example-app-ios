@@ -122,7 +122,9 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.navigationController?.pushViewController(vc, animated: animated)
         }.catch { error in
             self.navigationController?.popViewController(animated: true)
-            let alert = UIAlertController().ephemereAlert(title: "No certificate found for \(apiEndpoint)", delay: 5.0)
+            
+            let alert = UIAlertController(title: "Missing certificate", message: "No certificate found for \(apiEndpoint)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
     }
