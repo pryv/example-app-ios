@@ -105,9 +105,9 @@ class ConnectionMapUITests: XCTestCase {
         
         marker = app.otherElements["29.06.2020"]
         app.segmentedControls["filterController"].buttons["Month"].tap()
-        self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
+        self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
         self.waitForExpectations(timeout: 10.0, handler: nil)
-        XCTAssertFalse(marker.exists)
+        XCTAssert(marker.exists)
         
         changeDate(month: "May")
         self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
