@@ -237,7 +237,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
             // generate signature
             if let _ = tak {
                 if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                    return serverSignature == String(decoding: signature, as: UTF8.self)
+                    return serverSignature == String(decoding: signature, as: UTF8.self).replacingOccurrences(of: "{", with: "") .replacingOccurrences(of: "}", with: "")
                 }
             }
 
