@@ -20,7 +20,6 @@ class ServiceInfoUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
-        sleep(1)
         
         if (app.alerts.element.exists) {
             app.alerts.element.buttons["Don’t Allow"].tap()
