@@ -15,7 +15,7 @@ class ConnectionListUITests: XCTestCase {
     private let endpoint = "https://ckbc28vpd00kz1vd3s7vgiszs@Testuser.pryv.me/"
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
     private let doesNotExistPredicate = NSPredicate(format: "exists == FALSE")
-    private let timeout = 10.0
+    private let timeout = 15.0
     
     var app: XCUIApplication!
 
@@ -44,7 +44,7 @@ class ConnectionListUITests: XCTestCase {
             self.waitForExpectations(timeout: 10.0, handler: nil)
             
             usernameTextfield.tap()
-            app.typeText("Testuser")
+            app.typeText("testuser")
             app.staticTexts["Password"].tap()
             app.typeText("testuser")
             app.buttons["SIGN IN"].tap()
@@ -274,7 +274,7 @@ class ConnectionListUITests: XCTestCase {
         
         let attachmentLabel = cell.staticTexts["attachmentLabel"]
         self.expectation(for: existsPredicate, evaluatedWith: attachmentLabel, handler: nil)
-        self.waitForExpectations(timeout: 20.0, handler: nil)
+        self.waitForExpectations(timeout: 30.0, handler: nil)
         
         XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId)
         XCTAssertEqual(cell.staticTexts["typeLabel"].label, type)

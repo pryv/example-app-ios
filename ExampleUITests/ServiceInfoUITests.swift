@@ -12,8 +12,9 @@ class ServiceInfoUITests: XCTestCase {
     
     var app: XCUIApplication!
     private var values = [String]()
+    private let doesNotExistPredicate = NSPredicate(format: "exists == FALSE")
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
-    private let timeout = 10.0
+    private let timeout = 15.0
     
     override func setUp() {
         continueAfterFailure = false
@@ -40,7 +41,7 @@ class ServiceInfoUITests: XCTestCase {
             logout.tap()
         }
         
-        self.expectation(for: existsPredicate, evaluatedWith: app.textFields["serviceInfoUrlField"], handler: nil)
+        self.expectation(for: existsPredicate, evaluatedWith: app.pickers["serviceInfoPicker"], handler: nil)
         self.waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -59,9 +60,11 @@ class ServiceInfoUITests: XCTestCase {
             app.buttons["ACCEPT"].tap()
         }
         
-        XCTAssert(app.alerts.element.staticTexts["unsupported URL"].exists)
-        XCTAssertEqual(app.alerts.element.label, "Service info request failed")
+        let pryvLabLabel = app.staticTexts["Pryv Lab"]
+        self.expectation(for: existsPredicate, evaluatedWith: pryvLabLabel, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
         XCTAssertFalse(app.webViews["webView"].exists)
+        XCTAssert(pryvLabLabel.exists)
     }
     
     func testLoginWithoutCertificate() {
@@ -82,8 +85,10 @@ class ServiceInfoUITests: XCTestCase {
             app.buttons["ACCEPT"].tap()
         }
         
+        self.expectation(for: doesNotExistPredicate, evaluatedWith: webView, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
+        XCTAssertFalse(webView.exists)
         XCTAssertFalse(app.staticTexts["Pryv Lab"].exists)
-        XCTAssert(app.alerts.element.staticTexts.element.label.contains("No certificate found for "))
-        XCTAssert(app.alerts.element.staticTexts.element.label.contains("Testuser"))
+        XCTAssert(app.alerts.element.staticTexts["Missing certificate"].exists)
     }
 }

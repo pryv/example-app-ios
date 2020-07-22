@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let limit = 100
     private let lastFetchedKey = "last-fetched-events"
     private let modifiedSinceKey = "modified-since"
-    var tak: TAK? = nil
     var storage: SecureStorage? = nil
     var connection: Connection? {
         didSet {
@@ -126,19 +125,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 "verticalAccuracy": location.verticalAccuracy,
                 "speed": location.speed
             ]
-            var params: Json = [
+            let params: Json = [
                 "streamIds": ["diary"],
                 "type": "position/wgs84",
                 "content": String(describing: content)
             ]
-            
-            if let _ = tak {
-                if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                    params["clientData"] = ["tak-signature": String(decoding: signature, as: UTF8.self).replacingOccurrences(of: "{", with: "") .replacingOccurrences(of: "}", with: "")]
-                }
-            }
-            
-            params["content"] = content
             
             let apiCall: APICall = [
                 "method": "events.create",
@@ -241,29 +232,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                     let token = Utils().extractTokenAndEndpoint(from: apiEndpoint)
                     let media = Media(key: "file-\(UUID().uuidString)-\(String(describing: token))", filename: "fhir", data: data, mimeType: "application/json")
                     if let event = pryvEvent.params {
-                        // TODO: add signature
                         self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
                             print("Create event with file failed: \(error.localizedDescription)")
                         }
                     }
                 } else {
-                    if var event = pryvEvent.params {
-                        if let _ = self.tak {
-                            let params: Event = [
-                                "streamIds": event["streamIds"] as? [String] ?? [String](),
-                                "type": event["type"] as? String ?? "",
-                                "content": String(describing: (event["content"] ?? "") ?? "")
-                            ]
-                            
-                            if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8) {
-                                if let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                                    var clientData = event["clientData"] as? Json ?? Json()
-                                    clientData["tak-signature"] = String(decoding: signature, as: UTF8.self).replacingOccurrences(of: "{", with: "") .replacingOccurrences(of: "}", with: "")
-                                    event["clientData"] = clientData
-                                }
-                            }
-                        }
-                        
+                    if let event = pryvEvent.params {
                         let apiCall: APICall = [
                             "method": "events.create",
                             "params": event
@@ -355,31 +329,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                 self.connection?.createEventWithFormData(event: event as Json, parameters: nil, files: [media]).catch { error in
                                     print("Create event with file failed: \(error.localizedDescription)")
                                 }
-                                // TODO: add signature 
                         } else {
-                            if var event = pryvEvent.params {
-                                if let _ = self.tak {
-                                    var params: Event = [
-                                        "streamIds": event["streamIds"] as? [String] ?? [String](),
-                                        "type": event["type"] as? String ?? "",
-                                        "content": String(describing: (event["content"] ?? "") ?? "")
-                                    ]
-                                    
-                                    if let content = event["content"] as? Double {
-                                        params["content"] = content.removeZerosFromEnd()
-                                    }
-                                    
-                                    if let content = event["content"] as? Json {
-                                        params["content"] = String(describing: content.sorted(by: { $0.key > $1.key }))
-                                    }
-                                    
-                                    if let dataToBeSigned = String(describing: params.sorted(by: { $0.key > $1.key })).data(using: .utf8), let signature = try? self.tak!.generateSignature(input: dataToBeSigned, signatureAlgorithm: .rsa2048) {
-                                        var clientData = event["clientData"] as? Json ?? Json()
-                                        clientData["tak-signature"] = String(decoding: signature, as: UTF8.self).replacingOccurrences(of: "{", with: "") .replacingOccurrences(of: "}", with: "")
-                                        event["clientData"] = clientData
-                                    }
-                                }
-                                
+                            if let event = pryvEvent.params {
                                 let apiCall: APICall = [
                                     "method": "events.create",
                                     "params": event

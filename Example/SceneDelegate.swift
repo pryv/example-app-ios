@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storage = try? tak?.getSecureStorage(storageName: "app-ios-swift-example-secure-storage")
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.tak = tak
         appDelegate.storage = storage
         
         if let isRegistered = try? tak?.isRegistered(), !isRegistered {

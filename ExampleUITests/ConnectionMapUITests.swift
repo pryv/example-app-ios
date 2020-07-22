@@ -15,7 +15,7 @@ class ConnectionMapUITests: XCTestCase {
     private let endpoint = "https://ckclwj7m504fo1od3fkt6ptqb@Testuser.pryv.me/"
     private let existsPredicate = NSPredicate(format: "exists == TRUE")
     private let doesNotExistPredicate = NSPredicate(format: "exists == FALSE")
-    private let timeout = 10.0
+    private let timeout = 15.0
     private var connection: Connection!
     
     var app: XCUIApplication!
