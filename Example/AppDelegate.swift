@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let lastFetchedKey = "last-fetched-events"
     private let modifiedSinceKey = "modified-since"
     var tak: TAK? = nil
-    var storage: SecureStorage? = nil // TODO: use it for anchor and last events
+    var storage: SecureStorage? = nil
     var connection: Connection? {
         didSet {
             if connection != nil {
