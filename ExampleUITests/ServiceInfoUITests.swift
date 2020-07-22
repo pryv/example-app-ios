@@ -14,6 +14,7 @@ class ServiceInfoUITests: XCTestCase {
     var app: XCUIApplication!
     private let keychain = KeychainSwift()
     private var values = [String]()
+    private let existsPredicate = NSPredicate(format: "exists == TRUE")
     
     override func setUp() {
         continueAfterFailure = false
@@ -33,9 +34,14 @@ class ServiceInfoUITests: XCTestCase {
         if (app.navigationBars["connectionNavBar"].buttons["userButton"].exists) {
             app.navigationBars["connectionNavBar"].buttons["userButton"].tap()
             app.sheets.element.buttons["Log out"].tap()
-            sleep(1)
-            app.alerts.element.buttons["Log out"].tap()
-            sleep(3)
+            let logout = app.alerts.element.buttons["Log out"]
+            self.expectation(for: existsPredicate, evaluatedWith: logout, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
+            
+            logout.tap()
+            
+            self.expectation(for: existsPredicate, evaluatedWith: app.buttons["loginButton"], handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
     }
     
@@ -52,7 +58,10 @@ class ServiceInfoUITests: XCTestCase {
     
     func testLogin() {
         app.buttons["loginButton"].tap()
-        sleep(2)
-        XCTAssert(app.webViews["webView"].exists)
+        
+        let webView = app.webViews["webView"]
+        self.expectation(for: existsPredicate, evaluatedWith: webView, handler: nil)
+        self.waitForExpectations(timeout: 5.0, handler: nil)
+        XCTAssert(webView.exists)
     }
 }
