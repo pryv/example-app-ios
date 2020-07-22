@@ -174,7 +174,6 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 self.events = dictionary["events"] as! [Event]
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
-                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
             }
         }
         connectionSocketIO!.connect()
