@@ -231,9 +231,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 ]
             ]
         ]).then { json in
-            let events = (json["results"] as? [Json])?.first?["events"] as? [Event]
-            let storedContent = events?.first?["content"]
-            if String(describing: storedContent) != String(describing: newContent) {
+            let events = (json["results"] as? [Json])?.first?["events"] as? [Event] ?? [Event]()
+            let storedValues = events.filter({ String(describing: $0["content"] ?? "") == String(describing: newContent.content ?? "")})
+            if storedValues.isEmpty {
                 let pryvEvent = stream.pryvEvent(of: self.healthStore)
                 
                 if let data = pryvEvent.attachmentData, let apiEndpoint = self.connection?.getApiEndpoint(){

@@ -41,10 +41,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   HealthKitBridge:
-    :commit: 0c5953dd744ee29a489db0dc07a5f019dc25f159
+    :commit: e4e9cf45248679cd9059c11e668204b2d4007b4f
     :git: https://github.com/pryv/bridge-ios-healthkit
   PryvSwiftKit:
-    :commit: d501345cfb39d8b460d137295fce645f9a3a4165
+    :commit: ad1b3043530631d971634d528df87229a9c9d942
     :git: https://github.com/pryv/lib-swift.git
 
 SPEC CHECKSUMS:

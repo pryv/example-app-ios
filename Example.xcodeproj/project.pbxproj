@@ -41,7 +41,6 @@
 		B3CDD51A24C6F11600EBB564 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1166524C197A700512165 /* BBCD341680E26FDA06B0B097414EE0C412A61401B480B383F45026E35A9E7DE3.tak */; };
 		B3CDD51B24C6F11600EBB564 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165E24C195A000512165 /* 327E003CD0BF5ABA5EB6D7043949164D53806BFB30B29D63911A6B0EA35100D3.tak */; };
 		B3CDD51C24C6F11600EBB564 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak in Resources */ = {isa = PBXBuildFile; fileRef = B3F1165F24C195A000512165 /* 905B38164D0D377E8D906007B0B188C25BA23A4F4897459D03539C050AD79DCC.tak */; };
-		B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */; };
 		B3D6FC9624924F3F00DB90D3 /* UIAlertController+newEventAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */; };
 		B3D70D37248A2FE900A1A247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D36248A2FE900A1A247 /* AppDelegate.swift */; };
 		B3D70D39248A2FE900A1A247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D70D38248A2FE900A1A247 /* SceneDelegate.swift */; };
@@ -111,7 +110,6 @@
 		B3B9220124BC8F7E002C724F /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		B3B9220224BC8F7E002C724F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B3C51E7B248A36B700F1D398 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+errorAlert.swift"; sourceTree = "<group>"; };
 		B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+newEventAlert.swift"; sourceTree = "<group>"; };
 		B3D6FC9724925EB000DB90D3 /* ConnectionListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionListUITests.swift; sourceTree = "<group>"; };
 		B3D70D33248A2FE900A1A247 /* Pryv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pryv.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,7 +165,6 @@
 			children = (
 				B3410B0524C5A2280027DB39 /* TakTlsSessionManager.swift */,
 				B32BE2A724C5CEC1008FE6EC /* String+condenseWhitespaces.swift */,
-				B3D660AD2498FB1B00EEA670 /* UIAlertController+errorAlert.swift */,
 				B3D6FC9524924F3F00DB90D3 /* UIAlertController+newEventAlert.swift */,
 				B306FCE924A47642008F23A2 /* Date+startOf+endOf.swift */,
 			);
@@ -474,7 +471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3D660AE2498FB1B00EEA670 /* UIAlertController+errorAlert.swift in Sources */,
 				B3D70D3B248A2FE900A1A247 /* MainViewController.swift in Sources */,
 				B3907DA524A0A7BA009FCE28 /* ConnectionTabBarViewController.swift in Sources */,
 				B3C51E7C248A36B700F1D398 /* AuthViewController.swift in Sources */,

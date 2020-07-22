@@ -42,10 +42,13 @@ class EventTableViewCell: UITableViewCell {
                 
                 // formatting the json string to make it readable
                 var contentString = String(describing: content)
-                contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
                 
-                contentStackView.isHidden = false
-                contentLabel.text = contentString
+                if contentString != "<null>" {
+                    contentString = contentString.replacingOccurrences(of: "=", with: ": ").condenseWhitespaces().replacingOccurrences(of: ";", with: ",\n").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: ",\n }", with: "")
+                    
+                    contentStackView.isHidden = false
+                    contentLabel.text = contentString
+                }
                 
                 if let attachments = event["attachments"] as? [Json], let fileName = attachments.last?["fileName"] as? String {
                     attachmentStackView.isHidden = false
@@ -178,7 +181,6 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                 self.events = dictionary["events"] as! [Event]
                 self.tableView.reloadData()
                 self.loadViewIfNeeded()
-                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
             }
         }
         connectionSocketIO!.connect()
@@ -304,7 +306,9 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                     }
                 } else {
                     self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
-                        self.present(UIAlertController().ephemereAlert(title: "Error: \(error.localizedDescription)", delay: 2), animated: true, completion: nil)
+                        let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true)
                     }
                 }
             }

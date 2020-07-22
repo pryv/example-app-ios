@@ -66,8 +66,10 @@ class MainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             vc.authUrl = authUrl
             
             self.navigationController?.pushViewController(vc, animated: false)
-        }.catch { _ in
-            self.present(UIAlertController().ephemereAlert(title: "Please, type a valid service info URL", delay: 2), animated: true, completion: nil)
+        }.catch { error in
+            let alert = UIAlertController(title: "Service info request failed", message: error.localizedDescription.replacingOccurrences(of: "URLSessionTask failed with error: ", with: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     

@@ -12,6 +12,8 @@ class ServiceInfoUITests: XCTestCase {
     
     var app: XCUIApplication!
     private var values = [String]()
+    private let existsPredicate = NSPredicate(format: "exists == TRUE")
+    private let timeout = 10.0
     
     override func setUp() {
         continueAfterFailure = false
@@ -31,10 +33,15 @@ class ServiceInfoUITests: XCTestCase {
         if (app.navigationBars["connectionNavBar"].buttons["userButton"].exists) {
             app.navigationBars["connectionNavBar"].buttons["userButton"].tap()
             app.sheets.element.buttons["Log out"].tap()
-            sleep(1)
-            app.alerts.element.buttons["Log out"].tap()
-            sleep(3)
+            let logout = app.alerts.element.buttons["Log out"]
+            self.expectation(for: existsPredicate, evaluatedWith: logout, handler: nil)
+            self.waitForExpectations(timeout: timeout, handler: nil)
+            
+            logout.tap()
         }
+        
+        self.expectation(for: existsPredicate, evaluatedWith: app.textFields["serviceInfoUrlField"], handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testLogin() {
@@ -52,16 +59,19 @@ class ServiceInfoUITests: XCTestCase {
             app.buttons["ACCEPT"].tap()
         }
         
-        sleep(5)
-        XCTAssert(app.staticTexts["Pryv Lab"].exists)
+        XCTAssert(app.alerts.element.staticTexts["unsupported URL"].exists)
+        XCTAssertEqual(app.alerts.element.label, "Service info request failed")
         XCTAssertFalse(app.webViews["webView"].exists)
     }
     
     func testLoginWithoutCertificate() {
         app.pickers["serviceInfoPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "https://reg.pryv.me/service/info")
         app.buttons["loginButton"].tap()
-        sleep(3)
-        XCTAssert(app.webViews["webView"].exists)
+        
+        let webView = app.webViews["webView"]
+        self.expectation(for: existsPredicate, evaluatedWith: webView, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
+        XCTAssert(webView.exists)
         
         app.staticTexts["Username or email"].tap()
         app.typeText("Testuser")
