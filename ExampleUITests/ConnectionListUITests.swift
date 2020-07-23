@@ -197,6 +197,42 @@ class ConnectionListUITests: XCTestCase {
         XCTAssertNotEqual(cell.staticTexts["contentLabel"].label, wrongField)
     }
     
+    func testCreateEventWithNewStream() {
+        var streamId = UUID().uuidString
+        let index = String.Index(utf16Offset: 10, in: streamId)
+        streamId = String(streamId[..<index]).replacingOccurrences(of: "-", with: " ")
+        
+        app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
+        app.sheets.element.buttons["Simple event"].tap()
+
+        let streamIdTextfield = app.textFields["streamIdField"]
+        self.expectation(for: existsPredicate, evaluatedWith: streamIdTextfield, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
+
+        streamIdTextfield.tap()
+        app.textFields["streamIdField"].buttons["Clear text"].tap()
+        app.textFields["streamIdField"].typeText(streamId)
+
+        app.textFields["contentField"].tap()
+        app.textFields["contentField"].typeText("hello")
+
+        app.alerts.buttons["OK"].tap()
+        
+        self.expectation(for: existsPredicate, evaluatedWith: app.staticTexts["Pryv Lab"], handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
+        
+        XCTAssertFalse(app.alerts.element.staticTexts["The parameters' format is invalid."].exists)
+        XCTAssertFalse(app.alerts.element.staticTexts["Unknown referenced stream \(streamId)"].exists)
+        
+        let myTable = app.tables.matching(identifier: "eventsTableView")
+        let cell = myTable.cells["eventCell0"]
+        
+        sleep(5)
+        XCTAssertEqual(cell.staticTexts["streamIdLabel"].label, streamId.replacingOccurrences(of: " ", with: "-"))
+        XCTAssertEqual(cell.staticTexts["typeLabel"].label, "note/txt")
+        XCTAssertEqual(cell.staticTexts["contentLabel"].label, "hello")
+    }
+    
     func testCreateEventWithFile() {
         app.navigationBars["connectionNavBar"].buttons["addEventButton"].tap()
         app.sheets.element.buttons["Event with attachment"].tap()
