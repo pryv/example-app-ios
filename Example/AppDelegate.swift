@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             let params: Json = [
                 "streamIds": ["diary"],
                 "type": "position/wgs84",
-                "content": String(describing: content)
+                "content": content
             ]
             
             let apiCall: APICall = [
