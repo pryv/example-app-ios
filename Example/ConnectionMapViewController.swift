@@ -79,6 +79,12 @@ class ConnectionMapViewController: UIViewController, MKMapViewDelegate {
         getEvents(until: selectedDate, during: duration)
     }
     
+    /// Refreshes the map markers
+    /// - Parameter sender: the refresh button
+    @IBAction func refresh(_ sender: Any) {
+        getEvents(until: selectedDate, during: duration)
+    }
+    
     /// Loads the events from the Pryv backend using `events.get` method, filters them by time/duration and shows them on the map
     /// - Parameters:
     ///   - until: the date corresponding to the `toTime` in the `events.get` method

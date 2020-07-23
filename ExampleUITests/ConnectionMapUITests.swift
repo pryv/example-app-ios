@@ -61,14 +61,12 @@ class ConnectionMapUITests: XCTestCase {
         
         app.tabBars["connectionTabBar"].buttons["mapButtonItem"].tap()
         XCTAssert(app.maps.element(boundBy: 0).exists)
-        
-        changeDate(day: "20", month: "June", year: "2020")
     }
     
     // Assuming that before the 22nd of June 2020 and after the 24th of June 2020, there are no position events.
     
     func testMarkers() {
-        changeDate(day: "24")
+        changeDate(day: "24", month: "June", year: "2020")
         var marker = app.otherElements["24.06.2020"]
         self.expectation(for: existsPredicate, evaluatedWith: marker, handler: nil)
         self.waitForExpectations(timeout: 10.0, handler: nil)
@@ -92,6 +90,7 @@ class ConnectionMapUITests: XCTestCase {
     }
     
     func testNoMarkers() {
+        changeDate(day: "20", month: "June", year: "2020")
         app.segmentedControls["filterController"].buttons["Day"].tap()
         var marker = app.otherElements["22.06.2020"]
         self.expectation(for: doesNotExistPredicate, evaluatedWith: marker, handler: nil)
@@ -116,6 +115,7 @@ class ConnectionMapUITests: XCTestCase {
     }
     
     func testSelectedTime() {
+        changeDate(day: "20", month: "June", year: "2020")
         XCTAssertEqual(app.staticTexts["selectedTimeValue"].label, "20.06.2020")
         
         changeDate(month: "May")
@@ -164,6 +164,39 @@ class ConnectionMapUITests: XCTestCase {
         let today = Date()
         changeDate(day: dayFormatter.string(from: today), month: monthFormatter.string(from: today), year: yearFormatter.string(from: today))
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        
+        let element = app.otherElements[formatter.string(from: today)]
+        self.expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
+        self.waitForExpectations(timeout: timeout, handler: nil)
+        XCTAssert(element.exists)
+    }
+    
+    func testRefresh() {
+        let params: Json = [
+            "streamIds": ["diary"],
+            "type": "position/wgs84",
+            "content": [
+                "latitude": 0.0,
+                "longitude": 0.0
+            ]
+        ]
+        
+        let apiCall: APICall = [
+            "method": "events.create",
+            "params": params
+        ]
+        
+        let promise = connection.api(APICalls: [apiCall])
+        
+        XCTAssert(waitForPromises(timeout: 10.0))
+        XCTAssertNil(promise.error)
+        XCTAssertNotNil(promise.value)
+        
+        app.buttons["refreshMap"].tap()
+        
+        let today = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         

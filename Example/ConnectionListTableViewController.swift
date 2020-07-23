@@ -174,14 +174,7 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
     private func setRealtimeUpdates(url: String) {
         connectionSocketIO = ConnectionWebSocket(url: url)
         connectionSocketIO!.subscribe(message: .eventsChanged) { _, _ in
-            self.events.removeAll()
-            self.connectionSocketIO!.emit(methodId: "events.get", params: Json()) { any in
-                let dataArray = any as NSArray
-                let dictionary = dataArray[1] as! Json
-                self.events = dictionary["events"] as! [Event]
-                self.tableView.reloadData()
-                self.loadViewIfNeeded()
-            }
+            self.getEvents()
         }
         connectionSocketIO!.connect()
     }
@@ -300,15 +293,11 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
                             }
                         }
                     }.catch { error in
-                        let innerAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        innerAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(innerAlert, animated: true, completion: nil)
+                        self.handleEventCreationError(params: params, handleResults: handleResults, error)
                     }
                 } else {
                     self.connection?.api(APICalls: [apiCall], handleResults: handleResults).catch { error in
-                        let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true)
+                        self.handleEventCreationError(params: params, handleResults: handleResults, error)
                     }
                 }
             }
@@ -398,6 +387,47 @@ class ConnectionListTableViewController: UITableViewController, UIImagePickerCon
         } else {
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true)
+        }
+    }
+    
+    /// Present an alert with the description of the error
+    /// - Parameter error
+    private func showAlert(with error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    private func handleEventCreationError(params: Event, handleResults: [Int: (Event) -> ()], _ error: Error) {
+        if error.localizedDescription.contains("Unknown referenced stream"), let streamIds = params["streamIds"] as? [String] {
+            let streamId = streamIds.first?.replacingOccurrences(of: " ", with: "-")
+            let newStreamCall: APICall = [
+                "method": "streams.create",
+                "params": [
+                    "id": streamId,
+                    "name": streamId
+                ]
+            ]
+            
+            var event = params
+            event["streamIds"] = [streamId]
+            
+            let newEventCall: APICall = [
+                "method": "events.create",
+                "params": event
+            ]
+            
+            self.connection?.api(APICalls: [newStreamCall]).then { _ in
+                self.connection?.api(APICalls: [newEventCall], handleResults: handleResults).catch { error in
+                    self.showAlert(with: error)
+                }
+            }.catch { _ in
+                self.connection?.api(APICalls: [newEventCall], handleResults: handleResults).catch { error in
+                    self.showAlert(with: error)
+                }
+            }
+        } else {
+            self.showAlert(with: error)
         }
     }
 }
