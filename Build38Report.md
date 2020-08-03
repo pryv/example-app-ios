@@ -96,7 +96,7 @@ Consequently, one will use the following features:
 The following features will not be integrated in the app: 
 
 - [Fraud Management Interface](file:TAK-Client/docs/DeveloperDocumentation/TAK_Documentation.html#backend-verify) as jailbreak check will be implemented in the application;
-- App re-packaging protection as it is not yet available in iOS;
+- App re-packaging protection as it was not available in iOS at the time of this project;
 - HealthCheck API as it is not a DevOps application. 
 
 ### Implementation of the features
