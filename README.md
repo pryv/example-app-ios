@@ -14,7 +14,10 @@ If authorized, the application will get the updates from HealthKit for date of b
 
 The application will also create a HealthKit sample for body mass upon the creation of a simple event with stream id `bodyMass` in the application.
 
-These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.
+These app views correspond to each of the view controllers described above: MainViewController, AuthViewController, ConnectionListTableViewController and ConnectionMapViewController respectively.  
+
+A [video tutorial](https://www.youtube.com/watch?v=poWC__m8ZFU) explains you how to get started with the app and navigates through its basic features (create a simple event, track your position). You can also connect your Pryv.io account to HealthKit using our [Apple HealthKit Bridge](https://github.com/pryv/bridge-ios-healthkit) following the step-by-step video tutorial [here](https://www.youtube.com/watch?v=PIBh2_joFqQ).  
+
 
 | Service info                                                 | Authentication and authorization                             | Connection list                                              | Connection map                                               |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
