@@ -10,6 +10,13 @@ import Foundation
 
 extension Date {
     
+    
+    /// User’s current calendar.
+    var calendar: Calendar {
+        return Calendar.current
+    }
+    
+    
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
@@ -22,6 +29,43 @@ extension Date {
         components.day = 1
         components.second = -1
         return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    /// Month.
+    var month: Int {
+        get {
+            return calendar.component(.month, from: self)
+        }
+        set {
+
+        }
+    }
+    
+    /// Day.
+    var day: Int {
+        get {
+            return calendar.component(.day, from: self)
+        }
+        set {
+  
+        }
+    }
+    
+    /// Year.
+    var year: Int {
+        get {
+            return calendar.component(.year, from: self)
+        }
+        set {
+      
+        }
+    }
+    
+    
+    
+    /// Check if date is in today.
+    var isInToday: Bool {
+        return self.day == Date().day && self.month == Date().month && self.year == Date().year
     }
     
     var startOfWeek: Date {
