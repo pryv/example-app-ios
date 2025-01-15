@@ -11,8 +11,8 @@ target 'Example' do
   use_frameworks!
 
   # Pods for Example
-  pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'fix/XCTest'
-  pod 'HealthKitBridge', :git => 'https://github.com/pryv/bridge-ios-healthkit', :branch => 'master'
+  pod 'PryvSwiftKit', :git => 'https://github.com/pryv/lib-swift.git', :branch => 'master'
+  pod 'HealthKitBridge', :git => 'https://github.com/pryv/poc-integration-healthkit', :branch => 'master'
   pod 'KeychainSwift'
   pod 'RLBAlertsPickers', :git => 'https://github.com/jbouaziz/Alerts-Pickers.git', :branch => 'master'
 
